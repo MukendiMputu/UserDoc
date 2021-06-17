@@ -1,0 +1,120 @@
+id info.scce.cinco.product.userdoc.mglid
+stylePath "model/UserDoc.style"
+
+@primeviewer
+@generatable("info.scce.cinco.product.userdoc.codegen.Generate", "/src/")
+graphModel UserDocGraphModel {
+	iconPath "icons/UserDoc.png"
+	diagramExtension "doc"
+	containableElements(*)
+	attr EString as modelName
+}
+
+@icon("icons/Start.png")
+node Start {
+	style StartNode
+	outgoingEdges (Transition[1,1])
+}
+
+@icon("icons/End.png")
+node End{
+	style EndNode
+	incomingEdges ({Transition,LabeledTransition}[1,*])
+}
+
+@icon("icons/Activity.png")
+node Activity {
+	style blueTextRectangle("${name}")
+	attr EString as name
+	attr EString as description
+	incomingEdges (*[1,*])
+	outgoingEdges (LabeledTransition[1,*])
+}
+
+@icon("icons/Navigation.png")
+node Navigation {
+	style navigationNode("${url}")
+	
+	attr EString as url
+	incomingEdges (*[1,*])
+	outgoingEdges ({Transition, LabeledTransition}[1,*])
+}
+
+@icon("icons/Screenshot-sm.png")
+node Screenshot {
+	style ScreenshotNode
+	
+	incomingEdges (*[1,*])
+	outgoingEdges ({Transition, LabeledTransition}[1,*])
+}
+
+@icon("icons/Comment.png")
+node Comment {
+	style commentNode("${content}")
+	
+	attr EString as content
+	attr Screenshot as NodeReference
+	outgoingEdges (CommentTransition[1,*])
+}
+
+@icon("icons/Input.png")
+node Input {
+	style inputNode("${value}", "${selector}")
+	attr EBoolean as highlighted
+	attr EString as value
+	attr EString as selector
+	incomingEdges (*[1,*])
+	outgoingEdges ({Transition, LabeledTransition}[1,*])
+}
+
+@icon("icons/Button.png")
+node Button {
+	style buttonNode("${text}", "${selector}", "${action}")
+	attr EBoolean as highlighted
+	attr EString as text
+	attr EString as selector
+	attr ButtonNodeAction as action
+	incomingEdges (*[1,*])
+	outgoingEdges ({Transition, LabeledTransition}[1,*])
+}
+
+enum ButtonNodeAction {
+	Post Get Update Delete
+}
+
+@icon("icons/Container.png")
+container Container {
+	style grayContainer
+	containableElements(*)
+	incomingEdges (*[1,*])
+	outgoingEdges ({Transition, LabeledTransition}[1,*])
+}
+
+@icon("icons/Section.png")
+container Section {
+	style sectionContainer("${title}")
+	attr EString as title
+	incomingEdges (*[1,*])
+	outgoingEdges ({Transition, LabeledTransition}[1,*])
+}
+
+node SubUserDoc{
+	prime this::UserDocGraphModel as SubDoc
+	style docNode("${SubDoc.modelName}.doc")
+	incomingEdges (*[1,*])
+	outgoingEdges ({Transition, LabeledTransition}[1,*])
+}
+
+edge LabeledTransition {
+	style labeledArrow("${label}")
+	
+	attr EString as label
+}
+
+edge CommentTransition {
+	style triangleArrow
+}
+
+edge Transition {
+	style simpleArrow
+}
