@@ -4,7 +4,7 @@ id info.scce.cinco.product.function.mglid
 stylePath "model/Function.style"
 
 @primeviewer
-@generatable("info.scce.cinco.product.userdoc.codegen.Generate", "/src/")
+@generatable("info.scce.cinco.product.userdoc.codegen.GenerateFunction", "/src/")
 graphModel FunctionGraphModel {
 	iconPath "icons/UserDocFunction.png"
 	diagramExtension "func"
@@ -39,6 +39,13 @@ node DocNode{
 	style docNode("${mgl.modelName}.doc")
 	incomingEdges (*[1,*])
 	outgoingEdges ({Edge,LabeledEdge}[1,*])
+}
+
+node CommentText {
+	style commentStyle("${content}")
+	attr EString as content
+	attr FeatureContainer as referenceTo
+	outgoingEdges (CommentEdge[1,*])
 }
 
 edge Edge {

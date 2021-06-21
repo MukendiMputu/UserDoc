@@ -36,7 +36,26 @@ Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,de.jabc.cinco
  me,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugi
  n.generator.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc
  .cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.generato
- r.runtime,de.jabc.cinco.meta.plugin.generator.runtime
+ r.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.met
+ a.plugin.generator.runtime,de.jabc.cinco.meta.plugin.generator.runtime,
+ de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.g
+ enerator.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.ci
+ nco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.generator.r
+ untime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.p
+ lugin.generator.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.
+ jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.gene
+ rator.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco
+ .meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.generator.runt
+ ime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plug
+ in.generator.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.jab
+ c.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.generat
+ or.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.me
+ ta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.generator.runtime
+ ,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.
+ generator.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.c
+ inco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.generator.
+ runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.
+ plugin.generator.runtime
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: info.scce.cinco.product.userdoc.mglid.factory,info.scce.

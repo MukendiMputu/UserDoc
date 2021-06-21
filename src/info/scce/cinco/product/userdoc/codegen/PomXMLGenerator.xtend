@@ -14,6 +14,11 @@ class PomXMLGenerator {
 		  <name>Login UserDoc </name>
 		  <dependencies>
 		  <dependency>
+		    <groupId>commons-io</groupId>
+		    <artifactId>commons-io</artifactId>
+		    <version>2.4</version>
+		</dependency>
+		  <dependency>
 		  	<groupId>org.seleniumhq.selenium</groupId>
 		  	<artifactId>selenium-java</artifactId>
 		  	<version>3.141.59</version>

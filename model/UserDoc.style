@@ -129,8 +129,8 @@ nodeStyle commentNode(1) {
 		position (0,0)
 		size (96,32)
 		corner (8,8)
-		text {
-			position ( CENTER, MIDDLE )
+		multiText {
+			position ( LEFT, TOP )
 			value "%s"
 		}
 	}

@@ -29,7 +29,7 @@ class Generate implements IGenerator<UserDocGraphModel> {
 		/* generate pom.xml file */
 		PomXMLGenerator.generateCode(project)
 		
-		// generate model information files  
+		// generate model information files
 		val modelInfo = generateModelInfo(model)
 		val modelInfoTextFile = root.getFileForLocation(targetDir.append( modelName + ".txt"))
 		EclipseFileUtils.writeToFile(modelInfoTextFile, modelInfo)
@@ -37,8 +37,8 @@ class Generate implements IGenerator<UserDocGraphModel> {
 		/* generate maven project structure */
 		MavenStructureGenerator.generateMavenStructure(project, monitor)
 		
-		PackageGenerator.generateJavaPackages("com.example.config", project, monitor)
-		// generateTestPackages("com.example.test", project, monitor)
+		PackageGenerator.generateJavaPackages("com/example/config", project, monitor)
+		// generateTestPackages("/com/example/test", project, monitor)
 		
 		// generatePages()
 		

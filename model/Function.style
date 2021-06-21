@@ -120,6 +120,21 @@ nodeStyle docNode(1) {
 	}
 }
 
+nodeStyle commentStyle(1) {
+	roundedRectangle {
+		appearance extends default {
+			background(192,191,188)
+		}
+		position (0,0)
+		size (300,50)
+		corner (8,8)
+		multiText {
+			position(LEFT,TOP)
+			value "%s" 
+		}
+	}
+}
+
 
 /*---------------- EDGES ------------------------ */
 
@@ -139,9 +154,6 @@ edgeStyle triangleArrow {
 	decorator {
 		location (1.0) // at the end of the edge
 		TRIANGLE
-		appearance extends default {
-			background (255,190,111)
-		}
 	}
 }
 

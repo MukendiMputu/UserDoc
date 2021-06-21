@@ -10,19 +10,19 @@ graphModel UserDocGraphModel {
 	attr EString as modelName
 }
 
-@icon("icons/Start.png")
+@icon("/icons/Start.png")
 node Start {
 	style StartNode
 	outgoingEdges (Transition[1,1])
 }
 
-@icon("icons/End.png")
+@icon("/icons/End.png")
 node End{
 	style EndNode
 	incomingEdges ({Transition,LabeledTransition}[1,*])
 }
 
-@icon("icons/Activity.png")
+@icon("/icons/Activity.png")
 node Activity {
 	style blueTextRectangle("${name}")
 	attr EString as name

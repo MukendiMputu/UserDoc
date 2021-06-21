@@ -14,6 +14,228 @@
 <wizard category="de.jabc.cinco.meta.core.wizards.category.cinco" class="info.scce.cinco.product.userdoc.UserDocToolProjectWizard" id="info.scce.cinco.product.userdoc.wizard.userdoctoolproject" name="New UserDocTool Project" project="true">
 </wizard>
 </extension><extension point="de.jabc.cinco.meta.plugin.generator.runtime.registry">
+<!--@MetaPlugin Generatable FunctionGraphModel-->
+<graphmodel class="info.scce.cinco.product.function.mglid.function.FunctionGraphModel">
+</graphmodel>
+<generator bundle_id="info.scce.cinco.product.userdoc" class="info.scce.cinco.product.userdoc.codegen.GenerateFunction" outlet="/src/">
+</generator>
+</extension><extension point="de.jabc.cinco.meta.plugin.generator.runtime.registry">
+<!--@MetaPlugin Generatable UserDocGraphModel-->
+<graphmodel class="info.scce.cinco.product.userdoc.mglid.userdoc.UserDocGraphModel">
+</graphmodel>
+<generator bundle_id="info.scce.cinco.product.userdoc" class="info.scce.cinco.product.userdoc.codegen.Generate" outlet="/src/">
+</generator>
+</extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.function.mglid.function.views.ViewsPackage" uri="http://cinco.scce.info/product/function/mglid/views"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.function.mglid.function.internal.InternalPackage" uri="http://cinco.scce.info/product/function/mglid/internal"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.function.mglid.function.FunctionPackage" uri="http://cinco.scce.info/product/function/mglid"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.views.ViewsPackage" uri="http://cinco.scce.info/product/userdoc/mglid/views"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.internal.InternalPackage" uri="http://cinco.scce.info/product/userdoc/mglid/internal"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.UserdocPackage" uri="http://cinco.scce.info/product/userdoc/mglid"/>
+   </extension><extension point="org.eclipse.ui.perspectives">
+	<perspective class="info.scce.cinco.product.userdoc.perspective.UserDocToolPerspective" fixed="false" id="info.scce.cinco.product.userdoc.userdoctoolperspective" name="UserDocTool Perspective">
+	</perspective>
+</extension><extension point="de.jabc.cinco.meta.plugin.generator.runtime.registry">
+<!--@MetaPlugin Generatable UserDocGraphModel-->
+<graphmodel class="info.scce.cinco.product.userdoc.mglid.userdoc.UserDocGraphModel">
+</graphmodel>
+<generator bundle_id="info.scce.cinco.product.userdoc" class="info.scce.cinco.product.userdoc.codegen.Generate" outlet="/src/">
+</generator>
+</extension><extension point="de.jabc.cinco.meta.plugin.generator.runtime.registry">
+<!--@MetaPlugin Generatable FunctionGraphModel-->
+<graphmodel class="info.scce.cinco.product.function.mglid.function.FunctionGraphModel">
+</graphmodel>
+<generator bundle_id="info.scce.cinco.product.userdoc" class="info.scce.cinco.product.userdoc.codegen.GenerateFunction" outlet="/src/">
+</generator>
+</extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.function.mglid.function.views.ViewsPackage" uri="http://cinco.scce.info/product/function/mglid/views"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.function.mglid.function.internal.InternalPackage" uri="http://cinco.scce.info/product/function/mglid/internal"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.function.mglid.function.FunctionPackage" uri="http://cinco.scce.info/product/function/mglid"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.views.ViewsPackage" uri="http://cinco.scce.info/product/userdoc/mglid/views"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.internal.InternalPackage" uri="http://cinco.scce.info/product/userdoc/mglid/internal"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.UserdocPackage" uri="http://cinco.scce.info/product/userdoc/mglid"/>
+   </extension><extension point="org.eclipse.ui.perspectives">
+	<perspective class="info.scce.cinco.product.userdoc.perspective.UserDocToolPerspective" fixed="false" id="info.scce.cinco.product.userdoc.userdoctoolperspective" name="UserDocTool Perspective">
+	</perspective>
+</extension><extension point="de.jabc.cinco.meta.plugin.generator.runtime.registry">
+<!--@MetaPlugin Generatable UserDocGraphModel-->
+<graphmodel class="info.scce.cinco.product.userdoc.mglid.userdoc.UserDocGraphModel">
+</graphmodel>
+<generator bundle_id="info.scce.cinco.product.userdoc" class="info.scce.cinco.product.userdoc.codegen.Generate" outlet="/src/">
+</generator>
+</extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.views.ViewsPackage" uri="http://cinco.scce.info/product/userdoc/mglid/views"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.internal.InternalPackage" uri="http://cinco.scce.info/product/userdoc/mglid/internal"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.UserdocPackage" uri="http://cinco.scce.info/product/userdoc/mglid"/>
+   </extension><extension point="org.eclipse.ui.perspectives">
+	<perspective class="info.scce.cinco.product.userdoc.perspective.UserDocToolPerspective" fixed="false" id="info.scce.cinco.product.userdoc.userdoctoolperspective" name="UserDocTool Perspective">
+	</perspective>
+</extension><extension point="de.jabc.cinco.meta.plugin.generator.runtime.registry">
+<!--@MetaPlugin Generatable UserDocGraphModel-->
+<graphmodel class="info.scce.cinco.product.userdoc.mglid.userdoc.UserDocGraphModel">
+</graphmodel>
+<generator bundle_id="info.scce.cinco.product.userdoc" class="info.scce.cinco.product.userdoc.codegen.Generate" outlet="/src/">
+</generator>
+</extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.views.ViewsPackage" uri="http://cinco.scce.info/product/userdoc/mglid/views"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.internal.InternalPackage" uri="http://cinco.scce.info/product/userdoc/mglid/internal"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.UserdocPackage" uri="http://cinco.scce.info/product/userdoc/mglid"/>
+   </extension><extension point="org.eclipse.ui.perspectives">
+	<perspective class="info.scce.cinco.product.userdoc.perspective.UserDocToolPerspective" fixed="false" id="info.scce.cinco.product.userdoc.userdoctoolperspective" name="UserDocTool Perspective">
+	</perspective>
+</extension><extension point="de.jabc.cinco.meta.plugin.generator.runtime.registry">
+<!--@MetaPlugin Generatable UserDocGraphModel-->
+<graphmodel class="info.scce.cinco.product.userdoc.mglid.userdoc.UserDocGraphModel">
+</graphmodel>
+<generator bundle_id="info.scce.cinco.product.userdoc" class="info.scce.cinco.product.userdoc.codegen.Generate" outlet="/src/">
+</generator>
+</extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.views.ViewsPackage" uri="http://cinco.scce.info/product/userdoc/mglid/views"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.internal.InternalPackage" uri="http://cinco.scce.info/product/userdoc/mglid/internal"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.UserdocPackage" uri="http://cinco.scce.info/product/userdoc/mglid"/>
+   </extension><extension point="org.eclipse.ui.perspectives">
+	<perspective class="info.scce.cinco.product.userdoc.perspective.UserDocToolPerspective" fixed="false" id="info.scce.cinco.product.userdoc.userdoctoolperspective" name="UserDocTool Perspective">
+	</perspective>
+</extension><extension point="de.jabc.cinco.meta.plugin.generator.runtime.registry">
+<!--@MetaPlugin Generatable FunctionGraphModel-->
+<graphmodel class="info.scce.cinco.product.function.mglid.function.FunctionGraphModel">
+</graphmodel>
+<generator bundle_id="info.scce.cinco.product.userdoc" class="info.scce.cinco.product.userdoc.codegen.GenerateFunction" outlet="/src/">
+</generator>
+</extension><extension point="de.jabc.cinco.meta.plugin.generator.runtime.registry">
+<!--@MetaPlugin Generatable UserDocGraphModel-->
+<graphmodel class="info.scce.cinco.product.userdoc.mglid.userdoc.UserDocGraphModel">
+</graphmodel>
+<generator bundle_id="info.scce.cinco.product.userdoc" class="info.scce.cinco.product.userdoc.codegen.Generate" outlet="/src/">
+</generator>
+</extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.function.mglid.function.views.ViewsPackage" uri="http://cinco.scce.info/product/function/mglid/views"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.function.mglid.function.internal.InternalPackage" uri="http://cinco.scce.info/product/function/mglid/internal"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.function.mglid.function.FunctionPackage" uri="http://cinco.scce.info/product/function/mglid"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.views.ViewsPackage" uri="http://cinco.scce.info/product/userdoc/mglid/views"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.internal.InternalPackage" uri="http://cinco.scce.info/product/userdoc/mglid/internal"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.UserdocPackage" uri="http://cinco.scce.info/product/userdoc/mglid"/>
+   </extension><extension point="org.eclipse.ui.perspectives">
+	<perspective class="info.scce.cinco.product.userdoc.perspective.UserDocToolPerspective" fixed="false" id="info.scce.cinco.product.userdoc.userdoctoolperspective" name="UserDocTool Perspective">
+	</perspective>
+</extension><extension point="de.jabc.cinco.meta.plugin.generator.runtime.registry">
+<!--@MetaPlugin Generatable UserDocGraphModel-->
+<graphmodel class="info.scce.cinco.product.userdoc.mglid.userdoc.UserDocGraphModel">
+</graphmodel>
+<generator bundle_id="info.scce.cinco.product.userdoc" class="info.scce.cinco.product.userdoc.codegen.Generate" outlet="/src/">
+</generator>
+</extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.views.ViewsPackage" uri="http://cinco.scce.info/product/userdoc/mglid/views"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.internal.InternalPackage" uri="http://cinco.scce.info/product/userdoc/mglid/internal"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.UserdocPackage" uri="http://cinco.scce.info/product/userdoc/mglid"/>
+   </extension><extension point="org.eclipse.ui.perspectives">
+	<perspective class="info.scce.cinco.product.userdoc.perspective.UserDocToolPerspective" fixed="false" id="info.scce.cinco.product.userdoc.userdoctoolperspective" name="UserDocTool Perspective">
+	</perspective>
+</extension><extension point="de.jabc.cinco.meta.plugin.generator.runtime.registry">
+<!--@MetaPlugin Generatable FunctionGraphModel-->
+<graphmodel class="info.scce.cinco.product.function.mglid.function.FunctionGraphModel">
+</graphmodel>
+<generator bundle_id="info.scce.cinco.product.userdoc" class="info.scce.cinco.product.userdoc.codegen.GenerateFunction" outlet="/src/">
+</generator>
+</extension><extension point="de.jabc.cinco.meta.plugin.generator.runtime.registry">
+<!--@MetaPlugin Generatable UserDocGraphModel-->
+<graphmodel class="info.scce.cinco.product.userdoc.mglid.userdoc.UserDocGraphModel">
+</graphmodel>
+<generator bundle_id="info.scce.cinco.product.userdoc" class="info.scce.cinco.product.userdoc.codegen.Generate" outlet="/src/">
+</generator>
+</extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.function.mglid.function.views.ViewsPackage" uri="http://cinco.scce.info/product/function/mglid/views"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.function.mglid.function.internal.InternalPackage" uri="http://cinco.scce.info/product/function/mglid/internal"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.function.mglid.function.FunctionPackage" uri="http://cinco.scce.info/product/function/mglid"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.views.ViewsPackage" uri="http://cinco.scce.info/product/userdoc/mglid/views"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.internal.InternalPackage" uri="http://cinco.scce.info/product/userdoc/mglid/internal"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.UserdocPackage" uri="http://cinco.scce.info/product/userdoc/mglid"/>
+   </extension><extension point="org.eclipse.ui.perspectives">
+	<perspective class="info.scce.cinco.product.userdoc.perspective.UserDocToolPerspective" fixed="false" id="info.scce.cinco.product.userdoc.userdoctoolperspective" name="UserDocTool Perspective">
+	</perspective>
+</extension><extension point="de.jabc.cinco.meta.plugin.generator.runtime.registry">
+<!--@MetaPlugin Generatable UserDocGraphModel-->
+<graphmodel class="info.scce.cinco.product.userdoc.mglid.userdoc.UserDocGraphModel">
+</graphmodel>
+<generator bundle_id="info.scce.cinco.product.userdoc" class="info.scce.cinco.product.userdoc.codegen.Generate" outlet="/src/">
+</generator>
+</extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.views.ViewsPackage" uri="http://cinco.scce.info/product/userdoc/mglid/views"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.internal.InternalPackage" uri="http://cinco.scce.info/product/userdoc/mglid/internal"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.UserdocPackage" uri="http://cinco.scce.info/product/userdoc/mglid"/>
+   </extension><extension point="org.eclipse.ui.perspectives">
+	<perspective class="info.scce.cinco.product.userdoc.perspective.UserDocToolPerspective" fixed="false" id="info.scce.cinco.product.userdoc.userdoctoolperspective" name="UserDocTool Perspective">
+	</perspective>
+</extension><extension point="de.jabc.cinco.meta.plugin.generator.runtime.registry">
 <!--@MetaPlugin Generatable UserDocGraphModel-->
 <graphmodel class="info.scce.cinco.product.userdoc.mglid.userdoc.UserDocGraphModel">
 </graphmodel>
@@ -223,6 +445,288 @@
    </extension><extension point="de.jabc.cinco.meta.plugin.generator.runtime.registry">
 <!--@MetaPlugin Generatable FunctionGraphModel-->
 <graphmodel class="info.scce.cinco.product.function.mglid.function.FunctionGraphModel">
+</graphmodel>
+<generator bundle_id="info.scce.cinco.product.userdoc" class="info.scce.cinco.product.userdoc.codegen.Generate" outlet="/src/">
+</generator>
+</extension><extension point="org.eclipse.ui.perspectives">
+	<perspective class="info.scce.cinco.product.userdoc.perspective.UserDocToolPerspective" fixed="false" id="info.scce.cinco.product.userdoc.userdoctoolperspective" name="UserDocTool Perspective">
+	</perspective>
+</extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.UserdocPackage" uri="http://cinco.scce.info/product/userdoc/mglid"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.internal.InternalPackage" uri="http://cinco.scce.info/product/userdoc/mglid/internal"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.views.ViewsPackage" uri="http://cinco.scce.info/product/userdoc/mglid/views"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.function.mglid.function.FunctionPackage" uri="http://cinco.scce.info/product/function/mglid"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.function.mglid.function.internal.InternalPackage" uri="http://cinco.scce.info/product/function/mglid/internal"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.function.mglid.function.views.ViewsPackage" uri="http://cinco.scce.info/product/function/mglid/views"/>
+   </extension><extension point="de.jabc.cinco.meta.plugin.generator.runtime.registry">
+<!--@MetaPlugin Generatable FunctionGraphModel-->
+<graphmodel class="info.scce.cinco.product.function.mglid.function.FunctionGraphModel">
+</graphmodel>
+<generator bundle_id="info.scce.cinco.product.userdoc" class="info.scce.cinco.product.userdoc.codegen.Generate" outlet="/src/">
+</generator>
+</extension><extension point="de.jabc.cinco.meta.plugin.generator.runtime.registry">
+<!--@MetaPlugin Generatable UserDocGraphModel-->
+<graphmodel class="info.scce.cinco.product.userdoc.mglid.userdoc.UserDocGraphModel">
+</graphmodel>
+<generator bundle_id="info.scce.cinco.product.userdoc" class="info.scce.cinco.product.userdoc.codegen.Generate" outlet="/src/">
+</generator>
+</extension><extension point="org.eclipse.ui.perspectives">
+	<perspective class="info.scce.cinco.product.userdoc.perspective.UserDocToolPerspective" fixed="false" id="info.scce.cinco.product.userdoc.userdoctoolperspective" name="UserDocTool Perspective">
+	</perspective>
+</extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.UserdocPackage" uri="http://cinco.scce.info/product/userdoc/mglid"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.internal.InternalPackage" uri="http://cinco.scce.info/product/userdoc/mglid/internal"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.views.ViewsPackage" uri="http://cinco.scce.info/product/userdoc/mglid/views"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.function.mglid.function.FunctionPackage" uri="http://cinco.scce.info/product/function/mglid"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.function.mglid.function.internal.InternalPackage" uri="http://cinco.scce.info/product/function/mglid/internal"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.function.mglid.function.views.ViewsPackage" uri="http://cinco.scce.info/product/function/mglid/views"/>
+   </extension><extension point="de.jabc.cinco.meta.plugin.generator.runtime.registry">
+<!--@MetaPlugin Generatable UserDocGraphModel-->
+<graphmodel class="info.scce.cinco.product.userdoc.mglid.userdoc.UserDocGraphModel">
+</graphmodel>
+<generator bundle_id="info.scce.cinco.product.userdoc" class="info.scce.cinco.product.userdoc.codegen.Generate" outlet="/src/">
+</generator>
+</extension><extension point="de.jabc.cinco.meta.plugin.generator.runtime.registry">
+<!--@MetaPlugin Generatable FunctionGraphModel-->
+<graphmodel class="info.scce.cinco.product.function.mglid.function.FunctionGraphModel">
+</graphmodel>
+<generator bundle_id="info.scce.cinco.product.userdoc" class="info.scce.cinco.product.userdoc.codegen.Generate" outlet="/src/">
+</generator>
+</extension><extension point="org.eclipse.ui.perspectives">
+	<perspective class="info.scce.cinco.product.userdoc.perspective.UserDocToolPerspective" fixed="false" id="info.scce.cinco.product.userdoc.userdoctoolperspective" name="UserDocTool Perspective">
+	</perspective>
+</extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.UserdocPackage" uri="http://cinco.scce.info/product/userdoc/mglid"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.internal.InternalPackage" uri="http://cinco.scce.info/product/userdoc/mglid/internal"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.views.ViewsPackage" uri="http://cinco.scce.info/product/userdoc/mglid/views"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.function.mglid.function.FunctionPackage" uri="http://cinco.scce.info/product/function/mglid"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.function.mglid.function.internal.InternalPackage" uri="http://cinco.scce.info/product/function/mglid/internal"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.function.mglid.function.views.ViewsPackage" uri="http://cinco.scce.info/product/function/mglid/views"/>
+   </extension><extension point="de.jabc.cinco.meta.plugin.generator.runtime.registry">
+<!--@MetaPlugin Generatable FunctionGraphModel-->
+<graphmodel class="info.scce.cinco.product.function.mglid.function.FunctionGraphModel">
+</graphmodel>
+<generator bundle_id="info.scce.cinco.product.userdoc" class="info.scce.cinco.product.userdoc.codegen.GenerateFunction" outlet="/src/">
+</generator>
+</extension><extension point="de.jabc.cinco.meta.plugin.generator.runtime.registry">
+<!--@MetaPlugin Generatable UserDocGraphModel-->
+<graphmodel class="info.scce.cinco.product.userdoc.mglid.userdoc.UserDocGraphModel">
+</graphmodel>
+<generator bundle_id="info.scce.cinco.product.userdoc" class="info.scce.cinco.product.userdoc.codegen.Generate" outlet="/src/">
+</generator>
+</extension><extension point="org.eclipse.ui.perspectives">
+	<perspective class="info.scce.cinco.product.userdoc.perspective.UserDocToolPerspective" fixed="false" id="info.scce.cinco.product.userdoc.userdoctoolperspective" name="UserDocTool Perspective">
+	</perspective>
+</extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.UserdocPackage" uri="http://cinco.scce.info/product/userdoc/mglid"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.internal.InternalPackage" uri="http://cinco.scce.info/product/userdoc/mglid/internal"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.views.ViewsPackage" uri="http://cinco.scce.info/product/userdoc/mglid/views"/>
+   </extension><extension point="de.jabc.cinco.meta.plugin.generator.runtime.registry">
+<!--@MetaPlugin Generatable UserDocGraphModel-->
+<graphmodel class="info.scce.cinco.product.userdoc.mglid.userdoc.UserDocGraphModel">
+</graphmodel>
+<generator bundle_id="info.scce.cinco.product.userdoc" class="info.scce.cinco.product.userdoc.codegen.Generate" outlet="/src/">
+</generator>
+</extension><extension point="org.eclipse.ui.perspectives">
+	<perspective class="info.scce.cinco.product.userdoc.perspective.UserDocToolPerspective" fixed="false" id="info.scce.cinco.product.userdoc.userdoctoolperspective" name="UserDocTool Perspective">
+	</perspective>
+</extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.UserdocPackage" uri="http://cinco.scce.info/product/userdoc/mglid"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.internal.InternalPackage" uri="http://cinco.scce.info/product/userdoc/mglid/internal"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.views.ViewsPackage" uri="http://cinco.scce.info/product/userdoc/mglid/views"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.function.mglid.function.FunctionPackage" uri="http://cinco.scce.info/product/function/mglid"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.function.mglid.function.internal.InternalPackage" uri="http://cinco.scce.info/product/function/mglid/internal"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.function.mglid.function.views.ViewsPackage" uri="http://cinco.scce.info/product/function/mglid/views"/>
+   </extension><extension point="de.jabc.cinco.meta.plugin.generator.runtime.registry">
+<!--@MetaPlugin Generatable FunctionGraphModel-->
+<graphmodel class="info.scce.cinco.product.function.mglid.function.FunctionGraphModel">
+</graphmodel>
+<generator bundle_id="info.scce.cinco.product.userdoc" class="info.scce.cinco.product.userdoc.codegen.GenerateFunction" outlet="/src/">
+</generator>
+</extension><extension point="de.jabc.cinco.meta.plugin.generator.runtime.registry">
+<!--@MetaPlugin Generatable UserDocGraphModel-->
+<graphmodel class="info.scce.cinco.product.userdoc.mglid.userdoc.UserDocGraphModel">
+</graphmodel>
+<generator bundle_id="info.scce.cinco.product.userdoc" class="info.scce.cinco.product.userdoc.codegen.Generate" outlet="/src/">
+</generator>
+</extension><extension point="org.eclipse.ui.perspectives">
+	<perspective class="info.scce.cinco.product.userdoc.perspective.UserDocToolPerspective" fixed="false" id="info.scce.cinco.product.userdoc.userdoctoolperspective" name="UserDocTool Perspective">
+	</perspective>
+</extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.UserdocPackage" uri="http://cinco.scce.info/product/userdoc/mglid"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.internal.InternalPackage" uri="http://cinco.scce.info/product/userdoc/mglid/internal"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.views.ViewsPackage" uri="http://cinco.scce.info/product/userdoc/mglid/views"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.function.mglid.function.FunctionPackage" uri="http://cinco.scce.info/product/function/mglid"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.function.mglid.function.internal.InternalPackage" uri="http://cinco.scce.info/product/function/mglid/internal"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.function.mglid.function.views.ViewsPackage" uri="http://cinco.scce.info/product/function/mglid/views"/>
+   </extension><extension point="de.jabc.cinco.meta.plugin.generator.runtime.registry">
+<!--@MetaPlugin Generatable UserDocGraphModel-->
+<graphmodel class="info.scce.cinco.product.userdoc.mglid.userdoc.UserDocGraphModel">
+</graphmodel>
+<generator bundle_id="info.scce.cinco.product.userdoc" class="info.scce.cinco.product.userdoc.codegen.Generate" outlet="/src/">
+</generator>
+</extension><extension point="de.jabc.cinco.meta.plugin.generator.runtime.registry">
+<!--@MetaPlugin Generatable FunctionGraphModel-->
+<graphmodel class="info.scce.cinco.product.function.mglid.function.FunctionGraphModel">
+</graphmodel>
+<generator bundle_id="info.scce.cinco.product.userdoc" class="info.scce.cinco.product.userdoc.codegen.GenerateFunction" outlet="/src/">
+</generator>
+</extension><extension point="org.eclipse.ui.perspectives">
+	<perspective class="info.scce.cinco.product.userdoc.perspective.UserDocToolPerspective" fixed="false" id="info.scce.cinco.product.userdoc.userdoctoolperspective" name="UserDocTool Perspective">
+	</perspective>
+</extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.UserdocPackage" uri="http://cinco.scce.info/product/userdoc/mglid"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.internal.InternalPackage" uri="http://cinco.scce.info/product/userdoc/mglid/internal"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.views.ViewsPackage" uri="http://cinco.scce.info/product/userdoc/mglid/views"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.function.mglid.function.FunctionPackage" uri="http://cinco.scce.info/product/function/mglid"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.function.mglid.function.internal.InternalPackage" uri="http://cinco.scce.info/product/function/mglid/internal"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.function.mglid.function.views.ViewsPackage" uri="http://cinco.scce.info/product/function/mglid/views"/>
+   </extension><extension point="de.jabc.cinco.meta.plugin.generator.runtime.registry">
+<!--@MetaPlugin Generatable UserDocGraphModel-->
+<graphmodel class="info.scce.cinco.product.userdoc.mglid.userdoc.UserDocGraphModel">
+</graphmodel>
+<generator bundle_id="info.scce.cinco.product.userdoc" class="info.scce.cinco.product.userdoc.codegen.Generate" outlet="/src/">
+</generator>
+</extension><extension point="de.jabc.cinco.meta.plugin.generator.runtime.registry">
+<!--@MetaPlugin Generatable FunctionGraphModel-->
+<graphmodel class="info.scce.cinco.product.function.mglid.function.FunctionGraphModel">
+</graphmodel>
+<generator bundle_id="info.scce.cinco.product.userdoc" class="info.scce.cinco.product.userdoc.codegen.GenerateFunction" outlet="/src/">
+</generator>
+</extension><extension point="org.eclipse.ui.perspectives">
+	<perspective class="info.scce.cinco.product.userdoc.perspective.UserDocToolPerspective" fixed="false" id="info.scce.cinco.product.userdoc.userdoctoolperspective" name="UserDocTool Perspective">
+	</perspective>
+</extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.UserdocPackage" uri="http://cinco.scce.info/product/userdoc/mglid"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.internal.InternalPackage" uri="http://cinco.scce.info/product/userdoc/mglid/internal"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.views.ViewsPackage" uri="http://cinco.scce.info/product/userdoc/mglid/views"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.function.mglid.function.FunctionPackage" uri="http://cinco.scce.info/product/function/mglid"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.function.mglid.function.internal.InternalPackage" uri="http://cinco.scce.info/product/function/mglid/internal"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.function.mglid.function.views.ViewsPackage" uri="http://cinco.scce.info/product/function/mglid/views"/>
+   </extension><extension point="de.jabc.cinco.meta.plugin.generator.runtime.registry">
+<!--@MetaPlugin Generatable FunctionGraphModel-->
+<graphmodel class="info.scce.cinco.product.function.mglid.function.FunctionGraphModel">
+</graphmodel>
+<generator bundle_id="info.scce.cinco.product.userdoc" class="info.scce.cinco.product.userdoc.codegen.GenerateFunction" outlet="/src/">
+</generator>
+</extension><extension point="de.jabc.cinco.meta.plugin.generator.runtime.registry">
+<!--@MetaPlugin Generatable UserDocGraphModel-->
+<graphmodel class="info.scce.cinco.product.userdoc.mglid.userdoc.UserDocGraphModel">
+</graphmodel>
+<generator bundle_id="info.scce.cinco.product.userdoc" class="info.scce.cinco.product.userdoc.codegen.Generate" outlet="/src/">
+</generator>
+</extension><extension point="org.eclipse.ui.perspectives">
+	<perspective class="info.scce.cinco.product.userdoc.perspective.UserDocToolPerspective" fixed="false" id="info.scce.cinco.product.userdoc.userdoctoolperspective" name="UserDocTool Perspective">
+	</perspective>
+</extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.UserdocPackage" uri="http://cinco.scce.info/product/userdoc/mglid"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.internal.InternalPackage" uri="http://cinco.scce.info/product/userdoc/mglid/internal"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.userdoc.mglid.userdoc.views.ViewsPackage" uri="http://cinco.scce.info/product/userdoc/mglid/views"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.function.mglid.function.FunctionPackage" uri="http://cinco.scce.info/product/function/mglid"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.function.mglid.function.internal.InternalPackage" uri="http://cinco.scce.info/product/function/mglid/internal"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocTool -->
+      <package class="info.scce.cinco.product.function.mglid.function.views.ViewsPackage" uri="http://cinco.scce.info/product/function/mglid/views"/>
+   </extension><extension point="de.jabc.cinco.meta.plugin.generator.runtime.registry">
+<!--@MetaPlugin Generatable FunctionGraphModel-->
+<graphmodel class="info.scce.cinco.product.function.mglid.function.FunctionGraphModel">
+</graphmodel>
+<generator bundle_id="info.scce.cinco.product.userdoc" class="info.scce.cinco.product.userdoc.codegen.GenerateFunction" outlet="/src/">
+</generator>
+</extension><extension point="de.jabc.cinco.meta.plugin.generator.runtime.registry">
+<!--@MetaPlugin Generatable UserDocGraphModel-->
+<graphmodel class="info.scce.cinco.product.userdoc.mglid.userdoc.UserDocGraphModel">
 </graphmodel>
 <generator bundle_id="info.scce.cinco.product.userdoc" class="info.scce.cinco.product.userdoc.codegen.Generate" outlet="/src/">
 </generator>
