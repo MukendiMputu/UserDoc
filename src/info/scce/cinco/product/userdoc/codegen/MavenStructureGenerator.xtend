@@ -5,23 +5,21 @@ import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.core.runtime.CoreException
 
 class MavenStructureGenerator {
+	static var mainFolder = '/src/main'
+	static var testFolder = '/src/test'
+	static var targetFolder = '/target'
 	
 	def static generateMavenStructure(IProject projectDir, IProgressMonitor monitor) {
-				
-		val mainFolder = '/src/main'
-		val testFolder = '/src/test'
-		val targetFolder = '/target'
-		
 		/* create maven specific folder */
 		try {
-			
+
 			projectDir.getFolder(targetFolder).create(true, true, monitor)
 			projectDir.getFolder(mainFolder).create(true, true, monitor)
 			projectDir.getFolder(testFolder).create(true, true, monitor)
-			
+
 			generateJavaFolders(projectDir, monitor)
 			generateResourceFolders(projectDir, monitor)
-			
+
 		} catch (CoreException exception) {
 			
 			exception.printStackTrace()
@@ -34,23 +32,13 @@ class MavenStructureGenerator {
 	}
 	
 	private def static generateJavaFolders(IProject projectDir, IProgressMonitor monitor){
-		
-		val mainJavaFolder = '/src/main/java'
-		val testJavaFolder = '/src/test/java'
-		
-		projectDir.getFolder(mainJavaFolder).create(true, true, monitor)
-		projectDir.getFolder(testJavaFolder).create(true, true, monitor)
-		
+		projectDir.getFolder(mainFolder + "/java").create(true, true, monitor)
+		projectDir.getFolder(testFolder + "/java").create(true, true, monitor)
 	}
 	
 	private def static generateResourceFolders(IProject projectDir, IProgressMonitor monitor){
-		
-		val mainResourceFolder = '/src/main/resources'
-		val testResourceFolder = '/src/test/resources'
-		
-		projectDir.getFolder(mainResourceFolder).create(true, true, monitor)
-		projectDir.getFolder(testResourceFolder).create(true, true, monitor)
-		
+		projectDir.getFolder(mainFolder + '/resources').create(true, true, monitor)
+		projectDir.getFolder(testFolder + '/resources').create(true, true, monitor)
 	}
 	
 }
