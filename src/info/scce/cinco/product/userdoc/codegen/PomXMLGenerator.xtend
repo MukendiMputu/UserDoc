@@ -8,10 +8,16 @@ class PomXMLGenerator {
 	static var code = '''
 		<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 		  <modelVersion>4.0.0</modelVersion>
-		  <groupId>info.scce.cinco.product.userdoc</groupId>
-		  <artifactId>login-doc</artifactId>
+		  <groupId>info.scce.cinco.product</groupId>
+		  <artifactId>userdoc</artifactId>
 		  <version>0.0.1-SNAPSHOT</version>
-		  <name>Login UserDoc </name>
+		  <name>User Documentation</name>
+		  
+		  <properties>
+			  <maven.compiler.source>1.8</maven.compiler.source>
+			  <maven.compiler.target>1.8</maven.compiler.target>
+		  </properties>
+		  
 		  <dependencies>
 		  <dependency>
 		    <groupId>commons-io</groupId>

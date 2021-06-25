@@ -14,8 +14,8 @@ import info.scce.cinco.product.userdoc.codegen.MavenStructureGenerator
 
 class Generate implements IGenerator<UserDocGraphModel> {
 	
-    IWorkspaceRoot root = ResourcesPlugin.workspace.getRoot();
-    IProject project
+	IWorkspaceRoot root = ResourcesPlugin.workspace.getRoot();
+	IProject project
 	
 	override generate(UserDocGraphModel model, IPath targetDir, IProgressMonitor monitor) {
 		if (model.userDocGraphModelView.modelName.nullOrEmpty)
@@ -37,15 +37,38 @@ class Generate implements IGenerator<UserDocGraphModel> {
 		/* generate maven project structure */
 		MavenStructureGenerator.generateMavenStructure(project, monitor)
 		
-		val String[] pkgs = #["config", "pages", "site", "tool", "test"]
-		val packagePrefix = "/src/main/java/com/example/"
+		val String[] pkgs = #["config", "main", "pages", "site", "tool", "test"]
+		val mainPackagePrefix = "/src/main/java/com/example/"
+		val testPackagePrefix = "/src/test/java/com/example/"
 		for (pkg : pkgs) {
-			PackageGenerator.generatePkg(packagePrefix + pkg, project, monitor)
+			PackageGenerator.generatePkg(mainPackagePrefix + pkg, project, monitor)
 		}
+			PackageGenerator.generatePkg(testPackagePrefix + pkgs.get(5), project, monitor)
 
+		// generate Main class
+		EclipseFileUtils.writeToFile(
+			project.getFile(mainPackagePrefix + "main/Main.java"),
+			'''
+				package com.example.main;
+				
+				import com.example.site.Site;
+				
+				public class Main {
+					
+					Boolean bResult = false;
+					Site site; 
+					
+					public static void main() throws InterruptedException {
+						bResult =  site.Login();
+						Thread.sleep(3000);
+						
+					}
+				}
+			'''
+		)
 		// generatePage()
 		EclipseFileUtils.writeToFile(
-			project.getFile(packagePrefix + "pages/Page.java"),
+			project.getFile(mainPackagePrefix + "pages/Page.java"),
 			'''
 				package com.example.pages;
 				
@@ -69,7 +92,7 @@ class Generate implements IGenerator<UserDocGraphModel> {
 		
 		// generateSite()
 		EclipseFileUtils.writeToFile(
-			project.getFile(packagePrefix + "site/Site.java"),
+			project.getFile(mainPackagePrefix + "site/Site.java"),
 			'''
 				package com.example.site;
 				
@@ -100,6 +123,10 @@ class Generate implements IGenerator<UserDocGraphModel> {
 							e.printStackTrace();
 						}
 					}
+									
+					public Boolean Login() {
+						return true;
+					}
 				
 					public String getsBrowserName() {
 						return sBrowserName;
@@ -122,13 +149,13 @@ class Generate implements IGenerator<UserDocGraphModel> {
 
 		// generateConfig()
 		val config = generateConfigurationFile()
-		val configFile = project.getFile(packagePrefix + "config/config.properties")
+		val configFile = project.getFile(mainPackagePrefix + "config/config.properties")
 		EclipseFileUtils.writeToFile(configFile, config)
 		
 		
 		// generateAutomationClass()
 		EclipseFileUtils.writeToFile(
-			project.getFile(packagePrefix + "tool/AutomationClass.java"),
+			project.getFile(mainPackagePrefix + "tool/AutomationClass.java"),
 			'''
 			package com.example.tool;
 			
@@ -196,8 +223,45 @@ class Generate implements IGenerator<UserDocGraphModel> {
 					driver.quit();
 				}
 			}
-			
+			'''
+		)
+		
+		
+		// generateSmokeTest()
+		EclipseFileUtils.writeToFile(
+			project.getFile(testPackagePrefix + "test/SmokeTest.java"),
+			'''
+				package com.example.test;
 				
+				import org.testng.Assert;
+				import org.testng.annotations.AfterMethod;
+				import org.testng.annotations.BeforeMethod;
+				import org.testng.annotations.Test;
+				import com.example.site.Site;
+				
+				public class SmokeTest {
+					
+					Boolean bResult = false;
+					Site site; 
+					
+					@BeforeMethod
+					public void beforeMethod() {
+						site = new Site();
+					}
+					
+					@Test
+					public void testCallFunction() throws InterruptedException {
+						bResult =  site.Login();
+						Thread.sleep(3000);
+						
+						Assert.assertTrue(bResult, "Login failed");
+					}
+					
+					@AfterMethod
+					public void afterMethode() {
+						
+					}
+				}
 			'''
 		)
 		
@@ -205,35 +269,55 @@ class Generate implements IGenerator<UserDocGraphModel> {
 		EclipseFileUtils.writeToFile(
 			project.getFile(".classpath"),
 			'''
-			<?xml version="1.0" encoding="UTF-8"?>
-			<classpath>
-				<classpathentry kind="src" output="target/classes" path="src/main/java">
-					<attributes>
-						<attribute name="optional" value="true"/>
-						<attribute name="maven.pomderived" value="true"/>
-					</attributes>
-				</classpathentry>
-				
-				<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
-					<attributes>
-						<attribute name="module" value="true"/>
-						<attribute name="maven.pomderived" value="true"/>
-					</attributes>
-				</classpathentry>
-				
-				<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
-					<attributes>
-						<attribute name="maven.pomderived" value="true"/>
-					</attributes>
-				</classpathentry>
-				
-				<classpathentry kind="output" path="bin"/>
-			</classpath>
-
+				<?xml version="1.0" encoding="UTF-8"?>
+				<classpath>
+					<classpathentry kind="src" output="target/classes" path="src/main/java">
+						<attributes>
+							<attribute name="optional" value="true"/>
+							<attribute name="maven.pomderived" value="true"/>
+						</attributes>
+					</classpathentry>
+					
+					<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
+						<attributes>
+							<attribute name="maven.pomderived" value="true"/>
+						</attributes>
+					</classpathentry>
+					
+					<classpathentry kind="src" output="target/test-classes" path="src/test/java">
+						<attributes>
+							<attribute name="test" value="true"/>
+							<attribute name="optional" value="true"/>
+							<attribute name="maven.pomderived" value="true"/>
+						</attributes>
+					</classpathentry>
+					
+					<classpathentry excluding="**" kind="src" output="target/test-classes" path="src/test/resources">
+						<attributes>
+							<attribute name="test" value="true"/>
+							<attribute name="maven.pomderived" value="true"/>
+						</attributes>
+					</classpathentry>
+					
+					<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+						<attributes>
+							<attribute name="module" value="true"/>
+							<attribute name="maven.pomderived" value="true"/>
+						</attributes>
+					</classpathentry>
+					
+					<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+						<attributes>
+							<attribute name="maven.pomderived" value="true"/>
+						</attributes>
+					</classpathentry>
+					
+					<classpathentry kind="output" path="target/classes"/>
+				</classpath>
 			'''
 		)
 	}
-	
+
 	private def generateModelInfo(UserDocGraphModel model) '''
 		=== «model.userDocGraphModelView.modelName» ===
 		
