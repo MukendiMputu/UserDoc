@@ -47,19 +47,19 @@ class Generate implements IGenerator<UserDocGraphModel> {
 
 		// generate Main class
 		EclipseFileUtils.writeToFile(
-			project.getFile(mainPackagePrefix + "main/Main.java"),
+			project.getFile(mainPackagePrefix + "main/Start.java"),
 			'''
 				package com.example.main;
 				
 				import com.example.site.Site;
 				
-				public class Main {
+				public class Start {
 					
-					Boolean bResult = false;
-					Site site; 
 					
 					public static void main() throws InterruptedException {
-						bResult =  site.Login();
+						Site site = new Site();
+						
+						site.Login();
 						Thread.sleep(3000);
 						
 					}
@@ -161,13 +161,14 @@ class Generate implements IGenerator<UserDocGraphModel> {
 			
 			import java.io.File;
 			import java.io.IOException;
-			import org.apache.commons.io.FileUtils;
 			import org.openqa.selenium.By;
 			import org.openqa.selenium.Keys;
 			import org.openqa.selenium.WebDriver;
 			import org.openqa.selenium.WebElement;
 			import org.openqa.selenium.OutputType;
+			import org.apache.commons.io.FileUtils;
 			import org.openqa.selenium.TakesScreenshot;
+			import org.openqa.selenium.JavascriptExecutor;
 			import org.openqa.selenium.firefox.FirefoxDriver;
 			
 			public class AutomationClass {
@@ -212,9 +213,23 @@ class Generate implements IGenerator<UserDocGraphModel> {
 					return true;
 				}
 				
+				public void highlightElement(WebElement elem) {
+					JavascriptExecutor jsExec = (JavascriptExecutor) driver;
+					jsExec.executeScript("arguments[0].setAttribute('style','border: 2px solid red;');", elem);
+				}
+			
 				public Boolean enterCredentials(String sUserName, String sPassword) {
-					driver.findElement(By.id("email")).sendKeys(sUserName + Keys.TAB);
-					driver.findElement(By.id("password")).sendKeys(sPassword + Keys.ENTER);
+					WebElement inputEmail = driver.findElement(By.id("email"));
+					WebElement inputPwd = driver.findElement(By.id("pass"));
+					highlightElement(inputEmail);
+					inputEmail.sendKeys(sUserName + Keys.TAB);
+					highlightElement(inputPwd);
+					try {
+						Thread.sleep(5000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					inputPwd.sendKeys(sPassword + Keys.ENTER);
 			
 					return true;
 				}
@@ -223,6 +238,7 @@ class Generate implements IGenerator<UserDocGraphModel> {
 					driver.quit();
 				}
 			}
+
 			'''
 		)
 		
