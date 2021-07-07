@@ -61,8 +61,9 @@ node Comment {
 node Input {
 	style inputNode("${value}", "${selector}")
 	attr EBoolean as highlighted
-	attr EString as value
 	attr EString as selector
+	attr EString as value
+	attr EString as content
 	incomingEdges (*[1,*])
 	outgoingEdges ({Transition, LabeledTransition}[1,*])
 }

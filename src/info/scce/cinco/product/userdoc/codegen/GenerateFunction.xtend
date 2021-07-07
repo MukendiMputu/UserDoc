@@ -36,6 +36,12 @@ class GenerateFunction implements IGenerator<FunctionGraphModel> {
 
 		«FOR node : model.allNodes»
 			* node «node.id» of type '«node.eClass.name»' with «node.successors.size» successors and «node.predecessors.size» predecessors
+				«IF node.eContainingFeature.EType.equals("container")»
+					Contains object(s):
+					«FOR containedObj : node.eContents»
+						- '«containedObj.eClass.name»'
+					«ENDFOR»
+				«ENDIF»
 		«ENDFOR»
 	'''
 }
