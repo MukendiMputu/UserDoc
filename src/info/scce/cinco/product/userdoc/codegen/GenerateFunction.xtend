@@ -15,10 +15,10 @@ class GenerateFunction implements IGenerator<FunctionGraphModel> {
 	IProject project
 	
 	override generate(FunctionGraphModel model, IPath targetDir, IProgressMonitor monitor) {
-		if (model.functionGraphModelView.modelName.nullOrEmpty)
+		if (model.modelName.nullOrEmpty)
 			throw new RuntimeException("Model's name cannot be empty!")
 		
-		val modelName = model.functionGraphModelView.modelName
+		val modelName = model.modelName
 		
 		// get the containing folder of the target directory, which is the project directory
 		this.project = root.getContainerForLocation(targetDir).getProject()
@@ -32,16 +32,17 @@ class GenerateFunction implements IGenerator<FunctionGraphModel> {
 	private def generateModelInfo(FunctionGraphModel model) '''
 		=== «model.functionGraphModelView.modelName» ===
 
-		The model contains «model.allNodes.size» nodes. Here's some general information about them:
+		The model has «model.allNodes.size» nodes. Here's some general information about them:
 
 		«FOR node : model.allNodes»
 			* node «node.id» of type '«node.eClass.name»' with «node.successors.size» successors and «node.predecessors.size» predecessors
-				«IF node.eContainingFeature.EType.equals("container")»
+			««« 	«FOR el : »
 					Contains object(s):
-					«FOR containedObj : node.eContents»
-						- '«containedObj.eClass.name»'
-					«ENDFOR»
-				«ENDIF»
+					««« «FOR containedObj : node.eContents»
+					«««	- '«containedObj.eClass.name»'
+					««« «ENDFOR»»»»
+					«node.internalElement.eClass.name»
+			««« 	«ENDFOR»
 		«ENDFOR»
 	'''
 }

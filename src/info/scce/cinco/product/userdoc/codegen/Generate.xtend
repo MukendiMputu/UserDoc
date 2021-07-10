@@ -18,10 +18,10 @@ class Generate implements IGenerator<UserDocGraphModel> {
 	IProject project
 	
 	override generate(UserDocGraphModel model, IPath targetDir, IProgressMonitor monitor) {
-		if (model.userDocGraphModelView.modelName.nullOrEmpty)
+		if (model.modelName.nullOrEmpty)
 			throw new RuntimeException("Model's name cannot be empty!")
 		
-		val modelName = model.userDocGraphModelView.modelName
+		val modelName = model.modelName
 		
 		// get the containing folder of the target directory, which is the project directory
 		project = root.getContainerForLocation(targetDir).getProject()

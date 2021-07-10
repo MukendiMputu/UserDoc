@@ -1,5 +1,5 @@
-import "model/UserDoc.mgl" as docMgl
-//import "platform:/resource/info.scce.cinco.product.userdoc/src-gen/model/UserDocTool.ecore" as UserDocTool
+//import "model/UserDoc.mgl" as docMgl
+import "platform:/resource/info.scce.cinco.product.userdoc/src-gen/info/scce/cinco/product/userdoc/mglid/userdoc/impl/userdoc.ecore" as UserDocTool
 id info.scce.cinco.product.function.mglid
 stylePath "model/Function.style"
 
@@ -9,7 +9,7 @@ graphModel FunctionGraphModel {
 	iconPath "icons/UserDocFunction.png"
 	diagramExtension "func"
 	containableElements(*)
-	attr EString as modelName
+	attr EString as name
 }
 
 @icon("icons/Start.png")
@@ -34,9 +34,9 @@ container FeatureContainer {
 }
 
 node DocNode{
-	//prime UserDocTool.FunctionGraphModel as mgl
-	prime docMgl::UserDocGraphModel as mgl
-	style docNode("${mgl.modelName}.doc")
+	style docNode("${mgl.modelName}")
+	prime UserDocTool.UserDocGraphModel as mgl
+	//prime docMgl::UserDocGraphModel as mgl
 	incomingEdges (*[1,*])
 	outgoingEdges ({Edge,LabeledEdge}[1,*])
 }

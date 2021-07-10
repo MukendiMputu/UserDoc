@@ -13,7 +13,7 @@ appearance blueBorder extends default {
 			background (28,113,216)
 }
 
-/*---------------- NODES ------------------------ */
+/*---------------- NODE STYLES ------------------------ */
 
 nodeStyle redCircle {
 	ellipse {
@@ -83,7 +83,7 @@ nodeStyle blueTextRectangle(1) {
 	}
 }
 
-nodeStyle StartNode {
+nodeStyle start {
 	roundedRectangle {
 		appearance extends default {
 			foreground (46,194,126)
@@ -99,7 +99,7 @@ nodeStyle StartNode {
 	}
 }
 
-nodeStyle navigationNode(1) {
+nodeStyle navigation(1) {
 	roundedRectangle {
 		appearance extends default {
 			background (222,221,218)
@@ -114,17 +114,56 @@ nodeStyle navigationNode(1) {
 	}
 }
 
-nodeStyle ScreenshotNode {
+nodeStyle screenshot {
 	image {
 		size (50, 43)
 		path ("icons/Screenshot.png")
 	}
 }
 
-nodeStyle commentNode(1) {
+nodeStyle textBlock(1) {
 	roundedRectangle {
 		appearance extends default {
-			background (255,190,111)
+			lineWidth 1
+			lineStyle DOT
+			background (255,255,255)
+		}
+		position (0,0)
+		size (96,32)
+		corner (1,1)
+		multiText {
+			position ( LEFT, TOP )
+			value "%s"
+		}
+	}
+}
+
+nodeStyle img(1) {
+	roundedRectangle {
+		appearance extends default {
+			lineWidth 1
+			lineStyle DOT
+			background (255,255,255)
+		}
+		position (0,0)
+		size (96,32)
+		corner (1,1)
+		text {
+			position ( CENTER, BOTTOM )
+			value "%s"
+		}
+		image {
+		position (CENTER,TOP)
+		size (50, 43)
+		path ("icons/Screenshot.png")
+	}
+	}
+}
+
+nodeStyle description(1) {
+	roundedRectangle {
+		appearance extends default {
+			background (247,226,58)
 		}
 		position (0,0)
 		size (96,32)
@@ -136,7 +175,8 @@ nodeStyle commentNode(1) {
 	}
 }
 
-nodeStyle inputNode(2) {
+nodeStyle input(3) {
+	appearanceProvider("info.scce.cinco.product.userdoc.appearance.HighlightedNodeAppearance")
 	roundedRectangle {
 		appearance extends default {
 			background (255,255,255)
@@ -151,7 +191,7 @@ nodeStyle inputNode(2) {
 	}
 }
 
-nodeStyle buttonNode(3) {
+nodeStyle button(4) {
 	roundedRectangle {
 		appearance extends default {
 			foreground (255,255,255)
@@ -167,7 +207,7 @@ nodeStyle buttonNode(3) {
 	}
 }
 
-nodeStyle EndNode {
+nodeStyle end {
 	roundedRectangle {
 		appearance extends default {
 			foreground (237,51,59)
@@ -183,7 +223,7 @@ nodeStyle EndNode {
 	}
 }
 
-nodeStyle docNode(1) {
+nodeStyle doc(1) {
 	roundedRectangle {
 		appearance extends default {
 			background (255,255,255)
@@ -199,7 +239,7 @@ nodeStyle docNode(1) {
 }
 
 
-/*---------------- EDGES ------------------------ */
+/*---------------- EDGE STYLES ------------------------ */
 
 edgeStyle simpleArrow {
 	appearance default
@@ -217,7 +257,7 @@ edgeStyle triangleArrow {
 		location (1.0)
 		TRIANGLE
 		appearance extends default {
-			background (255,190,111)
+			background (247,226,58)
 		}
 	}
 } 
