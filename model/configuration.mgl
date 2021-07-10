@@ -1,0 +1,10 @@
+id info.scce.cinco.product.configuration.mglid
+stylePath "model/configuration.style"
+
+@generatable("info.scce.cinco.product.userdoc.codegen.GenerateConfiguration", "/src/")
+graphModel FunctionGraphModel {
+	iconPath "icons/UserDocFunction.png"
+	diagramExtension "conf"
+	containableElements(*)
+	attr EString as modelName
+}

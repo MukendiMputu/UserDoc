@@ -1,0 +1,20 @@
+appearance default {
+	lineWidth 2
+	background (144,207,238)
+}
+
+nodeStyle StartNode {
+	roundedRectangle {
+		appearance extends default {
+			foreground (46,194,126)
+			background (46,194,126)
+		}
+		position (0, 0)
+		size (96, 32)
+		corner (8, 8)
+		text {
+			position (CENTER, MIDDLE)
+			value "Start"
+		}
+	}
+}
