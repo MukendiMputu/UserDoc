@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+<extension
+	point="org.eclipse.ui.perspectives">
+	<perspective
+		class="info.scce.cinco.product.userdocumentation.perspective.UserDocumentationToolPerspective"
+		fixed="false"
+		id="info.scce.cinco.product.userdocumentation.userdocumentationtoolperspective"
+		icon="branding/Icon16.png"
+		name="UserDocumentationTool Perspective">
+	</perspective>
+</extension><extension point="org.eclipse.ui.newWizards">
+<!--@CincoGen PROJECT_WIZARD_USERDOCUMENTATIONTOOL_WIZ -->
+<wizard category="de.jabc.cinco.meta.core.wizards.category.cinco" class="info.scce.cinco.product.userdocumentation.UserDocumentationToolProjectWizard" icon="branding/Icon16.png" id="info.scce.cinco.product.userdocumentation.wizard.userdocumentationtoolproject" name="New UserDocumentationTool Project" project="true">
+</wizard>
+</extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocumentationTool -->
+      <package class="info.scce.cinco.product.usersequence.usersequence.views.ViewsPackage" uri="http://cinco.scce.info/product/usersequence/views"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocumentationTool -->
+      <package class="info.scce.cinco.product.usersequence.usersequence.internal.InternalPackage" uri="http://cinco.scce.info/product/usersequence/internal"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocumentationTool -->
+      <package class="info.scce.cinco.product.usersequence.usersequence.UsersequencePackage" uri="http://cinco.scce.info/product/usersequence"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocumentationTool -->
+      <package class="info.scce.cinco.product.useraction.useraction.views.ViewsPackage" uri="http://cinco.scce.info/product/useraction/views"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocumentationTool -->
+      <package class="info.scce.cinco.product.useraction.useraction.internal.InternalPackage" uri="http://cinco.scce.info/product/useraction/internal"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocumentationTool -->
+      <package class="info.scce.cinco.product.useraction.useraction.UseractionPackage" uri="http://cinco.scce.info/product/useraction"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocumentationTool -->
+      <package class="info.scce.cinco.product.siteconfiguration.siteconfiguration.views.ViewsPackage" uri="http://cinco.scce.info/product/siteconfiguration/views"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocumentationTool -->
+      <package class="info.scce.cinco.product.siteconfiguration.siteconfiguration.internal.InternalPackage" uri="http://cinco.scce.info/product/siteconfiguration/internal"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocumentationTool -->
+      <package class="info.scce.cinco.product.siteconfiguration.siteconfiguration.SiteconfigurationPackage" uri="http://cinco.scce.info/product/siteconfiguration"/>
+   </extension><extension point="org.eclipse.ui.perspectives">
+	<perspective class="info.scce.cinco.product.userdocumentation.perspective.UserDocumentationToolPerspective" fixed="false" icon="branding/Icon16.png" id="info.scce.cinco.product.userdocumentation.userdocumentationtoolperspective" name="UserDocumentationTool Perspective">
+	</perspective>
+</extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocumentationTool -->
+      <package class="info.scce.cinco.product.siteconfiguration.siteconfiguration.views.ViewsPackage" uri="http://cinco.scce.info/product/siteconfiguration/views"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocumentationTool -->
+      <package class="info.scce.cinco.product.siteconfiguration.siteconfiguration.internal.InternalPackage" uri="http://cinco.scce.info/product/siteconfiguration/internal"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocumentationTool -->
+      <package class="info.scce.cinco.product.siteconfiguration.siteconfiguration.SiteconfigurationPackage" uri="http://cinco.scce.info/product/siteconfiguration"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocumentationTool -->
+      <package class="info.scce.cinco.product.usersequence.usersequence.UsersequencePackage" uri="http://cinco.scce.info/product/usersequence"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocumentationTool -->
+      <package class="info.scce.cinco.product.usersequence.usersequence.internal.InternalPackage" uri="http://cinco.scce.info/product/usersequence/internal"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocumentationTool -->
+      <package class="info.scce.cinco.product.usersequence.usersequence.views.ViewsPackage" uri="http://cinco.scce.info/product/usersequence/views"/>
+   </extension><extension point="org.eclipse.ui.perspectives">
+	<perspective class="info.scce.cinco.product.userdocumentation.perspective.UserDocumentationToolPerspective" fixed="false" icon="branding/Icon16.png" id="info.scce.cinco.product.userdocumentation.userdocumentationtoolperspective" name="UserDocumentationTool Perspective">
+	</perspective>
+</extension><extension point="org.eclipse.ui.navigator.navigatorContent">
+<!--@CincoGen PROJECT_WIZARD_USERDOCUMENTATIONTOOL_NAV -->		
+<commonWizard menuGroupId="mgl" type="new" wizardId="info.scce.cinco.product.userdocumentation.wizard.userdocumentationtoolproject">
+	<enablement/>
+</commonWizard>
+</extension></plugin>

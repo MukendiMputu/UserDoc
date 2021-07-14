@@ -41,7 +41,7 @@ nodeStyle page(2) {
 		size (70,100)
 		multiText {
 			position ( CENTER, MIDDLE )
-			value "%1s\n %2s"
+			value "%1s %2s"
 		}
 	}
 }

@@ -1,6 +1,6 @@
 cincoProduct UserDocumentationTool {
-	mgl "model/UserAction.mgl"
 	mgl "model/UserSequence.mgl"
+	mgl "model/UserAction.mgl"
 	mgl "model/SiteConfiguration.mgl"
 
 	splashScreen "branding/splash.bmp" {

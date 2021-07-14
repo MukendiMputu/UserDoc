@@ -2,25 +2,25 @@ id info.scce.cinco.product.usersequence
 stylePath "model/UserSequence.style"
 
 graphModel UserSequenceGraphModel {
-	iconPath "icons/"
+	iconPath "icons/16/gear_16.png"
 	diagramExtension "sequence"
 	containableElements(*)
 	attr EString as modelName := ""
 }
 
-@icon("icons/")
+@icon("icons/16/gear_16.png")
 node Start {
 	style start
 	outgoingEdges (*[1,1])
 }
 
-@icon("icons/")
+@icon("icons/16/gear_16.png")
 node End {
 	style end
 	incomingEdges ({Transition,LabeledTransition}[1,*])
 }
 
-@icon("icons/")
+@icon("icons/16/gear_16.png")
 container FeatureContainer {
 	style divContainer("${title}")
 	containableElements(*)
