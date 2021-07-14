@@ -6,3 +6,14 @@
 /.StartEContentAdapter.java._trace
 /.TransitionEContentAdapter.java._trace
 /.UserSequenceGraphModelEContentAdapter.java._trace
+/.AttributesEContentAdapter.java._trace
+/.CheckEContentAdapter.java._trace
+/.ClearEContentAdapter.java._trace
+/.ClickEContentAdapter.java._trace
+/.GoToEContentAdapter.java._trace
+/.ObjectEContentAdapter.java._trace
+/.PressEContentAdapter.java._trace
+/.SelectEContentAdapter.java._trace
+/.SubmitEContentAdapter.java._trace
+/.TipEContentAdapter.java._trace
+/.WebElementEContentAdapter.java._trace

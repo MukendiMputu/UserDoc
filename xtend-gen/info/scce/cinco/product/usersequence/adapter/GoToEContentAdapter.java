@@ -1,12 +1,12 @@
-package info.scce.cinco.product.useraction.adapter;
+package info.scce.cinco.product.usersequence.adapter;
 
 import com.google.common.base.Objects;
 import de.jabc.cinco.meta.runtime.contentadapter.CincoEContentAdapter;
 import graphmodel.GraphModel;
 import graphmodel.ModelElement;
 import graphmodel.internal.InternalGraphModel;
-import info.scce.cinco.product.useraction.useraction.internal.InternalPackage;
-import info.scce.cinco.product.useraction.useraction.internal.InternalWebElement;
+import info.scce.cinco.product.usersequence.usersequence.internal.InternalGoTo;
+import info.scce.cinco.product.usersequence.usersequence.internal.InternalPackage;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClassifier;
@@ -15,14 +15,14 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 
 @SuppressWarnings("all")
-public class WebElementEContentAdapter extends EContentAdapter implements CincoEContentAdapter {
+public class GoToEContentAdapter extends EContentAdapter implements CincoEContentAdapter {
   @Override
   public void notifyChanged(final Notification notification) {
     super.notifyChanged(notification);
     final Object o = notification.getNotifier();
     final Object feature = notification.getFeature();
-    if ((o instanceof InternalWebElement)) {
-      if ((Objects.equal(((InternalWebElement)o).eContainer(), null) && (!(o instanceof InternalGraphModel)))) {
+    if ((o instanceof InternalGoTo)) {
+      if ((Objects.equal(((InternalGoTo)o).eContainer(), null) && (!(o instanceof InternalGraphModel)))) {
         return;
       }
       boolean _matched = false;
@@ -30,7 +30,7 @@ public class WebElementEContentAdapter extends EContentAdapter implements CincoE
         boolean _isRelevant = this.isRelevant(((EStructuralFeature)feature));
         if (_isRelevant) {
           _matched=true;
-          ModelElement _element = ((InternalWebElement)o).getElement();
+          ModelElement _element = ((InternalGoTo)o).getElement();
           GraphModel _rootElement = null;
           if (_element!=null) {
             _rootElement=_element.getRootElement();

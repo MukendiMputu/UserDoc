@@ -6,3 +6,8 @@
 /.PackageGenerator.xtendbin
 /.PomXMLGenerator.xtendbin
 /Generate.java
+/.GenerateFunction.java._trace
+/.Generate2.java._trace
+/.PackageGenerator.java._trace
+/.PomXMLGenerator.java._trace
+/.MavenStructureGenerator.java._trace

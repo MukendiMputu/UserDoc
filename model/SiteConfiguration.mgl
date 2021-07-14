@@ -16,8 +16,9 @@ graphModel SiteConfigurationGraphModel {
 }
 
 /* Basic url node */
+@icon("icons/16/url_16.png")
 node UrlNode {
-	style url("url", "${content}")
+	style url("Url: ", "${content}")
 	attr EString as content := ""
 }
 
@@ -25,8 +26,9 @@ node UrlNode {
  * the constant url extention '\home';
  * this node might be reference in other MGLs.
  */
+@icon("icons/16/url_16.png")
 node HomeUrl{
-	style url("url", "${content}")
+	style url("Url: ", "${content}")
 	final attr EString as content := "\\home"
 	
 }
@@ -35,15 +37,17 @@ node HomeUrl{
  * the site's reverse domain for defining packages;
  * this node might be reference in other MGLs.
  */
+@icon("icons/16/domain_16.png")
 node Domain{
-	style url("reverse domain: ", "${content}")
+	style url("Reverse domain: ", "${content}")
 	attr EString as content := ""
 	
 }
 
 /* Email input node*/
+@icon("icons/16/email_16.png")
 node Email {
-	style input("email", "${content}")
+	style input("Email: ", "${content}")
 	attr EString as content := ""
 }
 
@@ -51,23 +55,26 @@ node Email {
  * Note: Might be redondant, since many sites accept
  * both email and username in the same input field.
  */
+@icon("icons/16/username_16.png")
 node Username {
-	style input("username", "${content}")
+	style input("Username", "${content}")
 	attr EString as content := ""
 	
 }
 
 /* Password input node*/
+@icon("icons/16/password_16.png")
 node Password {
-	style input("password", "${content}")
+	style input("Password", "${content}")
 	attr EString as content := ""
 	
 }
 /* To model all the pages the website
  * might contain.
   */
+@icon("icons/16/page_16.png")
 node Page {
-	style page("${name}", "${url}")
+	style page("${name}: ", "${url}")
 	attr EString as name := "Page"
 	attr EString as url := ""
 }

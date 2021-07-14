@@ -1,6 +1,5 @@
 cincoProduct UserDocumentationTool {
 	mgl "model/UserSequence.mgl"
-	mgl "model/UserAction.mgl"
 	mgl "model/SiteConfiguration.mgl"
 
 	splashScreen "branding/splash.bmp" {
@@ -8,7 +7,7 @@ cincoProduct UserDocumentationTool {
 		progressMessage (37,280,190,18)
 	}
 
-	image16 "branding/Icon16.png"
+	image16 "branding/Icon16_dark.png"
 	image32 "branding/Icon32.png"
 	image48 "branding/Icon48.png"
 	image64 "branding/Icon64.png"

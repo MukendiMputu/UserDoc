@@ -1,4 +1,4 @@
-package info.scce.cinco.product.userdoc.codegen;
+package info.scce.cinco.product.userdocumentation.codegen;
 
 import de.jabc.cinco.meta.core.utils.EclipseFileUtils;
 import org.eclipse.core.resources.IFile;

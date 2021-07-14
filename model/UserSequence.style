@@ -3,6 +3,8 @@ appearance default {
 	background (144,207,238)
 }
 
+/*---------------- Structural Elements ------------------------ */
+
 nodeStyle start {
 	roundedRectangle {
 		appearance extends default {
@@ -18,8 +20,6 @@ nodeStyle start {
 		}
 	}
 }
-
-/*---------------- Structural Elements ------------------------ */
 
 nodeStyle divContainer(1) {
 	rectangle {
@@ -65,6 +65,39 @@ nodeStyle actionNode(1) {
 		text {
 			position ( CENTER, MIDDLE )
 			value "%s" 
+		}
+	}
+}
+
+nodeStyle screenshot {
+	image {
+		size (50, 43)
+		path ("icons/16/screenshot_16.png")
+	}
+}
+
+/* represent the actual user action */
+nodeStyle verb (1) {
+	ellipse {
+		appearance default
+		size(40,40)
+		text {
+			position ( CENTER, MIDDLE )
+			value "%s"
+		}
+	}
+}
+
+/* represent the object
+ * receiving the user action
+ */
+nodeStyle object (1){
+	rectangle {
+		appearance default
+		size(40,40)
+		text {
+			position ( CENTER, MIDDLE )
+			value "%s"
 		}
 	}
 }

@@ -1,4 +1,4 @@
-package info.scce.cinco.product.userdoc.codegen
+package info.scce.cinco.product.userdocumentation.codegen
 
 import org.eclipse.core.resources.IProject
 import org.eclipse.core.runtime.IProgressMonitor

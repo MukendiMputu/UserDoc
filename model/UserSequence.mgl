@@ -1,49 +1,197 @@
+import "model/UserAction.mgl" as ActionMGL
+
 id info.scce.cinco.product.usersequence
 stylePath "model/UserSequence.style"
 
 graphModel UserSequenceGraphModel {
-	iconPath "icons/16/gear_16.png"
+	iconPath "icons/16/sequence_16.png"
 	diagramExtension "sequence"
 	containableElements(*)
 	attr EString as modelName := ""
 }
 
-@icon("icons/16/gear_16.png")
+@icon("icons/16/start_16.png")
 node Start {
 	style start
 	outgoingEdges (*[1,1])
 }
 
-@icon("icons/16/gear_16.png")
+@icon("icons/16/stop_16.png")
 node End {
 	style end
-	incomingEdges ({Transition,LabeledTransition}[1,*])
+	incomingEdges (*[1,*])
 }
 
-@icon("icons/16/gear_16.png")
+@icon("icons/16/container_16.png")
 container FeatureContainer {
 	style divContainer("${title}")
 	containableElements(*)
 	attr EString as title
 	incomingEdges (*[1,*])
-	outgoingEdges ({Transition,LabeledTransition}[1,*])
+	outgoingEdges (*[1,*])
 }
 
-node Action{
-	style actionNode("${mgl.modelName}")
-	//prime docMgl::UserDocGraphModel as mgl
-	incomingEdges (*[1,*])
-	outgoingEdges ({Transition,LabeledTransition}[1,*])
+/*
+ * This model specification allows
+ * the definition of common user action.
+ * E.g. goto (for following links to other pages),
+ * press or click action, etc.
+ */
+
+
+
+
+/*
+ * Definition of the graphical element of an action goto
+ */
+@icon("icons/16/action_16.png")
+node GoTo {
+	style verb("${verb}")
+	
+	outgoingEdges (*)
+	attr EString as verb := "goToPage"
 }
 
+/*
+ * Definition of the graphical element of an action goto
+ */
+@icon("icons/16/click_16.png")
+node Press {
+	style verb("${verb}")
+	
+	outgoingEdges (*)
+	attr EString as verb := "press"
+}
+
+/*
+ * Definition of the graphical element of an action goto
+ */
+@icon("icons/16/click_16.png")
+node Click {
+	style verb("${verb}")
+	
+	outgoingEdges (*)
+	attr EString as verb := "click"
+}
+
+/*
+ * Definition of the graphical element of an action goto
+ */
+@icon("icons/16/action_16.png")
+node Select {
+	style verb("${verb}")
+	
+	outgoingEdges (*)
+	attr EString as verb := "select"
+}
+
+/*
+ * Definition of the graphical element of an action goto
+ */
+@icon("icons/16/action_16.png")
+node Tip {
+	style verb("${verb}")
+	
+	outgoingEdges (*)
+	attr EString as verb := "tip"
+}
+
+/*
+ * Definition of the graphical element of an action goto
+ */
+@icon("icons/16/action_16.png")
+node Check {
+	style verb("${verb}")
+	
+	outgoingEdges (*)
+	attr EString as verb := "check"
+}
+
+/*
+ * Definition of the graphical element of an action goto
+ */
+@icon("icons/16/action_16.png")
+node Submit {
+	style verb("${verb}")
+	
+	outgoingEdges (*)
+	attr EString as verb := "submit"
+}
+
+/*
+ * Definition of the graphical element of an action goto
+ */
+@icon("icons/16/action_16.png")
+node Clear {
+	style verb("${verb}")
+	
+	outgoingEdges (*)
+	attr EString as verb := "clear"
+}
+
+/*
+ * Object that endures the user action
+ */
+@icon("icons/16/object_16.png")
+node Object {
+	style object("web element")
+	
+	incomingEdges (*)
+}
+
+/*
+ * WebElement literally represents an html element.
+ * It's intended to define only the most used web element,
+ * e.g. headers (h1, h2,...), buttons, input, textarea and so on.
+ */
+@icon("icons/16/object_16.png")
+node WebElement extends Object {
+	style object("${tagName}: ${contentText}")
+	
+	attr EString as tagName := ""
+	attr EString as contentText := ""
+	attr Attributes as attributes [0,*]
+	attr EString as attrValue := ""
+	attr EBoolean as isHighlighted
+	
+	incomingEdges (*)
+}
+
+/*
+ * User defined type to represent html element attributes
+ */
+type Attributes {
+	attr AttributeNames as name
+	attr EString as value := ""
+}
+
+/*
+ * Enumeration of attributes that control the visual
+ * aspect of the web element.
+ * Subject to completion
+ */
+enum AttributeNames {
+	autofocus
+	background
+	bgcolor
+	border
+	border
+	color
+	disabled
+	href
+	value
+}
+
+@icon("icons/16/comment_16.png")
 node Comment {
 	style actionNode("${content}")
 	attr EString as content
 	attr FeatureContainer as referenceTo
-	outgoingEdges (Transition[1,*])
+	outgoingEdges (*[1,*])
 }
 
-	
+/*---------------------------------------------------------------------------- */
+
 edge Transition {
 	style simpleArrow
 }

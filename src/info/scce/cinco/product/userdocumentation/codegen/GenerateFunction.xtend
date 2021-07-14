@@ -1,4 +1,4 @@
-package info.scce.cinco.product.userdoc.codegen
+package info.scce.cinco.product.userdocumentation.codegen
 
 import org.eclipse.core.runtime.IPath
 import org.eclipse.core.resources.IProject
@@ -7,14 +7,14 @@ import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.core.resources.ResourcesPlugin
 import de.jabc.cinco.meta.core.utils.EclipseFileUtils
 import de.jabc.cinco.meta.plugin.generator.runtime.IGenerator
-import info.scce.cinco.product.function.mglid.function.FunctionGraphModel
+import info.scce.cinco.product.usersequence.usersequence.UserSequenceGraphModel
 
-class GenerateFunction implements IGenerator<FunctionGraphModel> {
+class GenerateFunction implements IGenerator<UserSequenceGraphModel> {
 	
 	IWorkspaceRoot root = ResourcesPlugin.workspace.getRoot();
 	IProject project
 	
-	override generate(FunctionGraphModel model, IPath targetDir, IProgressMonitor monitor) {
+	override generate(UserSequenceGraphModel model, IPath targetDir, IProgressMonitor monitor) {
 		if (model.modelName.nullOrEmpty)
 			throw new RuntimeException("Model's name cannot be empty!")
 		
@@ -29,8 +29,8 @@ class GenerateFunction implements IGenerator<FunctionGraphModel> {
 		EclipseFileUtils.writeToFile(modelInfoTextFile, modelInfo)
 	}
 
-	private def generateModelInfo(FunctionGraphModel model) '''
-		=== «model.functionGraphModelView.modelName» ===
+	private def generateModelInfo(UserSequenceGraphModel model) '''
+		=== «model.modelName» ===
 
 		The model has «model.allNodes.size» nodes. Here's some general information about them:
 

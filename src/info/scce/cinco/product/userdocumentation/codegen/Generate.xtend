@@ -5,7 +5,7 @@ import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.core.resources.ResourcesPlugin
 import de.jabc.cinco.meta.core.utils.EclipseFileUtils
 import de.jabc.cinco.meta.plugin.generator.runtime.IGenerator
-import info.scce.cinco.product.userdocumentation.usersequence.UserSequenceGraph
+import info.scce.cinco.product.usersequence.usersequence.UserSequenceGraphModel
 
 /**
  *  Example class that generates code for a given FlowGraph model. As different
@@ -14,22 +14,22 @@ import info.scce.cinco.product.userdocumentation.usersequence.UserSequenceGraph
  *  nodes and prints some general information about them.
  *
  */
-class Generate implements IGenerator<UserSequenceGraph> {
+class Generate implements IGenerator<UserSequenceGraphModel> {
 
-	override generate(FlowGraphDiagram model, IPath targetDir, IProgressMonitor monitor) {
+	override generate(UserSequenceGraphModel model, IPath targetDir, IProgressMonitor monitor) {
 
-		if (model.flowGraphDiagramView.modelName.nullOrEmpty)
+		if (model.modelName.nullOrEmpty)
 			throw new RuntimeException("Model's name must be set.")
 
 		val code = generateCode(model);
-		val targetFile = ResourcesPlugin.workspace.root.getFileForLocation(targetDir.append(model.flowGraphDiagramView.modelName + ".txt"))
+		val targetFile = ResourcesPlugin.workspace.root.getFileForLocation(targetDir.append(model.modelName + ".txt"))
 
 		EclipseFileUtils.writeToFile(targetFile, code)
 
 	}
 
-	private def generateCode(FlowGraphDiagram model) '''
-		=== «model.flowGraphDiagramView.modelName» ===
+	private def generateCode(UserSequenceGraphModel model) '''
+		=== «model.modelName» ===
 
 		The model contains «model.allNodes.size» nodes. Here's some general information about them:
 
