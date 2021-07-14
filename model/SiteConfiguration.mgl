@@ -1,0 +1,73 @@
+id info.scce.cinco.product.siteconfiguration
+stylePath "model/SiteConfiguration.style"
+
+
+/* 
+ * All the model elements that will contain
+ * the configuration for the target website.
+ * 
+ * e.g. url, username, password, etc.
+ * */
+graphModel SiteConfigurationGraphModel {
+	iconPath "icons/16/gear_16.png"
+	diagramExtension "config"
+	containableElements(*)
+	attr EString as modelName := "Site"
+}
+
+/* Basic url node */
+node UrlNode {
+	style url("url", "${content}")
+	attr EString as content := ""
+}
+
+/* The Home node is suppose to contain
+ * the constant url extention '\home';
+ * this node might be reference in other MGLs.
+ */
+node HomeUrl{
+	style url("url", "${content}")
+	final attr EString as content := "\\home"
+	
+}
+
+/* The Domain node is suppose to contain
+ * the site's reverse domain for defining packages;
+ * this node might be reference in other MGLs.
+ */
+node Domain{
+	style url("reverse domain: ", "${content}")
+	attr EString as content := ""
+	
+}
+
+/* Email input node*/
+node Email {
+	style input("email", "${content}")
+	attr EString as content := ""
+}
+
+/* Username input node
+ * Note: Might be redondant, since many sites accept
+ * both email and username in the same input field.
+ */
+node Username {
+	style input("username", "${content}")
+	attr EString as content := ""
+	
+}
+
+/* Password input node*/
+node Password {
+	style input("password", "${content}")
+	attr EString as content := ""
+	
+}
+/* To model all the pages the website
+ * might contain.
+  */
+node Page {
+	style page("${name}", "${url}")
+	attr EString as name := "Page"
+	attr EString as url := ""
+}

@@ -1,0 +1,54 @@
+id info.scce.cinco.product.usersequence
+stylePath "model/UserSequence.style"
+
+graphModel UserSequenceGraphModel {
+	iconPath "icons/"
+	diagramExtension "sequence"
+	containableElements(*)
+	attr EString as modelName := ""
+}
+
+@icon("icons/")
+node Start {
+	style start
+	outgoingEdges (*[1,1])
+}
+
+@icon("icons/")
+node End {
+	style end
+	incomingEdges ({Transition,LabeledTransition}[1,*])
+}
+
+@icon("icons/")
+container FeatureContainer {
+	style divContainer("${title}")
+	containableElements(*)
+	attr EString as title
+	incomingEdges (*[1,*])
+	outgoingEdges ({Transition,LabeledTransition}[1,*])
+}
+
+node Action{
+	style actionNode("${mgl.modelName}")
+	//prime docMgl::UserDocGraphModel as mgl
+	incomingEdges (*[1,*])
+	outgoingEdges ({Transition,LabeledTransition}[1,*])
+}
+
+node Comment {
+	style actionNode("${content}")
+	attr EString as content
+	attr FeatureContainer as referenceTo
+	outgoingEdges (Transition[1,*])
+}
+
+	
+edge Transition {
+	style simpleArrow
+}
+
+edge LabeledTransition {
+	style labeledArrow("${label}")
+	attr EString as label
+}

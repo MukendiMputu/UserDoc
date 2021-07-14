@@ -1,4 +1,0 @@
-cincoProduct UserDocTool {
-	mgl "model/UserDoc.mgl"
-	mgl "model/Function.mgl"
-}
