@@ -18,38 +18,33 @@ Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,org.eclipse.e
  .meta.core.ge.style,de.jabc.cinco.meta.core.event,org.eclipse.jface,org
  .eclipse.core.resources,de.jabc.cinco.meta.plugin.generator.runtime,org
  .eclipse.emf.transaction,de.jabc.cinco.meta.libraries,org.eclipse.xtend
- .typesystem.emf
+ .typesystem.emf,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cin
+ co.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.generator.ru
+ ntime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.pl
+ ugin.generator.runtime
 Bundle-ActivationPolicy: lazy
 Export-Package: info.scce.cinco.product.userdocumentation.appearance,inf
  o.scce.cinco.product.userdocumentation.action,info.scce.cinco.product.u
  serdocumentation.hooks,info.scce.cinco.product.userdocumentation.codege
- n,info.scce.cinco.product.useraction.factory,info.scce.cinco.product.us
- eraction.adapter,info.scce.cinco.product.siteconfiguration.factory,info
- .scce.cinco.product.siteconfiguration.adapter,info.scce.cinco.product.u
- sersequence.factory,info.scce.cinco.product.usersequence.adapter,info.s
- cce.cinco.product.siteconfiguration.siteconfiguration,info.scce.cinco.p
- roduct.siteconfiguration.siteconfiguration.impl,info.scce.cinco.product
- .siteconfiguration.siteconfiguration.internal,info.scce.cinco.product.s
- iteconfiguration.siteconfiguration.internal.impl,info.scce.cinco.produc
- t.siteconfiguration.siteconfiguration.internal.util,info.scce.cinco.pro
- duct.siteconfiguration.siteconfiguration.util,info.scce.cinco.product.s
- iteconfiguration.siteconfiguration.views,info.scce.cinco.product.siteco
- nfiguration.siteconfiguration.views.impl,info.scce.cinco.product.siteco
- nfiguration.siteconfiguration.views.util,info.scce.cinco.product.userac
- tion.useraction,info.scce.cinco.product.useraction.useraction.impl,info
- .scce.cinco.product.useraction.useraction.internal,info.scce.cinco.prod
- uct.useraction.useraction.internal.impl,info.scce.cinco.product.useract
- ion.useraction.internal.util,info.scce.cinco.product.useraction.useract
- ion.util,info.scce.cinco.product.useraction.useraction.views,info.scce.
- cinco.product.useraction.useraction.views.impl,info.scce.cinco.product.
- useraction.useraction.views.util,info.scce.cinco.product.usersequence.u
- sersequence,info.scce.cinco.product.usersequence.usersequence.impl,info
- .scce.cinco.product.usersequence.usersequence.internal,info.scce.cinco.
- product.usersequence.usersequence.internal.impl,info.scce.cinco.product
- .usersequence.usersequence.internal.util,info.scce.cinco.product.userse
- quence.usersequence.util,info.scce.cinco.product.usersequence.userseque
- nce.views,info.scce.cinco.product.usersequence.usersequence.views.impl,
- info.scce.cinco.product.usersequence.usersequence.views.util,info.scce.
- cinco.product.userdocumentation.perspective
+ n,info.scce.cinco.product.siteconfiguration.factory,info.scce.cinco.pro
+ duct.siteconfiguration.adapter,info.scce.cinco.product.usersequence.fac
+ tory,info.scce.cinco.product.usersequence.adapter,info.scce.cinco.produ
+ ct.siteconfiguration.siteconfiguration,info.scce.cinco.product.siteconf
+ iguration.siteconfiguration.impl,info.scce.cinco.product.siteconfigurat
+ ion.siteconfiguration.internal,info.scce.cinco.product.siteconfiguratio
+ n.siteconfiguration.internal.impl,info.scce.cinco.product.siteconfigura
+ tion.siteconfiguration.internal.util,info.scce.cinco.product.siteconfig
+ uration.siteconfiguration.util,info.scce.cinco.product.siteconfiguratio
+ n.siteconfiguration.views,info.scce.cinco.product.siteconfiguration.sit
+ econfiguration.views.impl,info.scce.cinco.product.siteconfiguration.sit
+ econfiguration.views.util,info.scce.cinco.product.usersequence.usersequ
+ ence,info.scce.cinco.product.usersequence.usersequence.impl,info.scce.c
+ inco.product.usersequence.usersequence.internal,info.scce.cinco.product
+ .usersequence.usersequence.internal.impl,info.scce.cinco.product.userse
+ quence.usersequence.internal.util,info.scce.cinco.product.usersequence.
+ usersequence.util,info.scce.cinco.product.usersequence.usersequence.vie
+ ws,info.scce.cinco.product.usersequence.usersequence.views.impl,info.sc
+ ce.cinco.product.usersequence.usersequence.views.util,info.scce.cinco.p
+ roduct.userdocumentation.perspective
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 

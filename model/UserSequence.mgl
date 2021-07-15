@@ -1,8 +1,9 @@
-import "model/UserAction.mgl" as ActionMGL
+import "model/SiteConfiguration.mgl" as SiteConfig
 
 id info.scce.cinco.product.usersequence
 stylePath "model/UserSequence.style"
 
+@generatable("info.scce.cinco.product.userdocumentation.codegen.Generate", "/src/")
 graphModel UserSequenceGraphModel {
 	iconPath "icons/16/sequence_16.png"
 	diagramExtension "sequence"
@@ -11,18 +12,21 @@ graphModel UserSequenceGraphModel {
 }
 
 @icon("icons/16/start_16.png")
+@palette("Basic Elements")
 node Start {
 	style start
 	outgoingEdges (*[1,1])
 }
 
 @icon("icons/16/stop_16.png")
+@palette("Basic Elements")
 node End {
 	style end
 	incomingEdges (*[1,*])
 }
 
 @icon("icons/16/container_16.png")
+@palette("Basic Elements")
 container FeatureContainer {
 	style divContainer("${title}")
 	containableElements(*)
@@ -38,105 +42,162 @@ container FeatureContainer {
  * press or click action, etc.
  */
 
-
+@icon("icons/16/screenshot_16.png")
+node Screenshot {
+	style screenshot
+	incomingEdges (*[1,1])
+	outgoingEdges (Transition[1,*])
+	
+	attr Comment as description
+}
 
 
 /*
  * Definition of the graphical element of an action goto
  */
+
 @icon("icons/16/action_16.png")
+@palette("User Action")
 node GoTo {
-	style verb("${verb}")
-	
-	outgoingEdges (*)
-	attr EString as verb := "goToPage"
+	style goToVerb("${verb}: ${URL}")
+
+	incomingEdges (*[1,1])
+	outgoingEdges (Transition)
+	final attr EString as verb := "goToPage"
+	attr EString as URL := ""
 }
 
 /*
  * Definition of the graphical element of an action goto
  */
 @icon("icons/16/click_16.png")
+@palette("User Action")
 node Press {
 	style verb("${verb}")
 	
-	outgoingEdges (*)
-	attr EString as verb := "press"
+	incomingEdges (*[1,1])
+	outgoingEdges (Transition)
+	final attr EString as verb := "press"
+	attr Object as obj
 }
 
 /*
  * Definition of the graphical element of an action goto
  */
 @icon("icons/16/click_16.png")
+@palette("User Action")
 node Click {
 	style verb("${verb}")
 	
-	outgoingEdges (*)
-	attr EString as verb := "click"
+	incomingEdges (*[1,1])
+	outgoingEdges (Transition[1,1])
+	final attr EString as verb := "click"
+	attr Object as obj
 }
 
 /*
  * Definition of the graphical element of an action goto
  */
 @icon("icons/16/action_16.png")
+@palette("User Action")
 node Select {
 	style verb("${verb}")
 	
-	outgoingEdges (*)
-	attr EString as verb := "select"
+	incomingEdges (*[1,1])
+	outgoingEdges (*[1,1])
+	final attr EString as verb := "select"
+	attr Object as obj
 }
 
 /*
  * Definition of the graphical element of an action goto
  */
 @icon("icons/16/action_16.png")
-node Tip {
+@palette("User Action")
+node Enter {
 	style verb("${verb}")
 	
-	outgoingEdges (*)
-	attr EString as verb := "tip"
+	incomingEdges (*[1,1])
+	outgoingEdges (*[1,1])
+	@disable
+	final attr EString as verb := "enter"
 }
 
 /*
  * Definition of the graphical element of an action goto
  */
 @icon("icons/16/action_16.png")
+@palette("User Action")
+node Sequence {
+	style actionNode("${subSequence.modelName}.sequence")
+	prime this::UserSequenceGraphModel as subSequence
+	incomingEdges (*[1,1])
+	outgoingEdges (*[1,1])
+}
+
+/*
+ * Definition of the graphical element of an action goto
+ */
+@icon("icons/16/action_16.png")
+@palette("User Action")
 node Check {
 	style verb("${verb}")
 	
-	outgoingEdges (*)
-	attr EString as verb := "check"
+	incomingEdges (*[1,1])
+	outgoingEdges (*[1,1])
+	final attr EString as verb := "check"
+	attr Object as obj
 }
 
 /*
  * Definition of the graphical element of an action goto
  */
 @icon("icons/16/action_16.png")
+@palette("User Action")
 node Submit {
 	style verb("${verb}")
 	
-	outgoingEdges (*)
-	attr EString as verb := "submit"
+	incomingEdges (*[1,1])
+	outgoingEdges (*[1,1])
+	final attr EString as verb := "submit"
+	attr Object as obj
 }
 
 /*
  * Definition of the graphical element of an action goto
  */
 @icon("icons/16/action_16.png")
+@palette("User Action")
 node Clear {
 	style verb("${verb}")
 	
-	outgoingEdges (*)
-	attr EString as verb := "clear"
+	incomingEdges (Transition[1,1])
+	outgoingEdges (Transition[1,1])
+	final attr EString as verb := "clear"
+	attr Object as obj
+}
+
+/* To model all the pages the web site
+ * might contain.
+  */
+@icon("icons/16/page_16.png")
+@palette("Web Elements")
+node WebPage {
+	style page("${page.name}: ", "${url}")
+	
+	prime SiteConfig::Page as page
 }
 
 /*
  * Object that endures the user action
  */
 @icon("icons/16/object_16.png")
+@palette("Web Elements")
 node Object {
 	style object("web element")
 	
-	incomingEdges (*)
+	incomingEdges (*[1,1])
+	outgoingEdges (Transition[1,1])
 }
 
 /*
@@ -145,20 +206,22 @@ node Object {
  * e.g. headers (h1, h2,...), buttons, input, textarea and so on.
  */
 @icon("icons/16/object_16.png")
+@palette("Web Elements")
 node WebElement extends Object {
-	style object("${tagName}: ${contentText}")
+	style object("<${tagName}>: ${attribute}=${attrValue}")
 	
 	attr EString as tagName := ""
-	attr EString as contentText := ""
-	attr Attributes as attributes [0,*]
+	attr EString as attribute := "id"
 	attr EString as attrValue := ""
+	attr EString as contentText := ""
 	attr EBoolean as isHighlighted
 	
-	incomingEdges (*)
+	incomingEdges (*[1,1])
+	outgoingEdges (Transition[1,1])
 }
 
 /*
- * User defined type to represent html element attributes
+ * User defined type to represent HTML element attributes
  */
 type Attributes {
 	attr AttributeNames as name
@@ -171,6 +234,7 @@ type Attributes {
  * Subject to completion
  */
 enum AttributeNames {
+	Id
 	autofocus
 	background
 	bgcolor
@@ -183,11 +247,13 @@ enum AttributeNames {
 }
 
 @icon("icons/16/comment_16.png")
+@palette("Semantic Elements")
 node Comment {
-	style actionNode("${content}")
+	style commentNode("${content}")
+	@multiLine
 	attr EString as content
-	attr FeatureContainer as referenceTo
-	outgoingEdges (*[1,*])
+	attr Screenshot as referenceTo
+	outgoingEdges (Transition[1,*])
 }
 
 /*---------------------------------------------------------------------------- */

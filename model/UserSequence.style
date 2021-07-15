@@ -69,10 +69,40 @@ nodeStyle actionNode(1) {
 	}
 }
 
+nodeStyle commentNode(1) {
+	roundedRectangle {
+		appearance extends default {
+			background (249,240,107)
+			foreground (245,194,17)
+			lineWidth 1
+		}
+		position (0,0)
+		size (90,40)
+		corner (8,8)
+		text {
+			position (LEFT, TOP)
+			value "%s" 
+		}
+	}
+}
+
+nodeStyle goToVerb(1) {
+	roundedRectangle {
+		appearance default 
+		position (0,0)
+		size (160,40)
+		corner (8,8)
+		text {
+			position ( CENTER, MIDDLE )
+			value "%s" 
+		}
+	}
+}
+
 nodeStyle screenshot {
 	image {
 		size (50, 43)
-		path ("icons/16/screenshot_16.png")
+		path ("icons/64/browser_64.png")
 	}
 }
 
@@ -98,6 +128,20 @@ nodeStyle object (1){
 		text {
 			position ( CENTER, MIDDLE )
 			value "%s"
+		}
+	}
+}
+
+nodeStyle page(2) {
+	rectangle {
+		appearance extends default {
+			background (255,255,255)
+		}
+		position (0,0)
+		size (70,100)
+		multiText {
+			position ( CENTER, MIDDLE )
+			value "%1s %2s"
 		}
 	}
 }

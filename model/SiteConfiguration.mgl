@@ -4,10 +4,11 @@ stylePath "model/SiteConfiguration.style"
 
 /* 
  * All the model elements that will contain
- * the configuration for the target website.
+ * the configuration for the target web site.
  * 
- * e.g. url, username, password, etc.
+ * e.g. URL, username, password, etc.
  * */
+@generatable("info.scce.cinco.product.userdocumentation.codegen.Generate", "/src/")
 graphModel SiteConfigurationGraphModel {
 	iconPath "icons/16/gear_16.png"
 	diagramExtension "config"
@@ -15,20 +16,20 @@ graphModel SiteConfigurationGraphModel {
 	attr EString as modelName := "Site"
 }
 
-/* Basic url node */
+/* Basic URL node */
 @icon("icons/16/url_16.png")
 node UrlNode {
-	style url("Url: ", "${content}")
+	style url("URL: ", "${content}")
 	attr EString as content := ""
 }
 
 /* The Home node is suppose to contain
- * the constant url extention '\home';
+ * the constant URL extension '\home';
  * this node might be reference in other MGLs.
  */
 @icon("icons/16/url_16.png")
 node HomeUrl{
-	style url("Url: ", "${content}")
+	style url("URL: ", "${content}")
 	final attr EString as content := "\\home"
 	
 }
@@ -52,14 +53,13 @@ node Email {
 }
 
 /* Username input node
- * Note: Might be redondant, since many sites accept
- * both email and username in the same input field.
+ * Note: Might be redundant, since many sites accept
+ * both email and user name in the same input field.
  */
 @icon("icons/16/username_16.png")
 node Username {
 	style input("Username", "${content}")
 	attr EString as content := ""
-	
 }
 
 /* Password input node*/
@@ -69,7 +69,7 @@ node Password {
 	attr EString as content := ""
 	
 }
-/* To model all the pages the website
+/* To model all the pages the web site
  * might contain.
   */
 @icon("icons/16/page_16.png")
