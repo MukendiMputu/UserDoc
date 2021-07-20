@@ -3,7 +3,6 @@ import "model/Page.mgl" as importedPage
 id info.scce.cinco.product.site
 stylePath "model/Site.style"
 
-
 /* 
  * All the model elements that will contain
  * the configuration for the target web site.
@@ -11,9 +10,9 @@ stylePath "model/Site.style"
  * e.g. URL, username, password, etc.
  * */
 @generatable("info.scce.cinco.product.userdocumentation.codegen.Generate", "/src/")
-graphModel SiteConfigurationGraphModel {
+graphModel SiteGraphModel {
 	iconPath "icons/16/gear_16.png"
-	diagramExtension "config"
+	diagramExtension "website"
 	containableElements(*)
 	attr EString as modelName := "Site"
 }

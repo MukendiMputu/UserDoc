@@ -3,31 +3,34 @@ appearance default {
 	background (229,229,229)
 }
 
-nodeStyle url(2) {
-	rectangle {
+nodeStyle start {
+	roundedRectangle {
 		appearance extends default {
-			background (37,155,239)
+			foreground (46,194,126)
+			background (46,194,126)
 		}
 		position (0, 0)
-		size (150, 32)
+		size (96, 32)
+		corner (8, 8)
 		text {
 			position (CENTER, MIDDLE)
-			value "%1s %2s"
+			value "Start sequence"
 		}
 	}
 }
 
-nodeStyle input(2) {
+nodeStyle end {
 	roundedRectangle {
 		appearance extends default {
-			background (255,255,255)
+			foreground (237,51,59)
+			background (237,51,59)
 		}
-		position (0,0)
-		size (100,32)
-		corner (8,8)
-		multiText {
-			position ( CENTER, MIDDLE )
-			value "%1s %2s"
+		position (0, 0)
+		size (96, 32)
+		corner (8, 8)
+		text {
+			position (CENTER, MIDDLE)
+			value "End sequence"
 		}
 	}
 }
@@ -43,5 +46,44 @@ nodeStyle page(2) {
 			position ( CENTER, MIDDLE )
 			value "%1s %2s"
 		}
+	}
+}
+
+/*---------------- Connection Elements ------------------------ */
+
+edgeStyle simpleArrow {
+	appearance default
+
+	decorator {
+		location (1.0)
+		ARROW
+		appearance default
+	}
+}
+
+edgeStyle labeledArrow(1) {
+	appearance default
+	decorator {
+		location (1.0)
+		ARROW
+		appearance default
+	}
+	decorator {
+		location (0.3)
+		movable
+		text {
+			value "%s"
+		}
+	}
+}
+edgeStyle commentLine {
+	appearance extends default {
+		lineStyle DOT
+	}
+
+	decorator {
+		location (1.0)
+		CIRCLE
+		appearance default
 	}
 }

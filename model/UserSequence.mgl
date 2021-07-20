@@ -13,14 +13,14 @@ graphModel UserSequenceGraphModel {
 @palette("Basic Elements")
 node Start {
 	style start
-	outgoingEdges (*[1,1])
+	outgoingEdges (LabeledTransition[1,1], Transition[1,1])
 }
 
 @icon("icons/16/stop_16.png")
 @palette("Basic Elements")
-node End {
+node Stop {
 	style end
-	incomingEdges (*[1,*])
+	incomingEdges (LabeledTransition[1,1], Transition[1,1])
 }
 
 @icon("icons/16/container_16.png")
@@ -30,7 +30,7 @@ container FeatureContainer {
 	containableElements(*)
 	attr EString as title
 	incomingEdges (*[1,*])
-	outgoingEdges (*[1,*])
+	outgoingEdges (LabeledTransition[1,1], Transition[1,1])
 }
 
 /*
@@ -43,7 +43,7 @@ container FeatureContainer {
 @icon("icons/16/screenshot_16.png")
 node Screenshot {
 	style screenshot
-	incomingEdges (*[1,1])
+	incomingEdges (LabeledTransition[1,1], Transition[1,1], Anchor[1,*])
 	outgoingEdges (Transition[1,*])
 	
 	attr Comment as description
@@ -102,7 +102,7 @@ node Select {
 	style verb("${verb}")
 	
 	incomingEdges (*[1,1])
-	outgoingEdges (*[1,1])
+	outgoingEdges (LabeledTransition[1,1], Transition[1,1])
 	final attr EString as verb := "select"
 	attr WebElement as obj
 }
@@ -116,7 +116,7 @@ node Enter {
 	style verb("${verb}")
 	
 	incomingEdges (*[1,1])
-	outgoingEdges (*[1,1])
+	outgoingEdges (LabeledTransition[1,1], Transition[1,1])
 	@disable
 	final attr EString as verb := "enter"
 }
@@ -130,7 +130,7 @@ node Sequence {
 	style actionNode("${subSequence.modelName}.sequence")
 	prime this::UserSequenceGraphModel as subSequence
 	incomingEdges (*[1,1])
-	outgoingEdges (*[1,1])
+	outgoingEdges (LabeledTransition[1,1], Transition[1,1])
 }
 
 /*
@@ -142,7 +142,7 @@ node Check {
 	style verb("${verb}")
 	
 	incomingEdges (*[1,1])
-	outgoingEdges (*[1,1])
+	outgoingEdges (LabeledTransition[1,1], Transition[1,1])
 	final attr EString as verb := "check"
 	attr WebElement as obj
 }
@@ -156,7 +156,7 @@ node Submit {
 	style verb("${verb}")
 	
 	incomingEdges (*[1,1])
-	outgoingEdges (*[1,1])
+	outgoingEdges (LabeledTransition[1,1], Transition[1,1])
 	final attr EString as verb := "submit"
 	attr WebElement as obj
 }
@@ -244,7 +244,7 @@ node Comment {
 	@multiLine
 	attr EString as content
 	attr Screenshot as referenceTo
-	outgoingEdges (Transition[1,*])
+	outgoingEdges (Anchor[1,*])
 }
 
 /*---------------------------------------------------------------------------- */
@@ -256,4 +256,8 @@ edge Transition {
 edge LabeledTransition {
 	style labeledArrow("${label}")
 	attr EString as label
+}
+
+edge Anchor {
+	style commentLine
 }

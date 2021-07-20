@@ -22,3 +22,6 @@
 /.SequenceEContentAdapter.java._trace
 /.WebPageEContentAdapter.java._trace
 /.DivEContentAdapter.java._trace
+/.DottedTransitionEContentAdapter.java._trace
+/.AnchorEContentAdapter.java._trace
+/.StopEContentAdapter.java._trace

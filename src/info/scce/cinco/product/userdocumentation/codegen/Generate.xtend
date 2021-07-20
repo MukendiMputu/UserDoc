@@ -7,7 +7,7 @@ import org.eclipse.core.resources.IWorkspaceRoot
 import org.eclipse.core.resources.ResourcesPlugin
 import de.jabc.cinco.meta.core.utils.EclipseFileUtils
 import de.jabc.cinco.meta.plugin.generator.runtime.IGenerator
-import info.scce.cinco.product.siteconfiguration.siteconfiguration.SiteConfigurationGraphModel
+import info.scce.cinco.product.site.site.SiteGraphModel
 
 /**
  *  Example class that generates code for a given FlowGraph model. As different
@@ -15,12 +15,12 @@ import info.scce.cinco.product.siteconfiguration.siteconfiguration.SiteConfigura
  *  library or swimlanes), this generator only does stupidly enumerate all
  *  nodes and prints some general information about them.
  */
-class Generate implements IGenerator<SiteConfigurationGraphModel> {
+class Generate implements IGenerator<SiteGraphModel> {
 
 	IWorkspaceRoot root = ResourcesPlugin.workspace.getRoot();
 	IProject project
 
-	override generate(SiteConfigurationGraphModel model, IPath targetDir, IProgressMonitor monitor) {
+	override generate(SiteGraphModel model, IPath targetDir, IProgressMonitor monitor) {
 
 		if (model.modelName.nullOrEmpty)
 			throw new RuntimeException("Model's name cannot be empty!")
@@ -221,12 +221,12 @@ class Generate implements IGenerator<SiteConfigurationGraphModel> {
 			
 				// The pages of our website
 				«FOR page : model.pages»
-				public «page.name» «page.name.toFirstLower»;
+				public «page.eClass.name» «page.eClass.name.toFirstLower»;
 				«ENDFOR»
 			
 				public «modelName»() {
 					«FOR page : model.pages»
-					«page.name.toFirstLower» = new «page.name»(sBrowserName, sSiteURL);
+					«page.eClass.name.toFirstUpper» = new «page.eClass.name»(sBrowserName, sSiteURL);
 					«ENDFOR»
 				}
 			
@@ -236,7 +236,7 @@ class Generate implements IGenerator<SiteConfigurationGraphModel> {
 			
 				public void CloseSite() {
 					«FOR page : model.pages»
-					«page.name.toFirstLower».closePage();
+					«page.eClass.name.toFirstLower».closePage();
 					«ENDFOR»
 				}
 			}
@@ -374,22 +374,22 @@ class Generate implements IGenerator<SiteConfigurationGraphModel> {
 		)
 	}
 
-	private def generateConfigurationFile(SiteConfigurationGraphModel model) '''
+	private def generateConfigurationFile(SiteGraphModel model) '''
 		«FOR node : model.nodes»
 			«node.eClass.name.toLowerCase» = «node.eAllContents.toString»
 		«ENDFOR»
 	'''
 	
-	private def generatePageJavaClasses(SiteConfigurationGraphModel model, String pkgPrefix){
+	private def generatePageJavaClasses(SiteGraphModel model, String pkgPrefix){
 		for (page : model.pages) {
 			EclipseFileUtils.writeToFile(
-				project.getFile(pkgPrefix + "pages/"+page.name.toFirstUpper+".java"),
+				project.getFile(pkgPrefix + "pages/"+page.eClass.name.toFirstUpper+".java"),
 				'''
 					package info.scce.cinco.product.userdocgenerator.pages;
 
-					public class «page.name.toFirstUpper» extends Page {
+					public class «page.eClass.name.toFirstUpper» extends Page {
 					
-						public «page.name.toFirstUpper»(String sBrowserName, String sSiteURL) {
+						public «page.eClass.name.toFirstUpper»(String sBrowserName, String sSiteURL) {
 							driverTool.openBrowser(sBrowserName);
 						}
 					

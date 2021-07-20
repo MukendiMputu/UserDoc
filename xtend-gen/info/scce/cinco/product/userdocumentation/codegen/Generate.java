@@ -3,8 +3,8 @@ package info.scce.cinco.product.userdocumentation.codegen;
 import de.jabc.cinco.meta.core.utils.EclipseFileUtils;
 import de.jabc.cinco.meta.plugin.generator.runtime.IGenerator;
 import graphmodel.Node;
-import info.scce.cinco.product.siteconfiguration.siteconfiguration.Page;
-import info.scce.cinco.product.siteconfiguration.siteconfiguration.SiteConfigurationGraphModel;
+import info.scce.cinco.product.site.site.Page;
+import info.scce.cinco.product.site.site.SiteGraphModel;
 import info.scce.cinco.product.userdocumentation.codegen.MavenStructureGenerator;
 import info.scce.cinco.product.userdocumentation.codegen.PackageGenerator;
 import info.scce.cinco.product.userdocumentation.codegen.PomXMLGenerator;
@@ -27,13 +27,13 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
  *  nodes and prints some general information about them.
  */
 @SuppressWarnings("all")
-public class Generate implements IGenerator<SiteConfigurationGraphModel> {
+public class Generate implements IGenerator<SiteGraphModel> {
   private IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
   
   private IProject project;
   
   @Override
-  public void generate(final SiteConfigurationGraphModel model, final IPath targetDir, final IProgressMonitor monitor) {
+  public void generate(final SiteGraphModel model, final IPath targetDir, final IProgressMonitor monitor) {
     boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(model.getModelName());
     if (_isNullOrEmpty) {
       throw new RuntimeException("Model\'s name cannot be empty!");
@@ -438,10 +438,10 @@ public class Generate implements IGenerator<SiteConfigurationGraphModel> {
       for(final Page page : _pages) {
         _builder_4.append("\t");
         _builder_4.append("public ");
-        String _name = page.getName();
+        String _name = page.eClass().getName();
         _builder_4.append(_name, "\t");
         _builder_4.append(" ");
-        String _firstLower = StringExtensions.toFirstLower(page.getName());
+        String _firstLower = StringExtensions.toFirstLower(page.eClass().getName());
         _builder_4.append(_firstLower, "\t");
         _builder_4.append(";");
         _builder_4.newLineIfNotEmpty();
@@ -457,10 +457,10 @@ public class Generate implements IGenerator<SiteConfigurationGraphModel> {
       EList<Page> _pages_1 = model.getPages();
       for(final Page page_1 : _pages_1) {
         _builder_4.append("\t\t");
-        String _firstLower_1 = StringExtensions.toFirstLower(page_1.getName());
-        _builder_4.append(_firstLower_1, "\t\t");
+        String _firstUpper_4 = StringExtensions.toFirstUpper(page_1.eClass().getName());
+        _builder_4.append(_firstUpper_4, "\t\t");
         _builder_4.append(" = new ");
-        String _name_1 = page_1.getName();
+        String _name_1 = page_1.eClass().getName();
         _builder_4.append(_name_1, "\t\t");
         _builder_4.append("(sBrowserName, sSiteURL);");
         _builder_4.newLineIfNotEmpty();
@@ -487,8 +487,8 @@ public class Generate implements IGenerator<SiteConfigurationGraphModel> {
       EList<Page> _pages_2 = model.getPages();
       for(final Page page_2 : _pages_2) {
         _builder_4.append("\t\t");
-        String _firstLower_2 = StringExtensions.toFirstLower(page_2.getName());
-        _builder_4.append(_firstLower_2, "\t\t");
+        String _firstLower_1 = StringExtensions.toFirstLower(page_2.eClass().getName());
+        _builder_4.append(_firstLower_1, "\t\t");
         _builder_4.append(".closePage();");
         _builder_4.newLineIfNotEmpty();
       }
@@ -801,7 +801,7 @@ public class Generate implements IGenerator<SiteConfigurationGraphModel> {
     EclipseFileUtils.writeToFile(_file_6, _builder_6);
   }
   
-  private CharSequence generateConfigurationFile(final SiteConfigurationGraphModel model) {
+  private CharSequence generateConfigurationFile(final SiteGraphModel model) {
     StringConcatenation _builder = new StringConcatenation();
     {
       EList<? extends Node> _nodes = model.getNodes();
@@ -817,10 +817,10 @@ public class Generate implements IGenerator<SiteConfigurationGraphModel> {
     return _builder;
   }
   
-  private void generatePageJavaClasses(final SiteConfigurationGraphModel model, final String pkgPrefix) {
+  private void generatePageJavaClasses(final SiteGraphModel model, final String pkgPrefix) {
     EList<Page> _pages = model.getPages();
     for (final Page page : _pages) {
-      String _firstUpper = StringExtensions.toFirstUpper(page.getName());
+      String _firstUpper = StringExtensions.toFirstUpper(page.eClass().getName());
       String _plus = ((pkgPrefix + "pages/") + _firstUpper);
       String _plus_1 = (_plus + ".java");
       IFile _file = this.project.getFile(_plus_1);
@@ -829,14 +829,14 @@ public class Generate implements IGenerator<SiteConfigurationGraphModel> {
       _builder.newLine();
       _builder.newLine();
       _builder.append("public class ");
-      String _firstUpper_1 = StringExtensions.toFirstUpper(page.getName());
+      String _firstUpper_1 = StringExtensions.toFirstUpper(page.eClass().getName());
       _builder.append(_firstUpper_1);
       _builder.append(" extends Page {");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.append("\t");
       _builder.append("public ");
-      String _firstUpper_2 = StringExtensions.toFirstUpper(page.getName());
+      String _firstUpper_2 = StringExtensions.toFirstUpper(page.eClass().getName());
       _builder.append(_firstUpper_2, "\t");
       _builder.append("(String sBrowserName, String sSiteURL) {");
       _builder.newLineIfNotEmpty();

@@ -5,8 +5,8 @@ import de.jabc.cinco.meta.runtime.contentadapter.CincoEContentAdapter;
 import graphmodel.GraphModel;
 import graphmodel.ModelElement;
 import graphmodel.internal.InternalGraphModel;
-import info.scce.cinco.product.usersequence.usersequence.internal.InternalEnd;
 import info.scce.cinco.product.usersequence.usersequence.internal.InternalPackage;
+import info.scce.cinco.product.usersequence.usersequence.internal.InternalStop;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClassifier;
@@ -15,14 +15,14 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 
 @SuppressWarnings("all")
-public class EndEContentAdapter extends EContentAdapter implements CincoEContentAdapter {
+public class StopEContentAdapter extends EContentAdapter implements CincoEContentAdapter {
   @Override
   public void notifyChanged(final Notification notification) {
     super.notifyChanged(notification);
     final Object o = notification.getNotifier();
     final Object feature = notification.getFeature();
-    if ((o instanceof InternalEnd)) {
-      if ((Objects.equal(((InternalEnd)o).eContainer(), null) && (!(o instanceof InternalGraphModel)))) {
+    if ((o instanceof InternalStop)) {
+      if ((Objects.equal(((InternalStop)o).eContainer(), null) && (!(o instanceof InternalGraphModel)))) {
         return;
       }
       boolean _matched = false;
@@ -30,7 +30,7 @@ public class EndEContentAdapter extends EContentAdapter implements CincoEContent
         boolean _isRelevant = this.isRelevant(((EStructuralFeature)feature));
         if (_isRelevant) {
           _matched=true;
-          ModelElement _element = ((InternalEnd)o).getElement();
+          ModelElement _element = ((InternalStop)o).getElement();
           GraphModel _rootElement = null;
           if (_element!=null) {
             _rootElement=_element.getRootElement();

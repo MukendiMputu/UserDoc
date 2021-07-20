@@ -1,12 +1,12 @@
-package info.scce.cinco.product.siteconfiguration.adapter;
+package info.scce.cinco.product.pages.adapter;
 
 import com.google.common.base.Objects;
 import de.jabc.cinco.meta.runtime.contentadapter.CincoEContentAdapter;
 import graphmodel.GraphModel;
 import graphmodel.ModelElement;
 import graphmodel.internal.InternalGraphModel;
-import info.scce.cinco.product.siteconfiguration.siteconfiguration.internal.InternalPackage;
-import info.scce.cinco.product.siteconfiguration.siteconfiguration.internal.InternalUrl;
+import info.scce.cinco.product.pages.page.internal.InternalLabeledConnection;
+import info.scce.cinco.product.pages.page.internal.InternalPackage;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClassifier;
@@ -15,14 +15,14 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 
 @SuppressWarnings("all")
-public class UrlEContentAdapter extends EContentAdapter implements CincoEContentAdapter {
+public class LabeledConnectionEContentAdapter extends EContentAdapter implements CincoEContentAdapter {
   @Override
   public void notifyChanged(final Notification notification) {
     super.notifyChanged(notification);
     final Object o = notification.getNotifier();
     final Object feature = notification.getFeature();
-    if ((o instanceof InternalUrl)) {
-      if ((Objects.equal(((InternalUrl)o).eContainer(), null) && (!(o instanceof InternalGraphModel)))) {
+    if ((o instanceof InternalLabeledConnection)) {
+      if ((Objects.equal(((InternalLabeledConnection)o).eContainer(), null) && (!(o instanceof InternalGraphModel)))) {
         return;
       }
       boolean _matched = false;
@@ -30,7 +30,7 @@ public class UrlEContentAdapter extends EContentAdapter implements CincoEContent
         boolean _isRelevant = this.isRelevant(((EStructuralFeature)feature));
         if (_isRelevant) {
           _matched=true;
-          ModelElement _element = ((InternalUrl)o).getElement();
+          ModelElement _element = ((InternalLabeledConnection)o).getElement();
           GraphModel _rootElement = null;
           if (_element!=null) {
             _rootElement=_element.getRootElement();
