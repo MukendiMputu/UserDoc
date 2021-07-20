@@ -1,5 +1,5 @@
 appearance default {
-	lineWidth 2
+	lineWidth 1
 	background (144,207,238)
 }
 
@@ -79,7 +79,7 @@ nodeStyle commentNode(1) {
 		position (0,0)
 		size (90,40)
 		corner (8,8)
-		text {
+		multiText {
 			position (LEFT, TOP)
 			value "%s" 
 		}
@@ -100,9 +100,14 @@ nodeStyle goToVerb(1) {
 }
 
 nodeStyle screenshot {
-	image {
-		size (50, 43)
-		path ("icons/64/browser_64.png")
+	roundedRectangle {
+		appearance default
+		size(50, 43)
+		corner(8,8)
+		image {
+			size (50, 43)
+			path ("icons/64/browser_64.png")
+		}
 	}
 }
 

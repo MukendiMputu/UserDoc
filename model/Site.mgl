@@ -1,5 +1,7 @@
-id info.scce.cinco.product.siteconfiguration
-stylePath "model/SiteConfiguration.style"
+import "model/Page.mgl" as importedPage
+
+id info.scce.cinco.product.site
+stylePath "model/Site.style"
 
 
 /* 
@@ -18,20 +20,9 @@ graphModel SiteConfigurationGraphModel {
 
 /* Basic URL node */
 @icon("icons/16/url_16.png")
-node UrlNode {
+node Url {
 	style url("URL: ", "${content}")
 	attr EString as content := ""
-}
-
-/* The Home node is suppose to contain
- * the constant URL extension '\home';
- * this node might be reference in other MGLs.
- */
-@icon("icons/16/url_16.png")
-node HomeUrl{
-	style url("URL: ", "${content}")
-	final attr EString as content := "\\home"
-	
 }
 
 /* The Domain node is suppose to contain
@@ -74,7 +65,6 @@ node Password {
   */
 @icon("icons/16/page_16.png")
 node Page {
-	style page("${name}: ", "${url}")
-	attr EString as name := "Page"
-	attr EString as url := ""
+	style page("${subPage.name}: ", "${subPage.URL}")
+	prime importedPage::PageGraphModel as subPage
 }

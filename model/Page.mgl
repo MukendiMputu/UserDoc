@@ -1,0 +1,38 @@
+import "model/UserSequence.mgl" as userSeq
+
+id info.scce.cinco.product.pages
+stylePath "model/Site.style"
+
+
+/* 
+ * All the model elements that will contain
+ * the configuration for the target web site.
+ * 
+ * e.g. URL, username, password, etc.
+ * */
+@generatable("info.scce.cinco.product.userdocumentation.codegen.Generate", "/src/")
+graphModel PageGraphModel {
+	iconPath "icons/16/page_16.png"
+	diagramExtension "page"
+	containableElements(*)
+	attr EString as name := "Page"
+	attr EString as URL := "page"
+	attr EBoolean as hasLogin
+}
+
+/* To model all the subpages within a page
+  */
+@icon("icons/16/page_16.png")
+node SubPage {
+	style page("${subPage.name}: ", "${subPage.URL}")
+	prime this::PageGraphModel as subPage
+}
+
+/*
+ * To model all the user sequences/actions that
+ * can be perform on a page
+ */
+node UserSequence {
+	style page("${sequence.modelName}","")
+	prime userSeq::UserSequenceGraphModel as sequence
+}

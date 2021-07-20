@@ -1,6 +1,7 @@
 cincoProduct UserDocumentationTool {
+	mgl "model/Site.mgl"
+	mgl "model/Page.mgl"
 	mgl "model/UserSequence.mgl"
-	mgl "model/SiteConfiguration.mgl"
 
 	splashScreen "branding/splash.bmp" {
 		progressBar (37,268,190,10)

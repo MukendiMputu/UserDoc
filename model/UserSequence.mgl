@@ -1,9 +1,7 @@
-import "model/SiteConfiguration.mgl" as SiteConfig
-
 id info.scce.cinco.product.usersequence
 stylePath "model/UserSequence.style"
 
-@generatable("info.scce.cinco.product.userdocumentation.codegen.Generate", "/src/")
+//@generatable("info.scce.cinco.product.userdocumentation.codegen.Generate2", "/src/")
 graphModel UserSequenceGraphModel {
 	iconPath "icons/16/sequence_16.png"
 	diagramExtension "sequence"
@@ -41,7 +39,7 @@ container FeatureContainer {
  * E.g. goto (for following links to other pages),
  * press or click action, etc.
  */
-
+@disable(resize)
 @icon("icons/16/screenshot_16.png")
 node Screenshot {
 	style screenshot
@@ -78,7 +76,7 @@ node Press {
 	incomingEdges (*[1,1])
 	outgoingEdges (Transition)
 	final attr EString as verb := "press"
-	attr Object as obj
+	attr WebElement as obj
 }
 
 /*
@@ -92,7 +90,7 @@ node Click {
 	incomingEdges (*[1,1])
 	outgoingEdges (Transition[1,1])
 	final attr EString as verb := "click"
-	attr Object as obj
+	attr WebElement as obj
 }
 
 /*
@@ -106,7 +104,7 @@ node Select {
 	incomingEdges (*[1,1])
 	outgoingEdges (*[1,1])
 	final attr EString as verb := "select"
-	attr Object as obj
+	attr WebElement as obj
 }
 
 /*
@@ -146,7 +144,7 @@ node Check {
 	incomingEdges (*[1,1])
 	outgoingEdges (*[1,1])
 	final attr EString as verb := "check"
-	attr Object as obj
+	attr WebElement as obj
 }
 
 /*
@@ -160,7 +158,7 @@ node Submit {
 	incomingEdges (*[1,1])
 	outgoingEdges (*[1,1])
 	final attr EString as verb := "submit"
-	attr Object as obj
+	attr WebElement as obj
 }
 
 /*
@@ -174,40 +172,18 @@ node Clear {
 	incomingEdges (Transition[1,1])
 	outgoingEdges (Transition[1,1])
 	final attr EString as verb := "clear"
-	attr Object as obj
-}
-
-/* To model all the pages the web site
- * might contain.
-  */
-@icon("icons/16/page_16.png")
-@palette("Web Elements")
-node WebPage {
-	style page("${page.name}: ", "${url}")
-	
-	prime SiteConfig::Page as page
-}
-
-/*
- * Object that endures the user action
- */
-@icon("icons/16/object_16.png")
-@palette("Web Elements")
-node Object {
-	style object("web element")
-	
-	incomingEdges (*[1,1])
-	outgoingEdges (Transition[1,1])
+	attr WebElement as obj
 }
 
 /*
  * WebElement literally represents an html element.
- * It's intended to define only the most used web element,
- * e.g. headers (h1, h2,...), buttons, input, textarea and so on.
+ * It's intended to define only the most used web 
+ * element (h1, h2, div, p, textarea) or custom elements
+ * like <dime id="..."  >
  */
 @icon("icons/16/object_16.png")
 @palette("Web Elements")
-node WebElement extends Object {
+node WebElement {
 	style object("<${tagName}>: ${attribute}=${attrValue}")
 	
 	attr EString as tagName := ""
@@ -220,9 +196,24 @@ node WebElement extends Object {
 	outgoingEdges (Transition[1,1])
 }
 
+
+/*
+ * WebElement literally represents an html element.
+ * It's intended to define only the most used web 
+ * element (h1, h2, div, p, textarea) or custom elements
+ * like <dime id="..."  >
+ */
+@icon("icons/16/object_16.png")
+@palette("Web Elements")
+container Div extends WebElement {
+	style object("<div>")
+	containableElements(WebElement)
+}
+
 /*
  * User defined type to represent HTML element attributes
  */
+@label(name)
 type Attributes {
 	attr AttributeNames as name
 	attr EString as value := ""

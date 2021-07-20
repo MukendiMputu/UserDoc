@@ -22,13 +22,13 @@ public class PomXMLGenerator {
       _builder.append("<groupId>info.scce.cinco.product</groupId>");
       _builder.newLine();
       _builder.append("  ");
-      _builder.append("<artifactId>userdoc</artifactId>");
+      _builder.append("<artifactId>userdocumentation</artifactId>");
       _builder.newLine();
       _builder.append("  ");
       _builder.append("<version>0.0.1-SNAPSHOT</version>");
       _builder.newLine();
       _builder.append("  ");
-      _builder.append("<name>User Documentation</name>");
+      _builder.append("<name>User Documentation Generator</name>");
       _builder.newLine();
       _builder.append("  ");
       _builder.newLine();
