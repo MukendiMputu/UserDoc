@@ -156,7 +156,7 @@ public class SiteFactory extends SiteFactoryImpl {
   }
   
   /**
-   * This method creates an Email with the given id.
+   * This method creates an Password with the given id.
    * 
    * @param ID: The id for the new element
    * @param ime: The internal model element {@link graphmodel.internal.InternalModelElement}
@@ -164,135 +164,65 @@ public class SiteFactory extends SiteFactoryImpl {
    * element of the created element
    * @param hook: Indicates, if the post create hook should be executed
    */
-  public Email createEmail(final String ID, final InternalModelElement ime, final InternalModelElementContainer parent, final boolean hook) {
-    Email _createEmail = super.createEmail();
-    final Procedure1<Email> _function = (Email it) -> {
+  public Password createPassword(final String ID, final InternalModelElement ime, final InternalModelElementContainer parent, final boolean hook) {
+    Password _createPassword = super.createPassword();
+    final Procedure1<Password> _function = (Password it) -> {
       EcoreUtil.setID(it, ID);
       InternalModelElement _elvis = null;
       if (ime != null) {
         _elvis = ime;
       } else {
-        InternalEmail _createInternalEmail = this._internalFactory.createInternalEmail();
-        _elvis = _createInternalEmail;
+        InternalPassword _createInternalPassword = this._internalFactory.createInternalPassword();
+        _elvis = _createInternalPassword;
       }
       final Procedure1<InternalModelElement> _function_1 = (InternalModelElement it_1) -> {
         EcoreUtil.setID(it_1, (ID + "_INTERNAL"));
         it_1.setContainer(parent);
         EList<Adapter> _eAdapters = it_1.eAdapters();
-        EmailEContentAdapter _emailEContentAdapter = new EmailEContentAdapter();
-        _eAdapters.add(_emailEContentAdapter);
+        PasswordEContentAdapter _passwordEContentAdapter = new PasswordEContentAdapter();
+        _eAdapters.add(_passwordEContentAdapter);
       };
       InternalModelElement _doubleArrow = ObjectExtensions.<InternalModelElement>operator_doubleArrow(_elvis, _function_1);
       this.setInternal(it, _doubleArrow);
     };
-    return ObjectExtensions.<Email>operator_doubleArrow(_createEmail, _function);
+    return ObjectExtensions.<Password>operator_doubleArrow(_createPassword, _function);
   }
   
   /**
-   * This method creates an Email with the given id. Post create hook won't be triggered.
+   * This method creates an Password with the given id. Post create hook won't be triggered.
    */
-  public Email createEmail(final String ID) {
-    return this.createEmail(ID, null, null, false);
+  public Password createPassword(final String ID) {
+    return this.createPassword(ID, null, null, false);
   }
   
   /**
-   * This method creates an Email with the given id. Post create hook will be triggered.
+   * This method creates an Password with the given id. Post create hook will be triggered.
    */
-  public Email createEmail(final InternalModelElementContainer parent) {
-    return this.createEmail(EcoreUtil.generateUUID(), null, parent, true);
+  public Password createPassword(final InternalModelElementContainer parent) {
+    return this.createPassword(EcoreUtil.generateUUID(), null, parent, true);
   }
   
   /**
-   * This method creates an Email with the given id. Post create hook will be triggered.
+   * This method creates an Password with the given id. Post create hook will be triggered.
    */
-  public Email createEmail(final String ID, final InternalModelElementContainer parent) {
-    return this.createEmail(ID, null, parent, true);
+  public Password createPassword(final String ID, final InternalModelElementContainer parent) {
+    return this.createPassword(ID, null, parent, true);
   }
   
-  public Email createEmail(final String ID, final InternalModelElement ime, final InternalModelElementContainer parent) {
-    return this.createEmail(ID, ime, parent, true);
+  public Password createPassword(final String ID, final InternalModelElement ime, final InternalModelElementContainer parent) {
+    return this.createPassword(ID, ime, parent, true);
   }
   
   /**
-   * This method creates an Email with the given id. Post create hook won't be triggered.
+   * This method creates an Password with the given id. Post create hook won't be triggered.
    */
-  public Email createEmail(final InternalModelElement ime) {
-    return this.createEmail(EcoreUtil.generateUUID(), ime, null, false);
+  public Password createPassword(final InternalModelElement ime) {
+    return this.createPassword(EcoreUtil.generateUUID(), ime, null, false);
   }
   
   @Override
-  public Email createEmail() {
-    return this.createEmail(EcoreUtil.generateUUID());
-  }
-  
-  /**
-   * This method creates an Domain with the given id.
-   * 
-   * @param ID: The id for the new element
-   * @param ime: The internal model element {@link graphmodel.internal.InternalModelElement}
-   * @param parent: The parent element of the newly created element. Needed if a post create hook accesses the parent
-   * element of the created element
-   * @param hook: Indicates, if the post create hook should be executed
-   */
-  public Domain createDomain(final String ID, final InternalModelElement ime, final InternalModelElementContainer parent, final boolean hook) {
-    Domain _createDomain = super.createDomain();
-    final Procedure1<Domain> _function = (Domain it) -> {
-      EcoreUtil.setID(it, ID);
-      InternalModelElement _elvis = null;
-      if (ime != null) {
-        _elvis = ime;
-      } else {
-        InternalDomain _createInternalDomain = this._internalFactory.createInternalDomain();
-        _elvis = _createInternalDomain;
-      }
-      final Procedure1<InternalModelElement> _function_1 = (InternalModelElement it_1) -> {
-        EcoreUtil.setID(it_1, (ID + "_INTERNAL"));
-        it_1.setContainer(parent);
-        EList<Adapter> _eAdapters = it_1.eAdapters();
-        DomainEContentAdapter _domainEContentAdapter = new DomainEContentAdapter();
-        _eAdapters.add(_domainEContentAdapter);
-      };
-      InternalModelElement _doubleArrow = ObjectExtensions.<InternalModelElement>operator_doubleArrow(_elvis, _function_1);
-      this.setInternal(it, _doubleArrow);
-    };
-    return ObjectExtensions.<Domain>operator_doubleArrow(_createDomain, _function);
-  }
-  
-  /**
-   * This method creates an Domain with the given id. Post create hook won't be triggered.
-   */
-  public Domain createDomain(final String ID) {
-    return this.createDomain(ID, null, null, false);
-  }
-  
-  /**
-   * This method creates an Domain with the given id. Post create hook will be triggered.
-   */
-  public Domain createDomain(final InternalModelElementContainer parent) {
-    return this.createDomain(EcoreUtil.generateUUID(), null, parent, true);
-  }
-  
-  /**
-   * This method creates an Domain with the given id. Post create hook will be triggered.
-   */
-  public Domain createDomain(final String ID, final InternalModelElementContainer parent) {
-    return this.createDomain(ID, null, parent, true);
-  }
-  
-  public Domain createDomain(final String ID, final InternalModelElement ime, final InternalModelElementContainer parent) {
-    return this.createDomain(ID, ime, parent, true);
-  }
-  
-  /**
-   * This method creates an Domain with the given id. Post create hook won't be triggered.
-   */
-  public Domain createDomain(final InternalModelElement ime) {
-    return this.createDomain(EcoreUtil.generateUUID(), ime, null, false);
-  }
-  
-  @Override
-  public Domain createDomain() {
-    return this.createDomain(EcoreUtil.generateUUID());
+  public Password createPassword() {
+    return this.createPassword(EcoreUtil.generateUUID());
   }
   
   /**
@@ -366,7 +296,7 @@ public class SiteFactory extends SiteFactoryImpl {
   }
   
   /**
-   * This method creates an Password with the given id.
+   * This method creates an Domain with the given id.
    * 
    * @param ID: The id for the new element
    * @param ime: The internal model element {@link graphmodel.internal.InternalModelElement}
@@ -374,135 +304,65 @@ public class SiteFactory extends SiteFactoryImpl {
    * element of the created element
    * @param hook: Indicates, if the post create hook should be executed
    */
-  public Password createPassword(final String ID, final InternalModelElement ime, final InternalModelElementContainer parent, final boolean hook) {
-    Password _createPassword = super.createPassword();
-    final Procedure1<Password> _function = (Password it) -> {
+  public Domain createDomain(final String ID, final InternalModelElement ime, final InternalModelElementContainer parent, final boolean hook) {
+    Domain _createDomain = super.createDomain();
+    final Procedure1<Domain> _function = (Domain it) -> {
       EcoreUtil.setID(it, ID);
       InternalModelElement _elvis = null;
       if (ime != null) {
         _elvis = ime;
       } else {
-        InternalPassword _createInternalPassword = this._internalFactory.createInternalPassword();
-        _elvis = _createInternalPassword;
+        InternalDomain _createInternalDomain = this._internalFactory.createInternalDomain();
+        _elvis = _createInternalDomain;
       }
       final Procedure1<InternalModelElement> _function_1 = (InternalModelElement it_1) -> {
         EcoreUtil.setID(it_1, (ID + "_INTERNAL"));
         it_1.setContainer(parent);
         EList<Adapter> _eAdapters = it_1.eAdapters();
-        PasswordEContentAdapter _passwordEContentAdapter = new PasswordEContentAdapter();
-        _eAdapters.add(_passwordEContentAdapter);
+        DomainEContentAdapter _domainEContentAdapter = new DomainEContentAdapter();
+        _eAdapters.add(_domainEContentAdapter);
       };
       InternalModelElement _doubleArrow = ObjectExtensions.<InternalModelElement>operator_doubleArrow(_elvis, _function_1);
       this.setInternal(it, _doubleArrow);
     };
-    return ObjectExtensions.<Password>operator_doubleArrow(_createPassword, _function);
+    return ObjectExtensions.<Domain>operator_doubleArrow(_createDomain, _function);
   }
   
   /**
-   * This method creates an Password with the given id. Post create hook won't be triggered.
+   * This method creates an Domain with the given id. Post create hook won't be triggered.
    */
-  public Password createPassword(final String ID) {
-    return this.createPassword(ID, null, null, false);
+  public Domain createDomain(final String ID) {
+    return this.createDomain(ID, null, null, false);
   }
   
   /**
-   * This method creates an Password with the given id. Post create hook will be triggered.
+   * This method creates an Domain with the given id. Post create hook will be triggered.
    */
-  public Password createPassword(final InternalModelElementContainer parent) {
-    return this.createPassword(EcoreUtil.generateUUID(), null, parent, true);
+  public Domain createDomain(final InternalModelElementContainer parent) {
+    return this.createDomain(EcoreUtil.generateUUID(), null, parent, true);
   }
   
   /**
-   * This method creates an Password with the given id. Post create hook will be triggered.
+   * This method creates an Domain with the given id. Post create hook will be triggered.
    */
-  public Password createPassword(final String ID, final InternalModelElementContainer parent) {
-    return this.createPassword(ID, null, parent, true);
+  public Domain createDomain(final String ID, final InternalModelElementContainer parent) {
+    return this.createDomain(ID, null, parent, true);
   }
   
-  public Password createPassword(final String ID, final InternalModelElement ime, final InternalModelElementContainer parent) {
-    return this.createPassword(ID, ime, parent, true);
+  public Domain createDomain(final String ID, final InternalModelElement ime, final InternalModelElementContainer parent) {
+    return this.createDomain(ID, ime, parent, true);
   }
   
   /**
-   * This method creates an Password with the given id. Post create hook won't be triggered.
+   * This method creates an Domain with the given id. Post create hook won't be triggered.
    */
-  public Password createPassword(final InternalModelElement ime) {
-    return this.createPassword(EcoreUtil.generateUUID(), ime, null, false);
+  public Domain createDomain(final InternalModelElement ime) {
+    return this.createDomain(EcoreUtil.generateUUID(), ime, null, false);
   }
   
   @Override
-  public Password createPassword() {
-    return this.createPassword(EcoreUtil.generateUUID());
-  }
-  
-  /**
-   * This method creates an Username with the given id.
-   * 
-   * @param ID: The id for the new element
-   * @param ime: The internal model element {@link graphmodel.internal.InternalModelElement}
-   * @param parent: The parent element of the newly created element. Needed if a post create hook accesses the parent
-   * element of the created element
-   * @param hook: Indicates, if the post create hook should be executed
-   */
-  public Username createUsername(final String ID, final InternalModelElement ime, final InternalModelElementContainer parent, final boolean hook) {
-    Username _createUsername = super.createUsername();
-    final Procedure1<Username> _function = (Username it) -> {
-      EcoreUtil.setID(it, ID);
-      InternalModelElement _elvis = null;
-      if (ime != null) {
-        _elvis = ime;
-      } else {
-        InternalUsername _createInternalUsername = this._internalFactory.createInternalUsername();
-        _elvis = _createInternalUsername;
-      }
-      final Procedure1<InternalModelElement> _function_1 = (InternalModelElement it_1) -> {
-        EcoreUtil.setID(it_1, (ID + "_INTERNAL"));
-        it_1.setContainer(parent);
-        EList<Adapter> _eAdapters = it_1.eAdapters();
-        UsernameEContentAdapter _usernameEContentAdapter = new UsernameEContentAdapter();
-        _eAdapters.add(_usernameEContentAdapter);
-      };
-      InternalModelElement _doubleArrow = ObjectExtensions.<InternalModelElement>operator_doubleArrow(_elvis, _function_1);
-      this.setInternal(it, _doubleArrow);
-    };
-    return ObjectExtensions.<Username>operator_doubleArrow(_createUsername, _function);
-  }
-  
-  /**
-   * This method creates an Username with the given id. Post create hook won't be triggered.
-   */
-  public Username createUsername(final String ID) {
-    return this.createUsername(ID, null, null, false);
-  }
-  
-  /**
-   * This method creates an Username with the given id. Post create hook will be triggered.
-   */
-  public Username createUsername(final InternalModelElementContainer parent) {
-    return this.createUsername(EcoreUtil.generateUUID(), null, parent, true);
-  }
-  
-  /**
-   * This method creates an Username with the given id. Post create hook will be triggered.
-   */
-  public Username createUsername(final String ID, final InternalModelElementContainer parent) {
-    return this.createUsername(ID, null, parent, true);
-  }
-  
-  public Username createUsername(final String ID, final InternalModelElement ime, final InternalModelElementContainer parent) {
-    return this.createUsername(ID, ime, parent, true);
-  }
-  
-  /**
-   * This method creates an Username with the given id. Post create hook won't be triggered.
-   */
-  public Username createUsername(final InternalModelElement ime) {
-    return this.createUsername(EcoreUtil.generateUUID(), ime, null, false);
-  }
-  
-  @Override
-  public Username createUsername() {
-    return this.createUsername(EcoreUtil.generateUUID());
+  public Domain createDomain() {
+    return this.createDomain(EcoreUtil.generateUUID());
   }
   
   /**
@@ -573,6 +433,146 @@ public class SiteFactory extends SiteFactoryImpl {
   @Override
   public Url createUrl() {
     return this.createUrl(EcoreUtil.generateUUID());
+  }
+  
+  /**
+   * This method creates an Email with the given id.
+   * 
+   * @param ID: The id for the new element
+   * @param ime: The internal model element {@link graphmodel.internal.InternalModelElement}
+   * @param parent: The parent element of the newly created element. Needed if a post create hook accesses the parent
+   * element of the created element
+   * @param hook: Indicates, if the post create hook should be executed
+   */
+  public Email createEmail(final String ID, final InternalModelElement ime, final InternalModelElementContainer parent, final boolean hook) {
+    Email _createEmail = super.createEmail();
+    final Procedure1<Email> _function = (Email it) -> {
+      EcoreUtil.setID(it, ID);
+      InternalModelElement _elvis = null;
+      if (ime != null) {
+        _elvis = ime;
+      } else {
+        InternalEmail _createInternalEmail = this._internalFactory.createInternalEmail();
+        _elvis = _createInternalEmail;
+      }
+      final Procedure1<InternalModelElement> _function_1 = (InternalModelElement it_1) -> {
+        EcoreUtil.setID(it_1, (ID + "_INTERNAL"));
+        it_1.setContainer(parent);
+        EList<Adapter> _eAdapters = it_1.eAdapters();
+        EmailEContentAdapter _emailEContentAdapter = new EmailEContentAdapter();
+        _eAdapters.add(_emailEContentAdapter);
+      };
+      InternalModelElement _doubleArrow = ObjectExtensions.<InternalModelElement>operator_doubleArrow(_elvis, _function_1);
+      this.setInternal(it, _doubleArrow);
+    };
+    return ObjectExtensions.<Email>operator_doubleArrow(_createEmail, _function);
+  }
+  
+  /**
+   * This method creates an Email with the given id. Post create hook won't be triggered.
+   */
+  public Email createEmail(final String ID) {
+    return this.createEmail(ID, null, null, false);
+  }
+  
+  /**
+   * This method creates an Email with the given id. Post create hook will be triggered.
+   */
+  public Email createEmail(final InternalModelElementContainer parent) {
+    return this.createEmail(EcoreUtil.generateUUID(), null, parent, true);
+  }
+  
+  /**
+   * This method creates an Email with the given id. Post create hook will be triggered.
+   */
+  public Email createEmail(final String ID, final InternalModelElementContainer parent) {
+    return this.createEmail(ID, null, parent, true);
+  }
+  
+  public Email createEmail(final String ID, final InternalModelElement ime, final InternalModelElementContainer parent) {
+    return this.createEmail(ID, ime, parent, true);
+  }
+  
+  /**
+   * This method creates an Email with the given id. Post create hook won't be triggered.
+   */
+  public Email createEmail(final InternalModelElement ime) {
+    return this.createEmail(EcoreUtil.generateUUID(), ime, null, false);
+  }
+  
+  @Override
+  public Email createEmail() {
+    return this.createEmail(EcoreUtil.generateUUID());
+  }
+  
+  /**
+   * This method creates an Username with the given id.
+   * 
+   * @param ID: The id for the new element
+   * @param ime: The internal model element {@link graphmodel.internal.InternalModelElement}
+   * @param parent: The parent element of the newly created element. Needed if a post create hook accesses the parent
+   * element of the created element
+   * @param hook: Indicates, if the post create hook should be executed
+   */
+  public Username createUsername(final String ID, final InternalModelElement ime, final InternalModelElementContainer parent, final boolean hook) {
+    Username _createUsername = super.createUsername();
+    final Procedure1<Username> _function = (Username it) -> {
+      EcoreUtil.setID(it, ID);
+      InternalModelElement _elvis = null;
+      if (ime != null) {
+        _elvis = ime;
+      } else {
+        InternalUsername _createInternalUsername = this._internalFactory.createInternalUsername();
+        _elvis = _createInternalUsername;
+      }
+      final Procedure1<InternalModelElement> _function_1 = (InternalModelElement it_1) -> {
+        EcoreUtil.setID(it_1, (ID + "_INTERNAL"));
+        it_1.setContainer(parent);
+        EList<Adapter> _eAdapters = it_1.eAdapters();
+        UsernameEContentAdapter _usernameEContentAdapter = new UsernameEContentAdapter();
+        _eAdapters.add(_usernameEContentAdapter);
+      };
+      InternalModelElement _doubleArrow = ObjectExtensions.<InternalModelElement>operator_doubleArrow(_elvis, _function_1);
+      this.setInternal(it, _doubleArrow);
+    };
+    return ObjectExtensions.<Username>operator_doubleArrow(_createUsername, _function);
+  }
+  
+  /**
+   * This method creates an Username with the given id. Post create hook won't be triggered.
+   */
+  public Username createUsername(final String ID) {
+    return this.createUsername(ID, null, null, false);
+  }
+  
+  /**
+   * This method creates an Username with the given id. Post create hook will be triggered.
+   */
+  public Username createUsername(final InternalModelElementContainer parent) {
+    return this.createUsername(EcoreUtil.generateUUID(), null, parent, true);
+  }
+  
+  /**
+   * This method creates an Username with the given id. Post create hook will be triggered.
+   */
+  public Username createUsername(final String ID, final InternalModelElementContainer parent) {
+    return this.createUsername(ID, null, parent, true);
+  }
+  
+  public Username createUsername(final String ID, final InternalModelElement ime, final InternalModelElementContainer parent) {
+    return this.createUsername(ID, ime, parent, true);
+  }
+  
+  /**
+   * This method creates an Username with the given id. Post create hook won't be triggered.
+   */
+  public Username createUsername(final InternalModelElement ime) {
+    return this.createUsername(EcoreUtil.generateUUID(), ime, null, false);
+  }
+  
+  @Override
+  public Username createUsername() {
+    return this.createUsername(EcoreUtil.generateUUID());
   }
   
   private <T extends IdentifiableElement> T setInternal(final T elm, final InternalIdentifiableElement internal) {

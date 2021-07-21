@@ -474,14 +474,14 @@ public class Generate implements IGenerator<SiteGraphModel> {
     _builder_4.append("public Boolean Login() {");
     _builder_4.newLine();
     _builder_4.append("\t\t");
-    _builder_4.append("return loginPage.Login(this.getsUserName(), this.getsPassword());");
+    _builder_4.append("return loginPage.login(this.getsUserName(), this.getsPassword());");
     _builder_4.newLine();
     _builder_4.append("\t");
     _builder_4.append("}");
     _builder_4.newLine();
     _builder_4.newLine();
     _builder_4.append("\t");
-    _builder_4.append("public void CloseSite() {");
+    _builder_4.append("public void closeSite() {");
     _builder_4.newLine();
     {
       EList<Page> _pages_2 = model.getPages();
@@ -770,7 +770,7 @@ public class Generate implements IGenerator<SiteGraphModel> {
     _builder_6.append("public void testCallFunction() throws InterruptedException {");
     _builder_6.newLine();
     _builder_6.append("\t\t");
-    _builder_6.append("bResult =  site.Login();");
+    _builder_6.append("bResult =  site.login();");
     _builder_6.newLine();
     _builder_6.append("\t\t");
     _builder_6.append("Thread.sleep(3000);");

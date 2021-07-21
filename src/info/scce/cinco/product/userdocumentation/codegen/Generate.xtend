@@ -231,10 +231,10 @@ class Generate implements IGenerator<SiteGraphModel> {
 				}
 			
 				public Boolean Login() {
-					return loginPage.Login(this.getsUserName(), this.getsPassword());
+					return loginPage.login(this.getsUserName(), this.getsPassword());
 				}
 			
-				public void CloseSite() {
+				public void closeSite() {
 					«FOR page : model.pages»
 					«page.eClass.name.toFirstLower».closePage();
 					«ENDFOR»
@@ -359,7 +359,7 @@ class Generate implements IGenerator<SiteGraphModel> {
 					
 					@Test
 					public void testCallFunction() throws InterruptedException {
-						bResult =  site.Login();
+						bResult =  site.login();
 						Thread.sleep(3000);
 						
 						Assert.assertTrue(bResult, "Login failed");

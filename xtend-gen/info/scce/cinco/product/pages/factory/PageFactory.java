@@ -158,146 +158,6 @@ public class PageFactory extends PageFactoryImpl {
   }
   
   /**
-   * This method creates an UserSequence with the given id.
-   * 
-   * @param ID: The id for the new element
-   * @param ime: The internal model element {@link graphmodel.internal.InternalModelElement}
-   * @param parent: The parent element of the newly created element. Needed if a post create hook accesses the parent
-   * element of the created element
-   * @param hook: Indicates, if the post create hook should be executed
-   */
-  public UserSequence createUserSequence(final String ID, final InternalModelElement ime, final InternalModelElementContainer parent, final boolean hook) {
-    UserSequence _createUserSequence = super.createUserSequence();
-    final Procedure1<UserSequence> _function = (UserSequence it) -> {
-      EcoreUtil.setID(it, ID);
-      InternalModelElement _elvis = null;
-      if (ime != null) {
-        _elvis = ime;
-      } else {
-        InternalUserSequence _createInternalUserSequence = this._internalFactory.createInternalUserSequence();
-        _elvis = _createInternalUserSequence;
-      }
-      final Procedure1<InternalModelElement> _function_1 = (InternalModelElement it_1) -> {
-        EcoreUtil.setID(it_1, (ID + "_INTERNAL"));
-        it_1.setContainer(parent);
-        EList<Adapter> _eAdapters = it_1.eAdapters();
-        UserSequenceEContentAdapter _userSequenceEContentAdapter = new UserSequenceEContentAdapter();
-        _eAdapters.add(_userSequenceEContentAdapter);
-      };
-      InternalModelElement _doubleArrow = ObjectExtensions.<InternalModelElement>operator_doubleArrow(_elvis, _function_1);
-      this.setInternal(it, _doubleArrow);
-    };
-    return ObjectExtensions.<UserSequence>operator_doubleArrow(_createUserSequence, _function);
-  }
-  
-  /**
-   * This method creates an UserSequence with the given id. Post create hook won't be triggered.
-   */
-  public UserSequence createUserSequence(final String ID) {
-    return this.createUserSequence(ID, null, null, false);
-  }
-  
-  /**
-   * This method creates an UserSequence with the given id. Post create hook will be triggered.
-   */
-  public UserSequence createUserSequence(final InternalModelElementContainer parent) {
-    return this.createUserSequence(EcoreUtil.generateUUID(), null, parent, true);
-  }
-  
-  /**
-   * This method creates an UserSequence with the given id. Post create hook will be triggered.
-   */
-  public UserSequence createUserSequence(final String ID, final InternalModelElementContainer parent) {
-    return this.createUserSequence(ID, null, parent, true);
-  }
-  
-  public UserSequence createUserSequence(final String ID, final InternalModelElement ime, final InternalModelElementContainer parent) {
-    return this.createUserSequence(ID, ime, parent, true);
-  }
-  
-  /**
-   * This method creates an UserSequence with the given id. Post create hook won't be triggered.
-   */
-  public UserSequence createUserSequence(final InternalModelElement ime) {
-    return this.createUserSequence(EcoreUtil.generateUUID(), ime, null, false);
-  }
-  
-  @Override
-  public UserSequence createUserSequence() {
-    return this.createUserSequence(EcoreUtil.generateUUID());
-  }
-  
-  /**
-   * This method creates an Begin with the given id.
-   * 
-   * @param ID: The id for the new element
-   * @param ime: The internal model element {@link graphmodel.internal.InternalModelElement}
-   * @param parent: The parent element of the newly created element. Needed if a post create hook accesses the parent
-   * element of the created element
-   * @param hook: Indicates, if the post create hook should be executed
-   */
-  public Begin createBegin(final String ID, final InternalModelElement ime, final InternalModelElementContainer parent, final boolean hook) {
-    Begin _createBegin = super.createBegin();
-    final Procedure1<Begin> _function = (Begin it) -> {
-      EcoreUtil.setID(it, ID);
-      InternalModelElement _elvis = null;
-      if (ime != null) {
-        _elvis = ime;
-      } else {
-        InternalBegin _createInternalBegin = this._internalFactory.createInternalBegin();
-        _elvis = _createInternalBegin;
-      }
-      final Procedure1<InternalModelElement> _function_1 = (InternalModelElement it_1) -> {
-        EcoreUtil.setID(it_1, (ID + "_INTERNAL"));
-        it_1.setContainer(parent);
-        EList<Adapter> _eAdapters = it_1.eAdapters();
-        BeginEContentAdapter _beginEContentAdapter = new BeginEContentAdapter();
-        _eAdapters.add(_beginEContentAdapter);
-      };
-      InternalModelElement _doubleArrow = ObjectExtensions.<InternalModelElement>operator_doubleArrow(_elvis, _function_1);
-      this.setInternal(it, _doubleArrow);
-    };
-    return ObjectExtensions.<Begin>operator_doubleArrow(_createBegin, _function);
-  }
-  
-  /**
-   * This method creates an Begin with the given id. Post create hook won't be triggered.
-   */
-  public Begin createBegin(final String ID) {
-    return this.createBegin(ID, null, null, false);
-  }
-  
-  /**
-   * This method creates an Begin with the given id. Post create hook will be triggered.
-   */
-  public Begin createBegin(final InternalModelElementContainer parent) {
-    return this.createBegin(EcoreUtil.generateUUID(), null, parent, true);
-  }
-  
-  /**
-   * This method creates an Begin with the given id. Post create hook will be triggered.
-   */
-  public Begin createBegin(final String ID, final InternalModelElementContainer parent) {
-    return this.createBegin(ID, null, parent, true);
-  }
-  
-  public Begin createBegin(final String ID, final InternalModelElement ime, final InternalModelElementContainer parent) {
-    return this.createBegin(ID, ime, parent, true);
-  }
-  
-  /**
-   * This method creates an Begin with the given id. Post create hook won't be triggered.
-   */
-  public Begin createBegin(final InternalModelElement ime) {
-    return this.createBegin(EcoreUtil.generateUUID(), ime, null, false);
-  }
-  
-  @Override
-  public Begin createBegin() {
-    return this.createBegin(EcoreUtil.generateUUID());
-  }
-  
-  /**
    * This method creates an End with the given id.
    * 
    * @param ID: The id for the new element
@@ -437,73 +297,144 @@ public class PageFactory extends PageFactoryImpl {
     return this.createSubPage(EcoreUtil.generateUUID());
   }
   
-  public LabeledConnection createLabeledConnection(final String ID, final InternalModelElement ime, final InternalNode source, final InternalNode target, final boolean hook) {
-    LabeledConnection _createLabeledConnection = super.createLabeledConnection();
-    final Procedure1<LabeledConnection> _function = (LabeledConnection it) -> {
+  /**
+   * This method creates an UserSequence with the given id.
+   * 
+   * @param ID: The id for the new element
+   * @param ime: The internal model element {@link graphmodel.internal.InternalModelElement}
+   * @param parent: The parent element of the newly created element. Needed if a post create hook accesses the parent
+   * element of the created element
+   * @param hook: Indicates, if the post create hook should be executed
+   */
+  public UserSequence createUserSequence(final String ID, final InternalModelElement ime, final InternalModelElementContainer parent, final boolean hook) {
+    UserSequence _createUserSequence = super.createUserSequence();
+    final Procedure1<UserSequence> _function = (UserSequence it) -> {
       EcoreUtil.setID(it, ID);
       InternalModelElement _elvis = null;
       if (ime != null) {
         _elvis = ime;
       } else {
-        InternalLabeledConnection _createInternalLabeledConnection = this._internalFactory.createInternalLabeledConnection();
-        _elvis = _createInternalLabeledConnection;
+        InternalUserSequence _createInternalUserSequence = this._internalFactory.createInternalUserSequence();
+        _elvis = _createInternalUserSequence;
       }
       final Procedure1<InternalModelElement> _function_1 = (InternalModelElement it_1) -> {
-        ((InternalEdge) it_1).set_sourceElement(source);
-        ((InternalEdge) it_1).set_targetElement(target);
-        InternalGraphModel _elvis_1 = null;
-        InternalGraphModel _rootElement = null;
-        if (source!=null) {
-          _rootElement=source.getRootElement();
-        }
-        if (_rootElement != null) {
-          _elvis_1 = _rootElement;
-        } else {
-          InternalGraphModel _rootElement_1 = null;
-          if (target!=null) {
-            _rootElement_1=target.getRootElement();
-          }
-          _elvis_1 = _rootElement_1;
-        }
-        it_1.setContainer(_elvis_1);
         EcoreUtil.setID(it_1, (ID + "_INTERNAL"));
+        it_1.setContainer(parent);
         EList<Adapter> _eAdapters = it_1.eAdapters();
-        LabeledConnectionEContentAdapter _labeledConnectionEContentAdapter = new LabeledConnectionEContentAdapter();
-        _eAdapters.add(_labeledConnectionEContentAdapter);
+        UserSequenceEContentAdapter _userSequenceEContentAdapter = new UserSequenceEContentAdapter();
+        _eAdapters.add(_userSequenceEContentAdapter);
       };
       InternalModelElement _doubleArrow = ObjectExtensions.<InternalModelElement>operator_doubleArrow(_elvis, _function_1);
       this.setInternal(it, _doubleArrow);
     };
-    return ObjectExtensions.<LabeledConnection>operator_doubleArrow(_createLabeledConnection, _function);
+    return ObjectExtensions.<UserSequence>operator_doubleArrow(_createUserSequence, _function);
   }
   
   /**
-   * This method creates an LabeledConnection with the given id. Post create hook will be triggered.
+   * This method creates an UserSequence with the given id. Post create hook won't be triggered.
    */
-  public LabeledConnection createLabeledConnection(final String ID, final InternalNode source, final InternalNode target) {
-    return this.createLabeledConnection(ID, null, source, target, true);
+  public UserSequence createUserSequence(final String ID) {
+    return this.createUserSequence(ID, null, null, false);
   }
   
   /**
-   * This method creates an LabeledConnection with generated id. Post create hook will be triggered.
+   * This method creates an UserSequence with the given id. Post create hook will be triggered.
    */
-  public LabeledConnection createLabeledConnection(final InternalNode source, final InternalNode target) {
-    return this.createLabeledConnection(EcoreUtil.generateUUID(), null, source, target, true);
+  public UserSequence createUserSequence(final InternalModelElementContainer parent) {
+    return this.createUserSequence(EcoreUtil.generateUUID(), null, parent, true);
   }
   
   /**
-   * This method creates an LabeledConnection with the given id. Post create hook won't be triggered.
+   * This method creates an UserSequence with the given id. Post create hook will be triggered.
    */
-  public LabeledConnection createLabeledConnection(final String ID) {
-    return this.createLabeledConnection(ID, null, null, null, false);
+  public UserSequence createUserSequence(final String ID, final InternalModelElementContainer parent) {
+    return this.createUserSequence(ID, null, parent, true);
+  }
+  
+  public UserSequence createUserSequence(final String ID, final InternalModelElement ime, final InternalModelElementContainer parent) {
+    return this.createUserSequence(ID, ime, parent, true);
   }
   
   /**
-   * This method creates an LabeledConnection with a generated id. Post create hook won't be triggered.
+   * This method creates an UserSequence with the given id. Post create hook won't be triggered.
    */
+  public UserSequence createUserSequence(final InternalModelElement ime) {
+    return this.createUserSequence(EcoreUtil.generateUUID(), ime, null, false);
+  }
+  
   @Override
-  public LabeledConnection createLabeledConnection() {
-    return this.createLabeledConnection(EcoreUtil.generateUUID());
+  public UserSequence createUserSequence() {
+    return this.createUserSequence(EcoreUtil.generateUUID());
+  }
+  
+  /**
+   * This method creates an Begin with the given id.
+   * 
+   * @param ID: The id for the new element
+   * @param ime: The internal model element {@link graphmodel.internal.InternalModelElement}
+   * @param parent: The parent element of the newly created element. Needed if a post create hook accesses the parent
+   * element of the created element
+   * @param hook: Indicates, if the post create hook should be executed
+   */
+  public Begin createBegin(final String ID, final InternalModelElement ime, final InternalModelElementContainer parent, final boolean hook) {
+    Begin _createBegin = super.createBegin();
+    final Procedure1<Begin> _function = (Begin it) -> {
+      EcoreUtil.setID(it, ID);
+      InternalModelElement _elvis = null;
+      if (ime != null) {
+        _elvis = ime;
+      } else {
+        InternalBegin _createInternalBegin = this._internalFactory.createInternalBegin();
+        _elvis = _createInternalBegin;
+      }
+      final Procedure1<InternalModelElement> _function_1 = (InternalModelElement it_1) -> {
+        EcoreUtil.setID(it_1, (ID + "_INTERNAL"));
+        it_1.setContainer(parent);
+        EList<Adapter> _eAdapters = it_1.eAdapters();
+        BeginEContentAdapter _beginEContentAdapter = new BeginEContentAdapter();
+        _eAdapters.add(_beginEContentAdapter);
+      };
+      InternalModelElement _doubleArrow = ObjectExtensions.<InternalModelElement>operator_doubleArrow(_elvis, _function_1);
+      this.setInternal(it, _doubleArrow);
+    };
+    return ObjectExtensions.<Begin>operator_doubleArrow(_createBegin, _function);
+  }
+  
+  /**
+   * This method creates an Begin with the given id. Post create hook won't be triggered.
+   */
+  public Begin createBegin(final String ID) {
+    return this.createBegin(ID, null, null, false);
+  }
+  
+  /**
+   * This method creates an Begin with the given id. Post create hook will be triggered.
+   */
+  public Begin createBegin(final InternalModelElementContainer parent) {
+    return this.createBegin(EcoreUtil.generateUUID(), null, parent, true);
+  }
+  
+  /**
+   * This method creates an Begin with the given id. Post create hook will be triggered.
+   */
+  public Begin createBegin(final String ID, final InternalModelElementContainer parent) {
+    return this.createBegin(ID, null, parent, true);
+  }
+  
+  public Begin createBegin(final String ID, final InternalModelElement ime, final InternalModelElementContainer parent) {
+    return this.createBegin(ID, ime, parent, true);
+  }
+  
+  /**
+   * This method creates an Begin with the given id. Post create hook won't be triggered.
+   */
+  public Begin createBegin(final InternalModelElement ime) {
+    return this.createBegin(EcoreUtil.generateUUID(), ime, null, false);
+  }
+  
+  @Override
+  public Begin createBegin() {
+    return this.createBegin(EcoreUtil.generateUUID());
   }
   
   public Connection createConnection(final String ID, final InternalModelElement ime, final InternalNode source, final InternalNode target, final boolean hook) {
@@ -573,6 +504,75 @@ public class PageFactory extends PageFactoryImpl {
   @Override
   public Connection createConnection() {
     return this.createConnection(EcoreUtil.generateUUID());
+  }
+  
+  public LabeledConnection createLabeledConnection(final String ID, final InternalModelElement ime, final InternalNode source, final InternalNode target, final boolean hook) {
+    LabeledConnection _createLabeledConnection = super.createLabeledConnection();
+    final Procedure1<LabeledConnection> _function = (LabeledConnection it) -> {
+      EcoreUtil.setID(it, ID);
+      InternalModelElement _elvis = null;
+      if (ime != null) {
+        _elvis = ime;
+      } else {
+        InternalLabeledConnection _createInternalLabeledConnection = this._internalFactory.createInternalLabeledConnection();
+        _elvis = _createInternalLabeledConnection;
+      }
+      final Procedure1<InternalModelElement> _function_1 = (InternalModelElement it_1) -> {
+        ((InternalEdge) it_1).set_sourceElement(source);
+        ((InternalEdge) it_1).set_targetElement(target);
+        InternalGraphModel _elvis_1 = null;
+        InternalGraphModel _rootElement = null;
+        if (source!=null) {
+          _rootElement=source.getRootElement();
+        }
+        if (_rootElement != null) {
+          _elvis_1 = _rootElement;
+        } else {
+          InternalGraphModel _rootElement_1 = null;
+          if (target!=null) {
+            _rootElement_1=target.getRootElement();
+          }
+          _elvis_1 = _rootElement_1;
+        }
+        it_1.setContainer(_elvis_1);
+        EcoreUtil.setID(it_1, (ID + "_INTERNAL"));
+        EList<Adapter> _eAdapters = it_1.eAdapters();
+        LabeledConnectionEContentAdapter _labeledConnectionEContentAdapter = new LabeledConnectionEContentAdapter();
+        _eAdapters.add(_labeledConnectionEContentAdapter);
+      };
+      InternalModelElement _doubleArrow = ObjectExtensions.<InternalModelElement>operator_doubleArrow(_elvis, _function_1);
+      this.setInternal(it, _doubleArrow);
+    };
+    return ObjectExtensions.<LabeledConnection>operator_doubleArrow(_createLabeledConnection, _function);
+  }
+  
+  /**
+   * This method creates an LabeledConnection with the given id. Post create hook will be triggered.
+   */
+  public LabeledConnection createLabeledConnection(final String ID, final InternalNode source, final InternalNode target) {
+    return this.createLabeledConnection(ID, null, source, target, true);
+  }
+  
+  /**
+   * This method creates an LabeledConnection with generated id. Post create hook will be triggered.
+   */
+  public LabeledConnection createLabeledConnection(final InternalNode source, final InternalNode target) {
+    return this.createLabeledConnection(EcoreUtil.generateUUID(), null, source, target, true);
+  }
+  
+  /**
+   * This method creates an LabeledConnection with the given id. Post create hook won't be triggered.
+   */
+  public LabeledConnection createLabeledConnection(final String ID) {
+    return this.createLabeledConnection(ID, null, null, null, false);
+  }
+  
+  /**
+   * This method creates an LabeledConnection with a generated id. Post create hook won't be triggered.
+   */
+  @Override
+  public LabeledConnection createLabeledConnection() {
+    return this.createLabeledConnection(EcoreUtil.generateUUID());
   }
   
   private <T extends IdentifiableElement> T setInternal(final T elm, final InternalIdentifiableElement internal) {
