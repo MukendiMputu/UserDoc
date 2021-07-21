@@ -437,75 +437,6 @@ public class PageFactory extends PageFactoryImpl {
     return this.createBegin(EcoreUtil.generateUUID());
   }
   
-  public Connection createConnection(final String ID, final InternalModelElement ime, final InternalNode source, final InternalNode target, final boolean hook) {
-    Connection _createConnection = super.createConnection();
-    final Procedure1<Connection> _function = (Connection it) -> {
-      EcoreUtil.setID(it, ID);
-      InternalModelElement _elvis = null;
-      if (ime != null) {
-        _elvis = ime;
-      } else {
-        InternalConnection _createInternalConnection = this._internalFactory.createInternalConnection();
-        _elvis = _createInternalConnection;
-      }
-      final Procedure1<InternalModelElement> _function_1 = (InternalModelElement it_1) -> {
-        ((InternalEdge) it_1).set_sourceElement(source);
-        ((InternalEdge) it_1).set_targetElement(target);
-        InternalGraphModel _elvis_1 = null;
-        InternalGraphModel _rootElement = null;
-        if (source!=null) {
-          _rootElement=source.getRootElement();
-        }
-        if (_rootElement != null) {
-          _elvis_1 = _rootElement;
-        } else {
-          InternalGraphModel _rootElement_1 = null;
-          if (target!=null) {
-            _rootElement_1=target.getRootElement();
-          }
-          _elvis_1 = _rootElement_1;
-        }
-        it_1.setContainer(_elvis_1);
-        EcoreUtil.setID(it_1, (ID + "_INTERNAL"));
-        EList<Adapter> _eAdapters = it_1.eAdapters();
-        ConnectionEContentAdapter _connectionEContentAdapter = new ConnectionEContentAdapter();
-        _eAdapters.add(_connectionEContentAdapter);
-      };
-      InternalModelElement _doubleArrow = ObjectExtensions.<InternalModelElement>operator_doubleArrow(_elvis, _function_1);
-      this.setInternal(it, _doubleArrow);
-    };
-    return ObjectExtensions.<Connection>operator_doubleArrow(_createConnection, _function);
-  }
-  
-  /**
-   * This method creates an Connection with the given id. Post create hook will be triggered.
-   */
-  public Connection createConnection(final String ID, final InternalNode source, final InternalNode target) {
-    return this.createConnection(ID, null, source, target, true);
-  }
-  
-  /**
-   * This method creates an Connection with generated id. Post create hook will be triggered.
-   */
-  public Connection createConnection(final InternalNode source, final InternalNode target) {
-    return this.createConnection(EcoreUtil.generateUUID(), null, source, target, true);
-  }
-  
-  /**
-   * This method creates an Connection with the given id. Post create hook won't be triggered.
-   */
-  public Connection createConnection(final String ID) {
-    return this.createConnection(ID, null, null, null, false);
-  }
-  
-  /**
-   * This method creates an Connection with a generated id. Post create hook won't be triggered.
-   */
-  @Override
-  public Connection createConnection() {
-    return this.createConnection(EcoreUtil.generateUUID());
-  }
-  
   public LabeledConnection createLabeledConnection(final String ID, final InternalModelElement ime, final InternalNode source, final InternalNode target, final boolean hook) {
     LabeledConnection _createLabeledConnection = super.createLabeledConnection();
     final Procedure1<LabeledConnection> _function = (LabeledConnection it) -> {
@@ -573,6 +504,75 @@ public class PageFactory extends PageFactoryImpl {
   @Override
   public LabeledConnection createLabeledConnection() {
     return this.createLabeledConnection(EcoreUtil.generateUUID());
+  }
+  
+  public Connection createConnection(final String ID, final InternalModelElement ime, final InternalNode source, final InternalNode target, final boolean hook) {
+    Connection _createConnection = super.createConnection();
+    final Procedure1<Connection> _function = (Connection it) -> {
+      EcoreUtil.setID(it, ID);
+      InternalModelElement _elvis = null;
+      if (ime != null) {
+        _elvis = ime;
+      } else {
+        InternalConnection _createInternalConnection = this._internalFactory.createInternalConnection();
+        _elvis = _createInternalConnection;
+      }
+      final Procedure1<InternalModelElement> _function_1 = (InternalModelElement it_1) -> {
+        ((InternalEdge) it_1).set_sourceElement(source);
+        ((InternalEdge) it_1).set_targetElement(target);
+        InternalGraphModel _elvis_1 = null;
+        InternalGraphModel _rootElement = null;
+        if (source!=null) {
+          _rootElement=source.getRootElement();
+        }
+        if (_rootElement != null) {
+          _elvis_1 = _rootElement;
+        } else {
+          InternalGraphModel _rootElement_1 = null;
+          if (target!=null) {
+            _rootElement_1=target.getRootElement();
+          }
+          _elvis_1 = _rootElement_1;
+        }
+        it_1.setContainer(_elvis_1);
+        EcoreUtil.setID(it_1, (ID + "_INTERNAL"));
+        EList<Adapter> _eAdapters = it_1.eAdapters();
+        ConnectionEContentAdapter _connectionEContentAdapter = new ConnectionEContentAdapter();
+        _eAdapters.add(_connectionEContentAdapter);
+      };
+      InternalModelElement _doubleArrow = ObjectExtensions.<InternalModelElement>operator_doubleArrow(_elvis, _function_1);
+      this.setInternal(it, _doubleArrow);
+    };
+    return ObjectExtensions.<Connection>operator_doubleArrow(_createConnection, _function);
+  }
+  
+  /**
+   * This method creates an Connection with the given id. Post create hook will be triggered.
+   */
+  public Connection createConnection(final String ID, final InternalNode source, final InternalNode target) {
+    return this.createConnection(ID, null, source, target, true);
+  }
+  
+  /**
+   * This method creates an Connection with generated id. Post create hook will be triggered.
+   */
+  public Connection createConnection(final InternalNode source, final InternalNode target) {
+    return this.createConnection(EcoreUtil.generateUUID(), null, source, target, true);
+  }
+  
+  /**
+   * This method creates an Connection with the given id. Post create hook won't be triggered.
+   */
+  public Connection createConnection(final String ID) {
+    return this.createConnection(ID, null, null, null, false);
+  }
+  
+  /**
+   * This method creates an Connection with a generated id. Post create hook won't be triggered.
+   */
+  @Override
+  public Connection createConnection() {
+    return this.createConnection(EcoreUtil.generateUUID());
   }
   
   private <T extends IdentifiableElement> T setInternal(final T elm, final InternalIdentifiableElement internal) {
