@@ -205,9 +205,10 @@ node WebElement {
  */
 @icon("icons/16/object_16.png")
 @palette("Web Elements")
-container Div extends WebElement {
+node Div extends WebElement {
 	style object("<div>")
-	containableElements(WebElement)
+	incomingEdges (*[1,1])
+	outgoingEdges (Transition[1,1])
 }
 
 /*
