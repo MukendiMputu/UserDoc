@@ -8,6 +8,9 @@ import org.eclipse.core.resources.ResourcesPlugin
 import de.jabc.cinco.meta.core.utils.EclipseFileUtils
 import de.jabc.cinco.meta.plugin.generator.runtime.IGenerator
 import info.scce.cinco.product.features.features.FeaturesGraphModel
+import info.scce.cinco.product.userdocumentation.codegen.PomXMLGenerator
+import info.scce.cinco.product.userdocumentation.codegen.PackageGenerator
+import info.scce.cinco.product.userdocumentation.codegen.MavenStructureGenerator
 
 /**
  *  Example class that generates code for a given FlowGraph model. As different
@@ -24,8 +27,6 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 
 		if (model.name.nullOrEmpty)
 			throw new RuntimeException("Model's name cannot be empty!")
-
-		val modelName = model.name
 
 		// get the containing folder of the target directory, which is the project directory
 		project = root.getContainerForLocation(targetDir).getProject()
@@ -68,23 +69,10 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 						</attributes>
 					</classpathentry>
 					
-					<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
-						<attributes>
-							<attribute name="maven.pomderived" value="true"/>
-						</attributes>
-					</classpathentry>
-					
 					<classpathentry kind="src" output="target/test-classes" path="src/test/java">
 						<attributes>
 							<attribute name="test" value="true"/>
 							<attribute name="optional" value="true"/>
-							<attribute name="maven.pomderived" value="true"/>
-						</attributes>
-					</classpathentry>
-					
-					<classpathentry excluding="**" kind="src" output="target/test-classes" path="src/test/resources">
-						<attributes>
-							<attribute name="test" value="true"/>
 							<attribute name="maven.pomderived" value="true"/>
 						</attributes>
 					</classpathentry>
@@ -143,17 +131,47 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 			'''
 				package info.scce.cinco.product.userdocgenerator.main;
 				
-				import info.scce.cinco.product.userdocgenerator.site.Site;
+				import info.scce.cinco.product.userdocgenerator.tool.AutomationClass;
 				
 				public class Main {
-					private static Site site;
-				
-					public Main () {
-						site = new Site();
-					}
+					private static AutomationClass driverTool;
 					
 					public static void main (String[] args){
-						site.getsStartNode();
+						driverTool = new AutomationClass();
+						try {
+							driverTool.openBrowser("firefox");
+							driverTool.goToPage("http://localhost:8080");
+							Login("peter", "pwd");
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					
+					public static Boolean Login(String sUserName, String sPassword) {
+						Boolean bResult = true;
+						String sequenceName = "Login";
+						try {
+				
+							driverTool.goToPage("http://localhost:8080/home");
+							driverTool.takePageScreenshot(sequenceName, "LoginPage");
+							driverTool.typeIn("username", sUserName);
+							driverTool.takePageScreenshot(sequenceName, "userCredentials");
+							driverTool.typeIn("password", sPassword);
+							Thread.sleep(5000);
+							driverTool.pressEnter();
+							driverTool.takePageScreenshot(sequenceName, "UserDashboard");
+				
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						} catch (IOException e) {
+							e.printStackTrace();
+						} finally {
+				
+							driverTool.closeBrowser();
+						}
+				
+						return bResult;
 					}
 				}
 			'''
@@ -391,9 +409,13 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 	}
 
 	private def generateConfigurationFile(FeaturesGraphModel model) '''
-		«FOR node : model.nodes»
-			«node.eClass.name.toLowerCase» = «node.eAllContents.toString»
-		«ENDFOR»
+«««		«FOR node : model.nodes»
+«««			«node.eClass.name.toLowerCase» = «node.eAllContents.toString»
+«««		«ENDFOR»
+		browser = firefox
+		url = http://localhost:8080
+		user = peter
+		password = pwd
 	'''
 
 }

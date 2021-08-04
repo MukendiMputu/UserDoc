@@ -101,6 +101,230 @@ class FeaturesFactory extends FeaturesFactoryImpl {
 		createFeaturesGraphModel(generateUUID)
 	}
 	/**
+	 * This method creates an StartNode with the given id.
+	 *
+	 * @param ID: The id for the new element
+	 * @param ime: The internal model element {@link graphmodel.internal.InternalModelElement}
+	 * @param parent: The parent element of the newly created element. Needed if a post create hook accesses the parent
+	 * element of the created element
+	 * @param hook: Indicates, if the post create hook should be executed
+	 */
+	def createStartNode(String ID, InternalModelElement ime, InternalModelElementContainer parent, boolean hook){
+		super.createStartNode => [
+			setID(ID)
+			internal = ime ?: createInternalStartNode => [
+				setID(ID + "_INTERNAL")
+				container = parent
+				eAdapters.add(new info.scce.cinco.product.features.adapter.StartNodeEContentAdapter)
+			]
+		]
+		
+	}
+	
+	/**
+	 * This method creates an StartNode with the given id. Post create hook won't be triggered.
+	 */
+	def createStartNode(String ID){
+		createStartNode(ID,null,null,false)
+	}
+	
+	/**
+	 * This method creates an StartNode with the given id. Post create hook will be triggered.
+	 */
+	def createStartNode(InternalModelElementContainer parent){
+		createStartNode(generateUUID,null,parent,true)
+	}
+	
+	/**
+	 * This method creates an StartNode with the given id. Post create hook will be triggered.
+	 */
+	def createStartNode(String ID, InternalModelElementContainer parent){
+		createStartNode(ID,null,parent,true)
+	}
+	
+	def createStartNode(String ID, InternalModelElement ime, InternalModelElementContainer parent){
+		createStartNode(ID,ime,parent,true)
+	}
+	
+	/**
+	 * This method creates an StartNode with the given id. Post create hook won't be triggered.
+	 */
+	def createStartNode(InternalModelElement ime) {
+		createStartNode(generateUUID,ime,null,false)
+	}
+	
+	override createStartNode() {
+		createStartNode(generateUUID)
+	}
+	/**
+	 * This method creates an KeyValue with the given id.
+	 *
+	 * @param ID: The id for the new element
+	 * @param ime: The internal model element {@link graphmodel.internal.InternalModelElement}
+	 * @param parent: The parent element of the newly created element. Needed if a post create hook accesses the parent
+	 * element of the created element
+	 * @param hook: Indicates, if the post create hook should be executed
+	 */
+	def createKeyValue(String ID, InternalModelElement ime, InternalModelElementContainer parent, boolean hook){
+		super.createKeyValue => [
+			setID(ID)
+			internal = ime ?: createInternalKeyValue => [
+				setID(ID + "_INTERNAL")
+				container = parent
+				eAdapters.add(new info.scce.cinco.product.features.adapter.KeyValueEContentAdapter)
+			]
+		]
+		
+	}
+	
+	/**
+	 * This method creates an KeyValue with the given id. Post create hook won't be triggered.
+	 */
+	def createKeyValue(String ID){
+		createKeyValue(ID,null,null,false)
+	}
+	
+	/**
+	 * This method creates an KeyValue with the given id. Post create hook will be triggered.
+	 */
+	def createKeyValue(InternalModelElementContainer parent){
+		createKeyValue(generateUUID,null,parent,true)
+	}
+	
+	/**
+	 * This method creates an KeyValue with the given id. Post create hook will be triggered.
+	 */
+	def createKeyValue(String ID, InternalModelElementContainer parent){
+		createKeyValue(ID,null,parent,true)
+	}
+	
+	def createKeyValue(String ID, InternalModelElement ime, InternalModelElementContainer parent){
+		createKeyValue(ID,ime,parent,true)
+	}
+	
+	/**
+	 * This method creates an KeyValue with the given id. Post create hook won't be triggered.
+	 */
+	def createKeyValue(InternalModelElement ime) {
+		createKeyValue(generateUUID,ime,null,false)
+	}
+	
+	override createKeyValue() {
+		createKeyValue(generateUUID)
+	}
+	/**
+	 * This method creates an EndNode with the given id.
+	 *
+	 * @param ID: The id for the new element
+	 * @param ime: The internal model element {@link graphmodel.internal.InternalModelElement}
+	 * @param parent: The parent element of the newly created element. Needed if a post create hook accesses the parent
+	 * element of the created element
+	 * @param hook: Indicates, if the post create hook should be executed
+	 */
+	def createEndNode(String ID, InternalModelElement ime, InternalModelElementContainer parent, boolean hook){
+		super.createEndNode => [
+			setID(ID)
+			internal = ime ?: createInternalEndNode => [
+				setID(ID + "_INTERNAL")
+				container = parent
+				eAdapters.add(new info.scce.cinco.product.features.adapter.EndNodeEContentAdapter)
+			]
+		]
+		
+	}
+	
+	/**
+	 * This method creates an EndNode with the given id. Post create hook won't be triggered.
+	 */
+	def createEndNode(String ID){
+		createEndNode(ID,null,null,false)
+	}
+	
+	/**
+	 * This method creates an EndNode with the given id. Post create hook will be triggered.
+	 */
+	def createEndNode(InternalModelElementContainer parent){
+		createEndNode(generateUUID,null,parent,true)
+	}
+	
+	/**
+	 * This method creates an EndNode with the given id. Post create hook will be triggered.
+	 */
+	def createEndNode(String ID, InternalModelElementContainer parent){
+		createEndNode(ID,null,parent,true)
+	}
+	
+	def createEndNode(String ID, InternalModelElement ime, InternalModelElementContainer parent){
+		createEndNode(ID,ime,parent,true)
+	}
+	
+	/**
+	 * This method creates an EndNode with the given id. Post create hook won't be triggered.
+	 */
+	def createEndNode(InternalModelElement ime) {
+		createEndNode(generateUUID,ime,null,false)
+	}
+	
+	override createEndNode() {
+		createEndNode(generateUUID)
+	}
+	/**
+	 * This method creates an Domain with the given id.
+	 *
+	 * @param ID: The id for the new element
+	 * @param ime: The internal model element {@link graphmodel.internal.InternalModelElement}
+	 * @param parent: The parent element of the newly created element. Needed if a post create hook accesses the parent
+	 * element of the created element
+	 * @param hook: Indicates, if the post create hook should be executed
+	 */
+	def createDomain(String ID, InternalModelElement ime, InternalModelElementContainer parent, boolean hook){
+		super.createDomain => [
+			setID(ID)
+			internal = ime ?: createInternalDomain => [
+				setID(ID + "_INTERNAL")
+				container = parent
+				eAdapters.add(new info.scce.cinco.product.features.adapter.DomainEContentAdapter)
+			]
+		]
+		
+	}
+	
+	/**
+	 * This method creates an Domain with the given id. Post create hook won't be triggered.
+	 */
+	def createDomain(String ID){
+		createDomain(ID,null,null,false)
+	}
+	
+	/**
+	 * This method creates an Domain with the given id. Post create hook will be triggered.
+	 */
+	def createDomain(InternalModelElementContainer parent){
+		createDomain(generateUUID,null,parent,true)
+	}
+	
+	/**
+	 * This method creates an Domain with the given id. Post create hook will be triggered.
+	 */
+	def createDomain(String ID, InternalModelElementContainer parent){
+		createDomain(ID,null,parent,true)
+	}
+	
+	def createDomain(String ID, InternalModelElement ime, InternalModelElementContainer parent){
+		createDomain(ID,ime,parent,true)
+	}
+	
+	/**
+	 * This method creates an Domain with the given id. Post create hook won't be triggered.
+	 */
+	def createDomain(InternalModelElement ime) {
+		createDomain(generateUUID,ime,null,false)
+	}
+	
+	override createDomain() {
+		createDomain(generateUUID)
+	}
+	/**
 	 * This method creates an FeatureContainer with the given id.
 	 *
 	 * @param ID: The id for the new element
@@ -213,7 +437,7 @@ class FeaturesFactory extends FeaturesFactoryImpl {
 		createDocNode(generateUUID)
 	}
 	/**
-	 * This method creates an EndNode with the given id.
+	 * This method creates an BaseURL with the given id.
 	 *
 	 * @param ID: The id for the new element
 	 * @param ime: The internal model element {@link graphmodel.internal.InternalModelElement}
@@ -221,108 +445,52 @@ class FeaturesFactory extends FeaturesFactoryImpl {
 	 * element of the created element
 	 * @param hook: Indicates, if the post create hook should be executed
 	 */
-	def createEndNode(String ID, InternalModelElement ime, InternalModelElementContainer parent, boolean hook){
-		super.createEndNode => [
+	def createBaseURL(String ID, InternalModelElement ime, InternalModelElementContainer parent, boolean hook){
+		super.createBaseURL => [
 			setID(ID)
-			internal = ime ?: createInternalEndNode => [
+			internal = ime ?: createInternalBaseURL => [
 				setID(ID + "_INTERNAL")
 				container = parent
-				eAdapters.add(new info.scce.cinco.product.features.adapter.EndNodeEContentAdapter)
+				eAdapters.add(new info.scce.cinco.product.features.adapter.BaseURLEContentAdapter)
 			]
 		]
 		
 	}
 	
 	/**
-	 * This method creates an EndNode with the given id. Post create hook won't be triggered.
+	 * This method creates an BaseURL with the given id. Post create hook won't be triggered.
 	 */
-	def createEndNode(String ID){
-		createEndNode(ID,null,null,false)
+	def createBaseURL(String ID){
+		createBaseURL(ID,null,null,false)
 	}
 	
 	/**
-	 * This method creates an EndNode with the given id. Post create hook will be triggered.
+	 * This method creates an BaseURL with the given id. Post create hook will be triggered.
 	 */
-	def createEndNode(InternalModelElementContainer parent){
-		createEndNode(generateUUID,null,parent,true)
+	def createBaseURL(InternalModelElementContainer parent){
+		createBaseURL(generateUUID,null,parent,true)
 	}
 	
 	/**
-	 * This method creates an EndNode with the given id. Post create hook will be triggered.
+	 * This method creates an BaseURL with the given id. Post create hook will be triggered.
 	 */
-	def createEndNode(String ID, InternalModelElementContainer parent){
-		createEndNode(ID,null,parent,true)
+	def createBaseURL(String ID, InternalModelElementContainer parent){
+		createBaseURL(ID,null,parent,true)
 	}
 	
-	def createEndNode(String ID, InternalModelElement ime, InternalModelElementContainer parent){
-		createEndNode(ID,ime,parent,true)
+	def createBaseURL(String ID, InternalModelElement ime, InternalModelElementContainer parent){
+		createBaseURL(ID,ime,parent,true)
 	}
 	
 	/**
-	 * This method creates an EndNode with the given id. Post create hook won't be triggered.
+	 * This method creates an BaseURL with the given id. Post create hook won't be triggered.
 	 */
-	def createEndNode(InternalModelElement ime) {
-		createEndNode(generateUUID,ime,null,false)
+	def createBaseURL(InternalModelElement ime) {
+		createBaseURL(generateUUID,ime,null,false)
 	}
 	
-	override createEndNode() {
-		createEndNode(generateUUID)
-	}
-	/**
-	 * This method creates an StartNode with the given id.
-	 *
-	 * @param ID: The id for the new element
-	 * @param ime: The internal model element {@link graphmodel.internal.InternalModelElement}
-	 * @param parent: The parent element of the newly created element. Needed if a post create hook accesses the parent
-	 * element of the created element
-	 * @param hook: Indicates, if the post create hook should be executed
-	 */
-	def createStartNode(String ID, InternalModelElement ime, InternalModelElementContainer parent, boolean hook){
-		super.createStartNode => [
-			setID(ID)
-			internal = ime ?: createInternalStartNode => [
-				setID(ID + "_INTERNAL")
-				container = parent
-				eAdapters.add(new info.scce.cinco.product.features.adapter.StartNodeEContentAdapter)
-			]
-		]
-		
-	}
-	
-	/**
-	 * This method creates an StartNode with the given id. Post create hook won't be triggered.
-	 */
-	def createStartNode(String ID){
-		createStartNode(ID,null,null,false)
-	}
-	
-	/**
-	 * This method creates an StartNode with the given id. Post create hook will be triggered.
-	 */
-	def createStartNode(InternalModelElementContainer parent){
-		createStartNode(generateUUID,null,parent,true)
-	}
-	
-	/**
-	 * This method creates an StartNode with the given id. Post create hook will be triggered.
-	 */
-	def createStartNode(String ID, InternalModelElementContainer parent){
-		createStartNode(ID,null,parent,true)
-	}
-	
-	def createStartNode(String ID, InternalModelElement ime, InternalModelElementContainer parent){
-		createStartNode(ID,ime,parent,true)
-	}
-	
-	/**
-	 * This method creates an StartNode with the given id. Post create hook won't be triggered.
-	 */
-	def createStartNode(InternalModelElement ime) {
-		createStartNode(generateUUID,ime,null,false)
-	}
-	
-	override createStartNode() {
-		createStartNode(generateUUID)
+	override createBaseURL() {
+		createBaseURL(generateUUID)
 	}
 	def createLabeledEdge(String ID, InternalModelElement ime, InternalNode source, InternalNode target, boolean hook) {
 		super.createLabeledEdge => [
