@@ -17,74 +17,35 @@ Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,org.eclipse.e
  referenceregistry,org.eclipse.ui,org.eclipse.core.runtime,de.jabc.cinco
  .meta.core.ge.style,de.jabc.cinco.meta.core.event,org.eclipse.jface,org
  .eclipse.core.resources,de.jabc.cinco.meta.plugin.generator.runtime,org
- .eclipse.emf.transaction,de.jabc.cinco.meta.libraries,org.eclipse.xtend
- .typesystem.emf,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cin
- co.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.generator.ru
+ .eclipse.emf.transaction,de.jabc.cinco.meta.plugin.generator.runtime,de
+ .jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.libraries,
+ org.eclipse.xtend.typesystem.emf,de.jabc.cinco.meta.plugin.generator.ru
  ntime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.pl
  ugin.generator.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.j
  abc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.gener
  ator.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.
  meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.generator.runti
- me,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugi
- n.generator.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc
- .cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.generato
- r.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.met
- a.plugin.generator.runtime,de.jabc.cinco.meta.plugin.generator.runtime,
- de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.g
- enerator.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.ci
- nco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.generator.r
- untime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.p
- lugin.generator.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.
- jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.gene
- rator.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco
- .meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.generator.runt
- ime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plug
- in.generator.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.jab
- c.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.generat
- or.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.me
- ta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.generator.runtime
- ,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.
- generator.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.c
- inco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.generator.
- runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.
- plugin.generator.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de
- .jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.gen
- erator.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinc
- o.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.generator.run
- time,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plu
- gin.generator.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.ja
- bc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.genera
- tor.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.m
- eta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.generator.runtim
- e,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin
- .generator.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.
- cinco.meta.plugin.generator.runtime
+ me,de.jabc.cinco.meta.plugin.generator.runtime
 Bundle-ActivationPolicy: lazy
-Export-Package: info.scce.cinco.product.userdocumentation.appearance,inf
- o.scce.cinco.product.userdocumentation.action,info.scce.cinco.product.u
- serdocumentation.hooks,info.scce.cinco.product.userdocumentation.codege
- n,info.scce.cinco.product.pages.factory,info.scce.cinco.product.pages.a
- dapter,info.scce.cinco.product.usersequence.factory,info.scce.cinco.pro
- duct.usersequence.adapter,info.scce.cinco.product.site.factory,info.scc
- e.cinco.product.site.adapter,info.scce.cinco.product.pages.page,info.sc
- ce.cinco.product.pages.page.impl,info.scce.cinco.product.pages.page.int
- ernal,info.scce.cinco.product.pages.page.internal.impl,info.scce.cinco.
- product.pages.page.internal.util,info.scce.cinco.product.pages.page.uti
- l,info.scce.cinco.product.pages.page.views,info.scce.cinco.product.page
- s.page.views.impl,info.scce.cinco.product.pages.page.views.util,info.sc
- ce.cinco.product.site.site,info.scce.cinco.product.site.site.impl,info.
- scce.cinco.product.site.site.internal,info.scce.cinco.product.site.site
- .internal.impl,info.scce.cinco.product.site.site.internal.util,info.scc
- e.cinco.product.site.site.util,info.scce.cinco.product.site.site.views,
- info.scce.cinco.product.site.site.views.impl,info.scce.cinco.product.si
- te.site.views.util,info.scce.cinco.product.usersequence.usersequence,in
- fo.scce.cinco.product.usersequence.usersequence.impl,info.scce.cinco.pr
- oduct.usersequence.usersequence.internal,info.scce.cinco.product.userse
- quence.usersequence.internal.impl,info.scce.cinco.product.usersequence.
- usersequence.internal.util,info.scce.cinco.product.usersequence.userseq
- uence.util,info.scce.cinco.product.usersequence.usersequence.views,info
- .scce.cinco.product.usersequence.usersequence.views.impl,info.scce.cinc
- o.product.usersequence.usersequence.views.util,info.scce.cinco.product.
- userdocumentation.perspective
+Export-Package: info.scce.cinco.product.userdocumentation.action,info.sc
+ ce.cinco.product.userdocumentation.appearance,info.scce.cinco.product.u
+ serdocumentation.codegen,info.scce.cinco.product.userdocumentation.hook
+ s,info.scce.cinco.product.features.factory,info.scce.cinco.product.feat
+ ures.adapter,info.scce.cinco.product.usersequence.factory,info.scce.cin
+ co.product.usersequence.adapter,info.scce.cinco.product.features.featur
+ es,info.scce.cinco.product.features.features.impl,info.scce.cinco.produ
+ ct.features.features.internal,info.scce.cinco.product.features.features
+ .internal.impl,info.scce.cinco.product.features.features.internal.util,
+ info.scce.cinco.product.features.features.util,info.scce.cinco.product.
+ features.features.views,info.scce.cinco.product.features.features.views
+ .impl,info.scce.cinco.product.features.features.views.util,info.scce.ci
+ nco.product.usersequence.usersequence,info.scce.cinco.product.userseque
+ nce.usersequence.impl,info.scce.cinco.product.usersequence.usersequence
+ .internal,info.scce.cinco.product.usersequence.usersequence.internal.im
+ pl,info.scce.cinco.product.usersequence.usersequence.internal.util,info
+ .scce.cinco.product.usersequence.usersequence.util,info.scce.cinco.prod
+ uct.usersequence.usersequence.views,info.scce.cinco.product.usersequenc
+ e.usersequence.views.impl,info.scce.cinco.product.usersequence.usersequ
+ ence.views.util,info.scce.cinco.product.userdocumentation.perspective
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 

@@ -1,13 +1,13 @@
 #Saving jABC Project
-#Wed Jul 14 01:01:08 CST 2021
+#Mon Aug 02 18:00:22 CST 2021
 transem.SIBDir=slg-gen/
 transem.other.ePackage.0=org.eclipse.graphiti.mm.algorithms.impl.AlgorithmsPackageImpl
 jabc.project.classpath.0=/bin/
-transem.qualified.package=info.scce.cinco.product.siteconfiguration.siteconfiguration.SiteconfigurationPackage
-jabc.project.name=SiteConfiguration
+transem.qualified.package=info.scce.cinco.product.usersequence.usersequence.UsersequencePackage
+jabc.project.name=UserSequence
 transem.codegenerator.targetDir=src-gen/
 jabc.project.sibpath.0=<classpath>
-ID=08377754-56cf-4995-9093-37dc29c9d3ec
+ID=526972b3-2207-4fda-b5cb-df323aa80154
 jabc.project.definition=1.0
 transem.codegenerator.sourceDir=slg/
 transem.other.ePackage.1=org.eclipse.graphiti.mm.pictograms.impl.PictogramsPackageImpl
