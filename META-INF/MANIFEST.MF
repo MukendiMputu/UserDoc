@@ -38,25 +38,9 @@ Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,org.eclipse.e
  jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.gene
  rator.runtime,de.jabc.cinco.meta.plugin.generator.runtime
 Bundle-ActivationPolicy: lazy
-Export-Package: info.scce.cinco.product.features.adapter,info.scce.cinco
- .product.features.factory,info.scce.cinco.product.features.features,inf
- o.scce.cinco.product.features.features.impl,info.scce.cinco.product.fea
- tures.features.internal,info.scce.cinco.product.features.features.inter
- nal.impl,info.scce.cinco.product.features.features.internal.util,info.s
- cce.cinco.product.features.features.util,info.scce.cinco.product.featur
- es.features.views,info.scce.cinco.product.features.features.views.impl,
- info.scce.cinco.product.features.features.views.util,info.scce.cinco.pr
- oduct.userdocumentation.action,info.scce.cinco.product.userdocumentatio
- n.appearance,info.scce.cinco.product.userdocumentation.codegen,info.scc
- e.cinco.product.userdocumentation.hooks,info.scce.cinco.product.userdoc
- umentation.perspective,info.scce.cinco.product.usersequence.adapter,inf
- o.scce.cinco.product.usersequence.factory,info.scce.cinco.product.users
- equence.usersequence,info.scce.cinco.product.usersequence.usersequence.
- impl,info.scce.cinco.product.usersequence.usersequence.internal,info.sc
- ce.cinco.product.usersequence.usersequence.internal.impl,info.scce.cinc
- o.product.usersequence.usersequence.internal.util,info.scce.cinco.produ
- ct.usersequence.usersequence.util,info.scce.cinco.product.usersequence.
- usersequence.views,info.scce.cinco.product.usersequence.usersequence.vi
- ews.impl,info.scce.cinco.product.usersequence.usersequence.views.util
+Export-Package: info.scce.cinco.product.userdocumentation.action,
+ info.scce.cinco.product.userdocumentation.appearance,
+ info.scce.cinco.product.userdocumentation.codegen,
+ info.scce.cinco.product.userdocumentation.hooks
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 

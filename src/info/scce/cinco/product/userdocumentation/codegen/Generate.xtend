@@ -2,15 +2,15 @@ package info.scce.cinco.product.userdocumentation.codegen
 
 import org.eclipse.core.runtime.IPath
 import org.eclipse.core.resources.IProject
+import org.eclipse.core.runtime.CoreException
 import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.core.resources.IWorkspaceRoot
 import org.eclipse.core.resources.ResourcesPlugin
 import de.jabc.cinco.meta.core.utils.EclipseFileUtils
 import de.jabc.cinco.meta.plugin.generator.runtime.IGenerator
+
 import info.scce.cinco.product.features.features.FeaturesGraphModel
-import info.scce.cinco.product.userdocumentation.codegen.PomXMLGenerator
 import info.scce.cinco.product.userdocumentation.codegen.PackageGenerator
-import info.scce.cinco.product.userdocumentation.codegen.MavenStructureGenerator
 
 /**
  *  Example class that generates code for a given FlowGraph model. As different
@@ -31,11 +31,33 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 		// get the containing folder of the target directory, which is the project directory
 		project = root.getContainerForLocation(targetDir).getProject()
 
-		/* generate pom.xml file */
-		PomXMLGenerator.generateCode(project)
 
 		/* generate maven project structure */
-		MavenStructureGenerator.generateMavenStructure(project, monitor)
+		var mainFolder = '/src/main'
+		var testFolder = '/src/test'
+		var targetFolder = '/target'
+		try {
+			// first generate main folders
+			project.getFolder(targetFolder).create(true, true, monitor)
+			project.getFolder(mainFolder).create(true, true, monitor)
+			project.getFolder(testFolder).create(true, true, monitor)
+	
+			// then the subfolders
+			project.getFolder(mainFolder + "/java").create(true, true, monitor)
+			project.getFolder(testFolder + "/java").create(true, true, monitor)
+			
+			project.getFolder(mainFolder + '/resources').create(true, true, monitor)
+			project.getFolder(testFolder + '/resources').create(true, true, monitor)
+
+		} catch (CoreException exception) {
+			
+			exception.printStackTrace()
+			
+		} catch (Exception exception) {
+			
+			exception.printStackTrace()
+			
+		}
 
 		/*
 		 * First, define the packages for the Selenium project
@@ -52,10 +74,54 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 		PackageGenerator.generatePkg(testPackagePrefix + "test", project, monitor)
 
 		// Generate configuration file
-		val config = generateConfigurationFile(model)
 		val configFile = project.getFile(mainPackagePrefix + "config/config.properties")
-		EclipseFileUtils.writeToFile(configFile, config)
+		EclipseFileUtils.writeToFile(configFile,
+			'''
+				# Here come all the configuration necessary to run the sequences in the browser
+				«FOR node : model.keyValues»
+				«node.key» = «node.value»
+				«ENDFOR»
+			'''
+		)
 		
+		// Generate pom.xml file
+		EclipseFileUtils.writeToFile(
+			project.getFile("pom.xml"),
+			'''
+				<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+				  <modelVersion>4.0.0</modelVersion>
+				  <groupId>info.scce.cinco.product</groupId>
+				  <artifactId>userdocumentation</artifactId>
+				  <version>0.0.1-SNAPSHOT</version>
+				  <name>User Documentation Generator</name>
+				  
+				  <properties>
+					  <maven.compiler.source>1.8</maven.compiler.source>
+					  <maven.compiler.target>1.8</maven.compiler.target>
+				  </properties>
+				  
+				  <dependencies>
+				  <dependency>
+				    <groupId>commons-io</groupId>
+				    <artifactId>commons-io</artifactId>
+				    <version>2.4</version>
+				</dependency>
+				  <dependency>
+				  	<groupId>org.seleniumhq.selenium</groupId>
+				  	<artifactId>selenium-java</artifactId>
+				  	<version>3.141.59</version>
+				  </dependency>
+				  <dependency>
+				    <groupId>org.testng</groupId>
+				    <artifactId>testng</artifactId>
+				    <version>6.14.3</version>
+				    <scope>compile</scope>
+				</dependency>
+				  </dependencies>
+				</project>
+			'''
+		)
+
 		// Generate .classpath file
 		EclipseFileUtils.writeToFile(
 			project.getFile(".classpath"),
@@ -179,7 +245,7 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 		)
 
 		
-		// generate AutomationClass()
+		// generate AutomationClass.java
 		EclipseFileUtils.writeToFile(
 			project.getFile(mainPackagePrefix + "tool/AutomationClass.java"),
 			'''
@@ -289,7 +355,7 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 			'''
 		)
 		
-		// Generate SmokeTest()
+		// Generate SmokeTest.java
 		EclipseFileUtils.writeToFile(
 			project.getFile(testPackagePrefix + "test/SmokeTest.java"),
 			'''
@@ -327,12 +393,5 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 			'''
 		)
 	}
-
-	private def generateConfigurationFile(FeaturesGraphModel model) '''
-		# Here come all the configuration necessary to run the sequences in the browser
-		«FOR node : model.keyValues»
-		«node.key» = «node.value»
-		«ENDFOR»
-	'''
 
 }
