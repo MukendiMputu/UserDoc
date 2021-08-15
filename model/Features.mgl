@@ -32,6 +32,32 @@ container FeatureContainer {
 	outgoingEdges ({Edge,LabeledEdge}[1,*])
 }
 
+/* Basic URL node, which will be called in the Selenium script*/
+@icon("icons/16/url_16.png")
+node BaseURL {
+	style url("URL: ", "${content}")
+	attr EString as content := "http://localhost"
+}
+
+/* The Domain node is suppose to contain
+ * the site's reverse domain for defining packages;
+ * this node might be reference in other MGLs.
+ */
+@icon("icons/16/domain_16.png")
+node Domain{
+	style url("Reverse domain: ", "${content}")
+	attr EString as content := "com.example"
+}
+
+/* Input node*/
+@icon("icons/16/gear_16.png")
+node KeyValue {
+	style keyValue("${key}: ", "${value}")
+	attr EString as value := "value"
+	attr EString as key := "key"
+}
+
+
 node DocNode{
 	style docNode("${mgl.modelName}")
 	prime docMgl::UserSequenceGraphModel as mgl

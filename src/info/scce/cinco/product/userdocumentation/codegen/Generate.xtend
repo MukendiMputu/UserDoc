@@ -8,6 +8,9 @@ import org.eclipse.core.resources.ResourcesPlugin
 import de.jabc.cinco.meta.core.utils.EclipseFileUtils
 import de.jabc.cinco.meta.plugin.generator.runtime.IGenerator
 import info.scce.cinco.product.features.features.FeaturesGraphModel
+import info.scce.cinco.product.userdocumentation.codegen.PomXMLGenerator
+import info.scce.cinco.product.userdocumentation.codegen.PackageGenerator
+import info.scce.cinco.product.userdocumentation.codegen.MavenStructureGenerator
 
 /**
  *  Example class that generates code for a given FlowGraph model. As different
@@ -25,8 +28,6 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 		if (model.name.nullOrEmpty)
 			throw new RuntimeException("Model's name cannot be empty!")
 
-		val modelName = model.name
-
 		// get the containing folder of the target directory, which is the project directory
 		project = root.getContainerForLocation(targetDir).getProject()
 
@@ -40,7 +41,7 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 		 * First, define the packages for the Selenium project
 		 * then create them within the source folders.
 		 */
-		val String[] pkgs = #["config", "main", "site", "tool"]
+		val String[] pkgs = #["config", "main", "tool"]
 		val mainPackagePrefix = "/src/main/java/info/scce/cinco/product/userdocgenerator/"
 		// All main packages
 		for (pkg : pkgs) {
@@ -50,7 +51,7 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 		val testPackagePrefix = "/src/test/java/info/scce/cinco/product/userdocgenerator/"
 		PackageGenerator.generatePkg(testPackagePrefix + "test", project, monitor)
 
-		// generateConfig()
+		// Generate configuration file
 		val config = generateConfigurationFile(model)
 		val configFile = project.getFile(mainPackagePrefix + "config/config.properties")
 		EclipseFileUtils.writeToFile(configFile, config)
@@ -68,23 +69,10 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 						</attributes>
 					</classpathentry>
 					
-					<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
-						<attributes>
-							<attribute name="maven.pomderived" value="true"/>
-						</attributes>
-					</classpathentry>
-					
 					<classpathentry kind="src" output="target/test-classes" path="src/test/java">
 						<attributes>
 							<attribute name="test" value="true"/>
 							<attribute name="optional" value="true"/>
-							<attribute name="maven.pomderived" value="true"/>
-						</attributes>
-					</classpathentry>
-					
-					<classpathentry excluding="**" kind="src" output="target/test-classes" path="src/test/resources">
-						<attributes>
-							<attribute name="test" value="true"/>
 							<attribute name="maven.pomderived" value="true"/>
 						</attributes>
 					</classpathentry>
@@ -137,108 +125,59 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 			'''
 		)
 		
-		// Generate Site()
+		// Generate Main.java
 		EclipseFileUtils.writeToFile(
 			project.getFile(mainPackagePrefix + "main/Main.java"),
 			'''
 				package info.scce.cinco.product.userdocgenerator.main;
 				
-				import info.scce.cinco.product.userdocgenerator.site.Site;
+				import java.io.IOException; 
+				import info.scce.cinco.product.userdocgenerator.tool.AutomationClass;
 				
 				public class Main {
-					private static Site site;
-				
-					public Main () {
-						site = new Site();
-					}
+					private static AutomationClass driverTool;
 					
 					public static void main (String[] args){
-						site.getsStartNode();
-					}
-				}
-			'''
-		)
-		
-		// Generate Site()
-		EclipseFileUtils.writeToFile(
-			project.getFile(mainPackagePrefix + "site/Site.java"),
-			'''
-				package info.scce.cinco.product.userdocgenerator.site;
-				
-				import java.io.FileInputStream;
-				import java.io.FileNotFoundException;
-				import java.util.Properties;
-				
-				public class Site {
-					
-					«FOR node : model.nodes»
-					public String s«node.eClass.name.toFirstUpper»;
-					«ENDFOR»
-					public Properties props;
-					
-					public Site() {
+						driverTool = new AutomationClass();
 						try {
-							// Try loading the properties from config.properties file
-							props = new Properties();
-							FileInputStream fis = new FileInputStream("«configFile.rawLocation»");
-							props.load(fis);
-												
-							«FOR node : model.nodes»
-							s«node.eClass.name.toFirstUpper» = props.getProperty("«node.eClass.name.toLowerCase»");
-							«ENDFOR»
-							
-						} catch (FileNotFoundException e) {
-							e.printStackTrace();
+							driverTool.openBrowser("firefox");
+							driverTool.goToPage("http://localhost:8080");
+							Login("peter", "pwd");
 						} catch (Exception e) {
+							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					}
 					
-					«FOR node : model.nodes»
-					public String gets«node.eClass.name.toFirstUpper»() {
-						return s«node.eClass.name.toFirstUpper»;
+					public static Boolean Login(String sUserName, String sPassword) {
+						Boolean bResult = true;
+						String sequenceName = "Login";
+						try {
+				
+							driverTool.goToPage("http://localhost:8080/home");
+							driverTool.takePageScreenshot(sequenceName, "LoginPage");
+							driverTool.typeIn("username", sUserName);
+							driverTool.takePageScreenshot(sequenceName, "userCredentials");
+							driverTool.typeIn("password", sPassword);
+							Thread.sleep(5000);
+							driverTool.pressEnter();
+							driverTool.takePageScreenshot(sequenceName, "UserDashboard");
+				
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						} catch (IOException e) {
+							e.printStackTrace();
+						} finally {
+				
+							driverTool.closeBrowser();
+						}
+				
+						return bResult;
 					}
-					
-					«ENDFOR»
 				}
 			'''
 		)
-		
-		// Generate CustomUserSite()
-		/*EclipseFileUtils.writeToFile(
-			project.getFile(mainPackagePrefix + "site/" +modelName+ ".java"),
-			'''
-			package info.scce.cinco.product.userdocgenerator.site;
-			
-			import java.io.FileInputStream;
-			import java.io.FileNotFoundException;
-			import java.util.Properties;
-			
-			public class «modelName» extends Site {
-			
-				// The pages of our website
-				«FOR page : model.»
-				public «page.eClass.name» «page.eClass.name.toFirstLower»;
-				«ENDFOR»
-			
-				public «modelName»() {
-					«FOR page : model.docNodes»
-					«page.eClass.name.toFirstUpper» = new «page.eClass.name»(sBrowserName, sSiteURL);
-					«ENDFOR»
-				}
-			
-				public Boolean Login() {
-					return loginPage.login(this.getsUserName(), this.getsPassword());
-				}
-			
-				public void closeSite() {
-					«FOR page : model.docNodes»
-					«page.eClass.name.toFirstLower».closePage();
-					«ENDFOR»
-				}
-			}
-		'''
-		)*/
+
 		
 		// generate AutomationClass()
 		EclipseFileUtils.writeToFile(
@@ -361,24 +300,23 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 				import org.testng.annotations.BeforeMethod;
 				import org.testng.annotations.Test;
 				
-				import info.scce.cinco.product.userdocgenerator.site.Site;
+				import info.scce.cinco.product.userdocgenerator.main.Main;
 				
 				public class SmokeTest {
 					
-					Boolean bResult = false;
-					Site site; 
+					Boolean loggedIn = false;
+					Main site; 
 					
 					@BeforeMethod
 					public void beforeMethod() {
-						site = new Site();
 					}
 					
 					@Test
 					public void testCallFunction() throws InterruptedException {
-						bResult = site.getsStartNode().isEmpty();
+						loggedIn = Main.Login("peter", "pwd");
 						Thread.sleep(3000);
 						
-						Assert.assertTrue(bResult, "Login failed");
+						Assert.assertTrue(loggedIn, "Login failed");
 					}
 					
 					@AfterMethod
@@ -391,8 +329,9 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 	}
 
 	private def generateConfigurationFile(FeaturesGraphModel model) '''
-		«FOR node : model.nodes»
-			«node.eClass.name.toLowerCase» = «node.eAllContents.toString»
+		# Here come all the configuration necessary to run the sequences in the browser
+		«FOR node : model.keyValues»
+		«node.key» = «node.value»
 		«ENDFOR»
 	'''
 
