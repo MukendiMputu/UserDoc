@@ -39,7 +39,7 @@ node SubSequence {
 
 /*
  * 
- */
+*/
 @disable(resize)
 @icon("icons/16/screenshot_16.png")
 node Screenshot {
@@ -60,8 +60,8 @@ node SectionNode {
 }
 
 /*
- * 
- */
+* 
+*/
 @disable(resize)
 @icon("icons/16/screenshot_16.png")
 node Navigation {

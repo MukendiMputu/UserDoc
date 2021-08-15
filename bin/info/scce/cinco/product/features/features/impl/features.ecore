@@ -56,51 +56,11 @@
       <eParameters name="oldY" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
       <eParameters name="direction" lowerBound="1" eType="ecore:EEnum http://www.jabc.de/cinco/gdl/graphmodel#//Direction"/>
     </eOperations>
-    <eOperations name="getOutgoingLabeledEdges" upperBound="-1" eType="#//LabeledEdge"/>
     <eOperations name="getOutgoingEdges" upperBound="-1" eType="#//Edge"/>
+    <eOperations name="getOutgoingLabeledEdges" upperBound="-1" eType="#//LabeledEdge"/>
     <eOperations name="getEndNodeSuccessors" upperBound="-1" eType="#//EndNode"/>
     <eOperations name="getFeatureContainerSuccessors" upperBound="-1" eType="#//FeatureContainer"/>
     <eOperations name="getDocNodeSuccessors" upperBound="-1" eType="#//DocNode"/>
-    <eOperations name="canNewLabeledEdge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
-      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
-    </eOperations>
-    <eOperations name="newLabeledEdge" eType="#//LabeledEdge">
-      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
-    </eOperations>
-    <eOperations name="newLabeledEdge" eType="#//LabeledEdge">
-      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
-      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eOperations>
-    <eOperations name="canNewLabeledEdge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
-      <eParameters name="target" lowerBound="1" eType="#//EndNode"/>
-    </eOperations>
-    <eOperations name="newLabeledEdge" eType="#//LabeledEdge">
-      <eParameters name="target" lowerBound="1" eType="#//EndNode"/>
-    </eOperations>
-    <eOperations name="newLabeledEdge" eType="#//LabeledEdge">
-      <eParameters name="target" lowerBound="1" eType="#//EndNode"/>
-      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eOperations>
-    <eOperations name="canNewLabeledEdge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
-      <eParameters name="target" lowerBound="1" eType="#//FeatureContainer"/>
-    </eOperations>
-    <eOperations name="newLabeledEdge" eType="#//LabeledEdge">
-      <eParameters name="target" lowerBound="1" eType="#//FeatureContainer"/>
-    </eOperations>
-    <eOperations name="newLabeledEdge" eType="#//LabeledEdge">
-      <eParameters name="target" lowerBound="1" eType="#//FeatureContainer"/>
-      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eOperations>
-    <eOperations name="canNewEdge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
-      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
-    </eOperations>
-    <eOperations name="newEdge" eType="#//Edge">
-      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
-    </eOperations>
-    <eOperations name="newEdge" eType="#//Edge">
-      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
-      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eOperations>
     <eOperations name="canNewEdge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eParameters name="target" lowerBound="1" eType="#//EndNode"/>
     </eOperations>
@@ -119,6 +79,46 @@
     </eOperations>
     <eOperations name="newEdge" eType="#//Edge">
       <eParameters name="target" lowerBound="1" eType="#//FeatureContainer"/>
+      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="canNewEdge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
+    </eOperations>
+    <eOperations name="newEdge" eType="#//Edge">
+      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
+    </eOperations>
+    <eOperations name="newEdge" eType="#//Edge">
+      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
+      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="canNewLabeledEdge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="target" lowerBound="1" eType="#//EndNode"/>
+    </eOperations>
+    <eOperations name="newLabeledEdge" eType="#//LabeledEdge">
+      <eParameters name="target" lowerBound="1" eType="#//EndNode"/>
+    </eOperations>
+    <eOperations name="newLabeledEdge" eType="#//LabeledEdge">
+      <eParameters name="target" lowerBound="1" eType="#//EndNode"/>
+      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="canNewLabeledEdge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="target" lowerBound="1" eType="#//FeatureContainer"/>
+    </eOperations>
+    <eOperations name="newLabeledEdge" eType="#//LabeledEdge">
+      <eParameters name="target" lowerBound="1" eType="#//FeatureContainer"/>
+    </eOperations>
+    <eOperations name="newLabeledEdge" eType="#//LabeledEdge">
+      <eParameters name="target" lowerBound="1" eType="#//FeatureContainer"/>
+      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="canNewLabeledEdge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
+    </eOperations>
+    <eOperations name="newLabeledEdge" eType="#//LabeledEdge">
+      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
+    </eOperations>
+    <eOperations name="newLabeledEdge" eType="#//LabeledEdge">
+      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
       <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
     <eOperations name="canMoveTo" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
@@ -208,8 +208,8 @@
       <eParameters name="oldY" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
       <eParameters name="direction" lowerBound="1" eType="ecore:EEnum http://www.jabc.de/cinco/gdl/graphmodel#//Direction"/>
     </eOperations>
-    <eOperations name="getIncomingLabeledEdges" upperBound="-1" eType="#//LabeledEdge"/>
     <eOperations name="getIncomingEdges" upperBound="-1" eType="#//Edge"/>
+    <eOperations name="getIncomingLabeledEdges" upperBound="-1" eType="#//LabeledEdge"/>
     <eOperations name="getStartNodePredecessors" upperBound="-1" eType="#//StartNode"/>
     <eOperations name="getFeatureContainerPredecessors" upperBound="-1" eType="#//FeatureContainer"/>
     <eOperations name="getDocNodePredecessors" upperBound="-1" eType="#//DocNode"/>
@@ -289,58 +289,6 @@
       <eParameters name="width" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
       <eParameters name="height" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     </eOperations>
-    <eOperations name="getDomains" upperBound="-1" eType="#//Domain"/>
-    <eOperations name="canNewDomain" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eOperations name="newDomain" lowerBound="1" eType="#//Domain">
-      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    </eOperations>
-    <eOperations name="newDomain" lowerBound="1" eType="#//Domain">
-      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    </eOperations>
-    <eOperations name="newDomain" lowerBound="1" eType="#//Domain">
-      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="width" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="height" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    </eOperations>
-    <eOperations name="newDomain" lowerBound="1" eType="#//Domain">
-      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="width" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="height" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    </eOperations>
-    <eOperations name="getDocNodes" upperBound="-1" eType="#//DocNode"/>
-    <eOperations name="canNewDocNode" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eOperations name="newDocNode" lowerBound="1" eType="#//DocNode">
-      <eParameters name="mgl" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
-      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    </eOperations>
-    <eOperations name="newDocNode" lowerBound="1" eType="#//DocNode">
-      <eParameters name="mgl" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
-      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    </eOperations>
-    <eOperations name="newDocNode" lowerBound="1" eType="#//DocNode">
-      <eParameters name="mgl" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
-      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="width" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="height" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    </eOperations>
-    <eOperations name="newDocNode" lowerBound="1" eType="#//DocNode">
-      <eParameters name="mgl" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
-      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="width" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="height" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    </eOperations>
     <eOperations name="getEndNodes" upperBound="-1" eType="#//EndNode"/>
     <eOperations name="canNewEndNode" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eOperations name="newEndNode" lowerBound="1" eType="#//EndNode">
@@ -359,30 +307,6 @@
       <eParameters name="height" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     </eOperations>
     <eOperations name="newEndNode" lowerBound="1" eType="#//EndNode">
-      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="width" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="height" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    </eOperations>
-    <eOperations name="getKeyValues" upperBound="-1" eType="#//KeyValue"/>
-    <eOperations name="canNewKeyValue" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eOperations name="newKeyValue" lowerBound="1" eType="#//KeyValue">
-      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    </eOperations>
-    <eOperations name="newKeyValue" lowerBound="1" eType="#//KeyValue">
-      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    </eOperations>
-    <eOperations name="newKeyValue" lowerBound="1" eType="#//KeyValue">
-      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="width" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="height" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    </eOperations>
-    <eOperations name="newKeyValue" lowerBound="1" eType="#//KeyValue">
       <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
       <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
@@ -431,6 +355,82 @@
       <eParameters name="height" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     </eOperations>
     <eOperations name="newFeatureContainer" lowerBound="1" eType="#//FeatureContainer">
+      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="width" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="height" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="getDocNodes" upperBound="-1" eType="#//DocNode"/>
+    <eOperations name="canNewDocNode" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="newDocNode" lowerBound="1" eType="#//DocNode">
+      <eParameters name="mgl" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="newDocNode" lowerBound="1" eType="#//DocNode">
+      <eParameters name="mgl" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="newDocNode" lowerBound="1" eType="#//DocNode">
+      <eParameters name="mgl" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="width" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="height" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="newDocNode" lowerBound="1" eType="#//DocNode">
+      <eParameters name="mgl" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="width" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="height" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="getDomains" upperBound="-1" eType="#//Domain"/>
+    <eOperations name="canNewDomain" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="newDomain" lowerBound="1" eType="#//Domain">
+      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="newDomain" lowerBound="1" eType="#//Domain">
+      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="newDomain" lowerBound="1" eType="#//Domain">
+      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="width" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="height" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="newDomain" lowerBound="1" eType="#//Domain">
+      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="width" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="height" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="getKeyValues" upperBound="-1" eType="#//KeyValue"/>
+    <eOperations name="canNewKeyValue" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="newKeyValue" lowerBound="1" eType="#//KeyValue">
+      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="newKeyValue" lowerBound="1" eType="#//KeyValue">
+      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="newKeyValue" lowerBound="1" eType="#//KeyValue">
+      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="width" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="height" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="newKeyValue" lowerBound="1" eType="#//KeyValue">
       <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
       <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
@@ -497,56 +497,16 @@
       <eParameters name="oldY" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
       <eParameters name="direction" lowerBound="1" eType="ecore:EEnum http://www.jabc.de/cinco/gdl/graphmodel#//Direction"/>
     </eOperations>
-    <eOperations name="getOutgoingLabeledEdges" upperBound="-1" eType="#//LabeledEdge"/>
     <eOperations name="getOutgoingEdges" upperBound="-1" eType="#//Edge"/>
-    <eOperations name="getIncomingLabeledEdges" upperBound="-1" eType="#//LabeledEdge"/>
+    <eOperations name="getOutgoingLabeledEdges" upperBound="-1" eType="#//LabeledEdge"/>
     <eOperations name="getIncomingEdges" upperBound="-1" eType="#//Edge"/>
+    <eOperations name="getIncomingLabeledEdges" upperBound="-1" eType="#//LabeledEdge"/>
     <eOperations name="getStartNodePredecessors" upperBound="-1" eType="#//StartNode"/>
     <eOperations name="getFeatureContainerPredecessors" upperBound="-1" eType="#//FeatureContainer"/>
     <eOperations name="getDocNodePredecessors" upperBound="-1" eType="#//DocNode"/>
     <eOperations name="getEndNodeSuccessors" upperBound="-1" eType="#//EndNode"/>
     <eOperations name="getFeatureContainerSuccessors" upperBound="-1" eType="#//FeatureContainer"/>
     <eOperations name="getDocNodeSuccessors" upperBound="-1" eType="#//DocNode"/>
-    <eOperations name="canNewLabeledEdge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
-      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
-    </eOperations>
-    <eOperations name="newLabeledEdge" eType="#//LabeledEdge">
-      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
-    </eOperations>
-    <eOperations name="newLabeledEdge" eType="#//LabeledEdge">
-      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
-      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eOperations>
-    <eOperations name="canNewLabeledEdge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
-      <eParameters name="target" lowerBound="1" eType="#//EndNode"/>
-    </eOperations>
-    <eOperations name="newLabeledEdge" eType="#//LabeledEdge">
-      <eParameters name="target" lowerBound="1" eType="#//EndNode"/>
-    </eOperations>
-    <eOperations name="newLabeledEdge" eType="#//LabeledEdge">
-      <eParameters name="target" lowerBound="1" eType="#//EndNode"/>
-      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eOperations>
-    <eOperations name="canNewLabeledEdge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
-      <eParameters name="target" lowerBound="1" eType="#//FeatureContainer"/>
-    </eOperations>
-    <eOperations name="newLabeledEdge" eType="#//LabeledEdge">
-      <eParameters name="target" lowerBound="1" eType="#//FeatureContainer"/>
-    </eOperations>
-    <eOperations name="newLabeledEdge" eType="#//LabeledEdge">
-      <eParameters name="target" lowerBound="1" eType="#//FeatureContainer"/>
-      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eOperations>
-    <eOperations name="canNewEdge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
-      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
-    </eOperations>
-    <eOperations name="newEdge" eType="#//Edge">
-      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
-    </eOperations>
-    <eOperations name="newEdge" eType="#//Edge">
-      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
-      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eOperations>
     <eOperations name="canNewEdge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eParameters name="target" lowerBound="1" eType="#//EndNode"/>
     </eOperations>
@@ -565,6 +525,46 @@
     </eOperations>
     <eOperations name="newEdge" eType="#//Edge">
       <eParameters name="target" lowerBound="1" eType="#//FeatureContainer"/>
+      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="canNewEdge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
+    </eOperations>
+    <eOperations name="newEdge" eType="#//Edge">
+      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
+    </eOperations>
+    <eOperations name="newEdge" eType="#//Edge">
+      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
+      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="canNewLabeledEdge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="target" lowerBound="1" eType="#//EndNode"/>
+    </eOperations>
+    <eOperations name="newLabeledEdge" eType="#//LabeledEdge">
+      <eParameters name="target" lowerBound="1" eType="#//EndNode"/>
+    </eOperations>
+    <eOperations name="newLabeledEdge" eType="#//LabeledEdge">
+      <eParameters name="target" lowerBound="1" eType="#//EndNode"/>
+      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="canNewLabeledEdge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="target" lowerBound="1" eType="#//FeatureContainer"/>
+    </eOperations>
+    <eOperations name="newLabeledEdge" eType="#//LabeledEdge">
+      <eParameters name="target" lowerBound="1" eType="#//FeatureContainer"/>
+    </eOperations>
+    <eOperations name="newLabeledEdge" eType="#//LabeledEdge">
+      <eParameters name="target" lowerBound="1" eType="#//FeatureContainer"/>
+      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="canNewLabeledEdge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
+    </eOperations>
+    <eOperations name="newLabeledEdge" eType="#//LabeledEdge">
+      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
+    </eOperations>
+    <eOperations name="newLabeledEdge" eType="#//LabeledEdge">
+      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
       <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
     <eOperations name="canMoveTo" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
@@ -907,56 +907,16 @@
       <eParameters name="oldY" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
       <eParameters name="direction" lowerBound="1" eType="ecore:EEnum http://www.jabc.de/cinco/gdl/graphmodel#//Direction"/>
     </eOperations>
-    <eOperations name="getOutgoingLabeledEdges" upperBound="-1" eType="#//LabeledEdge"/>
     <eOperations name="getOutgoingEdges" upperBound="-1" eType="#//Edge"/>
-    <eOperations name="getIncomingLabeledEdges" upperBound="-1" eType="#//LabeledEdge"/>
+    <eOperations name="getOutgoingLabeledEdges" upperBound="-1" eType="#//LabeledEdge"/>
     <eOperations name="getIncomingEdges" upperBound="-1" eType="#//Edge"/>
+    <eOperations name="getIncomingLabeledEdges" upperBound="-1" eType="#//LabeledEdge"/>
     <eOperations name="getStartNodePredecessors" upperBound="-1" eType="#//StartNode"/>
     <eOperations name="getFeatureContainerPredecessors" upperBound="-1" eType="#//FeatureContainer"/>
     <eOperations name="getDocNodePredecessors" upperBound="-1" eType="#//DocNode"/>
     <eOperations name="getEndNodeSuccessors" upperBound="-1" eType="#//EndNode"/>
     <eOperations name="getFeatureContainerSuccessors" upperBound="-1" eType="#//FeatureContainer"/>
     <eOperations name="getDocNodeSuccessors" upperBound="-1" eType="#//DocNode"/>
-    <eOperations name="canNewLabeledEdge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
-      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
-    </eOperations>
-    <eOperations name="newLabeledEdge" eType="#//LabeledEdge">
-      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
-    </eOperations>
-    <eOperations name="newLabeledEdge" eType="#//LabeledEdge">
-      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
-      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eOperations>
-    <eOperations name="canNewLabeledEdge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
-      <eParameters name="target" lowerBound="1" eType="#//EndNode"/>
-    </eOperations>
-    <eOperations name="newLabeledEdge" eType="#//LabeledEdge">
-      <eParameters name="target" lowerBound="1" eType="#//EndNode"/>
-    </eOperations>
-    <eOperations name="newLabeledEdge" eType="#//LabeledEdge">
-      <eParameters name="target" lowerBound="1" eType="#//EndNode"/>
-      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eOperations>
-    <eOperations name="canNewLabeledEdge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
-      <eParameters name="target" lowerBound="1" eType="#//FeatureContainer"/>
-    </eOperations>
-    <eOperations name="newLabeledEdge" eType="#//LabeledEdge">
-      <eParameters name="target" lowerBound="1" eType="#//FeatureContainer"/>
-    </eOperations>
-    <eOperations name="newLabeledEdge" eType="#//LabeledEdge">
-      <eParameters name="target" lowerBound="1" eType="#//FeatureContainer"/>
-      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eOperations>
-    <eOperations name="canNewEdge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
-      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
-    </eOperations>
-    <eOperations name="newEdge" eType="#//Edge">
-      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
-    </eOperations>
-    <eOperations name="newEdge" eType="#//Edge">
-      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
-      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eOperations>
     <eOperations name="canNewEdge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eParameters name="target" lowerBound="1" eType="#//EndNode"/>
     </eOperations>
@@ -975,6 +935,46 @@
     </eOperations>
     <eOperations name="newEdge" eType="#//Edge">
       <eParameters name="target" lowerBound="1" eType="#//FeatureContainer"/>
+      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="canNewEdge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
+    </eOperations>
+    <eOperations name="newEdge" eType="#//Edge">
+      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
+    </eOperations>
+    <eOperations name="newEdge" eType="#//Edge">
+      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
+      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="canNewLabeledEdge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="target" lowerBound="1" eType="#//EndNode"/>
+    </eOperations>
+    <eOperations name="newLabeledEdge" eType="#//LabeledEdge">
+      <eParameters name="target" lowerBound="1" eType="#//EndNode"/>
+    </eOperations>
+    <eOperations name="newLabeledEdge" eType="#//LabeledEdge">
+      <eParameters name="target" lowerBound="1" eType="#//EndNode"/>
+      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="canNewLabeledEdge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="target" lowerBound="1" eType="#//FeatureContainer"/>
+    </eOperations>
+    <eOperations name="newLabeledEdge" eType="#//LabeledEdge">
+      <eParameters name="target" lowerBound="1" eType="#//FeatureContainer"/>
+    </eOperations>
+    <eOperations name="newLabeledEdge" eType="#//LabeledEdge">
+      <eParameters name="target" lowerBound="1" eType="#//FeatureContainer"/>
+      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="canNewLabeledEdge" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
+    </eOperations>
+    <eOperations name="newLabeledEdge" eType="#//LabeledEdge">
+      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
+    </eOperations>
+    <eOperations name="newLabeledEdge" eType="#//LabeledEdge">
+      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
       <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
     <eOperations name="canMoveTo" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
@@ -1044,12 +1044,6 @@
       <eParameters name="source" lowerBound="1" eType="#//DocNode"/>
     </eOperations>
     <eOperations name="canReconnectTarget" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
-      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
-    </eOperations>
-    <eOperations name="reconnectTarget" lowerBound="1">
-      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
-    </eOperations>
-    <eOperations name="canReconnectTarget" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eParameters name="target" lowerBound="1" eType="#//EndNode"/>
     </eOperations>
     <eOperations name="reconnectTarget" lowerBound="1">
@@ -1060,6 +1054,12 @@
     </eOperations>
     <eOperations name="reconnectTarget" lowerBound="1">
       <eParameters name="target" lowerBound="1" eType="#//FeatureContainer"/>
+    </eOperations>
+    <eOperations name="canReconnectTarget" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
+    </eOperations>
+    <eOperations name="reconnectTarget" lowerBound="1">
+      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
     </eOperations>
     <eOperations name="getEdgeView" eType="#//views/EdgeView"/>
   </eClassifiers>
@@ -1097,12 +1097,6 @@
       <eParameters name="source" lowerBound="1" eType="#//DocNode"/>
     </eOperations>
     <eOperations name="canReconnectTarget" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
-      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
-    </eOperations>
-    <eOperations name="reconnectTarget" lowerBound="1">
-      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
-    </eOperations>
-    <eOperations name="canReconnectTarget" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eParameters name="target" lowerBound="1" eType="#//EndNode"/>
     </eOperations>
     <eOperations name="reconnectTarget" lowerBound="1">
@@ -1113,6 +1107,12 @@
     </eOperations>
     <eOperations name="reconnectTarget" lowerBound="1">
       <eParameters name="target" lowerBound="1" eType="#//FeatureContainer"/>
+    </eOperations>
+    <eOperations name="canReconnectTarget" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
+    </eOperations>
+    <eOperations name="reconnectTarget" lowerBound="1">
+      <eParameters name="target" lowerBound="1" eType="#//DocNode"/>
     </eOperations>
     <eOperations name="getLabeledEdgeView" eType="#//views/LabeledEdgeView"/>
   </eClassifiers>
@@ -1160,58 +1160,6 @@
       <eParameters name="width" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
       <eParameters name="height" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     </eOperations>
-    <eOperations name="getDomains" upperBound="-1" eType="#//Domain"/>
-    <eOperations name="canNewDomain" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eOperations name="newDomain" lowerBound="1" eType="#//Domain">
-      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    </eOperations>
-    <eOperations name="newDomain" lowerBound="1" eType="#//Domain">
-      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    </eOperations>
-    <eOperations name="newDomain" lowerBound="1" eType="#//Domain">
-      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="width" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="height" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    </eOperations>
-    <eOperations name="newDomain" lowerBound="1" eType="#//Domain">
-      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="width" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="height" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    </eOperations>
-    <eOperations name="getDocNodes" upperBound="-1" eType="#//DocNode"/>
-    <eOperations name="canNewDocNode" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eOperations name="newDocNode" lowerBound="1" eType="#//DocNode">
-      <eParameters name="mgl" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
-      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    </eOperations>
-    <eOperations name="newDocNode" lowerBound="1" eType="#//DocNode">
-      <eParameters name="mgl" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
-      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    </eOperations>
-    <eOperations name="newDocNode" lowerBound="1" eType="#//DocNode">
-      <eParameters name="mgl" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
-      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="width" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="height" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    </eOperations>
-    <eOperations name="newDocNode" lowerBound="1" eType="#//DocNode">
-      <eParameters name="mgl" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
-      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="width" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="height" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    </eOperations>
     <eOperations name="getEndNodes" upperBound="-1" eType="#//EndNode"/>
     <eOperations name="canNewEndNode" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eOperations name="newEndNode" lowerBound="1" eType="#//EndNode">
@@ -1230,30 +1178,6 @@
       <eParameters name="height" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     </eOperations>
     <eOperations name="newEndNode" lowerBound="1" eType="#//EndNode">
-      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="width" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="height" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    </eOperations>
-    <eOperations name="getKeyValues" upperBound="-1" eType="#//KeyValue"/>
-    <eOperations name="canNewKeyValue" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eOperations name="newKeyValue" lowerBound="1" eType="#//KeyValue">
-      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    </eOperations>
-    <eOperations name="newKeyValue" lowerBound="1" eType="#//KeyValue">
-      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    </eOperations>
-    <eOperations name="newKeyValue" lowerBound="1" eType="#//KeyValue">
-      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="width" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-      <eParameters name="height" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    </eOperations>
-    <eOperations name="newKeyValue" lowerBound="1" eType="#//KeyValue">
       <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
       <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
@@ -1302,6 +1226,82 @@
       <eParameters name="height" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     </eOperations>
     <eOperations name="newFeatureContainer" lowerBound="1" eType="#//FeatureContainer">
+      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="width" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="height" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="getDocNodes" upperBound="-1" eType="#//DocNode"/>
+    <eOperations name="canNewDocNode" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="newDocNode" lowerBound="1" eType="#//DocNode">
+      <eParameters name="mgl" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="newDocNode" lowerBound="1" eType="#//DocNode">
+      <eParameters name="mgl" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="newDocNode" lowerBound="1" eType="#//DocNode">
+      <eParameters name="mgl" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="width" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="height" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="newDocNode" lowerBound="1" eType="#//DocNode">
+      <eParameters name="mgl" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="width" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="height" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="getDomains" upperBound="-1" eType="#//Domain"/>
+    <eOperations name="canNewDomain" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="newDomain" lowerBound="1" eType="#//Domain">
+      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="newDomain" lowerBound="1" eType="#//Domain">
+      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="newDomain" lowerBound="1" eType="#//Domain">
+      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="width" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="height" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="newDomain" lowerBound="1" eType="#//Domain">
+      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="width" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="height" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="getKeyValues" upperBound="-1" eType="#//KeyValue"/>
+    <eOperations name="canNewKeyValue" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="newKeyValue" lowerBound="1" eType="#//KeyValue">
+      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="newKeyValue" lowerBound="1" eType="#//KeyValue">
+      <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="newKeyValue" lowerBound="1" eType="#//KeyValue">
+      <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="width" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="height" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="newKeyValue" lowerBound="1" eType="#//KeyValue">
       <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eParameters name="x" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
       <eParameters name="y" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>

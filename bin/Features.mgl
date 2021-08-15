@@ -47,15 +47,14 @@ node BaseURL {
 node Domain{
 	style url("Reverse domain: ", "${content}")
 	attr EString as content := "com.example"
-	
 }
 
 /* Input node*/
 @icon("icons/16/gear_16.png")
 node KeyValue {
 	style keyValue("${key}: ", "${value}")
-	attr EString as key := "key"
 	attr EString as value := "value"
+	attr EString as key := "key"
 }
 
 

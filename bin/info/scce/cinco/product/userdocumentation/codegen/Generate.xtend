@@ -41,7 +41,7 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 		 * First, define the packages for the Selenium project
 		 * then create them within the source folders.
 		 */
-		val String[] pkgs = #["config", "main", "site", "tool"]
+		val String[] pkgs = #["config", "main", "tool"]
 		val mainPackagePrefix = "/src/main/java/info/scce/cinco/product/userdocgenerator/"
 		// All main packages
 		for (pkg : pkgs) {
@@ -51,7 +51,7 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 		val testPackagePrefix = "/src/test/java/info/scce/cinco/product/userdocgenerator/"
 		PackageGenerator.generatePkg(testPackagePrefix + "test", project, monitor)
 
-		// generateConfig()
+		// Generate configuration file
 		val config = generateConfigurationFile(model)
 		val configFile = project.getFile(mainPackagePrefix + "config/config.properties")
 		EclipseFileUtils.writeToFile(configFile, config)
@@ -125,12 +125,13 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 			'''
 		)
 		
-		// Generate Site()
+		// Generate Main.java
 		EclipseFileUtils.writeToFile(
 			project.getFile(mainPackagePrefix + "main/Main.java"),
 			'''
 				package info.scce.cinco.product.userdocgenerator.main;
 				
+				import java.io.IOException; 
 				import info.scce.cinco.product.userdocgenerator.tool.AutomationClass;
 				
 				public class Main {
@@ -176,87 +177,7 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 				}
 			'''
 		)
-		
-		// Generate Site()
-		EclipseFileUtils.writeToFile(
-			project.getFile(mainPackagePrefix + "site/Site.java"),
-			'''
-				package info.scce.cinco.product.userdocgenerator.site;
-				
-				import java.io.FileInputStream;
-				import java.io.FileNotFoundException;
-				import java.util.Properties;
-				
-				public class Site {
-					
-					«FOR node : model.nodes»
-					public String s«node.eClass.name.toFirstUpper»;
-					«ENDFOR»
-					public Properties props;
-					
-					public Site() {
-						try {
-							// Try loading the properties from config.properties file
-							props = new Properties();
-							FileInputStream fis = new FileInputStream("«configFile.rawLocation»");
-							props.load(fis);
-												
-							«FOR node : model.nodes»
-							s«node.eClass.name.toFirstUpper» = props.getProperty("«node.eClass.name.toLowerCase»");
-							«ENDFOR»
-							
-						} catch (FileNotFoundException e) {
-							e.printStackTrace();
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-					
-					«FOR node : model.nodes»
-					public String gets«node.eClass.name.toFirstUpper»() {
-						return s«node.eClass.name.toFirstUpper»;
-					}
-					
-					«ENDFOR»
-				}
-			'''
-		)
-		
-		// Generate CustomUserSite()
-		/*EclipseFileUtils.writeToFile(
-			project.getFile(mainPackagePrefix + "site/" +modelName+ ".java"),
-			'''
-			package info.scce.cinco.product.userdocgenerator.site;
-			
-			import java.io.FileInputStream;
-			import java.io.FileNotFoundException;
-			import java.util.Properties;
-			
-			public class «modelName» extends Site {
-			
-				// The pages of our website
-				«FOR page : model.»
-				public «page.eClass.name» «page.eClass.name.toFirstLower»;
-				«ENDFOR»
-			
-				public «modelName»() {
-					«FOR page : model.docNodes»
-					«page.eClass.name.toFirstUpper» = new «page.eClass.name»(sBrowserName, sSiteURL);
-					«ENDFOR»
-				}
-			
-				public Boolean Login() {
-					return loginPage.login(this.getsUserName(), this.getsPassword());
-				}
-			
-				public void closeSite() {
-					«FOR page : model.docNodes»
-					«page.eClass.name.toFirstLower».closePage();
-					«ENDFOR»
-				}
-			}
-		'''
-		)*/
+
 		
 		// generate AutomationClass()
 		EclipseFileUtils.writeToFile(
@@ -379,24 +300,23 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 				import org.testng.annotations.BeforeMethod;
 				import org.testng.annotations.Test;
 				
-				import info.scce.cinco.product.userdocgenerator.site.Site;
+				import info.scce.cinco.product.userdocgenerator.main.Main;
 				
 				public class SmokeTest {
 					
-					Boolean bResult = false;
-					Site site; 
+					Boolean loggedIn = false;
+					Main site; 
 					
 					@BeforeMethod
 					public void beforeMethod() {
-						site = new Site();
 					}
 					
 					@Test
 					public void testCallFunction() throws InterruptedException {
-						bResult = site.getsStartNode().isEmpty();
+						loggedIn = Main.Login("peter", "pwd");
 						Thread.sleep(3000);
 						
-						Assert.assertTrue(bResult, "Login failed");
+						Assert.assertTrue(loggedIn, "Login failed");
 					}
 					
 					@AfterMethod
@@ -409,13 +329,10 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 	}
 
 	private def generateConfigurationFile(FeaturesGraphModel model) '''
-«««		«FOR node : model.nodes»
-«««			«node.eClass.name.toLowerCase» = «node.eAllContents.toString»
-«««		«ENDFOR»
-		browser = firefox
-		url = http://localhost:8080
-		user = peter
-		password = pwd
+		# Here come all the configuration necessary to run the sequences in the browser
+		«FOR node : model.keyValues»
+		«node.key» = «node.value»
+		«ENDFOR»
 	'''
 
 }
