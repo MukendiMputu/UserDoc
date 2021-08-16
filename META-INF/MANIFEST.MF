@@ -36,11 +36,43 @@ Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,org.eclipse.e
  untime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.p
  lugin.generator.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.
  jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.gene
- rator.runtime,de.jabc.cinco.meta.plugin.generator.runtime
+ rator.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco
+ .meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.generator.runt
+ ime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plug
+ in.generator.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.jab
+ c.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.generat
+ or.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.me
+ ta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.generator.runtime
+ ,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.
+ generator.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.c
+ inco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.generator.
+ runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.
+ plugin.generator.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de
+ .jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.mca
+ m.runtime,de.jabc.cinco.meta.plugin.generator.runtime
 Bundle-ActivationPolicy: lazy
-Export-Package: info.scce.cinco.product.userdocumentation.action,
- info.scce.cinco.product.userdocumentation.appearance,
- info.scce.cinco.product.userdocumentation.codegen,
- info.scce.cinco.product.userdocumentation.hooks
+Export-Package: info.scce.cinco.product.userdocumentation.action,info.sc
+ ce.cinco.product.userdocumentation.appearance,info.scce.cinco.product.u
+ serdocumentation.codegen,info.scce.cinco.product.userdocumentation.hook
+ s,info.scce.cinco.product.features.main.factory,info.scce.cinco.product
+ .features.main.adapter,info.scce.cinco.product.usersequence.main.factor
+ y,info.scce.cinco.product.usersequence.main.adapter,info.scce.cinco.pro
+ duct.features.main.features,info.scce.cinco.product.features.main.featu
+ res.impl,info.scce.cinco.product.features.main.features.internal,info.s
+ cce.cinco.product.features.main.features.internal.impl,info.scce.cinco.
+ product.features.main.features.internal.util,info.scce.cinco.product.fe
+ atures.main.features.util,info.scce.cinco.product.features.main.feature
+ s.views,info.scce.cinco.product.features.main.features.views.impl,info.
+ scce.cinco.product.features.main.features.views.util,info.scce.cinco.pr
+ oduct.usersequence.main.usersequence,info.scce.cinco.product.usersequen
+ ce.main.usersequence.impl,info.scce.cinco.product.usersequence.main.use
+ rsequence.internal,info.scce.cinco.product.usersequence.main.usersequen
+ ce.internal.impl,info.scce.cinco.product.usersequence.main.usersequence
+ .internal.util,info.scce.cinco.product.usersequence.main.usersequence.u
+ til,info.scce.cinco.product.usersequence.main.usersequence.views,info.s
+ cce.cinco.product.usersequence.main.usersequence.views.impl,info.scce.c
+ inco.product.usersequence.main.usersequence.views.util,info.scce.cinco.
+ product.userdocumentation.perspective,info.scce.cinco.product.features.
+ main.mcam.adapter,info.scce.cinco.product.features.main.mcam.cli
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 

@@ -9,8 +9,8 @@ import org.eclipse.core.resources.ResourcesPlugin
 import de.jabc.cinco.meta.core.utils.EclipseFileUtils
 import de.jabc.cinco.meta.plugin.generator.runtime.IGenerator
 
-import info.scce.cinco.product.features.features.FeaturesGraphModel
 import info.scce.cinco.product.userdocumentation.codegen.PackageGenerator
+import info.scce.cinco.product.features.main.features.FeaturesGraphModel
 
 /**
  *  Example class that generates code for a given FlowGraph model. As different

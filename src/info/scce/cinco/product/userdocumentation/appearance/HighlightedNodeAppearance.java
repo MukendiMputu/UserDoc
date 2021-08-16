@@ -4,10 +4,10 @@ import style.Color;
 import style.Appearance;
 import style.StyleFactory;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import info.scce.cinco.product.usersequence.usersequence.WebElement;
 
 
 import de.jabc.cinco.meta.core.ge.style.generator.runtime.appearance.StyleAppearanceProvider;
+import info.scce.cinco.product.usersequence.main.usersequence.WebElement;
 
 /**
  * @author mukendi

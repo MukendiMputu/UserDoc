@@ -1,7 +1,8 @@
 import "model/UserSequence.mgl" as docMgl
-id info.scce.cinco.product.features
+id info.scce.cinco.product.features.main
 stylePath "model/Features.style"
 
+@mcam("check")
 @primeviewer
 @generatable("info.scce.cinco.product.userdocumentation.codegen.Generate", "/src/")
 graphModel FeaturesGraphModel {
@@ -9,6 +10,7 @@ graphModel FeaturesGraphModel {
 	diagramExtension "feat"
 	containableElements(*)
 	attr EString as name
+	// TODO: add unmodifiable code templates in each element
 }
 
 @icon("icons/16/start_16.png")
@@ -49,7 +51,7 @@ node Domain{
 	attr EString as content := "com.example"
 }
 
-/* Input node*/
+/* configuration node*/
 @icon("icons/16/gear_16.png")
 node KeyValue {
 	style keyValue("${key}: ", "${value}")

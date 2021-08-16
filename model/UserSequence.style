@@ -128,6 +128,7 @@ nodeStyle textBlock(1) {
 }
 
 nodeStyle input(3) {
+	// TODO: highlight model element
 	appearanceProvider("info.scce.cinco.product.userdocumentation.appearance.HighlightedNodeAppearance")
 	roundedRectangle {
 		appearance extends default {
@@ -232,6 +233,7 @@ nodeStyle verb (1) {
  * receiving the user action
  */
 nodeStyle object (1){
+	appearanceProvider("info.scce.cinco.product.userdocumentation.appearance.HighlightInputNodeAppearance")
 	rectangle {
 		appearance default
 		size(40,40)

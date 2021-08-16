@@ -1,7 +1,7 @@
-id info.scce.cinco.product.usersequence
+id info.scce.cinco.product.usersequence.main
 stylePath "model/UserSequence.style"
 
-@generatable("info.scce.cinco.product.userdocumentation.codegen.Generate2", "/src/")
+// @generatable("info.scce.cinco.product.userdocumentation.codegen.Generate2", "/src/")
 graphModel UserSequenceGraphModel {
 	iconPath "icons/16/sequence_16.png"
 	diagramExtension "doc"
@@ -159,6 +159,7 @@ node Form extends WebElement {
 @palette("Web Elements")
 node Input extends WebElement {
 	style input("${content}","${selector}","value")
+	// TODO: specific actions for input element
 	attr EBoolean as highlighted
 	attr EString as selector
 	attr EString as value
