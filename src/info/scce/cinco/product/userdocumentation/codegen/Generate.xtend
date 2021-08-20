@@ -2,7 +2,6 @@ package info.scce.cinco.product.userdocumentation.codegen
 
 import org.eclipse.core.runtime.IPath
 //import org.eclipse.core.resources.IFolder
-import org.eclipse.core.runtime.CoreException
 import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.core.resources.IWorkspaceRoot
 import org.eclipse.core.resources.ResourcesPlugin
@@ -10,6 +9,9 @@ import de.jabc.cinco.meta.core.utils.EclipseFileUtils
 import de.jabc.cinco.meta.plugin.generator.runtime.IGenerator
 
 import info.scce.cinco.product.features.main.features.FeaturesGraphModel
+import info.scce.cinco.product.features.main.features.KeyValue
+import org.eclipse.emf.common.util.EList
+import org.eclipse.emf.common.util.BasicEList
 
 /**
  *  Example class that generates code for a given FlowGraph model. As different
@@ -25,12 +27,12 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 
 		if (model.name.nullOrEmpty)
 			throw new RuntimeException("Model's name cannot be empty!")
-
+		/*
 		// get the IPath of the target directory
 		val srcGen = root.getFolder(targetDir)
 
 
-		/* append the maven project folders to it */
+		// append the maven project folders to it
 		var src = targetDir.append('/src')
 		var srcMain = targetDir.append(src + '/main')
 		var srcTest = targetDir.append(src + '/test')
@@ -59,7 +61,8 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 			exception.printStackTrace()
 			
 		}
-		
+		 */
+		 
 		// Generate pom.xml file into the targetDir src-gen
 		EclipseFileUtils.writeToFile(
 			root.getFileForLocation(targetDir.append("pom.xml")),
@@ -97,9 +100,10 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 				</project>
 			'''
 		)
+		
 		// Generate Main.java
 		EclipseFileUtils.writeToFile(
-			srcGen.getFile('/src-gen/src/main/java/main/Main.java'),
+			root.getFileForLocation(targetDir.append('Main.java')),
 			'''
 				package info.scce.cinco.product.userdocgenerator.main;
 				
@@ -142,11 +146,10 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 				}
 			'''
 		)
-
 		
 		// generate AutomationClass.java
 		EclipseFileUtils.writeToFile(
-			srcGen.getFile('/src-gen/src/main/java/' + "tool/AutomationClass.java"),
+			root.getFileForLocation(targetDir.append('AutomationClass.java')),
 			'''
 			package info.scce.cinco.product.userdocgenerator.tool;
 			
@@ -167,28 +170,31 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 			
 			public class AutomationClass {
 				protected WebDriver driver;
-				protected String sBrowserName, sSiteURL, sUserName, sPassword;
+			«var EList<KeyValue> keyValPairs = new BasicEList<KeyValue> »
+			«IF !model.configurationContainers.isEmpty»
+			«FOR configContainer : model.configurationContainers»
+				// «configContainer.title»
+				«FOR keyVal : configContainer.keyValues»
+				«keyValPairs.add(keyVal)»
+				protected String s«keyVal.key.toFirstUpper»;
+				«ENDFOR»
+			«ENDFOR»
+			«ENDIF»
 				protected WebElement element;
-				
 
 				public AutomationClass() {
-					try {
-						// Try loading the properties from config.properties file
-						
-						sBrowserName = "firefox";
-						sSiteURL = "url";
-						sUserName = "user";
-						sPassword = "password";
-						driver = null;
-						element = null;
-						
-					} catch (FileNotFoundException e) {
-						e.printStackTrace();
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
+			
+					// Loading configuratiion properties
+					«IF !keyValPairs.nullOrEmpty»
+					«FOR keyVal : keyValPairs»
+					s«keyVal.key.toFirstUpper» = "«keyVal.value»";
+					«ENDFOR»
+					«ENDIF»
+
+					driver = null;
+					element = null;
 				}
-				
+			
 				public Boolean openBrowser(String sBrowserType) {
 			
 					// Set path to driver executable as system path
@@ -197,32 +203,32 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 						driver = new FirefoxDriver();
 						driver.manage().window().maximize();
 					}
-					
+			
 					return true;
 				}
-				
+			
 				public Boolean goToPage(String sSiteURL) {
 					driver.get(sSiteURL);
 					return true;
 				}
-				
+			
 				public Boolean takePageScreenshot(String folderName, String pictureName) throws IOException {
 					//Use TakesScreenshot method to capture screenshot
 					TakesScreenshot screenshot = (TakesScreenshot)driver;
 			
 					File source = screenshot.getScreenshotAs(OutputType.FILE);
 					FileUtils.copyFile(source, new File("./"+folderName+"/" + pictureName + ".png"));
-					
+			
 					return true;
 				}
-				
+			
 				public Boolean takeElementScreenshot(WebElement pElement, String folderName, String pictureName) throws IOException {
 					//Capture single element screenshot
 					File source = pElement.getScreenshotAs(OutputType.FILE);
 					FileUtils.copyFile(source, new File("./"+folderName+"/" + pictureName + ".png"));
 					return true;
 				}
-				
+			
 				public void highlightElement(WebElement elem) {
 					JavascriptExecutor jsExec = (JavascriptExecutor) driver;
 					jsExec.executeScript("arguments[0].setAttribute('style','border: 2px solid red;');", elem);
@@ -243,7 +249,7 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 			
 					return true;
 				}
-				
+			
 				public void closeBrowser() {
 					driver.quit();
 				}
@@ -322,6 +328,21 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 		)
  */
  
+ 
+ 		val code = generateCode(model);
+		val targetFile = ResourcesPlugin.workspace.root.getFileForLocation(targetDir.append(model.name + ".txt"))
+
+		EclipseFileUtils.writeToFile(targetFile, code)
 	}
+
+	private def generateCode(FeaturesGraphModel model) '''
+		=== «model.name» ===
+
+		The model contains «model.allNodes.size» nodes. Here's some general information about them:
+
+		«FOR node : model.allNodes»
+			* node «node.id» of type '«node.eClass.name»' with «node.successors.size» successors and «node.predecessors.size» predecessors
+		«ENDFOR»
+	'''
 
 }
