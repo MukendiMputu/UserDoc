@@ -2,15 +2,14 @@ import "model/UserSequence.mgl" as docMgl
 id info.scce.cinco.product.features.main
 stylePath "model/Features.style"
 
-@mcam("check")
+
 @primeviewer
-@generatable("info.scce.cinco.product.userdocumentation.codegen.Generate", "/src/")
+@generatable("info.scce.cinco.product.userdocumentation.codegen.Generate", "/src-gen/")
 graphModel FeaturesGraphModel {
 	iconPath "icons/16/feature_16.png"
 	diagramExtension "feat"
 	containableElements(*)
 	attr EString as name
-	// TODO: add unmodifiable code templates in each element
 }
 
 @icon("icons/16/start_16.png")
@@ -32,6 +31,13 @@ container FeatureContainer {
 	attr EString as title := ""
 	incomingEdges (*[1,*])
 	outgoingEdges ({Edge,LabeledEdge}[1,*])
+}
+
+@icon("icons/16/container_16.png")
+container ConfigurationContainer {
+	style grayContainer("${title}")
+	containableElements(KeyValue[1,*])
+	attr EString as title := ""
 }
 
 /* Basic URL node, which will be called in the Selenium script*/
@@ -58,7 +64,6 @@ node KeyValue {
 	attr EString as value := "value"
 	attr EString as key := "key"
 }
-
 
 node DocNode{
 	style docNode("${mgl.modelName}")

@@ -1,7 +1,7 @@
 package info.scce.cinco.product.userdocumentation.codegen
 
 import org.eclipse.core.runtime.IPath
-import org.eclipse.core.resources.IProject
+//import org.eclipse.core.resources.IFolder
 import org.eclipse.core.runtime.CoreException
 import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.core.resources.IWorkspaceRoot
@@ -9,7 +9,6 @@ import org.eclipse.core.resources.ResourcesPlugin
 import de.jabc.cinco.meta.core.utils.EclipseFileUtils
 import de.jabc.cinco.meta.plugin.generator.runtime.IGenerator
 
-import info.scce.cinco.product.userdocumentation.codegen.PackageGenerator
 import info.scce.cinco.product.features.main.features.FeaturesGraphModel
 
 /**
@@ -21,33 +20,35 @@ import info.scce.cinco.product.features.main.features.FeaturesGraphModel
 class Generate implements IGenerator<FeaturesGraphModel> {
 
 	IWorkspaceRoot root = ResourcesPlugin.workspace.getRoot();
-	IProject project
 
 	override generate(FeaturesGraphModel model, IPath targetDir, IProgressMonitor monitor) {
 
 		if (model.name.nullOrEmpty)
 			throw new RuntimeException("Model's name cannot be empty!")
 
-		// get the containing folder of the target directory, which is the project directory
-		project = root.getContainerForLocation(targetDir).getProject()
+		// get the IPath of the target directory
+		val srcGen = root.getFolder(targetDir)
 
 
-		/* generate maven project structure */
-		var mainFolder = '/src/main'
-		var testFolder = '/src/test'
-		var targetFolder = '/target'
+		/* append the maven project folders to it */
+		var src = targetDir.append('/src')
+		var srcMain = targetDir.append(src + '/main')
+		var srcTest = targetDir.append(src + '/test')
+		var target = targetDir.append('/target')
+		
 		try {
 			// first generate main folders
-			project.getFolder(targetFolder).create(true, true, monitor)
-			project.getFolder(mainFolder).create(true, true, monitor)
-			project.getFolder(testFolder).create(true, true, monitor)
+			srcGen.getFolder(src).create(true, true, monitor)
+			srcGen.getFolder(srcMain).create(true, true, monitor)
+			srcGen.getFolder(srcTest).create(true, true, monitor)
+			srcGen.getFolder(target).create(true, true, monitor)
 	
 			// then the subfolders
-			project.getFolder(mainFolder + "/java").create(true, true, monitor)
-			project.getFolder(testFolder + "/java").create(true, true, monitor)
+			srcGen.getFolder(srcMain + "/java").create(true, true, monitor)
+			srcGen.getFolder(srcTest + "/java").create(true, true, monitor)
 			
-			project.getFolder(mainFolder + '/resources').create(true, true, monitor)
-			project.getFolder(testFolder + '/resources').create(true, true, monitor)
+			srcGen.getFolder(srcMain + '/resources').create(true, true, monitor)
+			srcGen.getFolder(srcTest + '/resources').create(true, true, monitor)
 
 		} catch (CoreException exception) {
 			
@@ -58,35 +59,10 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 			exception.printStackTrace()
 			
 		}
-
-		/*
-		 * First, define the packages for the Selenium project
-		 * then create them within the source folders.
-		 */
-		val String[] pkgs = #["config", "main", "tool"]
-		val mainPackagePrefix = "/src/main/java/info/scce/cinco/product/userdocgenerator/"
-		// All main packages
-		for (pkg : pkgs) {
-			PackageGenerator.generatePkg(mainPackagePrefix + pkg, project, monitor)
-		}
-		// and one test package
-		val testPackagePrefix = "/src/test/java/info/scce/cinco/product/userdocgenerator/"
-		PackageGenerator.generatePkg(testPackagePrefix + "test", project, monitor)
-
-		// Generate configuration file
-		val configFile = project.getFile(mainPackagePrefix + "config/config.properties")
-		EclipseFileUtils.writeToFile(configFile,
-			'''
-				# Here come all the configuration necessary to run the sequences in the browser
-				«FOR node : model.keyValues»
-				«node.key» = «node.value»
-				«ENDFOR»
-			'''
-		)
 		
-		// Generate pom.xml file
+		// Generate pom.xml file into the targetDir src-gen
 		EclipseFileUtils.writeToFile(
-			project.getFile("pom.xml"),
+			root.getFileForLocation(targetDir.append("pom.xml")),
 			'''
 				<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 				  <modelVersion>4.0.0</modelVersion>
@@ -121,79 +97,9 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 				</project>
 			'''
 		)
-
-		// Generate .classpath file
-		EclipseFileUtils.writeToFile(
-			project.getFile(".classpath"),
-			'''
-				<?xml version="1.0" encoding="UTF-8"?>
-				<classpath>
-					<classpathentry kind="src" output="target/classes" path="src/main/java">
-						<attributes>
-							<attribute name="optional" value="true"/>
-							<attribute name="maven.pomderived" value="true"/>
-						</attributes>
-					</classpathentry>
-					
-					<classpathentry kind="src" output="target/test-classes" path="src/test/java">
-						<attributes>
-							<attribute name="test" value="true"/>
-							<attribute name="optional" value="true"/>
-							<attribute name="maven.pomderived" value="true"/>
-						</attributes>
-					</classpathentry>
-					
-					<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
-						<attributes>
-							<attribute name="module" value="true"/>
-							<attribute name="maven.pomderived" value="true"/>
-						</attributes>
-					</classpathentry>
-					
-					<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
-						<attributes>
-							<attribute name="maven.pomderived" value="true"/>
-						</attributes>
-					</classpathentry>
-					
-					<classpathentry kind="output" path="target/classes"/>
-				</classpath>
-			'''
-		)
-		
-		// Generate .project file
-		EclipseFileUtils.writeToFile(
-			project.getFile(".project"),
-			'''
-			<?xml version="1.0" encoding="UTF-8"?>
-			<projectDescription>
-				<name>«project.name.split("/").last»</name>
-				<comment></comment>
-				<projects>
-				</projects>
-				<buildSpec>
-					<buildCommand>
-						<name>org.eclipse.jdt.core.javabuilder</name>
-						<arguments>
-						</arguments>
-					</buildCommand>
-					<buildCommand>
-						<name>org.eclipse.m2e.core.maven2Builder</name>
-						<arguments>
-						</arguments>
-					</buildCommand>
-				</buildSpec>
-				<natures>
-					<nature>org.eclipse.jdt.core.javanature</nature>
-					<nature>org.eclipse.m2e.core.maven2Nature</nature>
-				</natures>
-			</projectDescription>
-			'''
-		)
-		
 		// Generate Main.java
 		EclipseFileUtils.writeToFile(
-			project.getFile(mainPackagePrefix + "main/Main.java"),
+			srcGen.getFile('/src-gen/src/main/java/main/Main.java'),
 			'''
 				package info.scce.cinco.product.userdocgenerator.main;
 				
@@ -202,23 +108,18 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 				
 				public class Main {
 					private static AutomationClass driverTool;
+					// Here come all the configuration necessary to run the sequences in the browser
+					«FOR node : model.keyValues»
+					«node.key» = «node.value»
+					«ENDFOR»
 					
 					public static void main (String[] args){
 						driverTool = new AutomationClass();
 						try {
 							driverTool.openBrowser("firefox");
 							driverTool.goToPage("http://localhost:8080");
-							Login("peter", "pwd");
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-					
-					public static Boolean Login(String sUserName, String sPassword) {
-						Boolean bResult = true;
-						String sequenceName = "Login";
-						try {
+
+							String sequenceName = "Login";
 				
 							driverTool.goToPage("http://localhost:8080/home");
 							driverTool.takePageScreenshot(sequenceName, "LoginPage");
@@ -235,10 +136,8 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 							e.printStackTrace();
 						} finally {
 				
-							driverTool.closeBrowser();
 						}
 				
-						return bResult;
 					}
 				}
 			'''
@@ -247,7 +146,7 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 		
 		// generate AutomationClass.java
 		EclipseFileUtils.writeToFile(
-			project.getFile(mainPackagePrefix + "tool/AutomationClass.java"),
+			srcGen.getFile('/src-gen/src/main/java/' + "tool/AutomationClass.java"),
 			'''
 			package info.scce.cinco.product.userdocgenerator.tool;
 			
@@ -270,19 +169,16 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 				protected WebDriver driver;
 				protected String sBrowserName, sSiteURL, sUserName, sPassword;
 				protected WebElement element;
-				protected Properties props;
 				
+
 				public AutomationClass() {
 					try {
 						// Try loading the properties from config.properties file
-						props = new Properties();
-						FileInputStream fis = new FileInputStream("«configFile.rawLocation»");
-						props.load(fis);
 						
-						sBrowserName = props.getProperty("browser");
-						sSiteURL = props.getProperty("url");
-						sUserName = props.getProperty("user");
-						sPassword = props.getProperty("password");
+						sBrowserName = "firefox";
+						sSiteURL = "url";
+						sUserName = "user";
+						sPassword = "password";
 						driver = null;
 						element = null;
 						
@@ -355,43 +251,77 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 			'''
 		)
 		
-		// Generate SmokeTest.java
-		EclipseFileUtils.writeToFile(
-			project.getFile(testPackagePrefix + "test/SmokeTest.java"),
+		// Generate .classpath file
+/*		EclipseFileUtils.writeToFile(
+			project.getFile(".classpath"),
 			'''
-				package info.scce.cinco.product.userdocgenerator.test;
-				
-				import org.testng.Assert;
-				import org.testng.annotations.AfterMethod;
-				import org.testng.annotations.BeforeMethod;
-				import org.testng.annotations.Test;
-				
-				import info.scce.cinco.product.userdocgenerator.main.Main;
-				
-				public class SmokeTest {
+				<?xml version="1.0" encoding="UTF-8"?>
+				<classpath>
+					<classpathentry kind="src" output="target/classes" path="src/main/java">
+						<attributes>
+							<attribute name="optional" value="true"/>
+							<attribute name="maven.pomderived" value="true"/>
+						</attributes>
+					</classpathentry>
 					
-					Boolean loggedIn = false;
-					Main site; 
+					<classpathentry kind="src" output="target/test-classes" path="src/test/java">
+						<attributes>
+							<attribute name="test" value="true"/>
+							<attribute name="optional" value="true"/>
+							<attribute name="maven.pomderived" value="true"/>
+						</attributes>
+					</classpathentry>
 					
-					@BeforeMethod
-					public void beforeMethod() {
-					}
+					<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+						<attributes>
+							<attribute name="module" value="true"/>
+							<attribute name="maven.pomderived" value="true"/>
+						</attributes>
+					</classpathentry>
 					
-					@Test
-					public void testCallFunction() throws InterruptedException {
-						loggedIn = Main.Login("peter", "pwd");
-						Thread.sleep(3000);
-						
-						Assert.assertTrue(loggedIn, "Login failed");
-					}
+					<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+						<attributes>
+							<attribute name="maven.pomderived" value="true"/>
+						</attributes>
+					</classpathentry>
 					
-					@AfterMethod
-					public void afterMethode() {
-						
-					}
-				}
+					<classpathentry kind="output" path="target/classes"/>
+				</classpath>
 			'''
 		)
+ */		
+		
+		// Generate .project file
+/*		EclipseFileUtils.writeToFile(
+			srcGen.getFile(".project"),
+			'''
+			<?xml version="1.0" encoding="UTF-8"?>
+			<projectDescription>
+				<name>«project.name.split("/").last»</name>
+				<comment></comment>
+				<projects>
+				</projects>
+				<buildSpec>
+					<buildCommand>
+						<name>org.eclipse.jdt.core.javabuilder</name>
+						<arguments>
+						</arguments>
+					</buildCommand>
+					<buildCommand>
+						<name>org.eclipse.m2e.core.maven2Builder</name>
+						<arguments>
+						</arguments>
+					</buildCommand>
+				</buildSpec>
+				<natures>
+					<nature>org.eclipse.jdt.core.javanature</nature>
+					<nature>org.eclipse.m2e.core.maven2Nature</nature>
+				</natures>
+			</projectDescription>
+			'''
+		)
+ */
+ 
 	}
 
 }

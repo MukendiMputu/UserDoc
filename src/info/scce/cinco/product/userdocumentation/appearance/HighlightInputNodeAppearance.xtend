@@ -7,27 +7,32 @@ import info.scce.cinco.product.usersequence.main.usersequence.WebElement
 class HighlightInputNodeAppearance implements StyleAppearanceProvider<WebElement> {
 
 	extension StyleFactory = StyleFactory.eINSTANCE
-
+	
 	val red = createColor => [
 		r = 255
 		g = 0
 		b = 0
 	]
 	
-	val black = createColor => [
-		r = 0
-		g = 0
-		b = 0
+	val invisible = createColor => [
+		r = 245
+		g = 245 
+		b = 245
 	]
 
-	
-	override getAppearance(WebElement webElem, String elementName) {
+	override getAppearance(WebElement webElem, String shapeName) {
 		val foregroundColor = if (webElem.isIsHighlighted) {
 			red
 		} else {
-			black
+			invisible
 		}
-		return createAppearance => [foreground = foregroundColor]
+		if ("outer".equals(shapeName)) {
+			return createAppearance => [
+				foreground = foregroundColor
+			]
+		} else {
+			return null
+		}
 	}
 	
 }

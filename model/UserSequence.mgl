@@ -91,6 +91,7 @@ node WebElement {
 	attr EString as attrValue := ""
 	attr EString as contentText := ""
 	attr EBoolean as isHighlighted
+	// TODO: add unmodifiable code templates in each element
 	
 	incomingEdges (*[1,1])
 	outgoingEdges (Transition[1,1])

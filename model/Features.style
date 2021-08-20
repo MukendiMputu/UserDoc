@@ -135,16 +135,23 @@ nodeStyle EndNode {
 
 
 nodeStyle docNode(1) {
-	roundedRectangle {
-		appearance extends default {
-			background (255,255,255)
+	appearanceProvider("info.scce.cinco.product.userdocumentation.appearance.CreateScreenshotAppearance")
+	rectangle outer {
+		appearance extends redBorder {
+			foreground(255,255,255)
+			lineWidth 2
 		}
-		position (0,0)
-		size (90,40)
-		corner (8,8)
-		text {
-			position ( CENTER, MIDDLE )
-			value "%s" 
+		roundedRectangle inner {
+			appearance extends default {
+				background (255,255,255)
+			}
+			position (CENTER,MIDDLE)
+			size (90,40)
+			corner (8,8)
+			text {
+				position ( CENTER, MIDDLE )
+				value "%s" 
+			}
 		}
 	}
 }
