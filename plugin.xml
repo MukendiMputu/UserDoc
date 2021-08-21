@@ -76,6 +76,33 @@
 </generator>
 </extension><extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated UserDocumentationTool -->
+      <package class="info.scce.cinco.product.features.main.features.views.ViewsPackage" uri="http://cinco.scce.info/product/features/main/views"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocumentationTool -->
+      <package class="info.scce.cinco.product.features.main.features.internal.InternalPackage" uri="http://cinco.scce.info/product/features/main/internal"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocumentationTool -->
+      <package class="info.scce.cinco.product.features.main.features.FeaturesPackage" uri="http://cinco.scce.info/product/features/main"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocumentationTool -->
+      <package class="info.scce.cinco.product.usersequence.main.usersequence.views.ViewsPackage" uri="http://cinco.scce.info/product/usersequence/main/views"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocumentationTool -->
+      <package class="info.scce.cinco.product.usersequence.main.usersequence.internal.InternalPackage" uri="http://cinco.scce.info/product/usersequence/main/internal"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocumentationTool -->
+      <package class="info.scce.cinco.product.usersequence.main.usersequence.UsersequencePackage" uri="http://cinco.scce.info/product/usersequence/main"/>
+   </extension><extension point="org.eclipse.ui.perspectives">
+	<perspective class="info.scce.cinco.product.userdocumentation.perspective.UserDocumentationToolPerspective" fixed="false" icon="branding/Icon16_dark.png" id="info.scce.cinco.product.userdocumentation.userdocumentationtoolperspective" name="UserDocumentationTool Perspective">
+	</perspective>
+</extension><extension point="de.jabc.cinco.meta.plugin.generator.runtime.registry">
+<!--@MetaPlugin Generatable FeaturesGraphModel-->
+<graphmodel class="info.scce.cinco.product.features.main.features.FeaturesGraphModel">
+</graphmodel>
+<generator bundle_id="info.scce.cinco.product.userdocumentation" class="info.scce.cinco.product.userdocumentation.codegen.Generate" outlet="/src/">
+</generator>
+</extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocumentationTool -->
       <package class="info.scce.cinco.product.usersequence.main.usersequence.views.ViewsPackage" uri="http://cinco.scce.info/product/usersequence/main/views"/>
    </extension><extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated UserDocumentationTool -->
@@ -114,21 +141,12 @@
 <!--@MetaPlugin Generatable FeaturesGraphModel-->
 <graphmodel class="info.scce.cinco.product.features.main.features.FeaturesGraphModel">
 </graphmodel>
-<generator bundle_id="info.scce.cinco.product.userdocumentation" class="info.scce.cinco.product.userdocumentation.codegen.Generate" outlet="/src/">
+<generator bundle_id="info.scce.cinco.product.userdocumentation" class="info.scce.cinco.product.userdocumentation.codegen.Generate" outlet="/src-gen/">
 </generator>
 </extension><extension point="org.eclipse.ui.perspectives">
 	<perspective class="info.scce.cinco.product.userdocumentation.perspective.UserDocumentationToolPerspective" fixed="false" icon="branding/Icon16_dark.png" id="info.scce.cinco.product.userdocumentation.userdocumentationtoolperspective" name="UserDocumentationTool Perspective">
 	</perspective>
 </extension><extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated UserDocumentationTool -->
-      <package class="info.scce.cinco.product.usersequence.main.usersequence.UsersequencePackage" uri="http://cinco.scce.info/product/usersequence/main"/>
-   </extension><extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated UserDocumentationTool -->
-      <package class="info.scce.cinco.product.usersequence.main.usersequence.internal.InternalPackage" uri="http://cinco.scce.info/product/usersequence/main/internal"/>
-   </extension><extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated UserDocumentationTool -->
-      <package class="info.scce.cinco.product.usersequence.main.usersequence.views.ViewsPackage" uri="http://cinco.scce.info/product/usersequence/main/views"/>
-   </extension><extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated UserDocumentationTool -->
       <package class="info.scce.cinco.product.features.main.features.FeaturesPackage" uri="http://cinco.scce.info/product/features/main"/>
    </extension><extension point="org.eclipse.emf.ecore.generated_package">
@@ -137,6 +155,15 @@
    </extension><extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated UserDocumentationTool -->
       <package class="info.scce.cinco.product.features.main.features.views.ViewsPackage" uri="http://cinco.scce.info/product/features/main/views"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocumentationTool -->
+      <package class="info.scce.cinco.product.usersequence.main.usersequence.UsersequencePackage" uri="http://cinco.scce.info/product/usersequence/main"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocumentationTool -->
+      <package class="info.scce.cinco.product.usersequence.main.usersequence.internal.InternalPackage" uri="http://cinco.scce.info/product/usersequence/main/internal"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocumentationTool -->
+      <package class="info.scce.cinco.product.usersequence.main.usersequence.views.ViewsPackage" uri="http://cinco.scce.info/product/usersequence/main/views"/>
    </extension><extension point="de.jabc.cinco.meta.plugin.generator.runtime.registry">
 <!--@MetaPlugin Generatable FeaturesGraphModel-->
 <graphmodel class="info.scce.cinco.product.features.main.features.FeaturesGraphModel">

@@ -12,6 +12,8 @@ import info.scce.cinco.product.features.main.features.FeaturesGraphModel
 import info.scce.cinco.product.features.main.features.KeyValue
 import org.eclipse.emf.common.util.EList
 import org.eclipse.emf.common.util.BasicEList
+import org.eclipse.core.runtime.Path
+import org.eclipse.core.runtime.CoreException
 
 /**
  *  Example class that generates code for a given FlowGraph model. As different
@@ -27,30 +29,42 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 
 		if (model.name.nullOrEmpty)
 			throw new RuntimeException("Model's name cannot be empty!")
-		/*
+		
 		// get the IPath of the target directory
-		val srcGen = root.getFolder(targetDir)
+		val srcGen = root.getContainerForLocation(targetDir)
+				
+		// append the maven project source folder to it
+		// and make an IPath of the last string segment
+		var src = new Path(targetDir.append('/src').lastSegment)
 
+		try {
+			srcGen.getFolder(src).create(true, true, monitor)
+		} catch (Exception exception) {
+			(exception.cause + ": while creating src folder")
+		}
+		
+		// Construct the subfolder paths
+		var srcMainPath = src.append('/main')
+		var srcTestPath = src.append('/test')
+		var targetPath = src.append('/target')
 
-		// append the maven project folders to it
-		var src = targetDir.append('/src')
-		var srcMain = targetDir.append(src + '/main')
-		var srcTest = targetDir.append(src + '/test')
-		var target = targetDir.append('/target')
+		// Get the IFolder classes
+		val mainFolder = srcGen.getFolder(srcMainPath)
+		val testFolder = srcGen.getFolder(srcTestPath)
+		val targetFolder = srcGen.getFolder(targetPath)
 		
 		try {
-			// first generate main folders
-			srcGen.getFolder(src).create(true, true, monitor)
-			srcGen.getFolder(srcMain).create(true, true, monitor)
-			srcGen.getFolder(srcTest).create(true, true, monitor)
-			srcGen.getFolder(target).create(true, true, monitor)
+			// first create main folders
+			mainFolder.create(true, true, monitor)
+			testFolder.create(true, true, monitor)
+			targetFolder.create(true, true, monitor)
 	
 			// then the subfolders
-			srcGen.getFolder(srcMain + "/java").create(true, true, monitor)
-			srcGen.getFolder(srcTest + "/java").create(true, true, monitor)
+			srcGen.getFolder(new Path(srcMainPath + "/java")).create(true, true, monitor)
+			srcGen.getFolder(new Path(srcTestPath + "/java")).create(true, true, monitor)
 			
-			srcGen.getFolder(srcMain + '/resources').create(true, true, monitor)
-			srcGen.getFolder(srcTest + '/resources').create(true, true, monitor)
+			srcGen.getFolder(new Path(srcMainPath + '/resources')).create(true, true, monitor)
+			srcGen.getFolder(new Path(srcTestPath + '/resources')).create(true, true, monitor)
 
 		} catch (CoreException exception) {
 			
@@ -61,7 +75,29 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 			exception.printStackTrace()
 			
 		}
+		
+		println(mainFolder)
+		println(testFolder)
+		
+		/*
+		 * First, define the packages for the Selenium project
+		 * then create them within the source folders.
 		 */
+		val String[] pkgs = #["config", "main", "tool"]
+		val packagePrefix = "/info/scce/cinco/product/userdocgenerator/"
+
+		try {
+			// All main packages
+			for (pkg : pkgs) {
+				PackageGenerator.generatePkg(packagePrefix + pkg, mainFolder, monitor)
+			}
+			// and one test package
+			PackageGenerator.generatePkg(packagePrefix + "test", testFolder, monitor)
+			
+		} catch (Throwable exception) {
+			println("Caught " + exception.toString + " while creating packages!")
+		}
+		
 		 
 		// Generate pom.xml file into the targetDir src-gen
 		EclipseFileUtils.writeToFile(
@@ -113,9 +149,6 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 				public class Main {
 					private static AutomationClass driverTool;
 					// Here come all the configuration necessary to run the sequences in the browser
-					«FOR node : model.keyValues»
-					«node.key» = «node.value»
-					«ENDFOR»
 					
 					public static void main (String[] args){
 						driverTool = new AutomationClass();
@@ -170,15 +203,16 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 			
 			public class AutomationClass {
 				protected WebDriver driver;
+			
 			«var EList<KeyValue> keyValPairs = new BasicEList<KeyValue> »
 			«IF !model.configurationContainers.isEmpty»
-			«FOR configContainer : model.configurationContainers»
-				// «configContainer.title»
-				«FOR keyVal : configContainer.keyValues»
-				«keyValPairs.add(keyVal)»
-				protected String s«keyVal.key.toFirstUpper»;
+				«FOR configContainer : model.configurationContainers»
+					// «configContainer.title»
+					«FOR keyVal : configContainer.keyValues SEPARATOR ',' AFTER ',\n'»
+					«var res = keyValPairs.add(keyVal)»
+						protected String s«keyVal.key.toFirstUpper»
+					«ENDFOR»
 				«ENDFOR»
-			«ENDFOR»
 			«ENDIF»
 				protected WebElement element;
 
@@ -258,8 +292,8 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 		)
 		
 		// Generate .classpath file
-/*		EclipseFileUtils.writeToFile(
-			project.getFile(".classpath"),
+		EclipseFileUtils.writeToFile(
+			root.getFileForLocation(targetDir.append(".classpath")),
 			'''
 				<?xml version="1.0" encoding="UTF-8"?>
 				<classpath>
@@ -295,15 +329,15 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 				</classpath>
 			'''
 		)
- */		
+
 		
 		// Generate .project file
-/*		EclipseFileUtils.writeToFile(
-			srcGen.getFile(".project"),
+		EclipseFileUtils.writeToFile(
+			root.getFileForLocation(targetDir.append(".project")),
 			'''
 			<?xml version="1.0" encoding="UTF-8"?>
 			<projectDescription>
-				<name>«project.name.split("/").last»</name>
+				<name>«root.getContainerForLocation(targetDir).project.name.split("/").last»</name>
 				<comment></comment>
 				<projects>
 				</projects>
@@ -326,7 +360,7 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 			</projectDescription>
 			'''
 		)
- */
+ 
  
  
  		val code = generateCode(model);

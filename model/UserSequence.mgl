@@ -33,6 +33,7 @@ node Stop {
 node SubSequence {
 	style actionNode("${subSequence.modelName}.doc")
 	prime this::UserSequenceGraphModel as subSequence
+	attr EBoolean as createScreenshots := true
 	incomingEdges (*[1,1])
 	outgoingEdges (LabeledTransition[1,1], Transition[1,1])
 }
@@ -87,10 +88,9 @@ node WebElement {
 	style object("<${tagName}>: ${attribute}=${attrValue}")
 	
 	attr EString as tagName := ""
-	attr EString as attribute := "id"
+	attr EString as selector := "id"
 	attr EString as attrValue := ""
-	attr EString as contentText := ""
-	attr EBoolean as isHighlighted
+	attr EBoolean as Highlighted
 	// TODO: add unmodifiable code templates in each element
 	
 	incomingEdges (*[1,1])
@@ -109,9 +109,7 @@ node Div extends WebElement {
 @palette("Web Elements")
 node H extends WebElement {
 	style textBlock("${content}")
-	attr EBoolean as highlighted
 	attr EInt as ranking
-	attr EString as selector
 	attr EString as value
 	attr EString as content
 }
@@ -120,37 +118,33 @@ node H extends WebElement {
 @palette("Web Elements")
 node P extends WebElement {
 	style textBlock("${content}")
-	attr EString as selector
 	attr EString as value
 	attr EString as content
-	attr EBoolean as highlighted
 }
 
 @icon("icons/16/object_16.png")
 @palette("Web Elements")
 node Span extends WebElement {
 	style textBlock("${content}")
-	attr EString as selector
 	attr EString as value
 	attr EString as content
-	attr EBoolean as highlighted
+	
 }
 
 @icon("icons/16/object_16.png")
 @palette("Web Elements")
 node Label extends WebElement {
 	style textBlock("${content}")
-	attr EString as selector
 	attr EString as value
 	attr EString as content
-	attr EBoolean as highlighted
+	
 }
 
 @icon("icons/16/object_16.png")
 @palette("Web Elements")
 node Form extends WebElement {
 	style actionNode("")
-	attr EBoolean as highlighted
+	
 	attr EString as action
 	attr EString as method
 	attr Input as field [0,*]
@@ -161,8 +155,7 @@ node Form extends WebElement {
 node Input extends WebElement {
 	style input("${content}","${selector}","value")
 	// TODO: specific actions for input element
-	attr EBoolean as highlighted
-	attr EString as selector
+	
 	attr EString as value
 	attr EString as content
 	incomingEdges (*[1,*])
@@ -181,17 +174,16 @@ node Textarea extends WebElement {
 @palette("Web Elements")
 node Button extends WebElement {
 	style button("${content}","${selector}","${value}", "${_type}")
-	attr EBoolean as highlighted
+	
 	attr EString as content
-	attr EString as selector
 	attr EString as value
-	attr ButtonAction as action
+	attr ButtonNodeAction as action
 	incomingEdges (*[1,*])
 	outgoingEdges ({Transition, LabeledTransition}[1,*])
 }
 
 
-enum ButtonAction {
+enum ButtonNodeAction {
 	submit delete button reset
 }
 
@@ -199,9 +191,8 @@ enum ButtonAction {
 @palette("Web Elements")
 node SelectBox extends WebElement {
 	style actionNode("")
-	attr EBoolean as highlighted
+	
 	attr EString as content
-	attr EString as selector
 	attr EString as value
 	/*attr SelectBoxAction as action*/
 	incomingEdges (*[1,*])
@@ -212,9 +203,8 @@ node SelectBox extends WebElement {
 @palette("Web Elements")
 node SelectBoxOption extends WebElement {
 	style actionNode("")
-	attr EBoolean as highlighted
+	
 	attr EString as content
-	attr EString as selector
 	attr EString as value
 	/*attr SelectBoxAction as action*/
 	incomingEdges (*[1,*])
@@ -225,9 +215,8 @@ node SelectBoxOption extends WebElement {
 @palette("Web Elements")
 node Table extends WebElement {
 	style actionNode("")
-	attr EBoolean as highlighted
+	
 	attr EString as content
-	attr EString as selector
 	attr EString as value
 	/*attr SelectBoxAction as action*/
 	incomingEdges (*[1,*])
@@ -238,9 +227,8 @@ node Table extends WebElement {
 @palette("Web Elements")
 node TableHead extends WebElement {
 	style actionNode("")
-	attr EBoolean as highlighted
+	
 	attr EString as content
-	attr EString as selector
 	attr EString as value
 	/*attr SelectBoxAction as action*/
 	incomingEdges (*[1,*])
@@ -251,9 +239,8 @@ node TableHead extends WebElement {
 @palette("Web Elements")
 node Th extends WebElement {
 	style actionNode("")
-	attr EBoolean as highlighted
+	
 	attr EString as content
-	attr EString as selector
 	attr EString as value
 	/*attr SelectBoxAction as action*/
 	incomingEdges (*[1,*])
@@ -264,9 +251,8 @@ node Th extends WebElement {
 @palette("Web Elements")
 node TableRow extends WebElement {
 	style actionNode("")
-	attr EBoolean as highlighted
+	
 	attr EString as content
-	attr EString as selector
 	attr EString as value
 	/*attr SelectBoxAction as action*/
 	incomingEdges (*[1,*])
@@ -277,9 +263,8 @@ node TableRow extends WebElement {
 @palette("Web Elements")
 node TableBody extends WebElement {
 	style actionNode("")
-	attr EBoolean as highlighted
+	
 	attr EString as content
-	attr EString as selector
 	attr EString as value
 	/*attr SelectBoxAction as action*/
 	incomingEdges (*[1,*])
@@ -290,9 +275,8 @@ node TableBody extends WebElement {
 @palette("Web Elements")
 node TableData extends WebElement {
 	style actionNode("")
-	attr EBoolean as highlighted
+	
 	attr EString as content
-	attr EString as selector
 	attr EString as value
 	/*attr SelectBoxAction as action*/
 	incomingEdges (*[1,*])
@@ -303,7 +287,7 @@ node TableData extends WebElement {
 @palette("Container Elements")
 container Section {
 	style sectionNode("${title}")
-	attr EBoolean as highlighted
+	
 	attr EString as title
 	incomingEdges (*[1,*])
 	outgoingEdges ({Transition, LabeledTransition}[1,*])
