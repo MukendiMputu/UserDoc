@@ -14,6 +14,7 @@ import org.eclipse.emf.common.util.EList
 import org.eclipse.emf.common.util.BasicEList
 import org.eclipse.core.runtime.Path
 import org.eclipse.core.runtime.CoreException
+import org.eclipse.core.resources.IContainer
 
 /**
  *  Example class that generates code for a given FlowGraph model. As different
@@ -24,6 +25,7 @@ import org.eclipse.core.runtime.CoreException
 class Generate implements IGenerator<FeaturesGraphModel> {
 
 	IWorkspaceRoot root = ResourcesPlugin.workspace.getRoot();
+	IPath tmpPath;
 
 	override generate(FeaturesGraphModel model, IPath targetDir, IProgressMonitor monitor) {
 
@@ -35,33 +37,32 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 				
 		// append the maven project source folder to it
 		// and make an IPath of the last string segment
-		var src = new Path(targetDir.append('/src').lastSegment)
+		val srcPath = new Path(targetDir.append('/src').lastSegment)
+		var src = srcGen.getFolder(srcPath)
 
 		try {
-			srcGen.getFolder(src).create(true, true, monitor)
+			src.create(true, true, monitor)
 		} catch (Exception exception) {
 			(exception.cause + ": while creating src folder")
 		}
 		
 		// Construct the subfolder paths
-		var srcMainPath = src.append('/main')
-		var srcTestPath = src.append('/test')
-		var targetPath = src.append('/target')
-
-		// Get the IFolder classes
-		val mainFolder = srcGen.getFolder(srcMainPath)
-		val testFolder = srcGen.getFolder(srcTestPath)
-		val targetFolder = srcGen.getFolder(targetPath)
+		var srcMainPath = srcPath.append('/main')
+		var srcTestPath = srcPath.append('/test')
+		var targetPath = srcPath.append('/target')
 		
+		val mainJavaFolder = src.getFolder(new Path("/main/java"))
+		val testJavaFolder = src.getFolder(new Path("/test/java"))
+
 		try {
 			// first create main folders
-			mainFolder.create(true, true, monitor)
-			testFolder.create(true, true, monitor)
-			targetFolder.create(true, true, monitor)
+			srcGen.getFolder(srcMainPath).create(true, true, monitor)
+			srcGen.getFolder(srcTestPath).create(true, true, monitor)
+			srcGen.getFolder(targetPath).create(true, true, monitor)
 	
 			// then the subfolders
-			srcGen.getFolder(new Path(srcMainPath + "/java")).create(true, true, monitor)
-			srcGen.getFolder(new Path(srcTestPath + "/java")).create(true, true, monitor)
+			mainJavaFolder.create(true, true, monitor)
+			testJavaFolder.create(true, true, monitor)
 			
 			srcGen.getFolder(new Path(srcMainPath + '/resources')).create(true, true, monitor)
 			srcGen.getFolder(new Path(srcTestPath + '/resources')).create(true, true, monitor)
@@ -76,29 +77,26 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 			
 		}
 		
-		println(mainFolder)
-		println(testFolder)
-		
-		/*
-		 * First, define the packages for the Selenium project
-		 * then create them within the source folders.
-		 */
+		// and last the package folders
 		val String[] pkgs = #["config", "main", "tool"]
 		val packagePrefix = "/info/scce/cinco/product/userdocgenerator/"
+		
 
 		try {
 			// All main packages
 			for (pkg : pkgs) {
-				PackageGenerator.generatePkg(packagePrefix + pkg, mainFolder, monitor)
+				//PackageGenerator.generatePkg(packagePrefix + pkg, mainJavaFolder, monitor)
+				generatePackage(new Path(packagePrefix + pkg), mainJavaFolder, monitor)
 			}
 			// and one test package
-			PackageGenerator.generatePkg(packagePrefix + "test", testFolder, monitor)
+			//PackageGenerator.generatePkg(packagePrefix + "test", testJavaFolder, monitor)
+			generatePackage(new Path(packagePrefix + "test"), testJavaFolder, monitor)
 			
 		} catch (Throwable exception) {
 			println("Caught " + exception.toString + " while creating packages!")
 		}
 		
-		 
+	 
 		// Generate pom.xml file into the targetDir src-gen
 		EclipseFileUtils.writeToFile(
 			root.getFileForLocation(targetDir.append("pom.xml")),
@@ -361,8 +359,6 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 			'''
 		)
  
- 
- 
  		val code = generateCode(model);
 		val targetFile = ResourcesPlugin.workspace.root.getFileForLocation(targetDir.append(model.name + ".txt"))
 
@@ -378,5 +374,33 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 			* node «node.id» of type '«node.eClass.name»' with «node.successors.size» successors and «node.predecessors.size» predecessors
 		«ENDFOR»
 	'''
-
+	
+	private def void generatePackage(IPath pkgPath, IContainer rootDir, IProgressMonitor monitor) {
+		tmpPath = Path.EMPTY
+		for (String segment : pkgPath.segments) {
+			tmpPath = tmpPath.append(segment)
+			var pkgFolder = rootDir.getFolder(tmpPath)
+			if(!pkgFolder.exists())
+				pkgFolder.create(true, true, monitor)
+		}
+		
+		/*
+		val pkgFolder = rootDir.getFolder(pkgPath)
+		
+		// current folder/container doesn't exist
+		if(!pkgFolder.exists) {
+			var parentFolder = pkgFolder.parent
+			//println(parentFolder.fullPath)
+			// does the parent folder exist
+			if ((parentFolder instanceof IContainer) && !parentFolder.exists) {
+				println(parentFolder + " does not exit!")
+				generatePackage(parentFolder.fullPath, parentFolder, monitor)
+			}
+			
+			println(parentFolder + " does exit!")
+			//pkgFolder.create(true, true, monitor)
+		
+		}
+		*/
+	}
 }
