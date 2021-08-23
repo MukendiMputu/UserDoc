@@ -157,7 +157,7 @@ nodeStyle navigation(1) {
 	}
 }
 
-nodeStyle button(4) {
+nodeStyle button(1) {
 	roundedRectangle {
 		appearance extends default {
 			foreground (255,255,255)

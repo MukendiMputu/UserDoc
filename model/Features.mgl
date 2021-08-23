@@ -34,13 +34,22 @@ container FeatureContainer {
 }
 
 @icon("icons/16/container_16.png")
-container ConfigurationContainer {
+@palette("Selenium Properties")
+container PropertyContainer {
 	style grayContainer("${title}")
-	containableElements(KeyValue[1,*])
-	attr EString as title := ""
+	containableElements(
+		Property[1,*], 
+		BaseURL[1,1],
+		BrowserName[1,1],
+		UserName,
+		Email,
+		Password
+	)
+	attr EString as title := "Properties"
 }
 
 /* Basic URL node, which will be called in the Selenium script*/
+@palette("Selenium Properties")
 @icon("icons/16/url_16.png")
 node BaseURL {
 	style url("URL: ", "${content}")
@@ -58,11 +67,46 @@ node Domain{
 }
 
 /* configuration node*/
+@palette("Selenium Properties")
 @icon("icons/16/gear_16.png")
-node KeyValue {
-	style keyValue("${key}: ", "${value}")
+node Property {
+	style property("${name}: ", "${value}")
 	attr EString as value := "value"
-	attr EString as key := "key"
+	attr EString as name := "key"
+}
+
+/* configuration node*/
+@palette("Selenium Properties")
+@icon("icons/16/gear_16.png")
+node UserName extends Property{
+	style property("${name}: ", "${value}")
+}
+
+/* configuration node*/
+@palette("Selenium Properties")
+@icon("icons/16/gear_16.png")
+node Password extends Property{
+	style property("${name}: ", "${value}")
+}
+
+/* configuration node*/
+@palette("Selenium Properties")
+@icon("icons/16/gear_16.png")
+node Email extends Property{
+	style property("${name}: ", "${value}")
+}
+
+/* configuration node*/
+@icon("icons/16/gear_16.png")
+node BrowserName extends Property{
+	style property("${name}: ", "${value}")
+}
+
+/* configuration node*/
+@palette("Selenium Properties")
+@icon("icons/16/gear_16.png")
+node WebDriver extends Property{
+	style property("${name}: ", "${value}")
 }
 
 node DocNode{

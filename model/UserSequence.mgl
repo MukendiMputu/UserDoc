@@ -1,7 +1,7 @@
 id info.scce.cinco.product.usersequence.main
 stylePath "model/UserSequence.style"
 
-// @generatable("info.scce.cinco.product.userdocumentation.codegen.Generate2", "/src/")
+@generatable("info.scce.cinco.product.userdocumentation.codegen.Generate2", "/src-gen/")
 graphModel UserSequenceGraphModel {
 	iconPath "icons/16/sequence_16.png"
 	diagramExtension "doc"
@@ -29,7 +29,6 @@ node Stop {
  * Definition of the graphical element of an action goto
  */
 @icon("icons/16/action_16.png")
-@palette("User Action")
 node SubSequence {
 	style actionNode("${subSequence.modelName}.doc")
 	prime this::UserSequenceGraphModel as subSequence
@@ -42,6 +41,7 @@ node SubSequence {
  * 
 */
 @disable(resize)
+@palette("Selenium Actions")
 @icon("icons/16/screenshot_16.png")
 node Screenshot {
 	style screenshot
@@ -51,19 +51,11 @@ node Screenshot {
 	attr Comment as description
 }
 
-/* */
-@icon("icons/16/section_16.png")
-node SectionNode {
-	style sectionNode("<b>${title}</b>")
-	attr EString as title := ""
-	incomingEdges (LabeledTransition[1,1], Transition[1,1], Anchor[1,*])
-	outgoingEdges (Transition[1,*])
-}
-
 /*
 * 
 */
 @disable(resize)
+@palette("Selenium Actions")
 @icon("icons/16/screenshot_16.png")
 node Navigation {
 	style navigation("${link}")
@@ -173,7 +165,7 @@ node Textarea extends WebElement {
 @icon("icons/16/object_16.png")
 @palette("Web Elements")
 node Button extends WebElement {
-	style button("${content}","${selector}","${value}", "${_type}")
+	style button("${content}")
 	
 	attr EString as content
 	attr EString as value
@@ -283,14 +275,15 @@ node TableData extends WebElement {
 	outgoingEdges ({Transition, LabeledTransition}[1,*])
 }
 
-@icon("icons/16/object_16.png")
+/* */
+@icon("icons/16/section_16.png")
 @palette("Container Elements")
-container Section {
+container SectionNode {
 	style sectionNode("${title}")
-	
-	attr EString as title
-	incomingEdges (*[1,*])
-	outgoingEdges ({Transition, LabeledTransition}[1,*])
+	attr EString as title := ""
+	containableElements(*)
+	incomingEdges (LabeledTransition[1,1], Transition[1,1], Anchor[1,*])
+	outgoingEdges (Transition[1,*])
 }
 
 @icon("icons/16/comment_16.png")

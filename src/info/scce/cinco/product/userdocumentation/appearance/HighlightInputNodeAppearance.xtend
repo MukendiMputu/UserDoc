@@ -21,7 +21,7 @@ class HighlightInputNodeAppearance implements StyleAppearanceProvider<WebElement
 	]
 
 	override getAppearance(WebElement webElem, String shapeName) {
-		val foregroundColor = if (webElem.isIsHighlighted) {
+		val foregroundColor = if (webElem.isHighlighted) {
 			red
 		} else {
 			invisible
