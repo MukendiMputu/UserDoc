@@ -20,7 +20,8 @@ class Generate2 implements IGenerator<UserSequenceGraphModel> {
 		EclipseFileUtils.writeToFile(targetFile, code)
 
 	}
-
+	
+	// TODO: implement correct template methods
 	private def generateCode(UserSequenceGraphModel model) '''
 		=== «model.modelName» ===
 

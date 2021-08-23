@@ -300,6 +300,7 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 				generateModelInfo(model)
 			)
 		
+		// for every DocNode, inject generate code her
 		for (node : extractAllNodes(model).filter(DocNode)) {
 			if (node.eClass.name.equalsIgnoreCase("docnode"))
 				sequenceGen = new Generate2()
