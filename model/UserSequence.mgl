@@ -49,6 +49,8 @@ node Screenshot {
 	outgoingEdges (Transition[1,*])
 	
 	attr Comment as description
+	@readOnly
+	attr EString as code := "seleniumTool.takePageScreenshot();"
 }
 
 /*
@@ -63,6 +65,8 @@ node Navigation {
 	outgoingEdges (Transition[1,*])
 	
 	attr EString as link
+	@readOnly
+	attr EString as code := 'seleniumTool.goToPage("${link}");'
 }
 
 /*======================== WEB ELEMENTS ======================== */
@@ -146,10 +150,10 @@ node Form extends WebElement {
 @palette("Web Elements")
 node Input extends WebElement {
 	style input("${content}","${selector}","value")
-	// TODO: specific actions for input element
-	
 	attr EString as value
 	attr EString as content
+	@readOnly
+	attr EString as code := 'seleniumTool.typeIn("${value}", "${content}");'
 	incomingEdges (*[1,*])
 	outgoingEdges ({Transition, LabeledTransition}[1,*])
 }
@@ -158,6 +162,8 @@ node Input extends WebElement {
 @palette("Web Elements")
 node Textarea extends WebElement {
 	style input("${content}","${selector}","value")
+	@readOnly
+	attr EString as code := 'seleniumTool.typeIn("${value}", "${content}");'
 	incomingEdges (*[1,*])
 	outgoingEdges ({Transition, LabeledTransition}[1,*])
 }
@@ -169,7 +175,9 @@ node Button extends WebElement {
 	
 	attr EString as content
 	attr EString as value
-	attr ButtonNodeAction as action
+	// attr ButtonNodeAction as action
+	@readOnly
+	attr EString as code := 'seleniumTool.click();'
 	incomingEdges (*[1,*])
 	outgoingEdges ({Transition, LabeledTransition}[1,*])
 }
@@ -187,6 +195,8 @@ node SelectBox extends WebElement {
 	attr EString as content
 	attr EString as value
 	/*attr SelectBoxAction as action*/
+	@readOnly
+	attr EString as code := 'seleniumTool.select();'
 	incomingEdges (*[1,*])
 	outgoingEdges ({Transition, LabeledTransition}[1,*])
 }

@@ -1,0 +1,8 @@
+[Dolphin]
+HeaderColumnWidths=686,72,147,111,103,190
+PreviewsShown=false
+SortRole=permissions
+Timestamp=2021,9,1,7,34,59.382
+Version=4
+ViewMode=1
+VisibleRoles=Details_text,Details_size,Details_modificationtime,Details_type,Details_permissions,Details_imageDateTime,CustomizedDetails

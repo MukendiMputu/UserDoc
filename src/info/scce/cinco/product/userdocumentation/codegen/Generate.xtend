@@ -1,8 +1,11 @@
 package info.scce.cinco.product.userdocumentation.codegen
 
+import info.scce.cinco.product.usersequence.main.usersequence.UserSequenceGraphModel
 import info.scce.cinco.product.features.main.features.FeaturesGraphModel
+import info.scce.cinco.product.userdocumentation.codegen.Generate2
 import info.scce.cinco.product.features.main.features.StartNode
 import info.scce.cinco.product.features.main.features.Property
+import info.scce.cinco.product.features.main.features.DocNode
 import de.jabc.cinco.meta.plugin.generator.runtime.IGenerator
 import de.jabc.cinco.meta.core.utils.EclipseFileUtils
 import org.eclipse.core.resources.ResourcesPlugin
@@ -14,11 +17,10 @@ import org.eclipse.core.resources.IProject
 import org.eclipse.emf.common.util.EList
 import org.eclipse.core.runtime.IPath
 import org.eclipse.core.runtime.Path
-import java.util.HashSet
+import graphmodel.Container
+import java.util.LinkedList
 import graphmodel.Node
-import java.util.Set
-import info.scce.cinco.product.features.main.features.DocNode
-import info.scce.cinco.product.userdocumentation.codegen.Generate2
+import java.util.List
 
 /**
  * 
@@ -74,116 +76,19 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 		} catch (Exception exception) {
 			printException(exception, "creating main, test and target folders")			
 		}
-		
-		// and last the package folders
-		val packagePrefix = "/info/scce/cinco/product/userdocgenerator/"
 
-		// All main packages
-		for (pkg : #["app", "tool"]) {
-			createPackageFolders(new Path(packagePrefix + pkg), mainJavaFolder, monitor)
-		}
-		// and one test package
-		createPackageFolders(new Path(packagePrefix + "test"), testJavaFolder, monitor)
+		// main package
+		createPackageFolders(new Path("/info/scce/cinco/product/userdocgenerator/app"), mainJavaFolder, monitor)
+		
+		// and test package
+		createPackageFolders(new Path("/info/scce/cinco/product/userdocgenerator/test"), testJavaFolder, monitor)
 			
 		try {	
 			
 			// Generate Main.java
 			// write java file to correct location
-			val appPkg = new Path(packagePrefix + "app")
+			val appPkg = new Path("/info/scce/cinco/product/userdocgenerator/app")
 			EclipseFileUtils.writeToFile(mainJavaFolder.getFile(appPkg+'/Main.java'), mainJavaCode(model))
-			
-			// generate AutomationClass.java
-			val toolPkg = new Path(packagePrefix + "tool")
-			EclipseFileUtils.writeToFile(mainJavaFolder.getFile(toolPkg+'/AutomationClass.java'),
-				'''
-				package info.scce.cinco.product.userdocgenerator.tool;
-	
-				import java.io.File;
-				import java.io.IOException;
-				import java.util.Properties;
-				import org.openqa.selenium.By;
-				import java.io.FileInputStream;
-				import org.openqa.selenium.Keys;
-				import java.io.FileNotFoundException;
-				import org.openqa.selenium.WebDriver;
-				import org.openqa.selenium.WebElement;
-				import org.openqa.selenium.OutputType;
-				import org.apache.commons.io.FileUtils;
-				import org.openqa.selenium.TakesScreenshot;
-				import org.openqa.selenium.JavascriptExecutor;
-				import org.openqa.selenium.firefox.FirefoxDriver;
-	
-				public class AutomationClass {
-					protected WebDriver driver;
-				«var EList<Property> props = new BasicEList<Property> »
-				«IF !model.propertyContainers.isEmpty»
-					«FOR configContainer : model.propertyContainers»
-						// «configContainer.title»
-						«FOR property : configContainer.propertys SEPARATOR ';'»
-						«var res = props.add(property)»
-							protected String «property.name»
-						«ENDFOR»
-					«ENDFOR»
-				«ENDIF»
-					protected WebElement element;
-					public AutomationClass() {
-						// Loading configuratiion properties
-						«IF !props.nullOrEmpty»
-						«FOR property : props»
-						«property.name» = "«property.value»";
-						«ENDFOR»
-						«ENDIF»
-						driver = null;
-						element = null;
-					}
-					public Boolean openBrowser(String sBrowserType) {
-						// Set path to driver executable as system path
-						if (sBrowserType.equalsIgnoreCase("firefox")) {
-							System.setProperty("webdriver.gecko.driver", "/home/mukendi/opt/WebDriver/bin/geckodriver");
-							driver = new FirefoxDriver();
-							driver.manage().window().maximize();
-						}
-						return true;
-					}
-					public Boolean goToPage(String sSiteURL) {
-						driver.get(sSiteURL);
-						return true;
-					}
-					public Boolean takePageScreenshot(String folderName, String pictureName) throws IOException {
-						//Use TakesScreenshot method to capture screenshot
-						TakesScreenshot screenshot = (TakesScreenshot)driver;
-						File source = screenshot.getScreenshotAs(OutputType.FILE);
-						FileUtils.copyFile(source, new File("./"+folderName+"/" + pictureName + ".png"));
-						return true;
-					}
-					public Boolean takeElementScreenshot(WebElement pElement, String folderName, String pictureName) throws IOException {
-						//Capture single element screenshot
-						File source = pElement.getScreenshotAs(OutputType.FILE);
-						FileUtils.copyFile(source, new File("./"+folderName+"/" + pictureName + ".png"));
-						return true;
-					}
-					public void highlightElement(WebElement elem) {
-						JavascriptExecutor jsExec = (JavascriptExecutor) driver;
-						jsExec.executeScript("arguments[0].setAttribute('style','border: 2px solid red;');", elem);
-					}
-					public Boolean typeIn(String elementID, String contentText) {
-						WebElement inputField = driver.findElement(By.id(elementID));
-						highlightElement(inputField);
-						inputField.sendKeys(contentText + Keys.TAB);
-						return true;
-					}
-					public Boolean pressEnter(){
-						WebElement enterBtn = driver.findElement(By.xpath("//button[@type='submit']"));
-						highlightElement(enterBtn);
-						enterBtn.click();;
-						return true;
-					}
-					public void closeBrowser() {
-						driver.quit();
-					}
-				}
-				'''
-			)
 			
 			// Generate pom.xml file into the targetDir src-gen
 			EclipseFileUtils.writeToFile(
@@ -296,7 +201,7 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 			printException(exception, "writing contents to files")
 		}
 		
-			EclipseFileUtils.writeToFile(root.getFileForLocation(targetDir.append(model.name + ".txt")),
+			EclipseFileUtils.writeToFile(root.getFileForLocation(targetDir.append(model.name + "Feature.txt")),
 				generateModelInfo(model)
 			)
 		
@@ -309,51 +214,140 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 	 
 	}
 	
-	private def mainJavaCode(FeaturesGraphModel model)
-	// TODO: add respective methods for model objects
+	private def mainJavaCode(FeaturesGraphModel model) {
 	'''
 		package info.scce.cinco.product.userdocgenerator.app;
 		
+		import java.io.File;
 		import java.io.IOException;
-		import info.scce.cinco.product.userdocgenerator.tool.AutomationClass;
+		import java.io.IOException;
+		import java.util.Properties;
+		import org.openqa.selenium.By;
+		import java.io.FileInputStream;
+		import org.openqa.selenium.Keys;
+		import java.io.FileNotFoundException;
+		import org.openqa.selenium.WebDriver;
+		import org.openqa.selenium.WebElement;
+		import org.openqa.selenium.OutputType;
+		import org.apache.commons.io.FileUtils;
+		import org.openqa.selenium.TakesScreenshot;
+		import org.openqa.selenium.JavascriptExecutor;
+		import org.openqa.selenium.firefox.FirefoxDriver;
 		
 		public class Main implements Runnable {
-		
+			protected static WebDriver driver;
+			«var EList<Property> props = new BasicEList<Property> »
+			«IF !model.propertyContainers.isEmpty»
+				«FOR configContainer : model.propertyContainers»
+					// «configContainer.title»
+					«FOR property : configContainer.propertys SEPARATOR ';'»
+					«var res = props.add(property)»
+					protected static String «property.name»
+					«ENDFOR»
+				«ENDFOR»
+			«ENDIF»
+			protected static WebElement element;
+			
 			public static void main (String[] args){
+				// Loading configuratiion properties
+				«IF !props.nullOrEmpty»
+				«FOR property : props»
+				«property.name» = "«property.value»";
+				«ENDFOR»
+				«ENDIF»
+				driver = null;
+				element = null;
 				Main main = new Main();
 				main.run();
 			}
 		
 			@Override
 			public void run() {
-				AutomationClass driverTool = new AutomationClass();
+				AutomationClass seleniumTool = new AutomationClass();
 				// Start of sequence
-				«IF model.allNodes.contains(StartNode)»
-				driverTool.openBrowser();
-				«ENDIF»
+				«FOR startNode : model.startNodes»
+				{
+				«startSequence(startNode)»
+				}
+				«ENDFOR»
 				// For every doc in MGL generate a method with model name as signature
-				driverTool.gotostart();
+				seleniumTool.gotostart();
 				try {
-					driverTool.takePageScreenshot(this.getClass().toString(), "LoginPage");
-					driverTool.typeIn("«»", "peter");
-					driverTool.takePageScreenshot(this.getClass().toString(), "userCredentials");
-					driverTool.typeIn("password", "pwd");
-					driverTool.pressEnter();
-					driverTool.takePageScreenshot(this.getClass().toString(), "UserDashboard");
+					seleniumTool.takePageScreenshot(this.getClass().toString(), "LoginPage");
+					seleniumTool.typeIn("«»", "peter");
+					seleniumTool.takePageScreenshot(this.getClass().toString(), "userCredentials");
+					seleniumTool.typeIn("password", "pwd");
+					seleniumTool.pressEnter();
+					seleniumTool.takePageScreenshot(this.getClass().toString(), "UserDashboard");
 					
-					driverTool.closeBrowser();
+					seleniumTool.closeBrowser();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
+			public Boolean openBrowser(String sBrowserType) {
+				// Set path to driver executable as system path
+				if (sBrowserType.equalsIgnoreCase("firefox")) {
+					System.setProperty("webdriver.gecko.driver", "/home/mukendi/opt/WebDriver/bin/geckodriver");
+					driver = new FirefoxDriver();
+					driver.manage().window().maximize();
+				}
+				return true;
+			}
+			public Boolean goToPage(String sSiteURL) {
+				driver.get(sSiteURL);
+				return true;
+			}
+			public Boolean takePageScreenshot(String folderName, String pictureName) throws IOException {
+				//Use TakesScreenshot method to capture screenshot
+				TakesScreenshot screenshot = (TakesScreenshot)driver;
+				File source = screenshot.getScreenshotAs(OutputType.FILE);
+				FileUtils.copyFile(source, new File("./"+folderName+"/" + pictureName + ".png"));
+				return true;
+			}
+			public Boolean takeElementScreenshot(WebElement pElement, String folderName, String pictureName) throws IOException {
+				//Capture single element screenshot
+				File source = pElement.getScreenshotAs(OutputType.FILE);
+				FileUtils.copyFile(source, new File("./"+folderName+"/" + pictureName + ".png"));
+				return true;
+			}
+			public void highlightElement(WebElement elem) {
+				JavascriptExecutor jsExec = (JavascriptExecutor) driver;
+				jsExec.executeScript("arguments[0].setAttribute('style','border: 2px solid red;');", elem);
+			}
+			public Boolean typeIn(String elementID, String contentText) {
+				WebElement inputField = driver.findElement(By.id(elementID));
+				highlightElement(inputField);
+				inputField.sendKeys(contentText + Keys.TAB);
+				return true;
+			}
+			public Boolean pressEnter(){
+				WebElement enterBtn = driver.findElement(By.xpath("//button[@type='submit']"));
+				highlightElement(enterBtn);
+				enterBtn.click();;
+				return true;
+			}
+			public void closeBrowser() {
+				driver.quit();
+			}
 		}
 	'''
+	}
+		
+	def startSequence(StartNode node) {
+		return '''
+		«FOR successor : node.successors»
+		«successor.eClass.name»
+		«ENDFOR»
+		«node.code»
+		'''
+	}
 	
 	private def extractAllNodes(FeaturesGraphModel model) {
-		val Set<Node> nodeList = new HashSet<Node>;
-		nodeList.addAll(model.allNodes)
-		for (container : model.allContainers)
-			nodeList.addAll(container.nodes)
+		val List<Node> nodeList = new LinkedList<Node>;
+		for (node : model.allNodes) {
+			nodeList.add(node)
+		}
 		return nodeList
 	}
 	
@@ -369,10 +363,9 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 	
 	private def printException(Exception e, String action){
 		println("Caught " + e + " while "+ action +".")
-			println("Cause: " + e.cause)
-			println("Message: " + e.message)
+		println("Cause: " + e.cause)
+		println("Message: " + e.message)
 	}
-	
 
 	private def generateModelInfo(FeaturesGraphModel model) '''
 		=== «model.name» ===
@@ -381,11 +374,15 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 
 		«FOR node : model.allNodes»
 			* node «node.id» of type '«node.eClass.name»' with «node.successors.size» successors and «node.predecessors.size» predecessors
-		«ENDFOR»
-		«FOR cont : model.allContainers»
-			«FOR containedNode : cont.getNodes()»
-			- sub node «containedNode.id» of type '«containedNode.eClass.name»'
-			«ENDFOR»
+			«IF model.allContainers.contains(node)»
+				«FOR containedNode : Container.cast(node).nodes»
+					- sub node «containedNode.id» of type '«containedNode.eClass.name»'
+				«ENDFOR»
+			«ENDIF»
+			«IF model.docNodes.contains(node)»
+				
+			«ENDIF»
 		«ENDFOR»
 	'''
+	
 }
