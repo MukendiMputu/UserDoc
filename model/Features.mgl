@@ -2,36 +2,37 @@ import "model/UserSequence.mgl" as docMgl
 id info.scce.cinco.product.features.main
 stylePath "model/Features.style"
 
-
 @primeviewer
 @generatable("info.scce.cinco.product.userdocumentation.codegen.Generate", "/src-gen/")
 graphModel FeaturesGraphModel {
 	iconPath "icons/16/feature_16.png"
 	diagramExtension "feat"
-	containableElements(*)
-	attr EString as name
+	containableElements(
+		StartNode,
+		EndNode,
+		FeatureContainer,
+		PropertyContainer,
+		DocNode
+	)
+	attr EString as name := "Feature"
 }
 
 @icon("icons/16/start_16.png")
 node StartNode {
 	style StartNode
 	outgoingEdges (*[1,1])
-	@readOnly
-	attr EString as code := "seleniumTool.openBrowser();"
 }
 
 @icon("icons/16/stop_16.png")
 node EndNode{
 	style EndNode
 	incomingEdges ({Edge,LabeledEdge}[1,*])
-	@readOnly
-	attr EString as code := "seleniumTool.closeBrowser();"
 }
 
 @icon("icons/16/container_16.png")
 container FeatureContainer {
 	style grayContainer("${title}")
-	containableElements(*)
+	containableElements(DocNode[1,*])
 	attr EString as title := ""
 	incomingEdges (*[1,*])
 	outgoingEdges ({Edge,LabeledEdge}[1,*])
@@ -45,11 +46,21 @@ container PropertyContainer {
 		Property[1,*], 
 		BaseURL[1,1],
 		BrowserName[1,1],
+		Domain[1,1],
 		UserName,
 		Email,
 		Password
 	)
 	attr EString as title := "Properties"
+}
+
+/* configuration node*/
+@palette("Selenium Properties")
+@icon("icons/16/gear_16.png")
+node Property{
+	style property("${name}: ", "${value}")
+	attr EString as name := "key"
+	attr EString as value := "value"
 }
 
 /* Basic URL node, which will be called in the Selenium script*/
@@ -74,47 +85,40 @@ node Domain{
 /* configuration node*/
 @palette("Selenium Properties")
 @icon("icons/16/gear_16.png")
-node Property {
-	style property("${name}: ", "${value}")
-	attr EString as value := "value"
-	attr EString as name := "key"
+node UserName{
+	style property("Username: ", "${value}")
+	attr EString as value := "john"
 }
 
 /* configuration node*/
 @palette("Selenium Properties")
 @icon("icons/16/gear_16.png")
-node UserName extends Property{
-	style property("${name}: ", "${value}")
+node Password{
+	style property("Password: ", "${value}")
+	attr EString as value := "pwd"
 }
 
 /* configuration node*/
 @palette("Selenium Properties")
 @icon("icons/16/gear_16.png")
-node Password extends Property{
-	style property("${name}: ", "${value}")
+node Email{
+	style property("Email: ", "${value}")
+	attr EString as value := "j.doe@example.com"
 }
 
 /* configuration node*/
 @palette("Selenium Properties")
 @icon("icons/16/gear_16.png")
-node Email extends Property{
-	style property("${name}: ", "${value}")
+node BrowserName{
+	style property("Browser: ", "${name}")
+	attr Browsers as name := "firefox"
 }
 
-/* configuration node*/
-@palette("Selenium Properties")
-@icon("icons/16/gear_16.png")
-node BrowserName extends Property{
-	style property("${name}: ", "${value}")
+enum Browsers {
+	firefox chrome Edge safari ie opera
 }
 
-/* configuration node*/
-@palette("Selenium Properties")
-@icon("icons/16/gear_16.png")
-node WebDriver extends Property{
-	style property("${name}: ", "${value}")
-}
-
+@doubleClickAction("info.scce.cinco.product.userdocumentation.action.DocNodeOpenSubmodel")
 node DocNode{
 	style docNode("${mgl.modelName}")
 	prime docMgl::UserSequenceGraphModel as mgl

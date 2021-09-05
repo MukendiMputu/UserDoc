@@ -6,7 +6,7 @@ graphModel UserSequenceGraphModel {
 	iconPath "icons/16/sequence_16.png"
 	diagramExtension "doc"
 	containableElements(*)
-	attr EString as modelName := ""
+	attr EString as modelName := "UserSequence"
 }
 
 @icon("icons/16/start_16.png")
@@ -29,6 +29,7 @@ node Stop {
  * Definition of the graphical element of an action goto
  */
 @icon("icons/16/action_16.png")
+@doubleClickAction("info.scce.cinco.product.userdocumentation.action.DocNodeOpenSubmodel")
 node SubSequence {
 	style actionNode("${subSequence.modelName}.doc")
 	prime this::UserSequenceGraphModel as subSequence
@@ -47,10 +48,8 @@ node Screenshot {
 	style screenshot
 	incomingEdges (LabeledTransition[1,1], Transition[1,1], Anchor[1,*])
 	outgoingEdges (Transition[1,*])
-	
+	attr EString as pictureName
 	attr Comment as description
-	@readOnly
-	attr EString as code := "seleniumTool.takePageScreenshot();"
 }
 
 /*
@@ -63,10 +62,7 @@ node Navigation {
 	style navigation("${link}")
 	incomingEdges (LabeledTransition[1,1], Transition[1,1], Anchor[1,*])
 	outgoingEdges (Transition[1,*])
-	
 	attr EString as link
-	@readOnly
-	attr EString as code := 'seleniumTool.goToPage("${link}");'
 }
 
 /*======================== WEB ELEMENTS ======================== */
@@ -81,13 +77,10 @@ node Navigation {
 @icon("icons/16/object_16.png")
 @palette("Web Elements")
 node WebElement {
-	style object("<${tagName}>: ${attribute}=${attrValue}")
-	
-	attr EString as tagName := ""
+	style object("WebElement: ${selector}:${value}")
 	attr EString as selector := "id"
-	attr EString as attrValue := ""
+	attr EString as value := ""
 	attr EBoolean as Highlighted
-	// TODO: add unmodifiable code templates in each element
 	
 	incomingEdges (*[1,1])
 	outgoingEdges (Transition[1,1])
@@ -106,7 +99,6 @@ node Div extends WebElement {
 node H extends WebElement {
 	style textBlock("${content}")
 	attr EInt as ranking
-	attr EString as value
 	attr EString as content
 }
 
@@ -114,7 +106,6 @@ node H extends WebElement {
 @palette("Web Elements")
 node P extends WebElement {
 	style textBlock("${content}")
-	attr EString as value
 	attr EString as content
 }
 
@@ -122,7 +113,6 @@ node P extends WebElement {
 @palette("Web Elements")
 node Span extends WebElement {
 	style textBlock("${content}")
-	attr EString as value
 	attr EString as content
 	
 }
@@ -131,7 +121,6 @@ node Span extends WebElement {
 @palette("Web Elements")
 node Label extends WebElement {
 	style textBlock("${content}")
-	attr EString as value
 	attr EString as content
 	
 }
@@ -149,11 +138,8 @@ node Form extends WebElement {
 @icon("icons/16/object_16.png")
 @palette("Web Elements")
 node Input extends WebElement {
-	style input("${content}","${selector}","value")
-	attr EString as value
+	style input("Input: ${content}")
 	attr EString as content
-	@readOnly
-	attr EString as code := 'seleniumTool.typeIn("${value}", "${content}");'
 	incomingEdges (*[1,*])
 	outgoingEdges ({Transition, LabeledTransition}[1,*])
 }
@@ -161,9 +147,7 @@ node Input extends WebElement {
 @icon("icons/16/object_16.png")
 @palette("Web Elements")
 node Textarea extends WebElement {
-	style input("${content}","${selector}","value")
-	@readOnly
-	attr EString as code := 'seleniumTool.typeIn("${value}", "${content}");'
+	style input("${content}")
 	incomingEdges (*[1,*])
 	outgoingEdges ({Transition, LabeledTransition}[1,*])
 }
@@ -172,12 +156,7 @@ node Textarea extends WebElement {
 @palette("Web Elements")
 node Button extends WebElement {
 	style button("${content}")
-	
 	attr EString as content
-	attr EString as value
-	// attr ButtonNodeAction as action
-	@readOnly
-	attr EString as code := 'seleniumTool.click();'
 	incomingEdges (*[1,*])
 	outgoingEdges ({Transition, LabeledTransition}[1,*])
 }
@@ -191,12 +170,7 @@ enum ButtonNodeAction {
 @palette("Web Elements")
 node SelectBox extends WebElement {
 	style actionNode("")
-	
 	attr EString as content
-	attr EString as value
-	/*attr SelectBoxAction as action*/
-	@readOnly
-	attr EString as code := 'seleniumTool.select();'
 	incomingEdges (*[1,*])
 	outgoingEdges ({Transition, LabeledTransition}[1,*])
 }
@@ -205,10 +179,7 @@ node SelectBox extends WebElement {
 @palette("Web Elements")
 node SelectBoxOption extends WebElement {
 	style actionNode("")
-	
 	attr EString as content
-	attr EString as value
-	/*attr SelectBoxAction as action*/
 	incomingEdges (*[1,*])
 	outgoingEdges ({Transition, LabeledTransition}[1,*])
 }
@@ -219,7 +190,6 @@ node Table extends WebElement {
 	style actionNode("")
 	
 	attr EString as content
-	attr EString as value
 	/*attr SelectBoxAction as action*/
 	incomingEdges (*[1,*])
 	outgoingEdges ({Transition, LabeledTransition}[1,*])
@@ -231,7 +201,6 @@ node TableHead extends WebElement {
 	style actionNode("")
 	
 	attr EString as content
-	attr EString as value
 	/*attr SelectBoxAction as action*/
 	incomingEdges (*[1,*])
 	outgoingEdges ({Transition, LabeledTransition}[1,*])
@@ -243,7 +212,6 @@ node Th extends WebElement {
 	style actionNode("")
 	
 	attr EString as content
-	attr EString as value
 	/*attr SelectBoxAction as action*/
 	incomingEdges (*[1,*])
 	outgoingEdges ({Transition, LabeledTransition}[1,*])
@@ -255,8 +223,6 @@ node TableRow extends WebElement {
 	style actionNode("")
 	
 	attr EString as content
-	attr EString as value
-	/*attr SelectBoxAction as action*/
 	incomingEdges (*[1,*])
 	outgoingEdges ({Transition, LabeledTransition}[1,*])
 }
@@ -267,8 +233,6 @@ node TableBody extends WebElement {
 	style actionNode("")
 	
 	attr EString as content
-	attr EString as value
-	/*attr SelectBoxAction as action*/
 	incomingEdges (*[1,*])
 	outgoingEdges ({Transition, LabeledTransition}[1,*])
 }
@@ -279,8 +243,6 @@ node TableData extends WebElement {
 	style actionNode("")
 	
 	attr EString as content
-	attr EString as value
-	/*attr SelectBoxAction as action*/
 	incomingEdges (*[1,*])
 	outgoingEdges ({Transition, LabeledTransition}[1,*])
 }
@@ -304,10 +266,6 @@ node Comment {
 	attr EString as content
 	attr Screenshot as referenceTo
 	outgoingEdges (Anchor[1,*])
-}
-
-enum Actions {
-	goto click select enter check submit clear
 }
 
 /*======================== TRANSITION ELEMENTS ======================== */

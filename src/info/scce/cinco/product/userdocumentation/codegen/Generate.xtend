@@ -1,26 +1,28 @@
 package info.scce.cinco.product.userdocumentation.codegen
 
-import info.scce.cinco.product.usersequence.main.usersequence.UserSequenceGraphModel
 import info.scce.cinco.product.features.main.features.FeaturesGraphModel
-import info.scce.cinco.product.userdocumentation.codegen.Generate2
 import info.scce.cinco.product.features.main.features.StartNode
-import info.scce.cinco.product.features.main.features.Property
 import info.scce.cinco.product.features.main.features.DocNode
+import info.scce.cinco.product.features.main.features.EndNode
+import info.scce.cinco.product.features.main.features.BaseURL
+import info.scce.cinco.product.features.main.features.BrowserName
+import info.scce.cinco.product.features.main.features.UserName
+import info.scce.cinco.product.features.main.features.Email
+import info.scce.cinco.product.features.main.features.Password
+import info.scce.cinco.product.features.main.features.Property
 import de.jabc.cinco.meta.plugin.generator.runtime.IGenerator
 import de.jabc.cinco.meta.core.utils.EclipseFileUtils
 import org.eclipse.core.resources.ResourcesPlugin
 import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.core.resources.IWorkspaceRoot
-import org.eclipse.emf.common.util.BasicEList
 import org.eclipse.core.resources.IContainer
-import org.eclipse.core.resources.IProject
-import org.eclipse.emf.common.util.EList
 import org.eclipse.core.runtime.IPath
 import org.eclipse.core.runtime.Path
 import graphmodel.Container
 import java.util.LinkedList
 import graphmodel.Node
 import java.util.List
+import org.eclipse.emf.common.util.BasicEList
 
 /**
  * 
@@ -28,12 +30,10 @@ import java.util.List
 class Generate implements IGenerator<FeaturesGraphModel> {
 
 	IWorkspaceRoot root = ResourcesPlugin.workspace.getRoot()
-	IProject project
 	IPath tmpPath
-	Generate2 sequenceGen
-
+	
 	override generate(FeaturesGraphModel model, IPath targetDir, IProgressMonitor monitor) {
-		project = root.getContainerForLocation(targetDir).project
+		val project = root.getContainerForLocation(targetDir).project
 
 		if (model.name.nullOrEmpty)
 			throw new RuntimeException("Model's name cannot be empty!")
@@ -81,141 +81,157 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 		createPackageFolders(new Path("/info/scce/cinco/product/userdocgenerator/app"), mainJavaFolder, monitor)
 		
 		// and test package
-		createPackageFolders(new Path("/info/scce/cinco/product/userdocgenerator/test"), testJavaFolder, monitor)
+		//createPackageFolders(new Path("/info/scce/cinco/product/userdocgenerator/test"), testJavaFolder, monitor)
 			
-		try {	
-			
-			// Generate Main.java
-			// write java file to correct location
-			val appPkg = new Path("/info/scce/cinco/product/userdocgenerator/app")
-			EclipseFileUtils.writeToFile(mainJavaFolder.getFile(appPkg+'/Main.java'), mainJavaCode(model))
-			
-			// Generate pom.xml file into the targetDir src-gen
-			EclipseFileUtils.writeToFile(
-				root.getFileForLocation(targetDir.append("pom.xml")),
-				'''
-					<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-					  <modelVersion>4.0.0</modelVersion>
-					  <groupId>info.scce.cinco.product</groupId>
-					  <artifactId>userdocumentation</artifactId>
-					  <version>0.0.1-SNAPSHOT</version>
-					  <name>User Documentation Generator</name>
-					
-					  <properties>
-						  <maven.compiler.source>1.8</maven.compiler.source>
-						  <maven.compiler.target>1.8</maven.compiler.target>
-					  </properties>
-					
-					  <dependencies>
-					  <dependency>
-					    <groupId>commons-io</groupId>
-					    <artifactId>commons-io</artifactId>
-					    <version>2.4</version>
-					</dependency>
-					  <dependency>
-					  	<groupId>org.seleniumhq.selenium</groupId>
-					  	<artifactId>selenium-java</artifactId>
-					  	<version>3.141.59</version>
-					  </dependency>
-					  <dependency>
-					    <groupId>org.testng</groupId>
-					    <artifactId>testng</artifactId>
-					    <version>6.14.3</version>
-					    <scope>compile</scope>
-					</dependency>
-					  </dependencies>
-					</project>
-				'''
-			)
-			
-			// Generate .classpath file
-			EclipseFileUtils.writeToFile(
-				root.getFileForLocation(targetDir.append(".classpath")),
-				'''
-					<?xml version="1.0" encoding="UTF-8"?>
-					<classpath>
-						<classpathentry kind="src" output="target/classes" path="src/main/java">
-							<attributes>
-								<attribute name="optional" value="true"/>
-								<attribute name="maven.pomderived" value="true"/>
-							</attributes>
-						</classpathentry>
-						
-						<classpathentry kind="src" output="target/test-classes" path="src/test/java">
-							<attributes>
-								<attribute name="test" value="true"/>
-								<attribute name="optional" value="true"/>
-								<attribute name="maven.pomderived" value="true"/>
-							</attributes>
-						</classpathentry>
-						
-						<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
-							<attributes>
-								<attribute name="module" value="true"/>
-								<attribute name="maven.pomderived" value="true"/>
-							</attributes>
-						</classpathentry>
-						
-						<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
-							<attributes>
-								<attribute name="maven.pomderived" value="true"/>
-							</attributes>
-						</classpathentry>
-						
-						<classpathentry kind="output" path="target/classes"/>
-					</classpath>
-				'''
-			)
-			
-			// Generate .project file
-			EclipseFileUtils.writeToFile(
-				root.getFileForLocation(targetDir.append(".project")),
-				'''
+		// Generate Main.java
+		// write java file to correct location
+		val appPkg = new Path("/info/scce/cinco/product/userdocgenerator/app")
+		EclipseFileUtils.writeToFile(mainJavaFolder.getFile(appPkg+'/Main.java'), mainJavaCode(model))
+		
+		// Generate pom.xml file into the targetDir src-gen
+		EclipseFileUtils.writeToFile(
+			root.getFileForLocation(targetDir.append("pom.xml")),
+			'''
+				<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+				  <modelVersion>4.0.0</modelVersion>
+				  <groupId>info.scce.cinco.product</groupId>
+				  <artifactId>userdocumentation</artifactId>
+				  <version>0.0.1-SNAPSHOT</version>
+				  <name>User Documentation Generator</name>
+				
+				  <properties>
+					  <maven.compiler.source>1.8</maven.compiler.source>
+					  <maven.compiler.target>1.8</maven.compiler.target>
+				  </properties>
+				
+				  <dependencies>
+				  <dependency>
+				    <groupId>commons-io</groupId>
+				    <artifactId>commons-io</artifactId>
+				    <version>2.4</version>
+				</dependency>
+				  <dependency>
+				  	<groupId>org.seleniumhq.selenium</groupId>
+				  	<artifactId>selenium-java</artifactId>
+				  	<version>3.141.59</version>
+				  </dependency>
+				  <dependency>
+				    <groupId>org.testng</groupId>
+				    <artifactId>testng</artifactId>
+				    <version>6.14.3</version>
+				    <scope>compile</scope>
+				</dependency>
+				  </dependencies>
+				</project>
+			'''
+		)
+		
+		// Generate .classpath file
+		EclipseFileUtils.writeToFile(
+			root.getFileForLocation(targetDir.append(".classpath")),
+			'''
 				<?xml version="1.0" encoding="UTF-8"?>
-				<projectDescription>
-					<name>«root.getContainerForLocation(targetDir).project.name.split("/").last»</name>
-					<comment></comment>
-					<projects>
-					</projects>
-					<buildSpec>
-						<buildCommand>
-							<name>org.eclipse.jdt.core.javabuilder</name>
-							<arguments>
-							</arguments>
-						</buildCommand>
-						<buildCommand>
-							<name>org.eclipse.m2e.core.maven2Builder</name>
-							<arguments>
-							</arguments>
-						</buildCommand>
-					</buildSpec>
-					<natures>
-						<nature>org.eclipse.jdt.core.javanature</nature>
-						<nature>org.eclipse.m2e.core.maven2Nature</nature>
-					</natures>
-				</projectDescription>
-				'''
-			)
-			
-		} catch (Exception exception) {
-			printException(exception, "writing contents to files")
-		}
+				<classpath>
+					<classpathentry kind="src" output="target/classes" path="src/main/java">
+						<attributes>
+							<attribute name="optional" value="true"/>
+							<attribute name="maven.pomderived" value="true"/>
+						</attributes>
+					</classpathentry>
+					
+					<classpathentry kind="src" output="target/test-classes" path="src/test/java">
+						<attributes>
+							<attribute name="test" value="true"/>
+							<attribute name="optional" value="true"/>
+							<attribute name="maven.pomderived" value="true"/>
+						</attributes>
+					</classpathentry>
+					
+					<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+						<attributes>
+							<attribute name="module" value="true"/>
+							<attribute name="maven.pomderived" value="true"/>
+						</attributes>
+					</classpathentry>
+					
+					<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+						<attributes>
+							<attribute name="maven.pomderived" value="true"/>
+						</attributes>
+					</classpathentry>
+					
+					<classpathentry kind="output" path="target/classes"/>
+				</classpath>
+			'''
+		)
 		
-			EclipseFileUtils.writeToFile(root.getFileForLocation(targetDir.append(model.name + "Feature.txt")),
-				generateModelInfo(model)
-			)
+		// Generate .project file
+		EclipseFileUtils.writeToFile(
+			root.getFileForLocation(targetDir.append(".project")),
+			'''
+			<?xml version="1.0" encoding="UTF-8"?>
+			<projectDescription>
+				<name>«root.getContainerForLocation(targetDir).project.name.split("/").last»</name>
+				<comment></comment>
+				<projects>
+				</projects>
+				<buildSpec>
+					<buildCommand>
+						<name>org.eclipse.jdt.core.javabuilder</name>
+						<arguments>
+						</arguments>
+					</buildCommand>
+					<buildCommand>
+						<name>org.eclipse.m2e.core.maven2Builder</name>
+						<arguments>
+						</arguments>
+					</buildCommand>
+				</buildSpec>
+				<natures>
+					<nature>org.eclipse.jdt.core.javanature</nature>
+					<nature>org.eclipse.m2e.core.maven2Nature</nature>
+				</natures>
+			</projectDescription>
+			'''
+		)
 		
-		// for every DocNode, inject generate code her
-		for (node : extractAllNodes(model).filter(DocNode)) {
-			if (node.eClass.name.equalsIgnoreCase("docnode"))
-				sequenceGen = new Generate2()
-				sequenceGen.generate(node.getMgl(), targetDir, monitor)
-		}
-	 
+		EclipseFileUtils.writeToFile(root.getFileForLocation(targetDir.append(model.name + "Feature.txt")),
+			generateModelInfo(model)
+		)
 	}
 	
 	private def mainJavaCode(FeaturesGraphModel model) {
-	'''
+		var List<Property> properties 
+		var List<BaseURL> urls 
+		var List<BrowserName> browserNames
+		var List<UserName> userNames 
+		var List<Email> emails 
+		var List<Password> passwords
+		// Lists of configuration nodes
+		if (!model.propertyContainers.isEmpty) {
+			for (propsContainer : model.propertyContainers) {
+				properties = new BasicEList(propsContainer.propertys)
+				urls = new BasicEList(propsContainer.baseURLs)
+				browserNames = new BasicEList(propsContainer.browserNames)
+				userNames = new BasicEList(propsContainer.userNames)
+				emails = new BasicEList(propsContainer.emails)
+				passwords = new BasicEList(propsContainer.passwords)
+			}
+		}
+
+		// At least on property has to be defined
+		if(browserNames.isEmpty)
+			throw new RuntimeException("You have to define at least the browser property.\nUse the property container to contain it.")
+		// At least on property has to be defined
+		val importStatement = switch browserNames.head.name {
+								case "firefox":  "import org.openqa.selenium.firefox.FirefoxDriver;"
+								case "chrome": "import org.openqa.selenium.chrome.ChromeDriver;"
+								case "edge": "import org.openqa.selenium.edge.EdgeDriver;"
+								case "safari": "import org.openqa.selenium.safari.SafariDriver;"
+								case "ie": "import org.openqa.selenium.ie.InternetExplorerDriver;"
+								case "opera": "import org.openqa.selenium.opera.OperaDriver;"
+							}
+		return 	'''
 		package info.scce.cinco.product.userdocgenerator.app;
 		
 		import java.io.File;
@@ -232,30 +248,67 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 		import org.apache.commons.io.FileUtils;
 		import org.openqa.selenium.TakesScreenshot;
 		import org.openqa.selenium.JavascriptExecutor;
-		import org.openqa.selenium.firefox.FirefoxDriver;
+		«importStatement»
+		import org.openqa.selenium.support.ui.WebDriverWait;
 		
 		public class Main implements Runnable {
 			protected static WebDriver driver;
-			«var EList<Property> props = new BasicEList<Property> »
-			«IF !model.propertyContainers.isEmpty»
-				«FOR configContainer : model.propertyContainers»
-					// «configContainer.title»
-					«FOR property : configContainer.propertys SEPARATOR ';'»
-					«var res = props.add(property)»
-					protected static String «property.name»
-					«ENDFOR»
-				«ENDFOR»
-			«ENDIF»
+			«FOR prop : properties»
+			protected static String «prop.name» = "«prop.value»"
+			«ENDFOR»
+			«FOR url : urls»
+			protected static String «url.eClass.name.toFirstLower» = "«url.content»"
+			«ENDFOR»
+			«FOR browser : browserNames»
+			protected static String «browser.eClass.name.toFirstLower» = "«browser.name»"
+			«ENDFOR»
+			«FOR uName : userNames»
+			protected static String «uName.eClass.name.toFirstLower» = "«uName.value»"
+			«ENDFOR»
+			«FOR email : emails»
+			protected static String «email.eClass.name.toFirstLower» = "«email.value»"
+			«ENDFOR»
+			«FOR pword : passwords»
+			protected static String «pword.eClass.name.toFirstLower» = "«pword.value»"
+			«ENDFOR»
+			
 			protected static WebElement element;
 			
 			public static void main (String[] args){
-				// Loading configuratiion properties
-				«IF !props.nullOrEmpty»
-				«FOR property : props»
-				«property.name» = "«property.value»";
-				«ENDFOR»
-				«ENDIF»
-				driver = null;
+				// Set path to driver executable as system path
+				switch («browserNames.head.eClass.name.toFirstLower») {
+					case "firefox": 
+						System.setProperty("webdriver.gecko.driver", "/home/mukendi/opt/WebDriver/bin/geckodriver");
+						driver = new FirefoxDriver();
+						break;
+					case "chrome": 
+						System.setProperty("webdriver.chrome.driver", "/home/mukendi/opt/WebDriver/bin/chromedriver");
+						driver = new ChromeDriver();
+						break;
+					case "safari": 
+						// Run the following command from the terminal for the first time and type your password at the prompt to authorise WebDriver
+						// High Sierra: safaridriver --enable
+						// El Capitan and Sierra:
+						//		- Enable the Developer menu from Safari preferences
+						//		- Check the Allow Remote Automation option from with the Develop menu
+						// 		- run the following command '/usr/bin/safaridriver -p 1337</' and type your password 
+						driver = new SafariDriver();
+						break;
+					case "edge": 
+						System.setProperty("webdriver.edge.driver", "C:/path/to/MicrosoftWebDriver.exe");
+						driver = new EdgeDriver();
+						break;
+					case "ie": 
+						System.setProperty("webdriver.ie.driver", "C:/path/to/IEDriver.exe");
+						driver = new InternetExplorerDriver();
+						break;
+					case "opera": 
+						System.setProperty("webdriver.opera.driver", "/home/mukendi/opt/WebDriver/bin/operadriver");
+						driver = new OperaDriver();
+						break;
+				}
+		
+		        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 				element = null;
 				Main main = new Main();
 				main.run();
@@ -263,92 +316,98 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 		
 			@Override
 			public void run() {
-				AutomationClass seleniumTool = new AutomationClass();
-				// Start of sequence
 				«FOR startNode : model.startNodes»
+				// Start of sequence «startNode.id»
 				{
-				«startSequence(startNode)»
+					this.openBrowser();
+					«FOR node : extractSequence(startNode)»
+					«IF node instanceof DocNode »
+					//------- DocNode Code
+					this.«new Generate2().generate(node.getMgl())»
+					//------- END DocNode Code
+					«ELSEIF node instanceof EndNode»
+					this.closeBrowser();	
+					«ENDIF»
+					«ENDFOR»
 				}
 				«ENDFOR»
-				// For every doc in MGL generate a method with model name as signature
-				seleniumTool.gotostart();
-				try {
-					seleniumTool.takePageScreenshot(this.getClass().toString(), "LoginPage");
-					seleniumTool.typeIn("«»", "peter");
-					seleniumTool.takePageScreenshot(this.getClass().toString(), "userCredentials");
-					seleniumTool.typeIn("password", "pwd");
-					seleniumTool.pressEnter();
-					seleniumTool.takePageScreenshot(this.getClass().toString(), "UserDashboard");
-					
-					seleniumTool.closeBrowser();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
 			}
-			public Boolean openBrowser(String sBrowserType) {
-				// Set path to driver executable as system path
-				if (sBrowserType.equalsIgnoreCase("firefox")) {
-					System.setProperty("webdriver.gecko.driver", "/home/mukendi/opt/WebDriver/bin/geckodriver");
-					driver = new FirefoxDriver();
-					driver.manage().window().maximize();
-				}
+			
+			/*================== Selenium Methods ==================*/
+		
+			public Boolean openBrowser(String sBrowserType)
+			{
+				this.driver.manage().window().maximize();
 				return true;
 			}
-			public Boolean goToPage(String sSiteURL) {
-				driver.get(sSiteURL);
+			public Boolean goToPage(String sSiteURL)
+			{
+				this.driver.get(sSiteURL);
 				return true;
 			}
-			public Boolean takePageScreenshot(String folderName, String pictureName) throws IOException {
+			public Boolean takePageScreenshot(String folderName, String pictureName) throws IOException
+			{
 				//Use TakesScreenshot method to capture screenshot
-				TakesScreenshot screenshot = (TakesScreenshot)driver;
+				TakesScreenshot screenshot = (TakesScreenshot)this.driver;
 				File source = screenshot.getScreenshotAs(OutputType.FILE);
 				FileUtils.copyFile(source, new File("./"+folderName+"/" + pictureName + ".png"));
 				return true;
 			}
-			public Boolean takeElementScreenshot(WebElement pElement, String folderName, String pictureName) throws IOException {
+			public Boolean takeElementScreenshot(WebElement pElement, String folderName, String pictureName) throws IOException
+			{
 				//Capture single element screenshot
 				File source = pElement.getScreenshotAs(OutputType.FILE);
 				FileUtils.copyFile(source, new File("./"+folderName+"/" + pictureName + ".png"));
 				return true;
 			}
-			public void highlightElement(WebElement elem) {
-				JavascriptExecutor jsExec = (JavascriptExecutor) driver;
-				jsExec.executeScript("arguments[0].setAttribute('style','border: 2px solid red;');", elem);
+			public void highlightElement()
+			{
+				JavascriptExecutor jsExec = (JavascriptExecutor)this.driver;
+				jsExec.executeScript("arguments[0].setAttribute('style','border: 2px solid red;');", this.element);
 			}
-			public Boolean typeIn(String elementID, String contentText) {
-				WebElement inputField = driver.findElement(By.id(elementID));
+			public Boolean typeIn(String elementID, String contentText)
+			{
+				WebElement inputField = this.driver.findElement(By.id(elementID));
 				highlightElement(inputField);
 				inputField.sendKeys(contentText + Keys.TAB);
 				return true;
 			}
-			public Boolean pressEnter(){
-				WebElement enterBtn = driver.findElement(By.xpath("//button[@type='submit']"));
+			public Boolean pressEnter()
+			{
+				WebElement enterBtn = this.driver.findElement(By.xpath("//button[@type='submit']"));
 				highlightElement(enterBtn);
 				enterBtn.click();;
 				return true;
 			}
-			public void closeBrowser() {
-				driver.quit();
+			public void closeBrowser()
+			{
+				this.driver.quit();
 			}
 		}
 	'''
 	}
+
+	private def extractSequence(StartNode start) {
+		val List<Node> singleSequence = new LinkedList<Node>;
+		var cond = true
 		
-	def startSequence(StartNode node) {
-		return '''
-		«FOR successor : node.successors»
-		«successor.eClass.name»
-		«ENDFOR»
-		«node.code»
-		'''
-	}
-	
-	private def extractAllNodes(FeaturesGraphModel model) {
-		val List<Node> nodeList = new LinkedList<Node>;
-		for (node : model.allNodes) {
-			nodeList.add(node)
+		singleSequence.add(start)			// get startNode
+		var succ = start.successors.head	// and its successor
+		singleSequence.add(succ)
+ 
+		if(succ instanceof EndNode){		// if it's and end node
+			return singleSequence			// return the sequence
+		} else {
+			// swapping
+			var current = succ					// or else get its successor
+			while(cond){						// while a certain condition still hold
+				current = current.successors.head // replace the current by its successor
+				singleSequence.add(current)		  // add that successor node
+				if (current instanceof EndNode)
+					cond = false
+			}
 		}
-		return nodeList
+		return singleSequence
 	}
 	
 	private def void createPackageFolders(IPath pkgPath, IContainer rootDir, IProgressMonitor monitor) {
@@ -378,9 +437,6 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 				«FOR containedNode : Container.cast(node).nodes»
 					- sub node «containedNode.id» of type '«containedNode.eClass.name»'
 				«ENDFOR»
-			«ENDIF»
-			«IF model.docNodes.contains(node)»
-				
 			«ENDIF»
 		«ENDFOR»
 	'''

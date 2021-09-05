@@ -17,6 +17,18 @@ appearance blueBorder extends default {
 			foreground (28,113,216)
 			background (255,255,255)
 }
+
+appearance labelFont {
+	font ("Sans",10)
+}
+
+appearance labelFontItalics {
+	font ("Sans",ITALIC,10)
+}
+
+appearance labelFontBold {
+	font ("Sans",BOLD,10)
+}
 /*---------------- Structural Elements ------------------------ */
 
 nodeStyle subsequence(1) {
@@ -89,6 +101,9 @@ nodeStyle sectionNode(1) {
 		position (0,0)
 		size (300,75)
 		text {
+			appearance extends labelFontBold {
+				foreground (0,0,0)
+			}
 			position (5, 5)
 			value "%s"
 		}
@@ -127,7 +142,7 @@ nodeStyle textBlock(1) {
 	}
 }
 
-nodeStyle input(3) {
+nodeStyle input(1) {
 	roundedRectangle {
 		appearance extends default {
 			background (255,255,255)
@@ -137,7 +152,7 @@ nodeStyle input(3) {
 		corner (8,8)
 		multiText {
 			position ( CENTER, MIDDLE )
-			value "%1s"
+			value "%s"
 		}
 	}
 }

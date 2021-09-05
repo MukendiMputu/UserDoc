@@ -2,34 +2,40 @@ package info.scce.cinco.product.userdocumentation.codegen
 
 import org.eclipse.core.runtime.IPath
 import org.eclipse.core.runtime.IProgressMonitor
-import org.eclipse.core.resources.ResourcesPlugin
-import de.jabc.cinco.meta.core.utils.EclipseFileUtils
 import de.jabc.cinco.meta.plugin.generator.runtime.IGenerator
+import info.scce.cinco.product.usersequence.main.usersequence.Navigation
+import info.scce.cinco.product.usersequence.main.usersequence.Input
+import info.scce.cinco.product.usersequence.main.usersequence.Screenshot
+import info.scce.cinco.product.usersequence.main.usersequence.Button
+import info.scce.cinco.product.usersequence.main.usersequence.SelectBox
 import info.scce.cinco.product.usersequence.main.usersequence.UserSequenceGraphModel
+import java.util.List
+import graphmodel.Node
+import java.util.LinkedList
 
 class Generate2 implements IGenerator<UserSequenceGraphModel> {
 
-	override generate(UserSequenceGraphModel model, IPath targetDir, IProgressMonitor monitor) {
-
-		if (model.modelName.nullOrEmpty)
-			throw new RuntimeException("Model's name must be set.")
-
-		val code = generateCode(model);
-		val targetFile = ResourcesPlugin.workspace.root.getFileForLocation(targetDir.append(model.modelName + ".txt"))
-
-		EclipseFileUtils.writeToFile(targetFile, code)
-
-	}
+	def generate(UserSequenceGraphModel model)'''
+			«FOR node : model.allNodes»
+			«switch (node.eClass.name) {
+					case "Navigation": 
+						"goToPage();"
+					case "Input": 
+						"typeIn();"
+					case "Screenshot": 
+						"takeScreenshot();"
+					case "Button": 
+						"click();"
+					case "SelectBox": 
+						"select();"
+			}
+			»
+			«ENDFOR»
+	''' 
 	
-	// TODO: implement correct template methods
-	private def generateCode(UserSequenceGraphModel model) '''
-		=== «model.modelName» ===
-
-		The model contains «model.allNodes.size» nodes. Here's some general information about them:
-
-		«FOR node : model.allNodes»
-			* node «node.id» of type '«node.eClass.name»' with «node.successors.size» successors and «node.predecessors.size» predecessors
-		«ENDFOR»
-	'''
+	
+	override generate(UserSequenceGraphModel arg0, IPath arg1, IProgressMonitor arg2) {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
 
 }
