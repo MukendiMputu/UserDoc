@@ -2,7 +2,7 @@ package info.scce.cinco.product.userdocumentation.appearance
 
 import de.jabc.cinco.meta.core.ge.style.generator.runtime.appearance.StyleAppearanceProvider
 import style.StyleFactory
-import info.scce.cinco.product.usersequence.main.usersequence.WebElement
+import info.scce.cinco.product.usersequence.main.doc.WebElement
 
 class HighlightInputNodeAppearance implements StyleAppearanceProvider<WebElement> {
 

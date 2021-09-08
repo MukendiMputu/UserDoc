@@ -1,15 +1,15 @@
 package info.scce.cinco.product.userdocumentation.codegen
 
-import info.scce.cinco.product.features.main.features.FeaturesGraphModel
-import info.scce.cinco.product.features.main.features.StartNode
-import info.scce.cinco.product.features.main.features.DocNode
-import info.scce.cinco.product.features.main.features.EndNode
-import info.scce.cinco.product.features.main.features.BaseURL
-import info.scce.cinco.product.features.main.features.BrowserName
-import info.scce.cinco.product.features.main.features.UserName
-import info.scce.cinco.product.features.main.features.Email
-import info.scce.cinco.product.features.main.features.Password
-import info.scce.cinco.product.features.main.features.Property
+import info.scce.cinco.product.features.main.feature.FeatureGraphModel
+import info.scce.cinco.product.features.main.feature.StartNode
+import info.scce.cinco.product.features.main.feature.DocNode
+import info.scce.cinco.product.features.main.feature.EndNode
+import info.scce.cinco.product.features.main.feature.BaseURL
+import info.scce.cinco.product.features.main.feature.BrowserName
+import info.scce.cinco.product.features.main.feature.UserName
+import info.scce.cinco.product.features.main.feature.Email
+import info.scce.cinco.product.features.main.feature.Password
+import info.scce.cinco.product.features.main.feature.Property
 import de.jabc.cinco.meta.plugin.generator.runtime.IGenerator
 import de.jabc.cinco.meta.core.utils.EclipseFileUtils
 import org.eclipse.core.resources.ResourcesPlugin
@@ -23,19 +23,21 @@ import java.util.LinkedList
 import graphmodel.Node
 import java.util.List
 import org.eclipse.emf.common.util.BasicEList
+import org.eclipse.core.resources.IProject
 
 /**
- * 
+ * @author Mukendi Mputu
  */
-class Generate implements IGenerator<FeaturesGraphModel> {
+class Generate implements IGenerator<FeatureGraphModel> {
 
-	IWorkspaceRoot root = ResourcesPlugin.workspace.getRoot()
-	IPath tmpPath
-	
-	override generate(FeaturesGraphModel model, IPath targetDir, IProgressMonitor monitor) {
-		val project = root.getContainerForLocation(targetDir).project
+	static IWorkspaceRoot root = ResourcesPlugin.workspace.getRoot()
+	static IPath tmpPath
+	static IProject project
+	/*
+	override generate(FeatureGraphModel model, IPath targetDir, IProgressMonitor monitor) {
+		project = root.getContainerForLocation(targetDir).project
 
-		if (model.name.nullOrEmpty)
+		if (model.modelName.nullOrEmpty)
 			throw new RuntimeException("Model's name cannot be empty!")
 		
 		// get the IPath of the target directory
@@ -86,7 +88,7 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 		// Generate Main.java
 		// write java file to correct location
 		val appPkg = new Path("/info/scce/cinco/product/userdocgenerator/app")
-		EclipseFileUtils.writeToFile(mainJavaFolder.getFile(appPkg+'/Main.java'), mainJavaCode(model))
+		EclipseFileUtils.writeToFile(mainJavaFolder.getFile(appPkg+'/Main.java'),model.generateMainJavaCode)
 		
 		// Generate pom.xml file into the targetDir src-gen
 		EclipseFileUtils.writeToFile(
@@ -195,12 +197,12 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 			'''
 		)
 		
-		EclipseFileUtils.writeToFile(root.getFileForLocation(targetDir.append(model.name + "Feature.txt")),
-			generateModelInfo(model)
+		EclipseFileUtils.writeToFile(root.getFileForLocation(targetDir.append(model.modelName + "Feature.txt")),
+			model.generateModelInfo
 		)
 	}
-	
-	private def mainJavaCode(FeaturesGraphModel model) {
+	*/
+	private static def generateMainJavaCode(FeatureGraphModel model) {
 		var List<Property> properties 
 		var List<BaseURL> urls 
 		var List<BrowserName> browserNames
@@ -320,7 +322,7 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 				// Start of sequence «startNode.id»
 				{
 					this.openBrowser();
-					«FOR node : extractSequence(startNode)»
+					«FOR node : startNode.extractSequence»
 					«IF node instanceof DocNode »
 					//------- DocNode Code
 					this.«new Generate2().generate(node.getMgl())»
@@ -329,7 +331,7 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 					this.closeBrowser();	
 					«ENDIF»
 					«ENDFOR»
-				}
+				}	
 				«ENDFOR»
 			}
 			
@@ -387,7 +389,7 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 	'''
 	}
 
-	private def extractSequence(StartNode start) {
+	private static def extractSequence(StartNode start) {
 		val List<Node> singleSequence = new LinkedList<Node>;
 		var cond = true
 		
@@ -410,7 +412,7 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 		return singleSequence
 	}
 	
-	private def void createPackageFolders(IPath pkgPath, IContainer rootDir, IProgressMonitor monitor) {
+	private static def void createPackageFolders(IPath pkgPath, IContainer rootDir, IProgressMonitor monitor) {
 		tmpPath = Path.EMPTY
 		for (String segment : pkgPath.segments) {
 			tmpPath = tmpPath.append(segment)
@@ -426,8 +428,8 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 		println("Message: " + e.message)
 	}
 
-	private def generateModelInfo(FeaturesGraphModel model) '''
-		=== «model.name» ===
+	private static def generateModelInfo(FeatureGraphModel model) '''
+		=== «model.modelName» ===
 		
 		The model contains «model.allNodes.size» nodes. Here's some general information about them:
 
@@ -440,5 +442,9 @@ class Generate implements IGenerator<FeaturesGraphModel> {
 			«ENDIF»
 		«ENDFOR»
 	'''
+	
+	override generate(FeatureGraphModel model, IPath srcGenPath, IProgressMonitor arg2) {
+		new UserDocProjectGenerator(model).createProject
+	}
 	
 }

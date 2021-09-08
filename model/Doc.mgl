@@ -1,8 +1,8 @@
 id info.scce.cinco.product.usersequence.main
-stylePath "model/UserSequence.style"
+stylePath "model/Doc.style"
 
 @generatable("info.scce.cinco.product.userdocumentation.codegen.Generate2", "/src-gen/")
-graphModel UserSequenceGraphModel {
+graphModel DocGraphModel {
 	iconPath "icons/16/sequence_16.png"
 	diagramExtension "doc"
 	containableElements(*)
@@ -30,9 +30,9 @@ node Stop {
  */
 @icon("icons/16/action_16.png")
 @doubleClickAction("info.scce.cinco.product.userdocumentation.action.DocNodeOpenSubmodel")
-node SubSequence {
-	style actionNode("${subSequence.modelName}.doc")
-	prime this::UserSequenceGraphModel as subSequence
+node SubDoc {
+	style subDocNode("${subDoc.modelName}.doc")
+	prime this::DocGraphModel as subDoc
 	attr EBoolean as createScreenshots := true
 	incomingEdges (*[1,1])
 	outgoingEdges (LabeledTransition[1,1], Transition[1,1])

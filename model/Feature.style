@@ -1,6 +1,11 @@
 appearance default {
+	lineWidth 1
+	background (255,255,255)
+}
+
+appearance thickLine {
 	lineWidth 2
-	background (144,207,238)
+	background (255,255,255)
 }
 
 appearance redBorder extends default {
@@ -9,8 +14,20 @@ appearance redBorder extends default {
 }
 
 appearance blueBorder extends default {
-			foreground (94,92,100)
-			background (28,113,216)
+			foreground (28,113,216)
+			background (255,255,255)
+}
+
+appearance labelFont {
+	font ("Sans",10)
+}
+
+appearance labelFontItalics {
+	font ("Sans",ITALIC,10)
+}
+
+appearance labelFontBold {
+	font ("Sans",BOLD,10)
 }
 
 /*---------------- NODES ------------------------ */
@@ -37,31 +54,57 @@ nodeStyle greenCircle {
 	}
 }
 
-nodeStyle grayContainer(1) {
+nodeStyle featureContainer(1) {
 	rectangle {
 		appearance extends default {
 			foreground (0,0,0)
 			background (246,245,244)
 		}
-		position (0,0)
 		size (300,75)
 		text {
-			position (5, 5)
+			appearance {
+				font("Sans", BOLD, 10)
+			}
+			position (LEFT 5, TOP 5)
 			value "%s"
 		}
 	}
 }
 
-nodeStyle url(2) {
+
+nodeStyle propertyContainer(1) {
+	rectangle {
+		appearance {
+			transparency 0.7
+		}
+		size (300,75)
+		image {
+			position(LEFT 3,TOP 3)
+			size (fix 15, fix 15)
+			path ("icons/16/gear_16.png")
+		}
+		text {
+			appearance {
+				font("Sans", BOLD, 12)
+			}
+			position(LEFT 20, TOP 3)
+			value "%s"
+		}
+	}
+}
+nodeStyle url(1) {
 	rectangle {
 		appearance extends default {
-			background (37,155,239)
+			background (48,52,67)
 		}
 		position (0, 0)
 		size (150, 32)
 		text {
+			appearance {
+				foreground (255,255,255)
+			}
 			position (CENTER, MIDDLE)
-			value "%1s %2s"
+			value "%s"
 		}
 	}
 }
@@ -84,17 +127,14 @@ nodeStyle property(2) {
 nodeStyle sectionContainer(1) {
 	rectangle {
 		appearance extends default {
-			foreground (0,0,0)
 			background (255,255,255)
-			font ("Sans", 14)
-			filled false
+			transparency 0.5
 			lineStyle DASH
 			lineWidth 2
 		}
-
-		position (0,0)
 		size (300,75)
 		text {
+			appearance extends labelFontBold {}
 			position (5, 5)
 			value "%s"
 		}
@@ -135,7 +175,6 @@ nodeStyle EndNode {
 
 
 nodeStyle docNode(1) {
-	appearanceProvider("info.scce.cinco.product.userdocumentation.appearance.CreateScreenshotAppearance")
 	rectangle outer {
 		appearance extends redBorder {
 			foreground(255,255,255)
@@ -161,11 +200,10 @@ nodeStyle commentStyle(1) {
 		appearance extends default {
 			background(192,191,188)
 		}
-		position (0,0)
 		size (300,50)
 		corner (8,8)
 		multiText {
-			position(LEFT,TOP)
+			position(LEFT 5,TOP 3)
 			value "%s" 
 		}
 	}

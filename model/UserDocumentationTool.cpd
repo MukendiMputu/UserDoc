@@ -1,6 +1,6 @@
 cincoProduct UserDocumentationTool {
-	mgl "model/Features.mgl"
-	mgl "model/UserSequence.mgl"
+	mgl "model/Feature.mgl"
+	mgl "model/Doc.mgl"
 	
 
 	splashScreen "branding/splash.bmp" {
@@ -19,7 +19,7 @@ cincoProduct UserDocumentationTool {
 	about {
 		text "UserDoc is a DSL-driven generator of end user documentation for web application. It is a bachelor thesis project developed with the Cinco SCCE Meta Tooling Suite ( http://cinco.scce.info )."
 	}
-	// 
+	//
 	plugins {
 		info.scce.cinco.product.userdocumentation.edit,
 		info.scce.cinco.product.userdocumentation.editor

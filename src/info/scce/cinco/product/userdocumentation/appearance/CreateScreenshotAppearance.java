@@ -3,7 +3,7 @@ package info.scce.cinco.product.userdocumentation.appearance;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import de.jabc.cinco.meta.core.ge.style.generator.runtime.appearance.StyleAppearanceProvider;
-import info.scce.cinco.product.features.main.features.DocNode;
+import info.scce.cinco.product.features.main.feature.DocNode;
 import style.Appearance;
 import style.Color;
 import style.StyleFactory;

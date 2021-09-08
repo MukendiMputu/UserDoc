@@ -1,10 +1,10 @@
-import "model/UserSequence.mgl" as docMgl
+import "model/Doc.mgl" as docMgl
 id info.scce.cinco.product.features.main
-stylePath "model/Features.style"
+stylePath "model/Feature.style"
 
 @primeviewer
 @generatable("info.scce.cinco.product.userdocumentation.codegen.Generate", "/src-gen/")
-graphModel FeaturesGraphModel {
+graphModel FeatureGraphModel {
 	iconPath "icons/16/feature_16.png"
 	diagramExtension "feat"
 	containableElements(
@@ -14,7 +14,7 @@ graphModel FeaturesGraphModel {
 		PropertyContainer,
 		DocNode
 	)
-	attr EString as name := "Feature"
+	attr EString as modelName := "Feature"
 }
 
 @icon("icons/16/start_16.png")
@@ -31,7 +31,7 @@ node EndNode{
 
 @icon("icons/16/container_16.png")
 container FeatureContainer {
-	style grayContainer("${title}")
+	style featureContainer("${title}")
 	containableElements(DocNode[1,*])
 	attr EString as title := ""
 	incomingEdges (*[1,*])
@@ -41,13 +41,13 @@ container FeatureContainer {
 @icon("icons/16/container_16.png")
 @palette("Selenium Properties")
 container PropertyContainer {
-	style grayContainer("${title}")
+	style propertyContainer("${title}")
 	containableElements(
 		Property[1,*], 
 		BaseURL[1,1],
-		BrowserName[1,1],
+		Browser[1,1],
 		Domain[1,1],
-		UserName,
+		Username,
 		Email,
 		Password
 	)
@@ -67,7 +67,7 @@ node Property{
 @palette("Selenium Properties")
 @icon("icons/16/url_16.png")
 node BaseURL {
-	style url("URL: ", "${content}")
+	style url("URL: ${content}")
 	attr EString as content := "http://localhost"
 }
 
@@ -78,14 +78,14 @@ node BaseURL {
 @palette("Selenium Properties")
 @icon("icons/16/domain_16.png")
 node Domain{
-	style url("Reverse domain: ", "${content}")
+	style url("Reverse domain: ${content}")
 	attr EString as content := "com.example"
 }
 
 /* configuration node*/
 @palette("Selenium Properties")
 @icon("icons/16/gear_16.png")
-node UserName{
+node Username{
 	style property("Username: ", "${value}")
 	attr EString as value := "john"
 }
@@ -109,7 +109,7 @@ node Email{
 /* configuration node*/
 @palette("Selenium Properties")
 @icon("icons/16/gear_16.png")
-node BrowserName{
+node Browser{
 	style property("Browser: ", "${name}")
 	attr Browsers as name := "firefox"
 }
@@ -121,7 +121,7 @@ enum Browsers {
 @doubleClickAction("info.scce.cinco.product.userdocumentation.action.DocNodeOpenSubmodel")
 node DocNode{
 	style docNode("${mgl.modelName}")
-	prime docMgl::UserSequenceGraphModel as mgl
+	prime docMgl::DocGraphModel as mgl
 	attr EBoolean as createScreenshots := true
 	incomingEdges (*[1,*])
 	outgoingEdges ({Edge,LabeledEdge}[1,*])

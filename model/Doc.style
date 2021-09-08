@@ -95,22 +95,34 @@ nodeStyle sectionNode(1) {
 		appearance extends default {
 			lineWidth 2
 			lineStyle DASH
-			foreground (0,0,0)
+			transparency 0.7
 			background (255,255,255)
 		}
-		position (0,0)
 		size (300,75)
 		text {
-			appearance extends labelFontBold {
-				foreground (0,0,0)
-			}
-			position (5, 5)
+			appearance { font ("Sans", BOLD, 12) }
+			position (LEFT 5, TOP 5)
 			value "%s"
 		}
 	}
 }
 
 nodeStyle actionNode(1) {
+	roundedRectangle {
+		appearance extends default {
+			background (255,255,255)
+		}
+		position (0,0)
+		size (90,40)
+		corner (8,8)
+		text {
+			position ( CENTER, MIDDLE )
+			value "%s" 
+		}
+	}
+}
+
+nodeStyle subDocNode(1) {
 	roundedRectangle {
 		appearance extends default {
 			background (255,255,255)
@@ -190,15 +202,17 @@ nodeStyle button(1) {
 
 nodeStyle commentNode(1) {
 	roundedRectangle {
-		appearance extends default {
-			background (249,240,107)
-			foreground (245,194,17)
-			lineWidth 1
+		appearance {
+			background (247,242,192)
+			foreground (251,234,104)
+			lineWidth 2
 		}
-		position (0,0)
-		size (90,40)
+		size (100,40)
 		corner (8,8)
 		multiText {
+			appearance extends labelFontItalics {
+				foreground(36,31,49)
+			}
 			position (LEFT, TOP)
 			value "%s" 
 		}
