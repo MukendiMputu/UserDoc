@@ -44,9 +44,8 @@ container PropertyContainer {
 	style propertyContainer("${title}")
 	containableElements(
 		Property[1,*], 
-		BaseURL[1,1],
-		Browser[1,1],
-		Domain[1,1],
+		/*BaseURL[1,1],*/
+		WebDriver[1,1],
 		Username,
 		Email,
 		Password
@@ -63,13 +62,13 @@ node Property{
 	attr EString as value := "value"
 }
 
-/* Basic URL node, which will be called in the Selenium script*/
+/* Basic URL node, which will be called in the Selenium script
 @palette("Selenium Properties")
 @icon("icons/16/url_16.png")
 node BaseURL {
 	style url("URL: ${content}")
 	attr EString as content := "http://localhost"
-}
+}*/
 
 /* The Domain node is suppose to contain
  * the site's reverse domain for defining packages;
@@ -77,9 +76,10 @@ node BaseURL {
  */
 @palette("Selenium Properties")
 @icon("icons/16/domain_16.png")
-node Domain{
-	style url("Reverse domain: ${content}")
-	attr EString as content := "com.example"
+node WebDriver{
+	style property("${name}","Driver")
+	attr Browsers as name := "firefox"
+	attr EString as path := "/home/user/WebDriver/bin/geckodriver"
 }
 
 /* configuration node*/
@@ -104,14 +104,6 @@ node Password{
 node Email{
 	style property("Email: ", "${value}")
 	attr EString as value := "j.doe@example.com"
-}
-
-/* configuration node*/
-@palette("Selenium Properties")
-@icon("icons/16/gear_16.png")
-node Browser{
-	style property("Browser: ", "${name}")
-	attr Browsers as name := "firefox"
 }
 
 enum Browsers {

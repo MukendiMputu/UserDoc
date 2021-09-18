@@ -1,8 +1,10 @@
 package info.scce.cinco.product.userdocumentation.codegen
 
 import de.jabc.cinco.meta.plugin.template.ProjectTemplate
-import info.scce.cinco.product.features.main.feature.FeatureGraphModel
 import de.jabc.cinco.meta.core.utils.projects.ProjectCreator
+import info.scce.cinco.product.features.main.feature.FeatureGraphModel
+import static extension info.scce.cinco.product.userdocumentation.codegen.NameExtension.*
+
 
 class UserDocProjectGenerator extends ProjectTemplate {
 	val FeatureGraphModel model
@@ -29,13 +31,22 @@ class UserDocProjectGenerator extends ProjectTemplate {
 				'org.eclipse.xtend.lib.macro'
 			]
 			
-			folder('src2') [
-				deleteIfExistent = false
+			folder('src-gen') [
+				deleteIfExistent = true
 				isSourceFolder = true
-				
-				pkg('com.test.main')[
-					file(new MainGenerator(model)/*,overwrite=false*/)
+				folder('src') [
+					pkg(mainPackage)[
+						file(new MainGenerator(model), true)
+					]
+					
+					pkg(testPackage)[
+						
+					]					
 				]
+				
+				file(new PomXMLGenerator(), true)
+				//file(new ClassPathFileGenerator(), true)
+				file(new ProjectFileGenerator(), true)
 			]
 		]
 	}

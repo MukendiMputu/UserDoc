@@ -1,7 +1,6 @@
 id info.scce.cinco.product.usersequence.main
 stylePath "model/Doc.style"
 
-@generatable("info.scce.cinco.product.userdocumentation.codegen.Generate2", "/src-gen/")
 graphModel DocGraphModel {
 	iconPath "icons/16/sequence_16.png"
 	diagramExtension "doc"
@@ -62,7 +61,7 @@ node Navigation {
 	style navigation("${link}")
 	incomingEdges (LabeledTransition[1,1], Transition[1,1], Anchor[1,*])
 	outgoingEdges (Transition[1,*])
-	attr EString as link
+	attr EString as link := ""
 }
 
 /*======================== WEB ELEMENTS ======================== */
@@ -159,11 +158,6 @@ node Button extends WebElement {
 	attr EString as content
 	incomingEdges (*[1,*])
 	outgoingEdges ({Transition, LabeledTransition}[1,*])
-}
-
-
-enum ButtonNodeAction {
-	submit delete button reset
 }
 
 @icon("icons/16/object_16.png")
