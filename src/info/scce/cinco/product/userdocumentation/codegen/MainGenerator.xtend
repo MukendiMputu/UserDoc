@@ -152,15 +152,14 @@ class MainGenerator extends UserDocFileTemplate {
 				{
 					// Start of sequence «startNode.id»
 					«val nodeSeq = startNode.extractSequence»
+					
 					try {
 					«FOR node : nodeSeq»
 					«IF node instanceof DocNode »
 					// DocNode «(node as DocNode).mgl.modelName»
-					this.«DocMglGenerator.getCode(node.getMgl())»
-
-					«ELSEIF node instanceof EndNode»
-					
+					«node.getMgl().modelCode»
 					«ELSE»	
+					«node.nodeCode»
 					«ENDIF»
 					«ENDFOR»
 					} catch (Exception e) {

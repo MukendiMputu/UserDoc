@@ -6,6 +6,13 @@ import java.util.List
 import info.scce.cinco.product.features.main.feature.StartNode
 import java.util.LinkedList
 import info.scce.cinco.product.features.main.feature.EndNode
+import info.scce.cinco.product.usersequence.main.doc.DocGraphModel
+import info.scce.cinco.product.usersequence.main.doc.SubDoc
+import info.scce.cinco.product.usersequence.main.doc.Navigation
+import info.scce.cinco.product.usersequence.main.doc.Input
+import info.scce.cinco.product.usersequence.main.doc.Button
+import info.scce.cinco.product.usersequence.main.doc.Start
+import info.scce.cinco.product.usersequence.main.doc.Stop
 
 class NameExtension {
 	
@@ -27,13 +34,13 @@ class NameExtension {
 	
 	/*** Main Packages ***/
 	
-	def static String getMainPackage()		{ 'main' }
-	def static String getTestPackage()		{ 'test' }
+	static def String getMainPackage()		{ 'main' }
+	static def String getTestPackage()		{ 'test' }
 	
 	/*** Selenium Drivers ***/
 	
 	// Drivers
-	def static String getDriverName(WebDriver driver) {
+	static def String getDriverName(WebDriver driver) {
 		switch (driver.name.getName.toLowerCase) {
 						case "firefox":  	'firefoxDriver'
 						case "chrome":  	'chromeDriver'
@@ -44,8 +51,9 @@ class NameExtension {
 						default:   			throw new RuntimeException('''Could not identify "«driver.name.getName.toLowerCase»"''')
 		}
 	}
+	
 	// Driver Fully Qalified Names
-	def static String getDriverFqn(WebDriver driver) {
+	static def String getDriverFqn(WebDriver driver) {
 		switch (driver.name.getName.toLowerCase) {
 						case "firefox":  	firefoxDriverFqn 
 						case "chrome":  	chromeDriverFqn 
@@ -58,7 +66,7 @@ class NameExtension {
 	}
 	
 	// System Properties
-	def static String getDriverProperty(WebDriver driver)	{ 
+	static def String getDriverProperty(WebDriver driver)	{ 
 		switch (driver.name.getName.toLowerCase) {
 						case "firefox":		firefoxDriverProperty
 						case "chrome":  	chromeDriverProperty
@@ -71,7 +79,7 @@ class NameExtension {
 	}
 	
 	// Driver Class Name
-	def static String getDriverClass(WebDriver driver) {
+	static def String getDriverClass(WebDriver driver) {
 		switch (driver.name.getName.toLowerCase) {
 						case "firefox":		firefoxDriverFqn.classFromFqn
 						case "chrome":  	chromeDriverFqn.classFromFqn
@@ -83,17 +91,38 @@ class NameExtension {
 		} 
 	}
 	
-	
-	def static String getClassFromFqn(String fqn) {
+	static def String getClassFromFqn(String fqn) {
 		fqn.split("\\.", -1).last
 	}
 	
-	static def extractSequence(Node start) {
+	static def extractSequence(Start start) {
 		val List<Node> singleSequence = new LinkedList<Node>;
 		var cond = true
-		
 		singleSequence.add(start)			// get startNode
-		for (su : start.successors){ println(su)}
+		var succ = start.successors.head	// and its successor
+		singleSequence.add(succ)
+ 
+		if(succ instanceof EndNode){		// if it's and end node
+			return singleSequence			// return the sequence
+		} else {							// or else get its successor
+			// swapping
+			var temp = succ					
+			while(cond){
+			// replace the current by its successor
+				var current = temp.successors.head 
+				temp = current
+				if (current instanceof Stop){
+					cond = false
+				}
+			}
+		}
+		return singleSequence
+	}
+	
+	static def extractSequence(StartNode start) {
+		val List<Node> singleSequence = new LinkedList<Node>;
+		var cond = true
+		singleSequence.add(start)			// get startNode
 		var succ = start.successors.head	// and its successor
 		singleSequence.add(succ)
  
@@ -112,4 +141,27 @@ class NameExtension {
 		return singleSequence
 	}
 
+	static def String getModelCode(DocGraphModel model)'''
+	«FOR start : model.starts»
+		«val nodeSeq = start.extractSequence»
+		«FOR node : nodeSeq»
+		«getNodeCode(node)»
+		«ENDFOR»
+	«ENDFOR»
+	''' 
+	
+	static def String getNodeCode(Node node)'''
+		«switch (node.eClass.name) {
+						case "StartNode" : '''this.openBrowser();'''
+						case "EndNode" : '''this.closeBrowser();'''
+						case "SubDoc": (node as SubDoc).subDoc.modelCode
+						case "Navigation": '''this.goToPage("«(node as Navigation).link»");'''
+						case "Input": '''this.typeIn("«(node as Input).id»", "«(node as Input).content»");'''
+						case "Screenshot": '''this.takePageScreenshot("«»", "«»"); // Screenshot'''
+						case "Button": '''this.clickBtn("«(node as Button).selector»", "«(node as Button).value»");'''
+						case "SelectBox": '''this.select();'''
+					//	case "SectionNode": (node as SectionNode).allNodes.forEach[getNodeCode]
+				}
+				»
+	'''
 }
