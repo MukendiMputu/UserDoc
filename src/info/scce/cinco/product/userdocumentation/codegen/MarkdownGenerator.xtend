@@ -1,27 +1,32 @@
 package info.scce.cinco.product.userdocumentation.codegen
 
 import info.scce.cinco.product.userdocumentation.codegen.UserDocFileTemplate
-import info.scce.cinco.product.features.main.feature.FeatureGraphModel
+import info.scce.cinco.product.features.main.feature.FeatureContainer
 
 class MarkdownGenerator extends UserDocFileTemplate {
 	
-	val FeatureGraphModel featureModel
+	val FeatureContainer featureCont
 	
-	new (FeatureGraphModel ftModel){
-		this.featureModel = ftModel
+	new (FeatureContainer ftContainer){
+		this.featureCont = ftContainer
 	}
 	
-	override fileName() {
-		'''«modelName».md'''
+	def String featureName() {
+		return featureCont.title.nullOrEmpty? 'UnknownFeature' : this.featureCont.title	
+	}
+	
+		override fileName() {
+		'''«featureName.trim».md'''
 	}
 	
 	override fileTemplate() {
+		
 		'''
-		# «modelName»
+		# «featureName»
+		
+		This feature starts with the sequence «featureCont.starts.head.docNodeSuccessors.head.mgl.modelName».
+		 
 		'''
 	}
-	
-	def String modelName()'''
-	«featureModel.modelName.nullOrEmpty? 'UnknownModel' : this.featureModel.modelName»
-	'''
+		
 }

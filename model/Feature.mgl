@@ -38,7 +38,7 @@ container FeatureContainer {
 	)
 	attr EString as title := "New Feature"
 }
-
+ 
 @doubleClickAction("info.scce.cinco.product.userdocumentation.action.DocNodeOpenSubmodel")
 node DocNode{
 	style docNode("${mgl.modelName}")

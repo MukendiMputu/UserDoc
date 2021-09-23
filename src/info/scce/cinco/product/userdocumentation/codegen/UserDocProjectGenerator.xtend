@@ -34,7 +34,7 @@ class UserDocProjectGenerator extends ProjectTemplate {
 				isSourceFolder = true
 				folder('src') [
 					pkg(mainJavaPackage)[
-						file(new MainGenerator(model), true)
+						file(new SeleniumScriptGenerator(model), true)
 					]
 					pkg(mainResourcePackage)[]
 					
@@ -42,8 +42,8 @@ class UserDocProjectGenerator extends ProjectTemplate {
 					]
 					
 					folder(ProjectCreator.getProject(model.eResource).name)[
-						forEachOf(findFilesInWorkspace('feat')) [ f |
-							file(new MarkdownGenerator(model), true)
+						forEachOf(model.featureContainers) [ f |
+							file(new MarkdownGenerator(f), true)
 						]
 					]					
 				]

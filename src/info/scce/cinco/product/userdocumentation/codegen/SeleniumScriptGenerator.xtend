@@ -14,7 +14,7 @@ import java.util.HashMap
 import java.util.Map
 import info.scce.cinco.product.features.main.feature.DocNode
 
-class MainGenerator extends UserDocFileTemplate {
+class SeleniumScriptGenerator extends UserDocFileTemplate {
 	
 	val FeatureGraphModel featureModel
 	var List<Property> properties 
@@ -52,11 +52,10 @@ class MainGenerator extends UserDocFileTemplate {
 	}
 	
 	def className() {
-		'''Main'''
+		'''GetSeleniumScreenshots'''
 	}
 	
 	override fileTemplate() {
-		val classTemplateResult = classTemplate
 		if (drivers.empty)
 			throw new RuntimeException("No WebDriver has been specified.")
 		'''
@@ -88,7 +87,7 @@ class MainGenerator extends UserDocFileTemplate {
 				import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 			«ENDIF»
 			
-			«classTemplateResult»
+			«classTemplate»
 		'''
 	}
 	
