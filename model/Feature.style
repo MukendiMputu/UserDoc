@@ -1,3 +1,5 @@
+/*---------------- Appearances  ------------------------ */
+
 appearance default {
 	lineWidth 1
 	background (255,255,255)
@@ -32,28 +34,6 @@ appearance labelFontBold {
 
 /*---------------- NODES ------------------------ */
 
-nodeStyle redCircle {
-	ellipse {
-		appearance redBorder
-		size(36,36)
-		ellipse { 
-			appearance redBorder
-			position ( CENTER, MIDDLE )
-			size (24,24)
-		}
-	}
-}
-
-nodeStyle greenCircle {
-	ellipse {
-		appearance extends default {
-			foreground (81,156,88)
-			background (255,255,255)
-		}
-		size(36,36)
-	}
-}
-
 nodeStyle featureContainer(1) {
 	rectangle {
 		appearance extends default {
@@ -70,7 +50,6 @@ nodeStyle featureContainer(1) {
 		}
 	}
 }
-
 
 nodeStyle propertyContainer(1) {
 	rectangle {
@@ -92,22 +71,6 @@ nodeStyle propertyContainer(1) {
 		}
 	}
 }
-nodeStyle url(1) {
-	rectangle {
-		appearance extends default {
-			background (48,52,67)
-		}
-		position (0, 0)
-		size (150, 32)
-		text {
-			appearance {
-				foreground (255,255,255)
-			}
-			position (CENTER, MIDDLE)
-			value "%s"
-		}
-	}
-}
 
 nodeStyle property(2) {
 	roundedRectangle {
@@ -124,24 +87,7 @@ nodeStyle property(2) {
 	}
 }
 
-nodeStyle sectionContainer(1) {
-	rectangle {
-		appearance extends default {
-			background (255,255,255)
-			transparency 0.5
-			lineStyle DASH
-			lineWidth 2
-		}
-		size (300,75)
-		text {
-			appearance extends labelFontBold {}
-			position (5, 5)
-			value "%s"
-		}
-	}
-}
-
-nodeStyle StartNode {
+nodeStyle startNode {
 	roundedRectangle {
 		appearance extends default {
 			foreground (46,194,126)
@@ -157,7 +103,7 @@ nodeStyle StartNode {
 	}
 }
 
-nodeStyle EndNode {
+nodeStyle endNode {
 	roundedRectangle {
 		appearance extends default {
 			foreground (237,51,59)
@@ -172,7 +118,6 @@ nodeStyle EndNode {
 		}
 	}
 }
-
 
 nodeStyle docNode(1) {
 	rectangle outer {
@@ -195,7 +140,7 @@ nodeStyle docNode(1) {
 	}
 }
 
-nodeStyle commentStyle(1) {
+nodeStyle commentNode(1) {
 	roundedRectangle {
 		appearance extends default {
 			background(192,191,188)
@@ -208,7 +153,6 @@ nodeStyle commentStyle(1) {
 		}
 	}
 }
-
 
 /*---------------- EDGES ------------------------ */
 
@@ -244,5 +188,17 @@ edgeStyle labeledArrow(1) {
 		text {
 			value "%s"
 		}
+	}
+}
+
+edgeStyle commentArrow {
+	appearance extends default {
+		lineStyle DOT
+	}
+
+	decorator {
+		location (1.0)
+		CIRCLE
+		appearance default
 	}
 }

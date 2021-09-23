@@ -5,10 +5,8 @@ import de.jabc.cinco.meta.core.utils.projects.ProjectCreator
 import info.scce.cinco.product.features.main.feature.FeatureGraphModel
 import static extension info.scce.cinco.product.userdocumentation.codegen.NameExtension.*
 
-
 class UserDocProjectGenerator extends ProjectTemplate {
 	val FeatureGraphModel model
-	
 	new(FeatureGraphModel model) {
 		this.model = model
 	}
@@ -35,17 +33,23 @@ class UserDocProjectGenerator extends ProjectTemplate {
 				deleteIfExistent = true
 				isSourceFolder = true
 				folder('src') [
-					pkg(mainPackage)[
+					pkg(mainJavaPackage)[
 						file(new MainGenerator(model), true)
 					]
+					pkg(mainResourcePackage)[]
 					
-					pkg(testPackage)[
-						
+					pkg(testJavaPackage)[
+					]
+					
+					folder(ProjectCreator.getProject(model.eResource).name)[
+						forEachOf(findFilesInWorkspace('feat')) [ f |
+							file(new MarkdownGenerator(model), true)
+						]
 					]					
 				]
 				
 				file(new PomXMLGenerator(), true)
-				//file(new ClassPathFileGenerator(), true)
+				file(new ClassPathFileGenerator(), true)
 				file(new ProjectFileGenerator(), true)
 			]
 		]

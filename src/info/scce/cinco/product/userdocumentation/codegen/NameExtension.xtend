@@ -3,16 +3,16 @@ package info.scce.cinco.product.userdocumentation.codegen
 import info.scce.cinco.product.features.main.feature.WebDriver
 import graphmodel.Node
 import java.util.List
-import info.scce.cinco.product.features.main.feature.StartNode
 import java.util.LinkedList
-import info.scce.cinco.product.features.main.feature.EndNode
 import info.scce.cinco.product.usersequence.main.doc.DocGraphModel
 import info.scce.cinco.product.usersequence.main.doc.SubDoc
 import info.scce.cinco.product.usersequence.main.doc.Navigation
 import info.scce.cinco.product.usersequence.main.doc.Input
 import info.scce.cinco.product.usersequence.main.doc.Button
-import info.scce.cinco.product.usersequence.main.doc.Start
-import info.scce.cinco.product.usersequence.main.doc.Stop
+import graphmodel.GraphModel
+import info.scce.cinco.product.features.main.feature.FeatureContainer
+import info.scce.cinco.product.usersequence.main.doc.EndNode
+import info.scce.cinco.product.features.main.feature.DocNode
 
 class NameExtension {
 	
@@ -34,8 +34,12 @@ class NameExtension {
 	
 	/*** Main Packages ***/
 	
-	static def String getMainPackage()		{ 'main' }
-	static def String getTestPackage()		{ 'test' }
+	static def String getMainPackage()			{ 'main' }
+	static def String getMainJavaPackage()		{ mainPackage + '.java'			   }
+	static def String getMainResourcePackage()	{ mainPackage + '.resources'	   }
+	static def String getTestPackage()			{ 'test' }
+	static def String getTestJavaPackage()		{ testPackage + '.java'			   }
+	static def String getTestResourcePackage()	{ testPackage + '.resources'	   }
 	
 	/*** Selenium Drivers ***/
 	
@@ -95,30 +99,20 @@ class NameExtension {
 		fqn.split("\\.", -1).last
 	}
 	
-	static def extractSequence(Start start) {
-		val List<Node> singleSequence = new LinkedList<Node>;
-		var cond = true
-		singleSequence.add(start)			// get startNode
-		var succ = start.successors.head	// and its successor
-		singleSequence.add(succ)
- 
-		if(succ instanceof EndNode){		// if it's and end node
-			return singleSequence			// return the sequence
-		} else {							// or else get its successor
-			// swapping
-			var temp = succ					
-			while(cond){
-			// replace the current by its successor
-				var current = temp.successors.head 
-				temp = current
-				if (current instanceof Stop){
-					cond = false
-				}
-			}
+	static def extractSequence(FeatureContainer container) {
+		val List<DocNode> singleSequence = new LinkedList<DocNode>;
+		val firstDocNode = container.starts.head.docNodeSuccessors.head
+		singleSequence.add(firstDocNode)			// get first DocNode
+		var succ = firstDocNode.successors.head		// and its successor
+		while (!(succ instanceof EndNode)) {		// if it's and end node
+			singleSequence.add(succ as DocNode)
+			succ = succ.successors.head				// or else get its successor
 		}
-		return singleSequence
+		return singleSequence						// return the sequence
 	}
 	
+	/*
+	 
 	static def extractSequence(StartNode start) {
 		val List<Node> singleSequence = new LinkedList<Node>;
 		var cond = true
@@ -130,9 +124,10 @@ class NameExtension {
 			return singleSequence			// return the sequence
 		} else {
 			// swapping
-			var current = succ					// or else get its successor
+			var temp = succ					// or else get its successor
 			while(cond){						// while a certain condition still hold
-				current = current.successors.head // replace the current by its successor
+				current = temp.successors.head // replace the current by its successor
+				temp = current
 				singleSequence.add(current)		  // add that successor node
 				if (current instanceof EndNode)
 					cond = false
@@ -140,15 +135,17 @@ class NameExtension {
 		}
 		return singleSequence
 	}
+	 */
 
-	static def String getModelCode(DocGraphModel model)'''
-	«FOR start : model.starts»
-		«val nodeSeq = start.extractSequence»
-		«FOR node : nodeSeq»
-		«getNodeCode(node)»
-		«ENDFOR»
-	«ENDFOR»
-	''' 
+	static def String getModelCode(DocGraphModel model){
+		for (start : model.starts) {
+			for (node : start.successors) {
+				return node.nodeCode
+			}
+		}
+	}
+
+	 
 	
 	static def String getNodeCode(Node node)'''
 		«switch (node.eClass.name) {
@@ -156,7 +153,7 @@ class NameExtension {
 						case "EndNode" : '''this.closeBrowser();'''
 						case "SubDoc": (node as SubDoc).subDoc.modelCode
 						case "Navigation": '''this.goToPage("«(node as Navigation).link»");'''
-						case "Input": '''this.typeIn("«(node as Input).id»", "«(node as Input).content»");'''
+						case "Input": '''this.typeIn("«(node as Input).selector»", "«(node as Input).value»", "«(node as Input).content»");'''
 						case "Screenshot": '''this.takePageScreenshot("«»", "«»"); // Screenshot'''
 						case "Button": '''this.clickBtn("«(node as Button).selector»", "«(node as Button).value»");'''
 						case "SelectBox": '''this.select();'''
@@ -164,4 +161,8 @@ class NameExtension {
 				}
 				»
 	'''
+	
+	static def String getProjectName(GraphModel model){
+		return ''''''
+	}
 }

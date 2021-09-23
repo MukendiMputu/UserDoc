@@ -3,47 +3,64 @@ id info.scce.cinco.product.features.main
 stylePath "model/Feature.style"
 
 @primeviewer
+@mcam("check")
 @generatable("info.scce.cinco.product.userdocumentation.codegen.Generate", "/src-gen/")
 graphModel FeatureGraphModel {
 	iconPath "icons/16/feature_16.png"
 	diagramExtension "feat"
 	containableElements(
-		StartNode,
-		EndNode,
 		FeatureContainer,
-		PropertyContainer,
-		DocNode
+		DocNode[1,*],
+		PropertyContainer[1,*]
 	)
-	attr EString as modelName := "Feature"
+	attr EString as modelName := "New Feature"
 }
 
 @icon("icons/16/start_16.png")
-node StartNode {
-	style StartNode
-	outgoingEdges (*[1,1])
+node Start extends docMgl::StartNode {
+	style startNode
+	outgoingEdges (Edge[1,1])
 }
 
 @icon("icons/16/stop_16.png")
-node EndNode{
-	style EndNode
-	incomingEdges ({Edge,LabeledEdge}[1,*])
+node End extends docMgl::EndNode {
+	style endNode
+	incomingEdges (Edge[1,*])
 }
 
 @icon("icons/16/container_16.png")
 container FeatureContainer {
 	style featureContainer("${title}")
-	containableElements(DocNode[1,*])
-	attr EString as title := ""
-	incomingEdges (*[1,*])
-	outgoingEdges ({Edge,LabeledEdge}[1,*])
+	containableElements(
+		Start[1,1],
+		End[1,1],
+		DocNode[1,*]
+	)
+	attr EString as title := "New Feature"
 }
+
+@doubleClickAction("info.scce.cinco.product.userdocumentation.action.DocNodeOpenSubmodel")
+node DocNode{
+	style docNode("${mgl.modelName}")
+	prime docMgl::DocGraphModel as mgl
+	attr EBoolean as createScreenshots := true
+	incomingEdges (*[1,*])
+	outgoingEdges (Edge[1,*])
+}
+
+//###################################################################
+//                                                                  #
+//  Following elements were'nt specified in the thesis description, #
+//  They have been added only for convenience purposes.             #
+//                                                                  #
+//###################################################################
 
 @icon("icons/16/container_16.png")
 @palette("Selenium Properties")
 container PropertyContainer {
 	style propertyContainer("${title}")
 	containableElements(
-		Property[1,*], 
+		Property[0,*], 
 		/*BaseURL[1,1],*/
 		WebDriver[1,1],
 		Username,
@@ -70,20 +87,20 @@ node BaseURL {
 	attr EString as content := "http://localhost"
 }*/
 
-/* The Domain node is suppose to contain
- * the site's reverse domain for defining packages;
- * this node might be reference in other MGLs.
+/* 
+ * The Selenium WebDriver that will be used
+ * to manipulate the web browser.
  */
 @palette("Selenium Properties")
 @icon("icons/16/domain_16.png")
 node WebDriver{
-	style property("${name}","Driver")
+	style property("Driver: ","${name}")
 	attr Browsers as name := "firefox"
 	attr EString as path := "/home/user/WebDriver/bin/geckodriver"
 }
 
 /* configuration node*/
-@palette("Selenium Properties")
+@palette("User Login Properties")
 @icon("icons/16/gear_16.png")
 node Username{
 	style property("Username: ", "${value}")
@@ -91,7 +108,7 @@ node Username{
 }
 
 /* configuration node*/
-@palette("Selenium Properties")
+@palette("User Login Properties")
 @icon("icons/16/gear_16.png")
 node Password{
 	style property("Password: ", "${value}")
@@ -99,7 +116,7 @@ node Password{
 }
 
 /* configuration node*/
-@palette("Selenium Properties")
+@palette("User Login Properties")
 @icon("icons/16/gear_16.png")
 node Email{
 	style property("Email: ", "${value}")
@@ -110,20 +127,6 @@ enum Browsers {
 	firefox chrome Edge safari ie opera
 }
 
-@doubleClickAction("info.scce.cinco.product.userdocumentation.action.DocNodeOpenSubmodel")
-node DocNode{
-	style docNode("${mgl.modelName}")
-	prime docMgl::DocGraphModel as mgl
-	attr EBoolean as createScreenshots := true
-	incomingEdges (*[1,*])
-	outgoingEdges ({Edge,LabeledEdge}[1,*])
-}
-
 edge Edge {
 	style simpleArrow
-}
-
-edge LabeledEdge {
-	style labeledArrow("${label}")
-	attr EString as label
 }

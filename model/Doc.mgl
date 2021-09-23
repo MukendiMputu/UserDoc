@@ -1,71 +1,71 @@
 id info.scce.cinco.product.usersequence.main
 stylePath "model/Doc.style"
 
+@mcam("check")
 graphModel DocGraphModel {
 	iconPath "icons/16/sequence_16.png"
 	diagramExtension "doc"
-	containableElements(*)
+	containableElements(
+		StartNode [1,1],
+		EndNode [1,1],
+		SubDoc [0,*],
+		Screenshot [1,*],
+		Navigation [1,*],
+		WebElement [0,*],
+		SectionNode [1,*],
+		Comment[1, *]
+	)
 	attr EString as modelName := "UserSequence"
 }
 
 @icon("icons/16/start_16.png")
 @palette("Basic Elements")
-node Start {
-	style start
-	outgoingEdges (LabeledTransition[1,1], Transition[1,1])
+node StartNode {
+	style startNode
+	outgoingEdges (Transition[1,1])
 }
 
 @icon("icons/16/stop_16.png")
 @palette("Basic Elements")
-node Stop {
-	style end
-	incomingEdges (LabeledTransition[1,1], Transition[1,1])
+node EndNode {
+	style endNode
+	incomingEdges (Transition[1,1])
 }
 
 /*======================== STRUCTURAL ELEMENTS ======================== */
 
-/*
- * Definition of the graphical element of an action goto
- */
 @icon("icons/16/action_16.png")
 @doubleClickAction("info.scce.cinco.product.userdocumentation.action.DocNodeOpenSubmodel")
 node SubDoc {
 	style subDocNode("${subDoc.modelName}.doc")
 	prime this::DocGraphModel as subDoc
 	attr EBoolean as createScreenshots := true
-	incomingEdges (*[1,1])
-	outgoingEdges (LabeledTransition[1,1], Transition[1,1])
+	incomingEdges (Transition[1,1])
+	outgoingEdges (Transition[1,1])
 }
 
-/*
- * 
-*/
 @disable(resize)
 @palette("Selenium Actions")
 @icon("icons/16/screenshot_16.png")
 node Screenshot {
-	style screenshot
-	incomingEdges (LabeledTransition[1,1], Transition[1,1], Anchor[1,*])
+	style screenshotNode
+	incomingEdges (Transition[1,1], Anchor[1,*])
 	outgoingEdges (Transition[1,*])
 	attr EString as pictureName
 	attr Comment as description
 }
 
-/*
-* 
-*/
 @disable(resize)
 @palette("Selenium Actions")
 @icon("icons/16/screenshot_16.png")
 node Navigation {
-	style navigation("${link}")
-	incomingEdges (LabeledTransition[1,1], Transition[1,1], Anchor[1,*])
+	style navigationNode("${link}")
+	incomingEdges (Transition[1,1], Anchor[0,*])
 	outgoingEdges (Transition[1,*])
 	attr EString as link := ""
 }
 
 /*======================== WEB ELEMENTS ======================== */
-
 
 /*
  * WebElement literally represents an html element.
@@ -81,7 +81,7 @@ node WebElement {
 	attr EString as value := ""
 	attr EBoolean as Highlighted
 	
-	incomingEdges (*[1,1])
+	incomingEdges (Transition[1,1])
 	outgoingEdges (Transition[1,1])
 }
 
@@ -89,7 +89,7 @@ node WebElement {
 @palette("Web Elements")
 node Div extends WebElement {
 	style object("<div>")
-	incomingEdges (*[1,1])
+	incomingEdges (Transition[1,1])
 	outgoingEdges (Transition[1,1])
 }
 
@@ -126,119 +126,119 @@ node Label extends WebElement {
 
 @icon("icons/16/object_16.png")
 @palette("Web Elements")
-node Form extends WebElement {
-	style actionNode("")
-	
-	attr EString as action
-	attr EString as method
-	attr Input as field [0,*]
+container Form extends WebElement {
+	style formNode("")
+	containableElements(
+		Input [1,*],
+		Button [1,3]
+	)
 }
 
 @icon("icons/16/object_16.png")
 @palette("Web Elements")
 node Input extends WebElement {
-	style input("Input: ${content}")
+	style inputNode("Input: ${content}")
 	attr EString as content
-	incomingEdges (*[1,*])
-	outgoingEdges ({Transition, LabeledTransition}[1,*])
+	incomingEdges (Transition[0,*])
+	outgoingEdges (Transition[0,*])
 }
 
 @icon("icons/16/object_16.png")
 @palette("Web Elements")
 node Textarea extends WebElement {
-	style input("${content}")
-	incomingEdges (*[1,*])
-	outgoingEdges ({Transition, LabeledTransition}[1,*])
+	style inputNode("${content}")
+	incomingEdges (Transition[1,*])
+	outgoingEdges (Transition[1,*])
 }
 
 @icon("icons/16/object_16.png")
 @palette("Web Elements")
 node Button extends WebElement {
-	style button("${content}")
+	style buttonNode("${content}")
 	attr EString as content
-	incomingEdges (*[1,*])
-	outgoingEdges ({Transition, LabeledTransition}[1,*])
+	incomingEdges (Transition[1,*])
+	outgoingEdges (Transition[1,*])
 }
 
 @icon("icons/16/object_16.png")
 @palette("Web Elements")
 node SelectBox extends WebElement {
-	style actionNode("")
+	style selectBoxNode("")
 	attr EString as content
-	incomingEdges (*[1,*])
-	outgoingEdges ({Transition, LabeledTransition}[1,*])
+	incomingEdges (Transition[1,*])
+	outgoingEdges (Transition[1,*])
 }
 
 @icon("icons/16/object_16.png")
 @palette("Web Elements")
 node SelectBoxOption extends WebElement {
-	style actionNode("")
+	style selectOptionNode("")
 	attr EString as content
-	incomingEdges (*[1,*])
-	outgoingEdges ({Transition, LabeledTransition}[1,*])
+	incomingEdges (Transition[1,*])
+	outgoingEdges (Transition[1,*])
 }
 
 @icon("icons/16/object_16.png")
 @palette("Web Elements")
 node Table extends WebElement {
-	style actionNode("")
+	style tableNode("")
 	
 	attr EString as content
 	/*attr SelectBoxAction as action*/
-	incomingEdges (*[1,*])
-	outgoingEdges ({Transition, LabeledTransition}[1,*])
+	incomingEdges (Transition[1,*])
+	outgoingEdges (Transition[1,*])
 }
 
 @icon("icons/16/object_16.png")
 @palette("Web Elements")
 node TableHead extends WebElement {
-	style actionNode("")
+	style tableChildElementNode("")
 	
 	attr EString as content
 	/*attr SelectBoxAction as action*/
-	incomingEdges (*[1,*])
-	outgoingEdges ({Transition, LabeledTransition}[1,*])
+	incomingEdges (Transition[1,*])
+	outgoingEdges (Transition[1,*])
 }
 
 @icon("icons/16/object_16.png")
 @palette("Web Elements")
 node Th extends WebElement {
-	style actionNode("")
+	style tableChildElementNode("")
 	
 	attr EString as content
 	/*attr SelectBoxAction as action*/
-	incomingEdges (*[1,*])
-	outgoingEdges ({Transition, LabeledTransition}[1,*])
+	incomingEdges (Transition[1,*])
+	outgoingEdges (Transition[1,*])
 }
 
 @icon("icons/16/object_16.png")
 @palette("Web Elements")
 node TableRow extends WebElement {
-	style actionNode("")
+	style tableChildElementNode("")
 	
 	attr EString as content
-	incomingEdges (*[1,*])
-	outgoingEdges ({Transition, LabeledTransition}[1,*])
+	incomingEdges (Transition[1,*])
+	outgoingEdges (Transition[1,*])
 }
 
 @icon("icons/16/object_16.png")
 @palette("Web Elements")
 node TableBody extends WebElement {
-	style actionNode("")
+	style tableChildElementNode("")
 	
 	attr EString as content
-	incomingEdges (*[1,*])
-	outgoingEdges ({Transition, LabeledTransition}[1,*])
+	incomingEdges (Transition[1,*])
+	outgoingEdges (Transition[1,*])
 }
 
 @icon("icons/16/object_16.png")
 @palette("Web Elements")
 node TableData extends WebElement {
-	style actionNode("")
+	style tableChildElementNode("")
 	
 	attr EString as content
-	incomingEdges (*[1,*])
-	outgoingEdges ({Transition, LabeledTransition}[1,*])
+	incomingEdges (Transition[1,*])
+	outgoingEdges (Transition[1,*])
 }
 
 /* */
@@ -247,8 +247,14 @@ node TableData extends WebElement {
 container SectionNode {
 	style sectionNode("${title}")
 	attr EString as title := ""
-	containableElements(*)
-	incomingEdges (LabeledTransition[1,1], Transition[1,1], Anchor[1,*])
+	containableElements(
+		WebElement [0,*],
+		SubDoc [0,*],
+		Navigation [0,*],
+		Comment[0,*],
+		Screenshot [0,*]
+	)
+	incomingEdges (Transition[1,1], Anchor[0,*])
 	outgoingEdges (Transition[1,*])
 }
 
@@ -268,11 +274,6 @@ edge Transition {
 	style simpleArrow
 }
 
-edge LabeledTransition {
-	style labeledArrow("${label}")
-	attr EString as label
-}
-
 edge Anchor {
-	style commentLine
+	style commentArrow
 }
