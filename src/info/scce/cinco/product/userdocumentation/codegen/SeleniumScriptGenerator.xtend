@@ -12,7 +12,6 @@ import info.scce.cinco.product.features.main.feature.Email
 import java.util.List
 import java.util.HashMap
 import java.util.Map
-import info.scce.cinco.product.features.main.feature.DocNode
 
 class SeleniumScriptGenerator extends UserDocFileTemplate {
 	
