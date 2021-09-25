@@ -16,7 +16,7 @@ class MarkdownGenerator extends UserDocFileTemplate {
 	}
 	
 		override fileName() {
-		'''«featureName.trim».md'''
+		'''index.md'''
 	}
 	
 	override fileTemplate() {
@@ -24,8 +24,18 @@ class MarkdownGenerator extends UserDocFileTemplate {
 		'''
 		# «featureName»
 		
-		This feature starts with the sequence «featureCont.starts.head.docNodeSuccessors.head.mgl.modelName».
-		 
+		This feature starts with the "«featureCont.starts.head.docNodeSuccessors.head.mgl.modelName»" sequence.
+		
+		## section 1
+		
+		[image-1](./1.png)
+		
+		here comes the description for the image shown above.
+		
+		[image-2](./2.png)
+		
+		here comes the second description for the image shown above.
+		
 		'''
 	}
 		

@@ -13,8 +13,13 @@ import graphmodel.GraphModel
 import info.scce.cinco.product.features.main.feature.FeatureContainer
 import info.scce.cinco.product.usersequence.main.doc.EndNode
 import info.scce.cinco.product.features.main.feature.DocNode
+import info.scce.cinco.product.usersequence.main.doc.Form
+import info.scce.cinco.product.usersequence.main.doc.SectionNode
+import info.scce.cinco.product.usersequence.main.doc.Screenshot
 
-class NameExtension {
+//import java.util.ArrayList
+
+class HelperExtension {
 	
 	// Fully Quallified Names (Fqn)
 	val static firefoxDriverFqn		= 'org.openqa.selenium.firefox.FirefoxDriver'
@@ -110,56 +115,57 @@ class NameExtension {
 		}
 		return singleSequence						// return the sequence
 	}
-	
-	/*
-	 
-	static def extractSequence(StartNode start) {
-		val List<Node> singleSequence = new LinkedList<Node>;
-		var cond = true
-		singleSequence.add(start)			// get startNode
-		var succ = start.successors.head	// and its successor
-		singleSequence.add(succ)
- 
-		if(succ instanceof EndNode){		// if it's and end node
-			return singleSequence			// return the sequence
-		} else {
-			// swapping
-			var temp = succ					// or else get its successor
-			while(cond){						// while a certain condition still hold
-				current = temp.successors.head // replace the current by its successor
-				temp = current
-				singleSequence.add(current)		  // add that successor node
-				if (current instanceof EndNode)
-					cond = false
+
+	static def String getLinesOfCode(DocGraphModel model){
+		var StringBuilder codeText = new StringBuilder
+		for(start : model.starts){
+		var succ = start.successors.head
+		while (!(succ instanceof EndNode)) {
+				codeText.append(succ.nodeCode)
+				succ = succ.successors.head
 			}
 		}
-		return singleSequence
-	}
-	 */
-
-	static def String getModelCode(DocGraphModel model){
-		for (start : model.starts) {
-			for (node : start.successors) {
-				return node.nodeCode
-			}
-		}
+		'''
+		«codeText.toString»
+	   	'''
 	}
 
-	 
-	
 	static def String getNodeCode(Node node)'''
 		«switch (node.eClass.name) {
-						case "StartNode" : '''this.openBrowser();'''
-						case "EndNode" : '''this.closeBrowser();'''
-						case "SubDoc": (node as SubDoc).subDoc.modelCode
-						case "Navigation": '''this.goToPage("«(node as Navigation).link»");'''
-						case "Input": '''this.typeIn("«(node as Input).selector»", "«(node as Input).value»", "«(node as Input).content»");'''
-						case "Screenshot": '''this.takePageScreenshot("«»", "«»"); // Screenshot'''
-						case "Button": '''this.clickBtn("«(node as Button).selector»", "«(node as Button).value»");'''
-						case "SelectBox": '''this.select();'''
-					//	case "SectionNode": (node as SectionNode).allNodes.forEach[getNodeCode]
-				}
-				»
+				case "StartNode" : '''this.openBrowser();'''
+				case "EndNode" : '''this.closeBrowser();'''
+				case "Navigation": '''this.goToPage("«(node as Navigation).link»");'''
+				case "Div": ''''''
+				case "H": ''''''
+				case "P": ''''''
+				case "Span": ''''''
+				case "Label": ''''''
+				case "Textarea": ''''''
+				case "Table": ''''''
+				case "TableHead": ''''''
+				case "Th": ''''''
+				case "TableRow": ''''''
+				case "TableBody": ''''''
+				case "TableData": ''''''
+				case "Input": '''this.typeIn("«(node as Input).selector»", "«(node as Input).value»", "«(node as Input).content»");'''
+				case "Screenshot": '''
+				this.takePageScreenshot("«»", "«(node as Screenshot).pictureName.trim.replaceAll("\\.", "_")»"); 
+				'''
+				case "Button": '''this.clickBtn("«(node as Button).selector»", "«(node as Button).value»");'''
+				case "SelectBox": '''this.select();'''
+				case "SelectBoxOption": ''''''
+				case "SectionNode": '''«(node as SectionNode).allNodes.forEach[nodeCode]»'''
+				case "Form": '''
+								«FOR input : (node as Form).inputs»
+								«input.nodeCode»
+								«ENDFOR»
+								«FOR button : (node as Form).buttons»
+								«button.nodeCode»
+								«ENDFOR»
+							 '''
+				case "SubDoc": '''«(node as SubDoc).subDoc.linesOfCode»'''
+		}
+		»
 	'''
 	
 	static def String getProjectName(GraphModel model){

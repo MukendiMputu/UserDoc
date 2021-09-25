@@ -1,7 +1,6 @@
 package info.scce.cinco.product.userdocumentation.codegen
 
 import info.scce.cinco.product.userdocumentation.codegen.UserDocFileTemplate
-import static extension info.scce.cinco.product.userdocumentation.codegen.NameExtension.*
 import info.scce.cinco.product.features.main.feature.PropertyContainer
 import info.scce.cinco.product.features.main.feature.FeatureGraphModel
 import info.scce.cinco.product.features.main.feature.WebDriver
@@ -12,6 +11,7 @@ import info.scce.cinco.product.features.main.feature.Email
 import java.util.List
 import java.util.HashMap
 import java.util.Map
+import static extension info.scce.cinco.product.userdocumentation.codegen.HelperExtension.*
 
 class SeleniumScriptGenerator extends UserDocFileTemplate {
 	
@@ -145,19 +145,21 @@ class SeleniumScriptGenerator extends UserDocFileTemplate {
 			@Override
 			public void run() {
 				// For every feature container in the MGL generate a sequence of methods
+				this.openBrowser();
 				«FOR featureCont : featureModel.featureContainers»
 				{
 					// Start of sequence «featureCont.title»
 					try {
-					«FOR docNode : featureCont.extractSequence»
-					// DocNode «docNode.mgl.modelName»
-					«docNode.getMgl().modelCode»
-					«ENDFOR»
+						«FOR docNode : featureCont.extractSequence»
+							// DocNode «docNode.mgl.modelName»
+							«docNode.getMgl().linesOfCode»
+						«ENDFOR»
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
 				}
 				«ENDFOR»
+				this.closeBrowser();
 			}
 		
 			/*================== Selenium Methods ==================*/
@@ -201,6 +203,9 @@ class SeleniumScriptGenerator extends UserDocFileTemplate {
 				WebElement inputField = findPageElement(selector, selectorValue);
 				inputField.sendKeys(contentText + Keys.TAB);
 				return true;
+			}
+			public Boolean waitUntilElementPresent(String elementID) {
+				return wait.until(presenceOfElementLocated(By.xpath("//*[@id='"+elementID+"']")))!= null;
 			}
 			public Boolean clickBtn(String selector, String value)
 			{

@@ -3,7 +3,7 @@ package info.scce.cinco.product.userdocumentation.codegen
 import de.jabc.cinco.meta.plugin.template.ProjectTemplate
 import de.jabc.cinco.meta.core.utils.projects.ProjectCreator
 import info.scce.cinco.product.features.main.feature.FeatureGraphModel
-import static extension info.scce.cinco.product.userdocumentation.codegen.NameExtension.*
+import static extension info.scce.cinco.product.userdocumentation.codegen.HelperExtension.*
 
 class UserDocProjectGenerator extends ProjectTemplate {
 	val FeatureGraphModel model
@@ -43,7 +43,9 @@ class UserDocProjectGenerator extends ProjectTemplate {
 					
 					folder(ProjectCreator.getProject(model.eResource).name)[
 						forEachOf(model.featureContainers) [ f |
-							file(new MarkdownGenerator(f), true)
+							folder(f.title)[
+								file(new MarkdownGenerator(f), true)
+							]
 						]
 					]					
 				]

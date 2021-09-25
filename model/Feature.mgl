@@ -67,7 +67,7 @@ container PropertyContainer {
 		Email,
 		Password
 	)
-	attr EString as title := "Properties"
+	attr EString as title := "Selenium Properties"
 }
 
 /* configuration node*/
