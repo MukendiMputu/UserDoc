@@ -55,7 +55,6 @@ node Screenshot {
 	attr Comment as description
 }
 
-@disable(resize)
 @palette("Selenium Actions")
 @icon("icons/16/screenshot_16.png")
 node Navigation {
@@ -64,6 +63,29 @@ node Navigation {
 	outgoingEdges (Transition[1,*])
 	attr EString as link := "http://example.com"
 }
+
+@disable(resize)
+@palette("Selenium Actions")
+@icon("icons/16/timer_16.png")
+node Timer {
+	style timerNode
+	incomingEdges (Transition[1,1])
+	outgoingEdges (Transition[1,1])
+	attr Condition as condition := "presenceOfElementLocated"
+	attr EString as cssSelector := ""
+}
+
+enum Condition {
+	presenceOfElementLocated
+	presenceOfAllElementsLocatedBy
+	elementToBeClickable
+	elementToBeSelected
+	frameToBeAvailableAndSwitchToIt
+	invisibilityOfElementLocated
+	visibilityOfAllElementsLocatedBy
+	visibilityOfElementLocated
+}
+
 
 /*======================== WEB ELEMENTS ======================== */
 

@@ -119,6 +119,13 @@ nodeStyle navigationNode(1) {
 	}
 }
 
+nodeStyle timerNode {
+	image {
+		size(32,32)
+		path("icons/32/timer_32.png")
+	}
+}
+
 nodeStyle sectionNode(1) {
 	rectangle {
 		appearance extends default {
@@ -273,14 +280,9 @@ nodeStyle commentNode(1) {
 }
 
 nodeStyle screenshotNode {
-	roundedRectangle {
-		appearance default
-		size(50, 43)
-		corner(8,8)
-		image {
-			size (50, 43)
-			path ("icons/64/browser_64.png")
-		}
+	image {
+		size (32,32)
+		path ("icons/32/browser_32.png")
 	}
 }
 

@@ -39,24 +39,30 @@ class HelperExtension {
 	
 	/*** Main Packages ***/
 	
-	static def String getMainPackage()			{ 'main' }
-	static def String getMainJavaPackage()		{ mainPackage + '.java'			   }
-	static def String getMainResourcePackage()	{ mainPackage + '.resources'	   }
-	static def String getTestPackage()			{ 'test' }
-	static def String getTestJavaPackage()		{ testPackage + '.java'			   }
-	static def String getTestResourcePackage()	{ testPackage + '.resources'	   }
+	static def String getMainJavaPackage()		{ 'main.java'		}
+	static def String getMainResourcePackage()	{ 'main.resources'	}
+	
+	/*** Application Package ***/
+	
+	static def String getApplicationPackage() 	{ 'info.scce.cinco.product.userdoc' }
+	
+	/*** Test Packages ***/
+	
+	static def String getTestJavaPackage()		{ 'test.java'		}
+	static def String getTestResourcePackage()	{ 'test.resources'	}
 	
 	/*** Selenium Drivers ***/
 	
 	// Drivers
 	static def String getDriverName(WebDriver driver) {
 		switch (driver.name.getName.toLowerCase) {
-						case "firefox":  	'firefoxDriver'
-						case "chrome":  	'chromeDriver'
-						case "edge" :  		'edgeDriver'
-						case "safari" :  	'safariDriver'
-						case "ie" :  		'ieDriver'
-						case "opera" :  	'operaDriver'
+						case "firefox":  					'firefoxDriver'
+						case "chrome":  					'chromeDriver'
+						case "edge" :  						'edgeDriver'
+						case "safari" :  					'safariDriver'
+						case "ie" :  						'ieDriver'
+						case "internet_explorer" :  		'ieDriver'
+						case "opera" :  					'operaDriver'
 						default:   			throw new RuntimeException('''Could not identify "«driver.name.getName.toLowerCase»"''')
 		}
 	}
@@ -118,7 +124,7 @@ class HelperExtension {
 
 	static def String getLinesOfCode(DocGraphModel model){
 		var StringBuilder codeText = new StringBuilder
-		for(start : model.starts){
+		for(start : model.startNodes){
 		var succ = start.successors.head
 		while (!(succ instanceof EndNode)) {
 				codeText.append(succ.nodeCode)

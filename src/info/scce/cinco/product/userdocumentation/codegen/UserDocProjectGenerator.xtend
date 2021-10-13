@@ -11,7 +11,7 @@ class UserDocProjectGenerator extends ProjectTemplate {
 		this.model = model
 	}
 	
-	override protected _projectDescription() {
+	override projectDescription() {
 		project(ProjectCreator.getProject(model.eResource).name) [
 			
 			deleteIfExistent = false
@@ -33,12 +33,17 @@ class UserDocProjectGenerator extends ProjectTemplate {
 				deleteIfExistent = true
 				isSourceFolder = true
 				folder('src') [
-					pkg(mainJavaPackage)[
-						file(new SeleniumScriptGenerator(model), true)
+					folder(mainJavaPackage)[						
+						pkg(applicationPackage)[
+							file(new SeleniumScriptGenerator(model), true)
+						]
 					]
-					pkg(mainResourcePackage)[]
+					folder(mainResourcePackage)[]
 					
-					pkg(testJavaPackage)[
+					folder(testJavaPackage)[
+					]
+					
+					folder(testJavaPackage)[
 					]
 					
 					folder(ProjectCreator.getProject(model.eResource).name)[
@@ -49,7 +54,6 @@ class UserDocProjectGenerator extends ProjectTemplate {
 						]
 					]					
 				]
-				
 				file(new PomXMLGenerator(), true)
 				file(new ClassPathFileGenerator(), true)
 				file(new ProjectFileGenerator(), true)
@@ -57,7 +61,11 @@ class UserDocProjectGenerator extends ProjectTemplate {
 		]
 	}
 	
-	override protected _projectName() {
+	def projectName() {
+		model.projectName
+	}
+	
+	override projectSuffix() {
 		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
 	
