@@ -46,11 +46,28 @@ class UserDocProjectGenerator extends ProjectTemplate {
 					folder(testJavaPackage)[
 					]
 					
-					folder(ProjectCreator.getProject(model.eResource).name)[
-						forEachOf(model.featureContainers) [ f |
-							folder(f.title)[
-								file(new MarkdownGenerator(f), true)
+					folder('documentation')[
+						folder('docs') [
+							folder('src') [
+								folder('.vuepress')[
+									folder('components')[]
+									folder('theme')[]
+									folder('public')[]
+									folder('styles')[]
+									folder('templates ')[]
+									
+								]
+								folder('features') [
+									forEachOf(model.featureContainers) [ f |
+										folder(f.title)[
+											file(new IndexMDGenerator(f), true)
+										]
+									]
+									file(new HomeIndexMDGenerator(), true)
+								]
 							]
+							file(new PackageJSONGenerator(), true)
+							// file(new GitIgnore(), true)
 						]
 					]					
 				]

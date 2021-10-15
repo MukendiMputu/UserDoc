@@ -3,7 +3,7 @@ package info.scce.cinco.product.userdocumentation.codegen
 import info.scce.cinco.product.userdocumentation.codegen.UserDocFileTemplate
 import info.scce.cinco.product.features.main.feature.FeatureContainer
 
-class MarkdownGenerator extends UserDocFileTemplate {
+class IndexMDGenerator extends UserDocFileTemplate {
 	
 	val FeatureContainer featureCont
 	
@@ -15,7 +15,7 @@ class MarkdownGenerator extends UserDocFileTemplate {
 		return featureCont.title.nullOrEmpty? 'UnknownFeature' : this.featureCont.title	
 	}
 	
-		override fileName() {
+	override fileName() {
 		'''index.md'''
 	}
 	

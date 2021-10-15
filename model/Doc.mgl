@@ -71,8 +71,8 @@ node Timer {
 	style timerNode
 	incomingEdges (Transition[1,1])
 	outgoingEdges (Transition[1,1])
-	attr Condition as condition := "presenceOfElementLocated"
 	attr EString as cssSelector := ""
+	attr Condition as condition := "presenceOfElementLocated"
 }
 
 enum Condition {
@@ -100,8 +100,9 @@ enum Condition {
 node WebElement {
 	style object("WebElement: ${selector}:${value}")
 	attr EString as selector := "id"
-	attr EString as value := "cincoID"
-	attr EBoolean as Highlighted
+	attr EBoolean as highlighted
+	@multiLine
+	attr EString as documenation := "Lorem ipsum dolor et si met."
 	
 	incomingEdges (Transition[1,1])
 	outgoingEdges (Transition[1,1])
