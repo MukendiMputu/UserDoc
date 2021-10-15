@@ -8,10 +8,11 @@ graphModel DocGraphModel {
 	containableElements(
 		StartNode [1,1],
 		EndNode [1,1],
-		SubDoc [0,*],
+		SubDoc,
 		Screenshot [1,*],
 		Navigation [1,*],
-		WebElement [0,*],
+		Timer,
+		WebElement,
 		SectionNode [1,*],
 		Comment[1, *]
 	)
@@ -55,24 +56,14 @@ node Screenshot {
 	attr Comment as description
 }
 
-@palette("Selenium Actions")
-@icon("icons/16/screenshot_16.png")
-node Navigation {
-	style navigationNode("${link}")
-	incomingEdges (Transition[1,1], Anchor[0,*])
-	outgoingEdges (Transition[1,*])
-	attr EString as link := "http://example.com"
-}
-
-@disable(resize)
-@palette("Selenium Actions")
 @icon("icons/16/timer_16.png")
+@palette("Selenium Actions")
 node Timer {
 	style timerNode
 	incomingEdges (Transition[1,1])
 	outgoingEdges (Transition[1,1])
 	attr EString as cssSelector := ""
-	attr Condition as condition := "presenceOfElementLocated"
+	attr Condition as condition
 }
 
 enum Condition {
@@ -86,6 +77,14 @@ enum Condition {
 	visibilityOfElementLocated
 }
 
+@palette("Selenium Actions")
+@icon("icons/16/screenshot_16.png")
+node Navigation {
+	style navigationNode("${link}")
+	incomingEdges (Transition[1,1], Anchor[0,*])
+	outgoingEdges (Transition[1,*])
+	attr EString as link := "http://example.com"
+}
 
 /*======================== WEB ELEMENTS ======================== */
 
@@ -271,11 +270,11 @@ container SectionNode {
 	style sectionNode("${title}")
 	attr EString as title := "New Section"
 	containableElements(
-		WebElement [0,*],
-		SubDoc [0,*],
-		Navigation [0,*],
-		Comment[0,*],
-		Screenshot [0,*]
+		WebElement ,
+		SubDoc,
+		Navigation,
+		Comment,
+		Screenshot
 	)
 	incomingEdges (Transition[1,1], Anchor[0,*])
 	outgoingEdges (Transition[1,*])

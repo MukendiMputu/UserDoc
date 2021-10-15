@@ -32,8 +32,13 @@ Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,org.eclipse.e
  nco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.generator.r
  untime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.p
  lugin.generator.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.
- jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.mcam
- .runtime
+ jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.gene
+ rator.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco
+ .meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.generator.runt
+ ime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plug
+ in.generator.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.jab
+ c.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.mcam.ru
+ ntime
 Bundle-ActivationPolicy: lazy
 Export-Package: info.scce.cinco.product.userdocumentation.action,info.sc
  ce.cinco.product.userdocumentation.appearance,info.scce.cinco.product.u

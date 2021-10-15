@@ -2,7 +2,6 @@ cincoProduct UserDocumentationTool {
 	mgl "model/Feature.mgl"
 	mgl "model/Doc.mgl"
 	
-
 	splashScreen "branding/splash.bmp" {
 		progressBar (37,268,190,10)
 		progressMessage (37,280,190,18)
@@ -15,11 +14,11 @@ cincoProduct UserDocumentationTool {
 	image128 "branding/Icon128.png"
 	linuxIcon "branding/Icon512.xpm"
 
-	// 	
+	
 	about {
 		text "UserDoc is a DSL-driven generator of end user documentation for web application. It is a bachelor thesis project developed with the Cinco SCCE Meta Tooling Suite ( http://cinco.scce.info )."
 	}
-	//
+
 	plugins {
 		info.scce.cinco.product.userdocumentation.edit,
 		info.scce.cinco.product.userdocumentation.editor

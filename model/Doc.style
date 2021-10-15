@@ -81,7 +81,6 @@ nodeStyle endNode {
 	}
 }
 
-/* represent the object receiving the user action */
 nodeStyle object (1){
 	appearanceProvider("info.scce.cinco.product.userdocumentation.appearance.HighlightInputNodeAppearance")
 	rectangle outer {
@@ -93,7 +92,7 @@ nodeStyle object (1){
 		roundedRectangle inner {
 			appearance default
 			position(CENTER,MIDDLE)
-			size(50,50)
+			size(58,58)
 			corner(8,8)
 			text {
 				position ( CENTER, MIDDLE )
@@ -116,13 +115,6 @@ nodeStyle navigationNode(1) {
 			position ( CENTER, MIDDLE )
 			value "%s"
 		}
-	}
-}
-
-nodeStyle timerNode {
-	image {
-		size(32,32)
-		path("icons/32/timer_32.png")
 	}
 }
 
@@ -231,7 +223,7 @@ nodeStyle textBlock(1) {
 
 nodeStyle inputNode(1) {
 	appearanceProvider("info.scce.cinco.product.userdocumentation.appearance.HighlightInputNodeAppearance")
-	roundedRectangle outter {
+	roundedRectangle outer {
 		appearance extends default {
 			foreground (245,245,245)
 		}
@@ -255,7 +247,7 @@ nodeStyle inputNode(1) {
 
 nodeStyle buttonNode(1) {
 	appearanceProvider("info.scce.cinco.product.userdocumentation.appearance.HighlightInputNodeAppearance")
-	roundedRectangle outter {
+	roundedRectangle outer {
 		appearance extends default {
 			foreground (245,245,245)
 		}
@@ -266,8 +258,8 @@ nodeStyle buttonNode(1) {
 				foreground (255,255,255)
 				background (28,113,216)
 			}
-			position (0,0)
-			size (90,40)
+			position ( CENTER, MIDDLE )
+			size (100,32)
 			corner (8,8)
 			text {
 				position ( CENTER, MIDDLE )
@@ -300,6 +292,13 @@ nodeStyle screenshotNode {
 	image {
 		size (32,32)
 		path ("icons/32/browser_32.png")
+	}
+}
+
+nodeStyle timerNode {
+	image {
+		size(32,32)
+		path("icons/32/browser_32.png")
 	}
 }
 
