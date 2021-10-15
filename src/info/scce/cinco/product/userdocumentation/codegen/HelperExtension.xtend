@@ -112,7 +112,18 @@ class HelperExtension {
 	}
 	
 	static def String getCleanFileOrFolderName(String fname) {
-		return fname.trim.replaceAll(" ","").replaceAll("\\.", "_")
+		return fname.trim.replaceAll(" ","").replaceAll("\\.", "_").escape
+	}
+	
+	static def String escape(String s){
+		 return s.replace("\\", "\\\\")
+		          .replace("\t", "\\t")
+		          .replace("\b", "\\b")
+		          .replace("\n", "\\n")
+		          .replace("\r", "\\r")
+		          .replace("\f", "\\f")
+		          .replace("\'", "\\'")
+		          .replace("\"", "\\\"");
 	}
 	
 	static def extractSequence(FeatureContainer container) {
@@ -158,7 +169,7 @@ class HelperExtension {
 				case "TableRow": ''''''
 				case "TableBody": ''''''
 				case "TableData": ''''''
-				case "Input": '''this.typeIn("«(node as Input).selector»", "«(node as Input).content»");'''
+				case "Input": '''this.typeIn("«(node as Input).selector.escape»", "«(node as Input).content»");'''
 				case "Screenshot": '''this.takePageScreenshot("«featureTitle»", "«(node as Screenshot).pictureName.cleanFileOrFolderName»"); 
 				'''
 				case "Button": '''this.clickBtn("«(node as Button).selector»");'''

@@ -47,7 +47,7 @@ node SubDoc {
 
 @disable(resize)
 @palette("Selenium Actions")
-@icon("icons/16/screenshot_16.png")
+@icon("icons/16/camera_16.png")
 node Screenshot {
 	style screenshotNode
 	incomingEdges (Transition[1,1], Anchor[1,*])
@@ -56,6 +56,7 @@ node Screenshot {
 	attr Comment as description
 }
 
+@disable(resize)
 @icon("icons/16/timer_16.png")
 @palette("Selenium Actions")
 node Timer {

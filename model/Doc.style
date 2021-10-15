@@ -233,7 +233,7 @@ nodeStyle inputNode(1) {
 			appearance extends default {
 				background (255,255,255)
 			}
-			position (CENTER , MIDDLE)
+			position (CENTER 2, MIDDLE 2)
 			size (100,32)
 			corner (8,8)
 			multiText {
@@ -298,7 +298,7 @@ nodeStyle screenshotNode {
 nodeStyle timerNode {
 	image {
 		size(32,32)
-		path("icons/32/browser_32.png")
+		path("icons/32/timer_32.png")
 	}
 }
 

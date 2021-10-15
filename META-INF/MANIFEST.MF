@@ -37,8 +37,8 @@ Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,org.eclipse.e
  .meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.generator.runt
  ime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plug
  in.generator.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.jab
- c.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.mcam.ru
- ntime
+ c.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.generat
+ or.runtime,de.jabc.cinco.meta.plugin.mcam.runtime
 Bundle-ActivationPolicy: lazy
 Export-Package: info.scce.cinco.product.userdocumentation.action,info.sc
  ce.cinco.product.userdocumentation.appearance,info.scce.cinco.product.u
