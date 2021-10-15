@@ -32,45 +32,49 @@ class UserDocProjectGenerator extends ProjectTemplate {
 			folder('src-gen') [
 				deleteIfExistent = true
 				isSourceFolder = true
+				
 				folder('src') [
-					folder(mainJavaPackage)[						
-						pkg(applicationPackage)[
-							file(new SeleniumScriptGenerator(model), true)
-						]
-					]
-					folder(mainResourcePackage)[]
-					
-					folder(testJavaPackage)[
-					]
-					
-					folder(testJavaPackage)[
-					]
-					
-					folder('documentation')[
-						folder('docs') [
-							folder('src') [
-								folder('.vuepress')[
-									folder('components')[]
-									folder('theme')[]
-									folder('public')[]
-									folder('styles')[]
-									folder('templates ')[]
-									
-								]
-								folder('features') [
-									forEachOf(model.featureContainers) [ f |
-										folder(f.title)[
-											file(new IndexMDGenerator(f), true)
-										]
-									]
-									file(new HomeIndexMDGenerator(), true)
-								]
+					folder(mainPackage)[
+						folder('java')[
+							pkg(applicationPackage)[
+								file(new SeleniumScriptGenerator(model), true)
 							]
-							file(new PackageJSONGenerator(), true)
-							// file(new GitIgnore(), true)
 						]
-					]					
+						folder('resources')[]						
+					]
+					
+					folder(testPackage)[
+						folder('java')[]
+						folder('resources')[]
+					]
+					
 				]
+					
+				folder('documentation')[
+					folder('docs') [
+						folder('src') [
+							folder('.vuepress')[
+								folder('components')[]
+								folder('theme')[]
+								folder('public')[]
+								folder('styles')[]
+								folder('templates ')[]
+								
+							]
+							folder('features') [
+								forEachOf(model.featureContainers) [ f |
+									folder(f.title)[
+										file(new IndexMDGenerator(f), true)
+									]
+								]
+								file(new HomeIndexMDGenerator(), true)
+							]
+						]
+						file(new PackageJSONGenerator(), true)
+						// file(new GitIgnore(), true)
+					]
+				]					
+				
 				file(new PomXMLGenerator(), true)
 				file(new ClassPathFileGenerator(), true)
 				file(new ProjectFileGenerator(), true)

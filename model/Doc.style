@@ -150,7 +150,7 @@ nodeStyle formNode(1) {
 		}
 		size (180, 80)
 		text {
-			position (CENTER ,MIDDLE)
+			position (LEFT 3 ,TOP 3)
 			value "%s"
 		}
 	}
@@ -230,32 +230,49 @@ nodeStyle textBlock(1) {
 }
 
 nodeStyle inputNode(1) {
-	roundedRectangle {
+	appearanceProvider("info.scce.cinco.product.userdocumentation.appearance.HighlightInputNodeAppearance")
+	roundedRectangle outter {
 		appearance extends default {
-			background (255,255,255)
+			foreground (245,245,245)
 		}
-		position (0,0)
-		size (100,32)
+		size(102,34)
 		corner (8,8)
-		multiText {
-			position ( CENTER, MIDDLE )
-			value "%s"
+		roundedRectangle inner {
+			appearance extends default {
+				background (255,255,255)
+			}
+			position (CENTER , MIDDLE)
+			size (100,32)
+			corner (8,8)
+			multiText {
+				position ( CENTER, MIDDLE )
+				value "%s"
+			}
 		}
 	}
+	
 }
 
 nodeStyle buttonNode(1) {
-	roundedRectangle {
+	appearanceProvider("info.scce.cinco.product.userdocumentation.appearance.HighlightInputNodeAppearance")
+	roundedRectangle outter {
 		appearance extends default {
-			foreground (255,255,255)
-			background (28,113,216)
+			foreground (245,245,245)
 		}
-		position (0,0)
-		size (90,40)
+		size(102,34)
 		corner (8,8)
-		text {
-			position ( CENTER, MIDDLE )
-			value "%s"
+		roundedRectangle inner {
+			appearance extends default {
+				foreground (255,255,255)
+				background (28,113,216)
+			}
+			position (0,0)
+			size (90,40)
+			corner (8,8)
+			text {
+				position ( CENTER, MIDDLE )
+				value "%s"
+			}
 		}
 	}
 }

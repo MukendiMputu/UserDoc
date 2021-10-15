@@ -150,7 +150,7 @@ node Label extends WebElement {
 @icon("icons/16/object_16.png")
 @palette("Web Elements")
 container Form extends WebElement {
-	style formNode("New Form")
+	style formNode("Form")
 	containableElements(
 		Input [1,*],
 		Button [1,3]

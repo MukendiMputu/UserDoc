@@ -14,16 +14,16 @@ graphModel FeatureGraphModel {
 		PropertyContainer[1,*]
 	)
 	attr EString as modelName := "New Feature"
-}
+} 
 
 @icon("icons/16/start_16.png")
-node Start extends docMgl::StartNode {
+node Start {
 	style startNode
 	outgoingEdges (Edge[1,1])
 }
 
 @icon("icons/16/stop_16.png")
-node End extends docMgl::EndNode {
+node End {
 	style endNode
 	incomingEdges (Edge[1,*])
 }

@@ -16,6 +16,7 @@ import info.scce.cinco.product.features.main.feature.DocNode
 import info.scce.cinco.product.usersequence.main.doc.Form
 import info.scce.cinco.product.usersequence.main.doc.SectionNode
 import info.scce.cinco.product.usersequence.main.doc.Screenshot
+import info.scce.cinco.product.features.main.feature.End
 
 //import java.util.ArrayList
 
@@ -39,8 +40,7 @@ class HelperExtension {
 	
 	/*** Main Packages ***/
 	
-	static def String getMainJavaPackage()		{ 'main.java'		}
-	static def String getMainResourcePackage()	{ 'main.resources'	}
+	static def String getMainPackage()			{ 'main'		}
 	
 	/*** Application Package ***/
 	
@@ -48,8 +48,9 @@ class HelperExtension {
 	
 	/*** Test Packages ***/
 	
-	static def String getTestJavaPackage()		{ 'test.java'		}
-	static def String getTestResourcePackage()	{ 'test.resources'	}
+	static def String getTestPackage()			{ 'test'		}
+	static def String getTestJavaPackage()		{ testPackage +"." +'java'		}
+	static def String getTestResourcePackage()	{ testPackage +"." +'resources'	}
 	
 	/*** Selenium Drivers ***/
 	
@@ -110,33 +111,37 @@ class HelperExtension {
 		fqn.split("\\.", -1).last
 	}
 	
+	static def String getCleanFileOrFolderName(String fname) {
+		return fname.trim.replaceAll(" ","").replaceAll("\\.", "_")
+	}
+	
 	static def extractSequence(FeatureContainer container) {
 		val List<DocNode> singleSequence = new LinkedList<DocNode>;
 		val firstDocNode = container.starts.head.docNodeSuccessors.head
 		singleSequence.add(firstDocNode)			// get first DocNode
 		var succ = firstDocNode.successors.head		// and its successor
-		while (!(succ instanceof EndNode)) {		// if it's and end node
+		while (!(succ instanceof End) && !(succ instanceof EndNode)) {		// if it's and end node
 			singleSequence.add(succ as DocNode)
 			succ = succ.successors.head				// or else get its successor
 		}
 		return singleSequence						// return the sequence
 	}
 
-	static def String getLinesOfCode(DocGraphModel model){
+	static def String getLinesOfCode(DocGraphModel model, String featureTitle){
 		var StringBuilder codeText = new StringBuilder
 		for(start : model.startNodes){
-		var succ = start.successors.head
-		while (!(succ instanceof EndNode)) {
-				codeText.append(succ.nodeCode)
-				succ = succ.successors.head
-			}
+			var succ = start.successors.head
+			while (!(succ instanceof EndNode)) {
+					codeText.append(succ.getNodeCode(featureTitle))
+					succ = succ.successors.head
+				}
 		}
 		'''
 		«codeText.toString»
 	   	'''
 	}
 
-	static def String getNodeCode(Node node)'''
+	static def String getNodeCode(Node node, String featureTitle)'''
 		«switch (node.eClass.name) {
 				case "StartNode" : '''this.openBrowser();'''
 				case "EndNode" : '''this.closeBrowser();'''
@@ -153,23 +158,22 @@ class HelperExtension {
 				case "TableRow": ''''''
 				case "TableBody": ''''''
 				case "TableData": ''''''
-				case "Input": '''this.typeIn("«(node as Input).selector»", "«(node as Input).value»", "«(node as Input).content»");'''
-				case "Screenshot": '''
-				this.takePageScreenshot("«»", "«(node as Screenshot).pictureName.trim.replaceAll("\\.", "_")»"); 
+				case "Input": '''this.typeIn("«(node as Input).selector»", "«(node as Input).content»");'''
+				case "Screenshot": '''this.takePageScreenshot("«featureTitle»", "«(node as Screenshot).pictureName.cleanFileOrFolderName»"); 
 				'''
-				case "Button": '''this.clickBtn("«(node as Button).selector»", "«(node as Button).value»");'''
+				case "Button": '''this.clickBtn("«(node as Button).selector»");'''
 				case "SelectBox": '''this.select();'''
 				case "SelectBoxOption": ''''''
-				case "SectionNode": '''«(node as SectionNode).allNodes.forEach[nodeCode]»'''
+				case "SectionNode": '''«(node as SectionNode).allNodes.forEach[getNodeCode(featureTitle)]»'''
 				case "Form": '''
 								«FOR input : (node as Form).inputs»
-								«input.nodeCode»
+								«input.getNodeCode(featureTitle)»
 								«ENDFOR»
 								«FOR button : (node as Form).buttons»
-								«button.nodeCode»
+								«button.getNodeCode(featureTitle)»
 								«ENDFOR»
 							 '''
-				case "SubDoc": '''«(node as SubDoc).subDoc.linesOfCode»'''
+				case "SubDoc": '''«(node as SubDoc).subDoc.getLinesOfCode(featureTitle)»'''
 		}
 		»
 	'''
