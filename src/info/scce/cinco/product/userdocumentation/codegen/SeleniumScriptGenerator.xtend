@@ -74,6 +74,7 @@ class SeleniumScriptGenerator extends UserDocFileTemplate {
 			import org.openqa.selenium.OutputType;
 			import org.apache.commons.io.FileUtils;
 			import org.openqa.selenium.TakesScreenshot;
+			import org.openqa.selenium.support.ui.Select;
 			import org.openqa.selenium.JavascriptExecutor;
 			«IF !drivers.empty»
 				«FOR driver : drivers.entrySet»
@@ -207,6 +208,12 @@ class SeleniumScriptGenerator extends UserDocFileTemplate {
 			public Boolean clickBtn(String selector)
 			{
 				findPageElement(selector).click();
+				return true;
+			}
+			public Boolean select(String selector, String option)
+			{
+				Select selectBox = new Select(findPageElement(selector));
+				selectBox.selectByVisibleText(option);
 				return true;
 			}
 			public Boolean pressEnter()

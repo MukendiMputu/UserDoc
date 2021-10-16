@@ -56,11 +56,14 @@ class UserDocProjectGenerator extends ProjectTemplate {
 							folder('.vuepress')[
 								folder('components')[]
 								folder('theme')[]
-								folder('public')[]
+								folder('public')[
+									file(new HomeIndexMDGenerator(), true)
+								]
 								folder('styles')[]
 								folder('templates ')[]
 								
 							]
+							folder('assets/img')[]
 							folder('features') [
 								forEachOf(model.featureContainers) [ f |
 									folder(f.title)[

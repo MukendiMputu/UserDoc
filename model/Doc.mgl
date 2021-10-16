@@ -187,16 +187,7 @@ node Button extends WebElement {
 @palette("Web Elements")
 node SelectBox extends WebElement {
 	style selectBoxNode("New SelectBox")
-	attr EString as content
-	incomingEdges (Transition[1,*])
-	outgoingEdges (Transition[1,*])
-}
-
-@icon("icons/16/object_16.png")
-@palette("Web Elements")
-node SelectBoxOption extends WebElement {
-	style selectOptionNode("New SelectBoxOption")
-	attr EString as content
+	attr EString as option := "option"
 	incomingEdges (Transition[1,*])
 	outgoingEdges (Transition[1,*])
 }

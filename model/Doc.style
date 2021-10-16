@@ -163,21 +163,6 @@ nodeStyle selectBoxNode(1) {
 	}
 }
 
-nodeStyle selectOptionNode(1) {
-	roundedRectangle {
-		appearance extends default {
-			background (255,255,255)
-		}
-		position (0,0)
-		size (90,40)
-		corner (8,8)
-		text {
-			position ( CENTER, MIDDLE )
-			value "%s" 
-		}
-	}
-}
-
 nodeStyle tableNode(1) {
 	rectangle {
 		appearance extends default {
@@ -233,7 +218,7 @@ nodeStyle inputNode(1) {
 			appearance extends default {
 				background (255,255,255)
 			}
-			position (CENTER 2, MIDDLE 2)
+			position (CENTER, MIDDLE)
 			size (100,32)
 			corner (8,8)
 			multiText {

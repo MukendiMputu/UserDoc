@@ -1,22 +1,35 @@
 package info.scce.cinco.product.userdocumentation.codegen
 
-import info.scce.cinco.product.features.main.feature.WebDriver
-import graphmodel.Node
-import java.util.List
-import java.util.LinkedList
-import info.scce.cinco.product.usersequence.main.doc.DocGraphModel
-import info.scce.cinco.product.usersequence.main.doc.SubDoc
-import info.scce.cinco.product.usersequence.main.doc.Navigation
-import info.scce.cinco.product.usersequence.main.doc.Input
-import info.scce.cinco.product.usersequence.main.doc.Button
 import graphmodel.GraphModel
-import info.scce.cinco.product.features.main.feature.FeatureContainer
-import info.scce.cinco.product.usersequence.main.doc.EndNode
+import graphmodel.Node
 import info.scce.cinco.product.features.main.feature.DocNode
-import info.scce.cinco.product.usersequence.main.doc.Form
-import info.scce.cinco.product.usersequence.main.doc.SectionNode
-import info.scce.cinco.product.usersequence.main.doc.Screenshot
 import info.scce.cinco.product.features.main.feature.End
+import info.scce.cinco.product.features.main.feature.FeatureContainer
+import info.scce.cinco.product.features.main.feature.WebDriver
+import info.scce.cinco.product.usersequence.main.doc.Button
+import info.scce.cinco.product.usersequence.main.doc.Div
+import info.scce.cinco.product.usersequence.main.doc.DocGraphModel
+import info.scce.cinco.product.usersequence.main.doc.EndNode
+import info.scce.cinco.product.usersequence.main.doc.Form
+import info.scce.cinco.product.usersequence.main.doc.H
+import info.scce.cinco.product.usersequence.main.doc.Input
+import info.scce.cinco.product.usersequence.main.doc.Navigation
+import info.scce.cinco.product.usersequence.main.doc.P
+import info.scce.cinco.product.usersequence.main.doc.Screenshot
+import info.scce.cinco.product.usersequence.main.doc.SectionNode
+import info.scce.cinco.product.usersequence.main.doc.SelectBox
+import info.scce.cinco.product.usersequence.main.doc.Span
+import info.scce.cinco.product.usersequence.main.doc.SubDoc
+import info.scce.cinco.product.usersequence.main.doc.Table
+import info.scce.cinco.product.usersequence.main.doc.TableBody
+import info.scce.cinco.product.usersequence.main.doc.TableData
+import info.scce.cinco.product.usersequence.main.doc.TableHead
+import info.scce.cinco.product.usersequence.main.doc.TableRow
+import info.scce.cinco.product.usersequence.main.doc.Textarea
+import info.scce.cinco.product.usersequence.main.doc.Th
+import java.util.LinkedList
+import java.util.List
+import info.scce.cinco.product.usersequence.main.doc.Label
 
 //import java.util.ArrayList
 
@@ -112,7 +125,10 @@ class HelperExtension {
 	}
 	
 	static def String getCleanFileOrFolderName(String fname) {
-		return fname.trim.replaceAll(" ","").replaceAll("\\.", "_").escape
+		return fname.trim
+					.replaceAll(" ","")
+					.replaceAll("\\.", "_")
+					.escape
 	}
 	
 	static def String escape(String s){
@@ -126,6 +142,7 @@ class HelperExtension {
 		          .replace("\"", "\\\"");
 	}
 	
+	/* Extracts in sequence order all Doc model container in a feature container */
 	static def extractSequence(FeatureContainer container) {
 		val List<DocNode> singleSequence = new LinkedList<DocNode>;
 		val firstDocNode = container.starts.head.docNodeSuccessors.head
@@ -137,7 +154,8 @@ class HelperExtension {
 		}
 		return singleSequence						// return the sequence
 	}
-
+	
+	/* Retrieves the element method following the sequence or queue in the model*/
 	static def String getLinesOfCode(DocGraphModel model, String featureTitle){
 		var StringBuilder codeText = new StringBuilder
 		for(start : model.startNodes){
@@ -152,39 +170,46 @@ class HelperExtension {
 	   	'''
 	}
 
+	/*Depending on the node type a template method for the Selenium Script is chosen. */
 	static def String getNodeCode(Node node, String featureTitle)'''
 		«switch (node.eClass.name) {
-				case "StartNode" : '''this.openBrowser();'''
-				case "EndNode" : '''this.closeBrowser();'''
-				case "Navigation": '''this.goToPage("«(node as Navigation).link»");'''
-				case "Div": ''''''
-				case "H": ''''''
-				case "P": ''''''
-				case "Span": ''''''
-				case "Label": ''''''
-				case "Textarea": ''''''
-				case "Table": ''''''
-				case "TableHead": ''''''
-				case "Th": ''''''
-				case "TableRow": ''''''
-				case "TableBody": ''''''
-				case "TableData": ''''''
-				case "Input": '''this.typeIn("«(node as Input).selector.escape»", "«(node as Input).content»");'''
-				case "Screenshot": '''this.takePageScreenshot("«featureTitle»", "«(node as Screenshot).pictureName.cleanFileOrFolderName»"); 
-				'''
-				case "Button": '''this.clickBtn("«(node as Button).selector»");'''
-				case "SelectBox": '''this.select();'''
-				case "SelectBoxOption": ''''''
-				case "SectionNode": '''«(node as SectionNode).allNodes.forEach[getNodeCode(featureTitle)]»'''
-				case "Form": '''
-								«FOR input : (node as Form).inputs»
-								«input.getNodeCode(featureTitle)»
-								«ENDFOR»
-								«FOR button : (node as Form).buttons»
-								«button.getNodeCode(featureTitle)»
-								«ENDFOR»
-							 '''
-				case "SubDoc": '''«(node as SubDoc).subDoc.getLinesOfCode(featureTitle)»'''
+				case "Navigation": 		'''this.goToPage("«(node as Navigation).link»");'''
+				case "Div": 			'''«IF (node as Div).highlighted»this.highlightElement(«(node as Div).selector»); «ENDIF»'''
+				case "H": 				'''«IF (node as H).highlighted»this.highlightElement(«(node as H).selector»); «ENDIF»'''
+				case "P": 				'''«IF (node as P).highlighted»this.highlightElement(«(node as P).selector»); «ENDIF»'''
+				case "Span": 			'''«IF (node as Span).highlighted»this.highlightElement(«(node as Span).selector»); «ENDIF»'''
+				case "Label": 			'''«IF (node as Label).highlighted»this.highlightElement(«(node as Label).selector»); «ENDIF»'''
+				case "Textarea": 		'''«IF (node as Textarea).highlighted»this.highlightElement(«(node as Textarea).selector»); «ENDIF»'''
+				case "Table": 			'''«IF (node as Table).highlighted»this.highlightElement(«(node as Table).selector»); «ENDIF»'''
+				case "TableHead": 		'''«IF (node as TableHead).highlighted»this.highlightElement(«(node as TableHead).selector»); «ENDIF»'''
+				case "Th": 				'''«IF (node as Th).highlighted»this.highlightElement(«(node as Th).selector»); «ENDIF»'''
+				case "TableRow": 		'''«IF (node as TableRow).highlighted»this.highlightElement(«(node as TableRow).selector»); «ENDIF»'''
+				case "TableBody": 		'''«IF (node as TableBody).highlighted»this.highlightElement(«(node as TableBody).selector»); «ENDIF»'''
+				case "TableData": 		'''«IF (node as TableData).highlighted»this.highlightElement(«(node as TableData).selector»); «ENDIF»'''
+				case "Input": 			'''
+										«IF (node as Input).highlighted»this.highlightElement(«(node as Input).selector»); «ENDIF»
+										this.typeIn("«(node as Input).selector.escape»", "«(node as Input).content»");
+										'''
+				case "Screenshot": 		'''this.takePageScreenshot("«featureTitle»", "«(node as Screenshot).pictureName.cleanFileOrFolderName»");'''
+				case "Button": 			'''
+										«IF (node as Button).highlighted»this.highlightElement(«(node as Button).selector»); «ENDIF»
+										this.clickBtn("«(node as Button).selector»");
+										'''
+				case "SelectBox": 		'''
+										«IF (node as SelectBox).highlighted»this.highlightElement(«(node as SelectBox).selector»); «ENDIF»
+										this.select("«(node as SelectBox).selector»", "«(node as SelectBox).option»");
+										'''
+				case "SectionNode": 	'''«(node as SectionNode).allNodes.forEach[getNodeCode(featureTitle)]»'''
+				case "Form": 			'''
+										«IF (node as Form).highlighted»this.highlightElement(«(node as Form).selector»); «ENDIF»
+										«FOR input : (node as Form).inputs»
+										«input.getNodeCode(featureTitle)»
+										«ENDFOR»
+										«FOR button : (node as Form).buttons»
+										«button.getNodeCode(featureTitle)»
+										«ENDFOR»
+										 '''
+				case "SubDoc": 			'''«(node as SubDoc).subDoc.getLinesOfCode(featureTitle)»'''
 		}
 		»
 	'''

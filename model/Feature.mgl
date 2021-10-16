@@ -37,6 +37,8 @@ container FeatureContainer {
 		DocNode[1,*]
 	)
 	attr EString as title := "New Feature"
+	@multiLine
+	attr EString as documentation := "This feature is about ..."
 }
  
 @doubleClickAction("info.scce.cinco.product.userdocumentation.action.DocNodeOpenSubmodel")

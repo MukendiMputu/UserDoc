@@ -131,6 +131,18 @@
 </extension><extension point="org.eclipse.ui.perspectives">
 	<perspective class="info.scce.cinco.product.userdocumentation.perspective.UserDocumentationToolPerspective" fixed="false" icon="branding/Icon16_dark.png" id="info.scce.cinco.product.userdocumentation.userdocumentationtoolperspective" name="UserDocumentationTool Perspective">
 	</perspective>
+</extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocumentationTool -->
+      <package class="info.scce.cinco.product.usersequence.main.doc.DocPackage" uri="http://cinco.scce.info/product/usersequence/main"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocumentationTool -->
+      <package class="info.scce.cinco.product.usersequence.main.doc.internal.InternalPackage" uri="http://cinco.scce.info/product/usersequence/main/internal"/>
+   </extension><extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated UserDocumentationTool -->
+      <package class="info.scce.cinco.product.usersequence.main.doc.views.ViewsPackage" uri="http://cinco.scce.info/product/usersequence/main/views"/>
+   </extension><extension point="org.eclipse.ui.perspectives">
+	<perspective class="info.scce.cinco.product.userdocumentation.perspective.UserDocumentationToolPerspective" fixed="false" icon="branding/Icon16_dark.png" id="info.scce.cinco.product.userdocumentation.userdocumentationtoolperspective" name="UserDocumentationTool Perspective">
+	</perspective>
 </extension><extension point="org.eclipse.ui.navigator.navigatorContent">
 <!--@CincoGen PROJECT_WIZARD_USERDOCUMENTATIONTOOL_NAV -->		
 <commonWizard menuGroupId="mgl" type="new" wizardId="info.scce.cinco.product.userdocumentation.wizard.userdocumentationtoolproject">
