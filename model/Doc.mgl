@@ -17,6 +17,8 @@ graphModel DocGraphModel {
 		Comment[1, *]
 	)
 	attr EString as modelName := "UserSequence"
+	@multiLine
+	attr EString as documenation := "Lorem ipsum dolor et si met."
 }
 
 @icon("icons/16/start_16.png")
@@ -45,10 +47,15 @@ node SubDoc {
 	outgoingEdges (Transition[1,1])
 }
 
+abstract node SemanticObject {
+	@multiLine
+	attr EString as documentation := "Descriptive text about this element."
+}
+
 @disable(resize)
 @palette("Selenium Actions")
 @icon("icons/16/camera_16.png")
-node Screenshot {
+node Screenshot extends SemanticObject{
 	style screenshotNode
 	incomingEdges (Transition[1,1], Anchor[1,*])
 	outgoingEdges (Transition[1,*])
@@ -80,7 +87,7 @@ enum Condition {
 
 @palette("Selenium Actions")
 @icon("icons/16/screenshot_16.png")
-node Navigation {
+node Navigation extends SemanticObject {
 	style navigationNode("${link}")
 	incomingEdges (Transition[1,1], Anchor[0,*])
 	outgoingEdges (Transition[1,*])
@@ -97,12 +104,10 @@ node Navigation {
  */
 @icon("icons/16/object_16.png")
 @palette("Web Elements")
-node WebElement {
+node WebElement extends SemanticObject  {
 	style object("WebElement: ${selector}:${value}")
 	attr EString as selector := "id"
 	attr EBoolean as highlighted
-	@multiLine
-	attr EString as documenation := "Lorem ipsum dolor et si met."
 	
 	incomingEdges (Transition[1,1])
 	outgoingEdges (Transition[1,1])
@@ -258,7 +263,7 @@ node TableData extends WebElement {
 /* */
 @icon("icons/16/section_16.png")
 @palette("Container Elements")
-container SectionNode {
+container SectionNode extends SemanticObject {
 	style sectionNode("${title}")
 	attr EString as title := "New Section"
 	containableElements(
@@ -278,7 +283,6 @@ node Comment {
 	style commentNode("${content}")
 	@multiLine
 	attr EString as content
-	attr Screenshot as referenceTo
 	outgoingEdges (Anchor[1,*])
 }
 

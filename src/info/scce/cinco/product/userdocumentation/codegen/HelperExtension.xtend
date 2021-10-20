@@ -169,39 +169,39 @@ class HelperExtension {
 		«codeText.toString»
 	   	'''
 	}
-
-	/*Depending on the node type a template method for the Selenium Script is chosen. */
+	
+	/* Depending on the node type a template method for the Selenium Script is chosen. */
 	static def String getNodeCode(Node node, String featureTitle)'''
 		«switch (node.eClass.name) {
-				case "Navigation": 		'''this.goToPage("«(node as Navigation).link»");'''
-				case "Div": 			'''«IF (node as Div).highlighted»this.highlightElement(«(node as Div).selector»); «ENDIF»'''
-				case "H": 				'''«IF (node as H).highlighted»this.highlightElement(«(node as H).selector»); «ENDIF»'''
-				case "P": 				'''«IF (node as P).highlighted»this.highlightElement(«(node as P).selector»); «ENDIF»'''
-				case "Span": 			'''«IF (node as Span).highlighted»this.highlightElement(«(node as Span).selector»); «ENDIF»'''
-				case "Label": 			'''«IF (node as Label).highlighted»this.highlightElement(«(node as Label).selector»); «ENDIF»'''
-				case "Textarea": 		'''«IF (node as Textarea).highlighted»this.highlightElement(«(node as Textarea).selector»); «ENDIF»'''
-				case "Table": 			'''«IF (node as Table).highlighted»this.highlightElement(«(node as Table).selector»); «ENDIF»'''
-				case "TableHead": 		'''«IF (node as TableHead).highlighted»this.highlightElement(«(node as TableHead).selector»); «ENDIF»'''
-				case "Th": 				'''«IF (node as Th).highlighted»this.highlightElement(«(node as Th).selector»); «ENDIF»'''
-				case "TableRow": 		'''«IF (node as TableRow).highlighted»this.highlightElement(«(node as TableRow).selector»); «ENDIF»'''
-				case "TableBody": 		'''«IF (node as TableBody).highlighted»this.highlightElement(«(node as TableBody).selector»); «ENDIF»'''
-				case "TableData": 		'''«IF (node as TableData).highlighted»this.highlightElement(«(node as TableData).selector»); «ENDIF»'''
+				case "Navigation": 		'''this.goToPage("«(node as Navigation).link.escape»");'''
+				case "Div": 			'''«IF (node as Div).highlighted»this.highlightElement("«(node as Div).selector.escape»"); «ENDIF»'''
+				case "H": 				'''«IF (node as H).highlighted»this.highlightElement("«(node as H).selector.escape»"); «ENDIF»'''
+				case "P": 				'''«IF (node as P).highlighted»this.highlightElement("«(node as P).selector.escape»"); «ENDIF»'''
+				case "Span": 			'''«IF (node as Span).highlighted»this.highlightElement("«(node as Span).selector.escape»"); «ENDIF»'''
+				case "Label": 			'''«IF (node as Label).highlighted»this.highlightElement("«(node as Label).selector.escape»"); «ENDIF»'''
+				case "Textarea": 		'''«IF (node as Textarea).highlighted»this.highlightElement("«(node as Textarea).selector.escape»"); «ENDIF»'''
+				case "Table": 			'''«IF (node as Table).highlighted»this.highlightElement("«(node as Table).selector.escape»"); «ENDIF»'''
+				case "TableHead": 		'''«IF (node as TableHead).highlighted»this.highlightElement("«(node as TableHead).selector.escape»"); «ENDIF»'''
+				case "Th": 				'''«IF (node as Th).highlighted»this.highlightElement("«(node as Th).selector.escape»"); «ENDIF»'''
+				case "TableRow": 		'''«IF (node as TableRow).highlighted»this.highlightElement("«(node as TableRow).selector.escape»"); «ENDIF»'''
+				case "TableBody": 		'''«IF (node as TableBody).highlighted»this.highlightElement("«(node as TableBody).selector.escape»"); «ENDIF»'''
+				case "TableData": 		'''«IF (node as TableData).highlighted»this.highlightElement("«(node as TableData).selector.escape»"); «ENDIF»'''
 				case "Input": 			'''
-										«IF (node as Input).highlighted»this.highlightElement(«(node as Input).selector»); «ENDIF»
-										this.typeIn("«(node as Input).selector.escape»", "«(node as Input).content»");
+										«IF (node as Input).highlighted»this.highlightElement("«(node as Input).selector.escape»"); «ENDIF»
+										this.typeIn("«(node as Input).selector.escape»", "«(node as Input).content.escape»");
 										'''
-				case "Screenshot": 		'''this.takePageScreenshot("«featureTitle»", "«(node as Screenshot).pictureName.cleanFileOrFolderName»");'''
+				case "Screenshot": 		'''this.takePageScreenshot("«featureTitle.escape»", "«(node as Screenshot).pictureName.cleanFileOrFolderName»");'''
 				case "Button": 			'''
-										«IF (node as Button).highlighted»this.highlightElement(«(node as Button).selector»); «ENDIF»
-										this.clickBtn("«(node as Button).selector»");
+										«IF (node as Button).highlighted»this.highlightElement("«(node as Button).selector.escape»"); «ENDIF»
+										this.clickBtn("«(node as Button).selector.escape»");
 										'''
 				case "SelectBox": 		'''
-										«IF (node as SelectBox).highlighted»this.highlightElement(«(node as SelectBox).selector»); «ENDIF»
-										this.select("«(node as SelectBox).selector»", "«(node as SelectBox).option»");
+										«IF (node as SelectBox).highlighted»this.highlightElement("«(node as SelectBox).selector.escape»"); «ENDIF»
+										this.select("«(node as SelectBox).selector.escape»", "«(node as SelectBox).option.escape»");
 										'''
 				case "SectionNode": 	'''«(node as SectionNode).allNodes.forEach[getNodeCode(featureTitle)]»'''
 				case "Form": 			'''
-										«IF (node as Form).highlighted»this.highlightElement(«(node as Form).selector»); «ENDIF»
+										«IF (node as Form).highlighted»this.highlightElement("«(node as Form).selector.escape»"); «ENDIF»
 										«FOR input : (node as Form).inputs»
 										«input.getNodeCode(featureTitle)»
 										«ENDFOR»
@@ -214,7 +214,51 @@ class HelperExtension {
 		»
 	'''
 	
+	/* Returns the UserDocumentationTool project name */
 	static def String getProjectName(GraphModel model){
 		return ''''''
 	}
+	
+	static def String getDocumentationText(DocGraphModel model){
+		var StringBuilder documentationText = new StringBuilder
+		for(start : model.startNodes){
+			var succ = start.successors.head
+			while (!(succ instanceof EndNode)) {
+					documentationText.append(succ.documentationLine)
+					documentationText.append("\n")
+					succ = succ.successors.head
+				}
+		}
+		'''«documentationText.toString»''' 
+	}
+	
+	static def String getDocumentationLine(Node node)'''
+		«switch (node.eClass.name) {
+				case "Navigation": 		'''«(node as Navigation).documentation»'''
+				case "Div": 			'''«(node as Div).documentation»'''
+				case "H": 				'''«(node as H).documentation»'''
+				case "P": 				'''«(node as P).documentation»'''
+				case "Span": 			'''«(node as Span).documentation»'''
+				case "Label": 			'''«(node as Label).documentation»'''
+				case "Textarea": 		'''«(node as Textarea).documentation»'''
+				case "Table": 			'''«(node as Table).documentation»'''
+				case "TableHead": 		'''«(node as TableHead).documentation»'''
+				case "Th": 				'''«(node as Th).documentation»'''
+				case "TableRow": 		'''«(node as TableRow).documentation»'''
+				case "TableBody": 		'''«(node as TableBody).documentation»'''
+				case "TableData": 		'''«(node as TableData).documentation»'''
+				case "Input": 			'''«(node as Input).documentation»'''
+				case "Screenshot": 		'''
+				![«(node as Screenshot).pictureName.cleanFileOrFolderName»](./«(node as Screenshot).pictureName.cleanFileOrFolderName».png)
+				«(node as Screenshot).documentation»
+				'''
+				case "Button": 			'''«(node as Button).documentation»'''
+				case "SelectBox": 		'''«(node as SelectBox).documentation»'''
+				case "SectionNode": 	'''«(node as SectionNode).documentation»'''
+				case "Form": 			'''«(node as Form).documentation»'''
+				case "SubDoc": 			'''«(node as SubDoc).subDoc.documentationText»'''
+		}
+		»
+	'''
+
 }

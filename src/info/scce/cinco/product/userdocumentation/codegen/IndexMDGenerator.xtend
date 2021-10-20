@@ -2,13 +2,17 @@ package info.scce.cinco.product.userdocumentation.codegen
 
 import info.scce.cinco.product.userdocumentation.codegen.UserDocFileTemplate
 import info.scce.cinco.product.features.main.feature.FeatureContainer
+import info.scce.cinco.product.usersequence.main.doc.DocGraphModel
+import static extension info.scce.cinco.product.userdocumentation.codegen.HelperExtension.getDocumentationText
 
 class IndexMDGenerator extends UserDocFileTemplate {
 	
 	val FeatureContainer featureCont
+	val DocGraphModel firstUserSequence 
 	
 	new (FeatureContainer ftContainer){
 		this.featureCont = ftContainer
+		this.firstUserSequence = featureCont.starts.head.docNodeSuccessors.head.mgl
 	}
 	
 	def String featureName() {
@@ -20,21 +24,14 @@ class IndexMDGenerator extends UserDocFileTemplate {
 	}
 	
 	override fileTemplate() {
-		
 		'''
 		# «featureName»
 		
-		This feature starts with the "«featureCont.starts.head.docNodeSuccessors.head.mgl.modelName»" sequence.
+		«featureCont.documentation»
 		
-		## section 1
+		## «firstUserSequence.modelName»
 		
-		![image-1](./1.png)
-		
-		here comes the description for the image shown above.
-		
-		![image-2](./2.png)
-		
-		here comes the second description for the image shown above.
+		«firstUserSequence.documentationText»
 		
 		'''
 	}

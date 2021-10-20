@@ -57,7 +57,7 @@ class UserDocProjectGenerator extends ProjectTemplate {
 								folder('components')[]
 								folder('theme')[]
 								folder('public')[
-									file(new HomeIndexMDGenerator(), true)
+									file(new SVGGenerator(), true)
 								]
 								folder('styles')[]
 								folder('templates ')[]
@@ -80,7 +80,7 @@ class UserDocProjectGenerator extends ProjectTemplate {
 				
 				file(new PomXMLGenerator(), true)
 				file(new ClassPathFileGenerator(), true)
-				file(new ProjectFileGenerator(), true)
+				file(new ProjectFileGenerator(model), true)
 			]
 		]
 	}

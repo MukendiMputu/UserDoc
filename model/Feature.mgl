@@ -14,6 +14,8 @@ graphModel FeatureGraphModel {
 		PropertyContainer[1,*]
 	)
 	attr EString as modelName := "New Feature"
+	@multiLine
+	attr EString as documenation := "Lorem ipsum dolor et si met."
 } 
 
 @icon("icons/16/start_16.png")

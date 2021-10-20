@@ -101,6 +101,8 @@ class SeleniumScriptGenerator extends UserDocFileTemplate {
 		 *
 		 * @author Mukendi Mputu
 		 */
+		
+		@SuppressWarnings("unused")
 		class «className» implements Runnable{
 			// User Credentials
 			private static String username;

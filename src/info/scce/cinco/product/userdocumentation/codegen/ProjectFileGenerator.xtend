@@ -1,7 +1,14 @@
 package info.scce.cinco.product.userdocumentation.codegen
 
+import info.scce.cinco.product.features.main.feature.FeatureGraphModel
 
 class ProjectFileGenerator extends UserDocFileTemplate {
+	
+	val FeatureGraphModel featureModel
+	
+	new (FeatureGraphModel model) {
+		featureModel = model
+	}
 	
 	override fileName() {
 		'''.project'''
@@ -11,7 +18,7 @@ class ProjectFileGenerator extends UserDocFileTemplate {
 		'''
 		<?xml version="1.0" encoding="UTF-8"?>
 		<projectDescription>
-			<name>TestUserDocGenerator</name>
+			<name>«featureModel.project.name»</name>
 			<comment></comment>
 			<projects>
 			</projects>
