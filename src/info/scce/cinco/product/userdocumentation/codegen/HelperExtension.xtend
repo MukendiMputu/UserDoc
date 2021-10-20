@@ -225,7 +225,6 @@ class HelperExtension {
 			var succ = start.successors.head
 			while (!(succ instanceof EndNode)) {
 					documentationText.append(succ.documentationLine)
-					documentationText.append("\n")
 					succ = succ.successors.head
 				}
 		}
@@ -250,7 +249,9 @@ class HelperExtension {
 				case "Input": 			'''«(node as Input).documentation»'''
 				case "Screenshot": 		'''
 				![«(node as Screenshot).pictureName.cleanFileOrFolderName»](./«(node as Screenshot).pictureName.cleanFileOrFolderName».png)
-				«(node as Screenshot).documentation»
+				«IF (node as Screenshot).description !== null»
+				«(node as Screenshot).description.content.nullOrEmpty? '':(node as Screenshot).description.content»
+				«ENDIF»
 				'''
 				case "Button": 			'''«(node as Button).documentation»'''
 				case "SelectBox": 		'''«(node as SelectBox).documentation»'''

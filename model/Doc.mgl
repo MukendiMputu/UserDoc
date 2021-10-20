@@ -47,15 +47,11 @@ node SubDoc {
 	outgoingEdges (Transition[1,1])
 }
 
-abstract node SemanticObject {
-	@multiLine
-	attr EString as documentation := "Descriptive text about this element."
-}
 
 @disable(resize)
 @palette("Selenium Actions")
 @icon("icons/16/camera_16.png")
-node Screenshot extends SemanticObject{
+node Screenshot {
 	style screenshotNode
 	incomingEdges (Transition[1,1], Anchor[1,*])
 	outgoingEdges (Transition[1,*])
@@ -87,11 +83,13 @@ enum Condition {
 
 @palette("Selenium Actions")
 @icon("icons/16/screenshot_16.png")
-node Navigation extends SemanticObject {
+node Navigation {
 	style navigationNode("${link}")
 	incomingEdges (Transition[1,1], Anchor[0,*])
 	outgoingEdges (Transition[1,*])
 	attr EString as link := "http://example.com"
+	@multiLine
+	attr EString as documentation := "Descriptive text about this element."
 }
 
 /*======================== WEB ELEMENTS ======================== */
@@ -104,10 +102,12 @@ node Navigation extends SemanticObject {
  */
 @icon("icons/16/object_16.png")
 @palette("Web Elements")
-node WebElement extends SemanticObject  {
+node WebElement {
 	style object("WebElement: ${selector}:${value}")
 	attr EString as selector := "id"
 	attr EBoolean as highlighted
+	@multiLine
+	attr EString as documentation := "Descriptive text about this element."
 	
 	incomingEdges (Transition[1,1])
 	outgoingEdges (Transition[1,1])
@@ -263,9 +263,11 @@ node TableData extends WebElement {
 /* */
 @icon("icons/16/section_16.png")
 @palette("Container Elements")
-container SectionNode extends SemanticObject {
+container SectionNode {
 	style sectionNode("${title}")
 	attr EString as title := "New Section"
+	@multiLine
+	attr EString as documentation := "Descriptive text about this element."
 	containableElements(
 		WebElement ,
 		SubDoc,

@@ -7,8 +7,8 @@ import static extension info.scce.cinco.product.userdocumentation.codegen.Helper
 
 class IndexMDGenerator extends UserDocFileTemplate {
 	
-	val FeatureContainer featureCont
 	val DocGraphModel firstUserSequence 
+	val FeatureContainer featureCont
 	
 	new (FeatureContainer ftContainer){
 		this.featureCont = ftContainer

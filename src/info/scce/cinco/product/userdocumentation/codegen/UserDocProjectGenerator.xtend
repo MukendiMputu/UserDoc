@@ -70,8 +70,9 @@ class UserDocProjectGenerator extends ProjectTemplate {
 										file(new IndexMDGenerator(f), true)
 									]
 								]
-								file(new HomeIndexMDGenerator(), true)
+								file(new FeaturesIndexMDGenerator(model), true)
 							]
+							file(new HomeIndexMDGenerator(), true)
 						]
 						file(new PackageJSONGenerator(), true)
 						// file(new GitIgnore(), true)
