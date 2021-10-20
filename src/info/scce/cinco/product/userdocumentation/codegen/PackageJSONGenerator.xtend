@@ -1,5 +1,6 @@
 package info.scce.cinco.product.userdocumentation.codegen
 
+import info.scce.cinco.product.features.main.feature.FeatureGraphModel
 
 class PackageJSONGenerator extends UserDocFileTemplate {
 	
@@ -12,7 +13,7 @@ class PackageJSONGenerator extends UserDocFileTemplate {
 		{
 		  "name": "documentation",
 		  "version": "0.0.1",
-		  "description": "end-user documentation project",
+		  "description": "End-user Documentation",
 		  "main": "index.js",
 		  "authors": {
 		    "name": "CINCO SCCE",
@@ -27,6 +28,92 @@ class PackageJSONGenerator extends UserDocFileTemplate {
 		    "vuepress": "^1.5.3"
 		  }
 		}
+		'''
+	}
+	
+}
+
+class ConfigJSGenerator extends UserDocFileTemplate  {
+	
+	val FeatureGraphModel model
+	
+	new (FeatureGraphModel ftModel) {
+		model = ftModel
+	}
+	override fileName() {
+		'''config.js'''
+	}
+	
+	override fileTemplate() {
+		'''
+		const { description } = require('../../package')
+		
+		module.exports = {
+		  /**
+		   * Ref：https://v1.vuepress.vuejs.org/config/#title
+		   */
+		  title: '«model.IResource.project.name» Wiki',
+		  /**
+		   * Ref：https://v1.vuepress.vuejs.org/config/#description
+		   */
+		  description: description,
+		
+		  /**
+		   * Extra tags to be injected to the page HTML `<head>`
+		   *
+		   * ref：https://v1.vuepress.vuejs.org/config/#head
+		   */
+		  head: [
+		    ['meta', { name: 'theme-color', content: '#14c4bb' }],
+		    ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
+		    ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }]
+		  ],
+		
+		  /**
+		   * Theme configuration, here is the default theme configuration for VuePress.
+		   *
+		   * ref：https://v1.vuepress.vuejs.org/theme/default-theme-config.html
+		   */
+		  themeConfig: {
+		    repo: '',
+		    editLinks: false,
+		    docsDir: '',
+		    editLinkText: '',
+		    lastUpdated: false,
+		    nav: [
+		      {
+		        text: 'Features',
+		        link: '/features/',
+		      },
+		      {
+		        text: 'Cinco SCCE',
+		        link: 'https://gitlab.com/scce/cinco/-/wikis/home'
+		      }
+		    ],
+		    sidebar: {
+		      '/features/': [
+		        {
+		          title: 'App Features',
+		          collapsable: false,
+		          children: [
+		            '',
+		            «FOR feature : model.featureContainers SEPARATOR ',' AFTER ''»
+		            '«feature.title»'
+		            «ENDFOR»
+		          ]
+		        }
+		      ],
+		    }
+		  },
+		
+		  /**
+		   * Apply plugins，ref：https://v1.vuepress.vuejs.org/zh/plugin/
+		   */
+		  plugins: [
+		    '@vuepress/plugin-back-to-top',
+		    '@vuepress/plugin-medium-zoom',
+		  ]
+		}	
 		'''
 	}
 	

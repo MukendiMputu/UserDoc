@@ -59,11 +59,15 @@ class UserDocProjectGenerator extends ProjectTemplate {
 								folder('public')[
 									file(new SVGGenerator(), true)
 								]
-								folder('styles')[]
+								folder('styles')[
+									file(new IndexStylusFileGenerator(), true)
+									file(new PaletteStylusFileGenerator(), true)
+								]
 								folder('templates ')[]
-								
+								file(new ConfigJSGenerator(model), true)
 							]
-							folder('assets/img')[]
+							folder('assets/img')[
+							]
 							folder('features') [
 								forEachOf(model.featureContainers) [ f |
 									folder(f.title)[
@@ -86,12 +90,9 @@ class UserDocProjectGenerator extends ProjectTemplate {
 		]
 	}
 	
-	def projectName() {
-		model.projectName
-	}
-	
 	override projectSuffix() {
 		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
 	
 }
+

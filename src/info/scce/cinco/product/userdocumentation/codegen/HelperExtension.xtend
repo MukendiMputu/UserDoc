@@ -1,6 +1,5 @@
 package info.scce.cinco.product.userdocumentation.codegen
 
-import graphmodel.GraphModel
 import graphmodel.Node
 import info.scce.cinco.product.features.main.feature.DocNode
 import info.scce.cinco.product.features.main.feature.End
@@ -213,11 +212,6 @@ class HelperExtension {
 		}
 		»
 	'''
-	
-	/* Returns the UserDocumentationTool project name */
-	static def String getProjectName(GraphModel model){
-		return ''''''
-	}
 	
 	static def String getDocumentationText(DocGraphModel model){
 		var StringBuilder documentationText = new StringBuilder
