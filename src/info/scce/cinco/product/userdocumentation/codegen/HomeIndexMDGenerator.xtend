@@ -15,7 +15,7 @@ class HomeIndexMDGenerator extends UserDocFileTemplate {
 		'''
 		---
 		home: true
-		heroImage: 
+		heroImage: /hero.svg
 		tagline: end-user documentation project
 		actionText: Quick Start →
 		actionLink: /features/

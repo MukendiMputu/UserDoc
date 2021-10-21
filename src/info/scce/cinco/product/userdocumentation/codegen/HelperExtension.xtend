@@ -139,7 +139,7 @@ class HelperExtension {
 		          .replace("\n", "\\n")
 		          .replace("\r", "\\r")
 		          .replace("\f", "\\f")
-		          .replace("\'", "\\'")
+		          //.replace("\'", "\\'")
 		          .replace("\"", "\\\"");
 	}
 	
@@ -204,7 +204,7 @@ class HelperExtension {
 										«IF (node as Input).highlighted»this.highlightElement("«(node as Input).selector.escape»"); «ENDIF»
 										this.typeIn("«(node as Input).selector.escape»", "«(node as Input).content.escape»");
 										'''
-				case "Screenshot": 		'''this.takePageScreenshot("«featureTitle.escape»", "«(node as Screenshot).pictureName.cleanFileOrFolderName»");'''
+				case "Screenshot": 		'''this.takePageScreenshot("«featureTitle.escape.cleanFileOrFolderName»", "«(node as Screenshot).pictureName.cleanFileOrFolderName»");'''
 				case "Button": 			'''
 										«IF (node as Button).highlighted»this.highlightElement("«(node as Button).selector.escape»"); «ENDIF»
 										this.clickBtn("«(node as Button).selector.escape»");

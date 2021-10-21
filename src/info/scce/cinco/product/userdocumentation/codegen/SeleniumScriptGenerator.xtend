@@ -199,6 +199,11 @@ class SeleniumScriptGenerator extends UserDocFileTemplate {
 				JavascriptExecutor jsExec = (JavascriptExecutor)«className».«this.concreteDriver.get("driverName")»;
 				jsExec.executeScript("arguments[0].setAttribute('style','border: 4px solid red;');", findPageElement(selector));
 			}
+			public void undoHighlightElement(String selector)
+			{
+				JavascriptExecutor jsExec = (JavascriptExecutor)«className».«this.concreteDriver.get("driverName")»;
+				jsExec.executeScript("arguments[0].setAttribute('style','border: 4px solid red;');", findPageElement(selector));
+			}
 			public Boolean typeIn(String selector, String contentText)
 			{
 				findPageElement(selector).sendKeys(contentText + Keys.TAB);

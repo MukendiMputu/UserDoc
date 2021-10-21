@@ -70,7 +70,7 @@ class UserDocProjectGenerator extends ProjectTemplate {
 							]
 							folder('features') [
 								forEachOf(model.featureContainers) [ f |
-									folder(f.title)[
+									folder(f.title.cleanFileOrFolderName)[
 										file(new IndexMDGenerator(f), true)
 									]
 								]
