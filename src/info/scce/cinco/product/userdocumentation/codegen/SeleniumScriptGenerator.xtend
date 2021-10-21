@@ -149,7 +149,7 @@ class SeleniumScriptGenerator extends UserDocFileTemplate {
 			public void run() {
 				// For every feature container in the MGL generate a sequence of methods
 				this.openBrowser();
-				«FOR featureCont : featureModel.featureContainers»
+				«FOR featureCont : featureModel.begins.head.extractFeatureSequence»
 				{
 					// Start of sequence «featureCont.title»
 					try {
@@ -197,7 +197,7 @@ class SeleniumScriptGenerator extends UserDocFileTemplate {
 			public void highlightElement(String selector)
 			{
 				JavascriptExecutor jsExec = (JavascriptExecutor)«className».«this.concreteDriver.get("driverName")»;
-				jsExec.executeScript("arguments[0].setAttribute('style','border: 2px solid red;');", findPageElement(selector));
+				jsExec.executeScript("arguments[0].setAttribute('style','border: 4px solid red;');", findPageElement(selector));
 			}
 			public Boolean typeIn(String selector, String contentText)
 			{

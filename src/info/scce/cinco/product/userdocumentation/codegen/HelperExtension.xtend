@@ -29,6 +29,8 @@ import info.scce.cinco.product.usersequence.main.doc.Th
 import java.util.LinkedList
 import java.util.List
 import info.scce.cinco.product.usersequence.main.doc.Label
+import info.scce.cinco.product.features.main.feature.Stop
+import info.scce.cinco.product.features.main.feature.Begin
 
 //import java.util.ArrayList
 
@@ -147,8 +149,21 @@ class HelperExtension {
 		val firstDocNode = container.starts.head.docNodeSuccessors.head
 		singleSequence.add(firstDocNode)			// get first DocNode
 		var succ = firstDocNode.successors.head		// and its successor
-		while (!(succ instanceof End) && !(succ instanceof EndNode)) {		// if it's and end node
+		while (!(succ instanceof Stop) && !(succ instanceof EndNode)) {		// if it's and end node
 			singleSequence.add(succ as DocNode)
+			succ = succ.successors.head				// or else get its successor
+		}
+		return singleSequence						// return the sequence
+	}
+	
+	/* Extracts in sequence order all Doc model container in a feature container */
+	static def extractFeatureSequence(Begin startPoint) {
+		val List<FeatureContainer> singleSequence = new LinkedList<FeatureContainer>;
+		val firstFeature = startPoint.featureContainerSuccessors.head
+		singleSequence.add(firstFeature)			// get first DocNode
+		var succ = firstFeature.successors.head		// and its successor
+		while (!(succ instanceof End) && !(succ instanceof EndNode)) {		// if it's and end node
+			singleSequence.add(succ as FeatureContainer)
 			succ = succ.successors.head				// or else get its successor
 		}
 		return singleSequence						// return the sequence

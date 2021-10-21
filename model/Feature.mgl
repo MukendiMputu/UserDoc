@@ -9,6 +9,7 @@ graphModel FeatureGraphModel {
 	iconPath "icons/16/feature_16.png"
 	diagramExtension "feat"
 	containableElements(
+		Begin[1,1], End[1,1],
 		FeatureContainer,
 		DocNode[1,*],
 		PropertyContainer[1,*]
@@ -18,29 +19,46 @@ graphModel FeatureGraphModel {
 	attr EString as documenation := "Lorem ipsum dolor et si met."
 } 
 
+@icon("icons/16/begin_16.png")
+node Begin {
+	style begin
+	outgoingEdges (Edge[1,1])
+}
+
+@icon("icons/16/end_16.png")
+node End {
+	style endNode
+	incomingEdges (Edge[1,*])
+}
+
+@palette("Feature Inner Elements")
 @icon("icons/16/start_16.png")
 node Start {
 	style startNode
 	outgoingEdges (Edge[1,1])
 }
 
+@palette("Feature Inner Elements")
 @icon("icons/16/stop_16.png")
-node End {
-	style endNode
+node Stop {
+	style stop
 	incomingEdges (Edge[1,*])
 }
 
+@palette("Feature Inner Elements")
 @icon("icons/16/container_16.png")
 container FeatureContainer {
 	style featureContainer("${title}")
 	containableElements(
 		Start[1,1],
-		End[1,1],
+		Stop[1,1],
 		DocNode[1,*]
 	)
 	attr EString as title := "New Feature"
 	@multiLine
 	attr EString as documentation := "This feature is about ..."
+	incomingEdges (Edge[1,1])
+	outgoingEdges (Edge[1,1])
 }
  
 @doubleClickAction("info.scce.cinco.product.userdocumentation.action.DocNodeOpenSubmodel")

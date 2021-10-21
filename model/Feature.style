@@ -34,6 +34,63 @@ appearance labelFontBold {
 
 /*---------------- NODES ------------------------ */
 
+nodeStyle begin {
+		roundedRectangle {
+		appearance extends default {
+			foreground (46,194,126)
+			background (46,194,126)
+		}
+		position (0, 0)
+		size (96, 32)
+		corner (8, 8)
+		text {
+			position (CENTER, MIDDLE)
+			value "Start"
+		}
+	}
+}
+
+nodeStyle endNode {
+	roundedRectangle {
+		appearance extends default {
+			foreground (237,51,59)
+			background (237,51,59)
+		}
+		position (0, 0)
+		size (96, 32)
+		corner (8, 8)
+		text {
+			position (CENTER, MIDDLE)
+			value "End"
+		}
+	}
+}
+
+nodeStyle startNode {
+	ellipse {
+		appearance extends blueBorder {}
+		size (16, 16)
+		ellipse {
+			appearance extends blueBorder {}
+			position (CENTER, MIDDLE)
+			size (8, 8)
+		}
+	}
+
+}
+
+nodeStyle stop {
+	ellipse {
+		appearance extends redBorder {}
+		size (16, 16)
+		ellipse {
+			appearance extends redBorder {}
+			position (CENTER, MIDDLE)
+			size (8, 8)
+		}
+	}
+}
+
 nodeStyle featureContainer(1) {
 	rectangle {
 		appearance extends default {
@@ -83,38 +140,6 @@ nodeStyle property(2) {
 		multiText {
 			position ( CENTER, MIDDLE )
 			value "%1s %2s"
-		}
-	}
-}
-
-nodeStyle startNode {
-	roundedRectangle {
-		appearance extends default {
-			foreground (46,194,126)
-			background (46,194,126)
-		}
-		position (0, 0)
-		size (96, 32)
-		corner (8, 8)
-		text {
-			position (CENTER, MIDDLE)
-			value "Start"
-		}
-	}
-}
-
-nodeStyle endNode {
-	roundedRectangle {
-		appearance extends default {
-			foreground (237,51,59)
-			background (237,51,59)
-		}
-		position (0, 0)
-		size (96, 32)
-		corner (8, 8)
-		text {
-			position (CENTER, MIDDLE)
-			value "End"
 		}
 	}
 }
