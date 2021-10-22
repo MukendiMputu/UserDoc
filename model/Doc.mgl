@@ -9,6 +9,7 @@ graphModel DocGraphModel {
 		StartNode [1,1],
 		EndNode [1,1],
 		SubDoc,
+		Highlight, UnHighlight,
 		Screenshot [1,*],
 		Navigation [1,*],
 		Timer,
@@ -18,7 +19,8 @@ graphModel DocGraphModel {
 	)
 	attr EString as modelName := "UserSequence"
 	@multiLine
-	attr EString as documenation := "Lorem ipsum dolor et si met."
+	attr EString as documenation := "Lorem ipsum dolor et si met"
+	// FIXME: attribute createScreenshots here 
 }
  
 @icon("icons/16/start_16.png")
@@ -43,8 +45,23 @@ node SubDoc {
 	style subDocNode("${subDoc.modelName}.doc")
 	prime this::DocGraphModel as subDoc
 	attr EBoolean as createScreenshots := true
+	// FIXME: createScreenshots false disables 
 	incomingEdges (Transition[1,1])
 	outgoingEdges (Transition[1,1])
+}
+
+node Highlight {
+	style highlightNode
+	incomingEdges (Transition[1,1])
+	outgoingEdges (Transition[1,1])
+	attr WebElement as target
+}
+
+node UnHighlight {
+	style highlightNode
+	incomingEdges (Transition[1,1])
+	outgoingEdges (Transition[1,1])
+	attr WebElement as target
 }
 
 
@@ -102,6 +119,7 @@ node Navigation {
  */
 @icon("icons/16/object_16.png")
 @palette("Web Elements")
+@postAttributeChange("info.scce.cinco.product.userdocumentation.hooks.HighlightOnAttributeChanged")
 node WebElement {
 	style object("WebElement: ${selector}:${value}")
 	attr EString as selector := "id"

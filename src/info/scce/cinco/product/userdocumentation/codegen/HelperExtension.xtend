@@ -2,8 +2,8 @@ package info.scce.cinco.product.userdocumentation.codegen
 
 import graphmodel.Node
 import info.scce.cinco.product.features.main.feature.DocNode
-import info.scce.cinco.product.features.main.feature.End
 import info.scce.cinco.product.features.main.feature.FeatureContainer
+import info.scce.cinco.product.features.main.feature.Stop
 import info.scce.cinco.product.features.main.feature.WebDriver
 import info.scce.cinco.product.usersequence.main.doc.Button
 import info.scce.cinco.product.usersequence.main.doc.Div
@@ -11,7 +11,9 @@ import info.scce.cinco.product.usersequence.main.doc.DocGraphModel
 import info.scce.cinco.product.usersequence.main.doc.EndNode
 import info.scce.cinco.product.usersequence.main.doc.Form
 import info.scce.cinco.product.usersequence.main.doc.H
+import info.scce.cinco.product.usersequence.main.doc.Highlight
 import info.scce.cinco.product.usersequence.main.doc.Input
+import info.scce.cinco.product.usersequence.main.doc.Label
 import info.scce.cinco.product.usersequence.main.doc.Navigation
 import info.scce.cinco.product.usersequence.main.doc.P
 import info.scce.cinco.product.usersequence.main.doc.Screenshot
@@ -26,11 +28,9 @@ import info.scce.cinco.product.usersequence.main.doc.TableHead
 import info.scce.cinco.product.usersequence.main.doc.TableRow
 import info.scce.cinco.product.usersequence.main.doc.Textarea
 import info.scce.cinco.product.usersequence.main.doc.Th
+import info.scce.cinco.product.usersequence.main.doc.UnHighlight
 import java.util.LinkedList
 import java.util.List
-import info.scce.cinco.product.usersequence.main.doc.Label
-import info.scce.cinco.product.features.main.feature.Stop
-import info.scce.cinco.product.features.main.feature.Begin
 
 //import java.util.ArrayList
 
@@ -156,19 +156,6 @@ class HelperExtension {
 		return singleSequence						// return the sequence
 	}
 	
-	/* Extracts in sequence order all Doc model container in a feature container */
-	static def extractFeatureSequence(Begin startPoint) {
-		val List<FeatureContainer> singleSequence = new LinkedList<FeatureContainer>;
-		val firstFeature = startPoint.featureContainerSuccessors.head
-		singleSequence.add(firstFeature)			// get first DocNode
-		var succ = firstFeature.successors.head		// and its successor
-		while (!(succ instanceof End) && !(succ instanceof EndNode)) {		// if it's and end node
-			singleSequence.add(succ as FeatureContainer)
-			succ = succ.successors.head				// or else get its successor
-		}
-		return singleSequence						// return the sequence
-	}
-	
 	/* Retrieves the element method following the sequence or queue in the model*/
 	static def String getLinesOfCode(DocGraphModel model, String featureTitle){
 		var StringBuilder codeText = new StringBuilder
@@ -204,6 +191,8 @@ class HelperExtension {
 										«IF (node as Input).highlighted»this.highlightElement("«(node as Input).selector.escape»"); «ENDIF»
 										this.typeIn("«(node as Input).selector.escape»", "«(node as Input).content.escape»");
 										'''
+				case "Highlight":		'''this.highlightElement("«(node as Highlight).target.selector.escape»"); '''
+				case "UnHighlight":		'''this.undoHighlightElement("«(node as UnHighlight).target.selector.escape»"); '''
 				case "Screenshot": 		'''this.takePageScreenshot("«featureTitle.escape.cleanFileOrFolderName»", "«(node as Screenshot).pictureName.cleanFileOrFolderName»");'''
 				case "Button": 			'''
 										«IF (node as Button).highlighted»this.highlightElement("«(node as Button).selector.escape»"); «ENDIF»

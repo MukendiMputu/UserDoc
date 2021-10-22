@@ -72,6 +72,7 @@ class UserDocProjectGenerator extends ProjectTemplate {
 								forEachOf(model.featureContainers) [ f |
 									folder(f.title.cleanFileOrFolderName)[
 										file(new IndexMDGenerator(f), true)
+										// TODO: Create placeholder for Screenshots
 									]
 								]
 								file(new FeaturesIndexMDGenerator(model), true)
