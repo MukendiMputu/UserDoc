@@ -84,14 +84,36 @@ nodeStyle navigationNode(1) {
 	}
 }
 
-nodeStyle highlightNode {
+nodeStyle highlightNode(1) {
 	rectangle {
 		appearance extends default{}
 		size(100,32)
 		text {
 			appearance {}
-			position (CENTER,MIDDLE)
-			value "%s"
+			position (CENTER 8, MIDDLE)
+			value "Highlight %s"
+		}
+		image {
+			position (LEFT 2, MIDDLE)
+			size(fix 16,fix 16)
+			path("icons/16/mono_highlighter_16.png")
+		}
+	}
+}
+
+nodeStyle unHighlightNode(1) {
+	rectangle {
+		appearance extends default{}
+		size(100,32)
+		text {
+			appearance {}
+			position (CENTER 8, MIDDLE)
+			value "UnHighlight %s"
+		}
+		image {
+			position (LEFT 2, MIDDLE)
+			size(fix 16, fix 16)
+			path("icons/16/mono_highlighter_16.png")
 		}
 	}
 }

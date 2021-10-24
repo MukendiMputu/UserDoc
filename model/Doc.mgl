@@ -50,15 +50,19 @@ node SubDoc {
 	outgoingEdges (Transition[1,1])
 }
 
+@icon("icons/16/highlighter_16.png")
+@palette("Selenium Actions")
 node Highlight {
-	style highlightNode
+	style highlightNode("${target}")
 	incomingEdges (Transition[1,1])
 	outgoingEdges (Transition[1,1])
 	attr WebElement as target
 }
 
+@icon("icons/16/eraser_16.png")
+@palette("Selenium Actions")
 node UnHighlight {
-	style highlightNode
+	style unHighlightNode("${target}")
 	incomingEdges (Transition[1,1])
 	outgoingEdges (Transition[1,1])
 	attr WebElement as target
@@ -99,7 +103,7 @@ enum Condition {
 }
 
 @palette("Selenium Actions")
-@icon("icons/16/screenshot_16.png")
+@icon("icons/16/url_16.png")
 node Navigation {
 	style navigationNode("${link}")
 	incomingEdges (Transition[1,1], Anchor[0,*])

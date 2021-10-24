@@ -100,7 +100,7 @@ node WebDriver{
 
 /* configuration node*/
 @palette("User Login Properties")
-@icon("icons/16/gear_16.png")
+@icon("icons/16/settings_16.png")
 node Username{
 	style property("Username: ", "${value}")
 	attr EString as value := "john"
@@ -108,7 +108,7 @@ node Username{
 
 /* configuration node*/
 @palette("User Login Properties")
-@icon("icons/16/gear_16.png")
+@icon("icons/16/settings_16.png")
 node Password{
 	style property("Password: ", "${value}")
 	attr EString as value := "pwd"
@@ -116,7 +116,7 @@ node Password{
 
 /* configuration node*/
 @palette("User Login Properties")
-@icon("icons/16/gear_16.png")
+@icon("icons/16/settings_16.png")
 node Email{
 	style property("Email: ", "${value}")
 	attr EString as value := "j.doe@example.com"

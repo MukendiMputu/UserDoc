@@ -73,6 +73,11 @@ class UserDocProjectGenerator extends ProjectTemplate {
 									folder(f.title.cleanFileOrFolderName)[
 										file(new IndexMDGenerator(f), true)
 										// TODO: Create placeholder for Screenshots
+										forEachOf(f.docNodes) [doc |
+											forEachOf(doc.mgl.screenshots) [ shot |
+												file(new ImagePlaceholder(shot.pictureName.cleanFileOrFolderName), true)
+											]
+										]
 									]
 								]
 								file(new FeaturesIndexMDGenerator(model), true)
