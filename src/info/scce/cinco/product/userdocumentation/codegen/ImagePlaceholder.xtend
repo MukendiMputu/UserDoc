@@ -35,6 +35,7 @@ class ImagePlaceholder extends UserDocFileTemplate {
 	}
 	
 	override fileTemplate() {
+		// FIXME: Create placeholder for Screenshots in the right place
 		if(!ImageIO.write(buffImg, "PNG", new File("./"+imageName+".png"))){			
 		'''
 
