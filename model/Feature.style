@@ -1,79 +1,13 @@
-/*---------------- Appearances  ------------------------ */
-
-appearance default {
-	lineWidth 1
-	background (255,255,255)
-}
-
-appearance thickLine {
-	lineWidth 2
-	background (255,255,255)
-}
-
-appearance redBorder extends default {
-			foreground (164,29,29)
-			background (255,255,255)
-}
-
-appearance blueBorder extends default {
-			foreground (28,113,216)
-			background (255,255,255)
-}
-
-appearance labelFont {
-	font ("Sans",10)
-}
-
-appearance labelFontItalics {
-	font ("Sans",ITALIC,10)
-}
-
-appearance labelFontBold {
-	font ("Sans",BOLD,10)
-}
-
 /*---------------- NODES ------------------------ */
-
-nodeStyle begin {
-		roundedRectangle {
-		appearance extends default {
-			foreground (46,194,126)
-			background (46,194,126)
-		}
-		position (0, 0)
-		size (96, 32)
-		corner (8, 8)
-		text {
-			position (CENTER, MIDDLE)
-			value "Start"
-		}
-	}
-}
-
-nodeStyle endNode {
-	roundedRectangle {
-		appearance extends default {
-			foreground (237,51,59)
-			background (237,51,59)
-		}
-		position (0, 0)
-		size (96, 32)
-		corner (8, 8)
-		text {
-			position (CENTER, MIDDLE)
-			value "End"
-		}
-	}
-}
 
 nodeStyle startNode {
 	ellipse {
 		appearance extends blueBorder {}
-		size (16, 16)
-		ellipse {
-			appearance extends blueBorder {}
+		size (20, 20)
+		image {
 			position (CENTER, MIDDLE)
-			size (8, 8)
+			size (6, 6)
+			path("icons/16/blue_start_16.png")
 		}
 	}
 
@@ -82,11 +16,11 @@ nodeStyle startNode {
 nodeStyle stop {
 	ellipse {
 		appearance extends redBorder {}
-		size (16, 16)
-		ellipse {
-			appearance extends redBorder {}
+		size (20, 20)
+		image {
 			position (CENTER, MIDDLE)
-			size (8, 8)
+			size (6, 6)
+			path("icons/16/red_stop_16.png")
 		}
 	}
 }
@@ -226,4 +160,38 @@ edgeStyle commentArrow {
 		CIRCLE
 		appearance default
 	}
+}
+
+/*---------------- Appearances  ------------------------ */
+
+appearance default {
+	lineWidth 1
+	background (255,255,255)
+}
+
+appearance thickLine {
+	lineWidth 2
+	background (255,255,255)
+}
+
+appearance redBorder extends default {
+			foreground (164,29,29)
+			background (255,255,255)
+}
+
+appearance blueBorder extends default {
+			foreground (28,113,216)
+			background (255,255,255)
+}
+
+appearance labelFont {
+	font ("Sans",10)
+}
+
+appearance labelFontItalics {
+	font ("Sans",ITALIC,10)
+}
+
+appearance labelFontBold {
+	font ("Sans",BOLD,10)
 }

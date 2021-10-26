@@ -149,7 +149,7 @@ class SeleniumScriptGenerator extends UserDocFileTemplate {
 			public void run() {
 				// For every feature container in the MGL generate a sequence of methods
 				this.openBrowser();
-				«FOR featureCont : featureModel.begins.head.extractFeatureSequence»
+				«FOR featureCont : featureModel.featureContainers»
 				{
 					// Start of sequence «featureCont.title»
 					try {
@@ -159,6 +159,9 @@ class SeleniumScriptGenerator extends UserDocFileTemplate {
 						«ENDFOR»
 					} catch (Exception e) {
 						e.printStackTrace();
+					} finally {
+««« FIXME: Reset the state after each sequence
+					// Reset the application state
 					}
 				}
 				«ENDFOR»

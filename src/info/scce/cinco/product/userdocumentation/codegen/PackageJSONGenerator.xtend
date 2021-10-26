@@ -2,7 +2,6 @@ package info.scce.cinco.product.userdocumentation.codegen
 
 import info.scce.cinco.product.features.main.feature.FeatureGraphModel
 import static extension info.scce.cinco.product.userdocumentation.codegen.HelperExtension.getCleanFileOrFolderName
-import static extension info.scce.cinco.product.userdocumentation.codegen.HelperExtension.extractFeatureSequence
 
 class PackageJSONGenerator extends UserDocFileTemplate {
 	
@@ -88,7 +87,7 @@ class ConfigJSGenerator extends UserDocFileTemplate  {
 		        prefix: '/features/',
 		        icon: "info",
 		        items: [
-		          «FOR feature : model.begins.head.extractFeatureSequence SEPARATOR ',' AFTER ''»
+		          «FOR feature : model.featureContainers SEPARATOR ',' AFTER ''»
 		          { text: "«feature.title»", link: "«feature.title.cleanFileOrFolderName»/" }
 		          «ENDFOR»
 		        ],
@@ -105,7 +104,7 @@ class ConfigJSGenerator extends UserDocFileTemplate  {
 		          collapsable: false,
 		          children: [
 		            '',
-		            «FOR feature : model.begins.head.extractFeatureSequence SEPARATOR ',' AFTER ''»
+		            «FOR feature : model.featureContainers SEPARATOR ',' AFTER ''»
 		            '«feature.title.cleanFileOrFolderName»/'
 		            «ENDFOR»
 		          ]

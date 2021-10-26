@@ -9,7 +9,6 @@ graphModel FeatureGraphModel {
 	iconPath "icons/16/feature_16.png"
 	diagramExtension "feat"
 	containableElements(
-		Begin[1,1], End[1,1],
 		FeatureContainer,
 		DocNode[1,*],
 		PropertyContainer[1,*]
@@ -18,18 +17,6 @@ graphModel FeatureGraphModel {
 	@multiLine
 	attr EString as documenation := "Lorem ipsum dolor et si met."
 } 
-
-@icon("icons/16/begin_16.png")
-node Begin {
-	style begin
-	outgoingEdges (Edge[1,1])
-}
-
-@icon("icons/16/end_16.png")
-node End {
-	style endNode
-	incomingEdges (Edge[1,*])
-}
 
 @palette("Feature Inner Elements")
 @icon("icons/16/start_16.png")
@@ -57,8 +44,6 @@ container FeatureContainer {
 	attr EString as title := "New Feature"
 	@multiLine
 	attr EString as documentation := "This feature is about ..."
-	incomingEdges (Edge[1,1])
-	outgoingEdges (Edge[1,1])
 }
  
 @doubleClickAction("info.scce.cinco.product.userdocumentation.action.DocNodeOpenSubmodel")
@@ -66,6 +51,7 @@ node DocNode{
 	style docNode("${mgl.modelName}")
 	prime docMgl::DocGraphModel as mgl
 	attr EBoolean as createScreenshots := true
+	// FIXME: createScreenshots false disables 
 	incomingEdges (*[1,*])
 	outgoingEdges (Edge[1,*])
 }
@@ -114,7 +100,7 @@ node WebDriver{
 
 /* configuration node*/
 @palette("User Login Properties")
-@icon("icons/16/gear_16.png")
+@icon("icons/16/settings_16.png")
 node Username{
 	style property("Username: ", "${value}")
 	attr EString as value := "john"
@@ -122,7 +108,7 @@ node Username{
 
 /* configuration node*/
 @palette("User Login Properties")
-@icon("icons/16/gear_16.png")
+@icon("icons/16/settings_16.png")
 node Password{
 	style property("Password: ", "${value}")
 	attr EString as value := "pwd"
@@ -130,7 +116,7 @@ node Password{
 
 /* configuration node*/
 @palette("User Login Properties")
-@icon("icons/16/gear_16.png")
+@icon("icons/16/settings_16.png")
 node Email{
 	style property("Email: ", "${value}")
 	attr EString as value := "j.doe@example.com"

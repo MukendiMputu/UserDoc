@@ -9,6 +9,7 @@ graphModel DocGraphModel {
 		StartNode [1,1],
 		EndNode [1,1],
 		SubDoc,
+		Highlight, UnHighlight,
 		Screenshot [1,*],
 		Navigation [1,*],
 		Timer,
@@ -18,7 +19,8 @@ graphModel DocGraphModel {
 	)
 	attr EString as modelName := "UserSequence"
 	@multiLine
-	attr EString as documenation := "Lorem ipsum dolor et si met."
+	attr EString as documenation := "Lorem ipsum dolor et si met"
+	// FIXME: attribute createScreenshots here 
 }
  
 @icon("icons/16/start_16.png")
@@ -43,8 +45,27 @@ node SubDoc {
 	style subDocNode("${subDoc.modelName}.doc")
 	prime this::DocGraphModel as subDoc
 	attr EBoolean as createScreenshots := true
+	// FIXME: createScreenshots false disables 
 	incomingEdges (Transition[1,1])
 	outgoingEdges (Transition[1,1])
+}
+
+@icon("icons/16/highlighter_16.png")
+@palette("Selenium Actions")
+node Highlight {
+	style highlightNode("${target}")
+	incomingEdges (Transition[1,1])
+	outgoingEdges (Transition[1,1])
+	attr WebElement as target
+}
+
+@icon("icons/16/eraser_16.png")
+@palette("Selenium Actions")
+node UnHighlight {
+	style unHighlightNode("${target}")
+	incomingEdges (Transition[1,1])
+	outgoingEdges (Transition[1,1])
+	attr WebElement as target
 }
 
 
@@ -82,7 +103,7 @@ enum Condition {
 }
 
 @palette("Selenium Actions")
-@icon("icons/16/screenshot_16.png")
+@icon("icons/16/url_16.png")
 node Navigation {
 	style navigationNode("${link}")
 	incomingEdges (Transition[1,1], Anchor[0,*])
@@ -102,6 +123,7 @@ node Navigation {
  */
 @icon("icons/16/object_16.png")
 @palette("Web Elements")
+@postAttributeChange("info.scce.cinco.product.userdocumentation.hooks.HighlightOnAttributeChanged")
 node WebElement {
 	style object("WebElement: ${selector}:${value}")
 	attr EString as selector := "id"
