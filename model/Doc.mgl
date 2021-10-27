@@ -53,7 +53,7 @@ node SubDoc {
 @icon("icons/16/highlighter_16.png")
 @palette("Selenium Actions")
 node Highlight {
-	style highlightNode("${target}")
+	style highlightNode("${target.selector}")
 	incomingEdges (Transition[1,1])
 	outgoingEdges (Transition[1,1])
 	attr WebElement as target
@@ -62,7 +62,7 @@ node Highlight {
 @icon("icons/16/eraser_16.png")
 @palette("Selenium Actions")
 node UnHighlight {
-	style unHighlightNode("${target}")
+	style unHighlightNode("${target.selector}")
 	incomingEdges (Transition[1,1])
 	outgoingEdges (Transition[1,1])
 	attr WebElement as target

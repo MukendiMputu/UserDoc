@@ -7,12 +7,13 @@ import static extension info.scce.cinco.product.userdocumentation.codegen.Helper
 
 class UserDocProjectGenerator extends ProjectTemplate {
 	val FeatureGraphModel model
+	
 	new(FeatureGraphModel model) {
 		this.model = model
 	}
 	
 	override projectDescription() {
-		project(ProjectCreator.getProject(model.eResource).name) [
+		val _project = project(ProjectCreator.getProject(model.eResource).name) [
 			
 			deleteIfExistent = false
 			
@@ -72,13 +73,10 @@ class UserDocProjectGenerator extends ProjectTemplate {
 								forEachOf(model.featureContainers) [ f |
 									folder(f.title.cleanFileOrFolderName)[
 										file(new IndexMDGenerator(f), true)
-										forEachOf(f.docNodes) [doc |
-											forEachOf(doc.mgl.screenshots) [ shot |
-												file(new ImagePlaceholder(shot.pictureName.cleanFileOrFolderName), true)
-											]
-										]
+										
 									]
 								]
+								
 								file(new FeaturesIndexMDGenerator(model), true)
 							]
 							file(new HomeIndexMDGenerator(), true)
@@ -93,6 +91,8 @@ class UserDocProjectGenerator extends ProjectTemplate {
 				file(new ProjectFileGenerator(model), true)
 			]
 		]
+		
+		_project
 	}
 	
 	override projectSuffix() {

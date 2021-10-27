@@ -96,7 +96,7 @@ nodeStyle highlightNode(1) {
 		image {
 			position (LEFT 2, MIDDLE)
 			size(fix 16,fix 16)
-			path("icons/16/mono_highlighter_16.png")
+			path("icons/16/highlighter_16.png")
 		}
 	}
 }
@@ -113,7 +113,7 @@ nodeStyle unHighlightNode(1) {
 		image {
 			position (LEFT 2, MIDDLE)
 			size(fix 16, fix 16)
-			path("icons/16/mono_highlighter_16.png")
+			path("icons/16/highlighter_16.png")
 		}
 	}
 }

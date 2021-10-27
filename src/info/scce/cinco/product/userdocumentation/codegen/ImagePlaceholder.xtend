@@ -1,17 +1,18 @@
 package info.scce.cinco.product.userdocumentation.codegen
 
-import info.scce.cinco.product.userdocumentation.codegen.UserDocFileTemplate
-import java.awt.image.BufferedImage
-import java.awt.Graphics2D
-import java.awt.Font
-import javax.imageio.ImageIO
-import java.io.File
-import java.awt.FontMetrics
 import java.awt.Color
+import java.awt.Font
+import java.awt.FontMetrics
+import java.awt.Graphics2D
+import java.awt.image.BufferedImage
+import java.io.File
+import java.nio.file.Files
+import java.nio.file.Path
+import javax.imageio.ImageIO
 
 class ImagePlaceholder extends UserDocFileTemplate {
 	var String imageName
-	
+	var String path
 	val width = 200
 	val height = 200
 	var BufferedImage buffImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
@@ -21,8 +22,9 @@ class ImagePlaceholder extends UserDocFileTemplate {
   	val int stringWidth
   	val int stringHeight 
 	
-	new (String fName) {
+	new (String fPath, String fName) {
 		imageName = fName
+		path = fPath
 		g2.setFont(textFont)
 		g2.setPaint(Color.black)
 		stringWidth = fontMetrics.stringWidth(imageName)
@@ -36,7 +38,12 @@ class ImagePlaceholder extends UserDocFileTemplate {
 	
 	override fileTemplate() {
 		// FIXME: Create placeholder for Screenshots in the right place
-		if(!ImageIO.write(buffImg, "PNG", new File("./"+imageName+".png"))){			
+		Files.createDirectories(Path.of(path))
+		println(path)
+		val f = new File(path + "/" + imageName+".png")
+		println(f.path)
+		if(!ImageIO.write(buffImg, "PNG", new File(path + "/" + imageName+".png"))){			
+		println(f.exists)
 		'''
 
 		'''
