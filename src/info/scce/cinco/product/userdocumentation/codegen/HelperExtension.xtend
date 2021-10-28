@@ -246,10 +246,13 @@ class HelperExtension {
 				case "TableData": 		'''«(node as TableData).documentation»'''
 				case "Input": 			'''«(node as Input).documentation»'''
 				case "Screenshot": 		'''
-				![«(node as Screenshot).pictureName.cleanFileOrFolderName»](./«(node as Screenshot).pictureName.cleanFileOrFolderName».png)
+				
+				| ![«(node as Screenshot).pictureName.cleanFileOrFolderName»](./«(node as Screenshot).pictureName.cleanFileOrFolderName».png "«(node as Screenshot).pictureName.escape»") |
+				| :--: |
 				«IF (node as Screenshot).description !== null»
-				«(node as Screenshot).description.content.nullOrEmpty? '':(node as Screenshot).description.content»
+				| «(node as Screenshot).description.content.nullOrEmpty? '': (node as Screenshot).description.content.replaceAll("\n", " ")» |
 				«ENDIF»
+				
 				'''
 				case "Button": 			'''«(node as Button).documentation»'''
 				case "SelectBox": 		'''«(node as SelectBox).documentation»'''
