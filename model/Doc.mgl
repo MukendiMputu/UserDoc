@@ -2,6 +2,9 @@ id info.scce.cinco.product.usersequence.main
 stylePath "model/Doc.style"
 
 @mcam("check")
+@mcam_checkmodule("info.scce.cinco.product.userdocumentation.checks.CheckDocGraphCycles")
+@mcam_checkmodule("info.scce.cinco.product.userdocumentation.checks.CheckInterruptedDocGraphSequence")
+@mcam_checkmodule("info.scce.cinco.product.userdocumentation.checks.CheckUniquePictureName")
 graphModel DocGraphModel {
 	iconPath "icons/16/sequence_16.png"
 	diagramExtension "doc"
@@ -115,9 +118,6 @@ node Navigation {
 
 /*
  * WebElement literally represents an html element.
- * It's intended to define only the most used web 
- * element (h1, h2, div, p, textarea) or custom elements
- * like <dime id="..."  >
  */
 @icon("icons/16/object_16.png")
 @palette("Web Elements")

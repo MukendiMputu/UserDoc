@@ -4,6 +4,8 @@ stylePath "model/Feature.style"
 
 @primeviewer
 @mcam("check")
+@mcam_checkmodule("info.scce.cinco.product.userdocumentation.checks.CheckFeatureGraphCycles")
+@mcam_checkmodule("info.scce.cinco.product.userdocumentation.checks.CheckInterruptedFeatureGraphSequence")
 @generatable("info.scce.cinco.product.userdocumentation.codegen.Generate", "/src-gen/")
 graphModel FeatureGraphModel {
 	iconPath "icons/16/feature_16.png"
@@ -43,7 +45,7 @@ container FeatureContainer {
 	)
 	attr EString as title := "New Feature"
 	@multiLine
-	attr EString as documentation := "This feature is about ..."
+	attr EString as documentation := "This feature is about..."
 }
  
 @doubleClickAction("info.scce.cinco.product.userdocumentation.action.DocNodeOpenSubmodel")
