@@ -26,7 +26,7 @@ class CheckUniquePictureName extends UserDocCheck<DocGraphModelId, DocGraphModel
 	
 	def private void checkFileNames(DocGraphModelAdapter adapter, Screenshot capture) {
 		if (picFileNames.contains(capture.pictureName)) {
-				adapter.getIdByString(capture.id).addError('''"«capture.pictureName»" is not unique''')
+				addWarning(adapter.getIdByString(capture.id), '''"«capture.pictureName»" is not unique''')
 			}
 			picFileNames.add(capture.pictureName)
 	}

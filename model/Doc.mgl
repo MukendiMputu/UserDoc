@@ -14,10 +14,10 @@ graphModel DocGraphModel {
 		SubDoc,
 		Highlight, UnHighlight,
 		Screenshot [1,*],
-		Navigation [1,*],
+		Navigation,
 		Timer,
 		WebElement,
-		SectionNode [1,*],
+		SectionNode,
 		Comment[1, *]
 	)
 	attr EString as modelName := "UserSequence"
@@ -76,7 +76,7 @@ node UnHighlight {
 node Screenshot {
 	style screenshotNode
 	incomingEdges (Transition[1,1], Anchor[1,*])
-	outgoingEdges (Transition[1,*])
+	outgoingEdges (Transition[1,1])
 	attr EString as pictureName
 	attr Comment as description
 }
@@ -121,7 +121,6 @@ node Navigation {
  */
 @icon("icons/16/object_16.png")
 @palette("Web Elements")
-@postAttributeChange("info.scce.cinco.product.userdocumentation.hooks.HighlightOnAttributeChanged")
 node WebElement {
 	style object("WebElement: ${selector}:${value}")
 	attr EString as selector := "id"

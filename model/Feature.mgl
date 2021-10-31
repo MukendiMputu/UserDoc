@@ -12,7 +12,7 @@ graphModel FeatureGraphModel {
 	diagramExtension "feat"
 	containableElements(
 		FeatureContainer,
-		DocNode[1,*],
+		// DocNode[1,*],
 		PropertyContainer[1,*]
 	)
 	attr EString as modelName := "New Feature"

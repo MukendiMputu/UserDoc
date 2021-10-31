@@ -2,11 +2,12 @@ package info.scce.cinco.product.userdocumentation.checks
 
 import info.scce.cinco.product.features.main.mcam.adapter.FeatureGraphModelAdapter
 import info.scce.cinco.product.features.main.mcam.adapter.FeatureGraphModelId
-import java.util.ArrayList
 
+/**
+ * Based on info.scce.cinco.product.minidime.process.checks.
+ */
 class CheckInterruptedFeatureGraphSequence extends UserDocCheck<FeatureGraphModelId, FeatureGraphModelAdapter> {
 	
-	ArrayList<String> picFileNames = new ArrayList
 	
 	override doExecute(FeatureGraphModelAdapter adapter) {
 		
@@ -14,7 +15,7 @@ class CheckInterruptedFeatureGraphSequence extends UserDocCheck<FeatureGraphMode
 	}
 	
 	override init() {
-		picFileNames.clear
+		// Intentionally left blank
 	}
 	
 	
