@@ -9,10 +9,12 @@ class IndexMDGenerator extends UserDocFileTemplate {
 	
 	val DocGraphModel firstUserSequence 
 	val FeatureContainer featureCont
+	val Boolean firstGraphCreatesScreenshots
 	
 	new (FeatureContainer ftContainer){
 		this.featureCont = ftContainer
 		this.firstUserSequence = featureCont.starts.head.docNodeSuccessors.head.mgl
+		this.firstGraphCreatesScreenshots = featureCont.starts.head.docNodeSuccessors.head.createScreenshots
 	}
 	
 	def String featureName() {
@@ -31,7 +33,7 @@ class IndexMDGenerator extends UserDocFileTemplate {
 		
 		## «firstUserSequence.modelName»
 		
-		«firstUserSequence.documentationText»
+		«firstUserSequence.getDocumentationText(firstGraphCreatesScreenshots)»
 		
 		'''
 	}

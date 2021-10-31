@@ -20,7 +20,6 @@ graphModel DocGraphModel {
 	attr EString as modelName := "UserSequence"
 	@multiLine
 	attr EString as documenation := "Lorem ipsum dolor et si met"
-	// FIXME: attribute createScreenshots here 
 }
  
 @icon("icons/16/start_16.png")
@@ -45,7 +44,6 @@ node SubDoc {
 	style subDocNode("${subDoc.modelName}.doc")
 	prime this::DocGraphModel as subDoc
 	attr EBoolean as createScreenshots := true
-	// FIXME: createScreenshots false disables 
 	incomingEdges (Transition[1,1])
 	outgoingEdges (Transition[1,1])
 }
@@ -284,7 +282,7 @@ node TableData extends WebElement {
 
 /* */
 @icon("icons/16/section_16.png")
-@palette("Container Elements")
+@palette("Basic Elements")
 container SectionNode {
 	style sectionNode("${title}")
 	attr EString as title := "New Section"

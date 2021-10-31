@@ -51,8 +51,7 @@ node DocNode{
 	style docNode("${mgl.modelName}")
 	prime docMgl::DocGraphModel as mgl
 	attr EBoolean as createScreenshots := true
-	// FIXME: createScreenshots false disables 
-	incomingEdges (*[1,*])
+	incomingEdges (Edge[1,*])
 	outgoingEdges (Edge[1,*])
 }
 

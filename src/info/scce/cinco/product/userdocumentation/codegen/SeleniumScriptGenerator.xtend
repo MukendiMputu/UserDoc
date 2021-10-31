@@ -155,12 +155,11 @@ class SeleniumScriptGenerator extends UserDocFileTemplate {
 					try {
 						«FOR docNode : featureCont.extractSequence»
 							// DocNode «docNode.mgl.modelName»
-							«docNode.getMgl().getLinesOfCode(featureCont.title)»
+							«docNode.mgl.getLinesOfCode(featureCont.title, docNode.createScreenshots)»
 						«ENDFOR»
 					} catch (Exception e) {
 						e.printStackTrace();
 					} finally {
-««« FIXME: Reset the state after each sequence
 					// Reset the application state
 					}
 				}
@@ -209,11 +208,8 @@ class SeleniumScriptGenerator extends UserDocFileTemplate {
 			}
 			public Boolean typeIn(String selector, String contentText)
 			{
-				findPageElement(selector).sendKeys(contentText + Keys.TAB);
+				findPageElement(selector);
 				return true;
-			}
-			public Boolean waitUntilElementPresent(String selector) {
-				return wait.until(presenceOfElementLocated(By.cssSelector(selector)))!= null;
 			}
 			public Boolean clickBtn(String selector)
 			{
