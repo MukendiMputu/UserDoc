@@ -43,7 +43,7 @@ container FeatureContainer {
 		Stop[1,1],
 		DocNode[1,*]
 	)
-	attr EString as title := "New Feature"
+	unique attr EString as title := "New Feature"
 	@multiLine
 	attr EString as documentation := "This feature is about..."
 }
