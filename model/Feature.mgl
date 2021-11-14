@@ -6,6 +6,7 @@ stylePath "model/Feature.style"
 @mcam("check")
 @mcam_checkmodule("info.scce.cinco.product.userdocumentation.checks.CheckFeatureGraphCycles")
 @mcam_checkmodule("info.scce.cinco.product.userdocumentation.checks.CheckInterruptedFeatureGraphSequence")
+@mcam_checkmodule("info.scce.cinco.product.userdocumentation.checks.CheckUniqueFeatureName")
 @generatable("info.scce.cinco.product.userdocumentation.codegen.Generate", "/src-gen/")
 graphModel FeatureGraphModel {
 	iconPath "icons/16/feature_16.png"
@@ -15,7 +16,7 @@ graphModel FeatureGraphModel {
 		// DocNode[1,*],
 		PropertyContainer[1,*]
 	)
-	attr EString as modelName := "New Feature"
+	unique attr EString as modelName := "New Feature"
 	@multiLine
 	attr EString as documenation := "Lorem ipsum dolor et si met."
 } 
@@ -127,6 +128,7 @@ enum Browsers {
 	CHROME	
 	EDGE	
 	FIREFOX	
+	OPERA
 	IE	
 	INTERNET_EXPLORER	
 	SAFARI

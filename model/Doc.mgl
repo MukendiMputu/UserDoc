@@ -20,7 +20,7 @@ graphModel DocGraphModel {
 		SectionNode,
 		Comment[1, *]
 	)
-	attr EString as modelName := "UserSequence"
+	unique attr EString as modelName := "UserSequence"
 	@multiLine
 	attr EString as documenation := "Lorem ipsum dolor et si met"
 }
