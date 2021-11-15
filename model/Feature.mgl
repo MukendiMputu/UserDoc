@@ -4,16 +4,19 @@ stylePath "model/Feature.style"
 
 @primeviewer
 @mcam("check")
+@mcam_checkmodule("info.scce.cinco.product.userdocumentation.checks.CheckFeatureGraphCycles")
+@mcam_checkmodule("info.scce.cinco.product.userdocumentation.checks.CheckInterruptedFeatureGraphSequence")
+@mcam_checkmodule("info.scce.cinco.product.userdocumentation.checks.CheckUniqueFeatureName")
 @generatable("info.scce.cinco.product.userdocumentation.codegen.Generate", "/src-gen/")
 graphModel FeatureGraphModel {
 	iconPath "icons/16/feature_16.png"
 	diagramExtension "feat"
 	containableElements(
 		FeatureContainer,
-		DocNode[1,*],
+		// DocNode[1,*],
 		PropertyContainer[1,*]
 	)
-	attr EString as modelName := "New Feature"
+	unique attr EString as modelName := "New Feature"
 	@multiLine
 	attr EString as documenation := "Lorem ipsum dolor et si met."
 } 
@@ -41,9 +44,9 @@ container FeatureContainer {
 		Stop[1,1],
 		DocNode[1,*]
 	)
-	attr EString as title := "New Feature"
+	unique attr EString as title := "New Feature"
 	@multiLine
-	attr EString as documentation := "This feature is about ..."
+	attr EString as documentation := "This feature is about..."
 }
  
 @doubleClickAction("info.scce.cinco.product.userdocumentation.action.DocNodeOpenSubmodel")
@@ -125,6 +128,7 @@ enum Browsers {
 	CHROME	
 	EDGE	
 	FIREFOX	
+	OPERA
 	IE	
 	INTERNET_EXPLORER	
 	SAFARI

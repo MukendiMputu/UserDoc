@@ -16,7 +16,7 @@ cincoProduct UserDocumentationTool {
 
 	
 	about {
-		text "UserDoc is a DSL-driven generator of end user documentation for web application. It is a bachelor thesis project developed with the Cinco SCCE Meta Tooling Suite ( http://cinco.scce.info )."
+		text "UserDoc is a/home/mukendi/Documents/TuDortmund/Bachelor/10.Semester/Bachelorarbeit/cinco-2.1.2/Workspace DSL-driven generator of end user documentation for web applications. It is a bachelor thesis project developed with the Cinco SCCE Meta Tooling Suite ( http://cinco.scce.info )."
 	}
 
 	plugins {

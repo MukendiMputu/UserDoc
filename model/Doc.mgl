@@ -2,6 +2,9 @@ id info.scce.cinco.product.usersequence.main
 stylePath "model/Doc.style"
 
 @mcam("check")
+@mcam_checkmodule("info.scce.cinco.product.userdocumentation.checks.CheckDocGraphCycles")
+@mcam_checkmodule("info.scce.cinco.product.userdocumentation.checks.CheckInterruptedDocGraphSequence")
+@mcam_checkmodule("info.scce.cinco.product.userdocumentation.checks.CheckUniquePictureName")
 graphModel DocGraphModel {
 	iconPath "icons/16/sequence_16.png"
 	diagramExtension "doc"
@@ -11,13 +14,13 @@ graphModel DocGraphModel {
 		SubDoc,
 		Highlight, UnHighlight,
 		Screenshot [1,*],
-		Navigation [1,*],
+		Navigation,
 		Timer,
 		WebElement,
-		SectionNode [1,*],
+		SectionNode,
 		Comment[1, *]
 	)
-	attr EString as modelName := "UserSequence"
+	unique attr EString as modelName := "UserSequence"
 	@multiLine
 	attr EString as documenation := "Lorem ipsum dolor et si met"
 }
@@ -73,7 +76,7 @@ node UnHighlight {
 node Screenshot {
 	style screenshotNode
 	incomingEdges (Transition[1,1], Anchor[1,*])
-	outgoingEdges (Transition[1,*])
+	outgoingEdges (Transition[1,1])
 	attr EString as pictureName
 	attr Comment as description
 }
@@ -115,13 +118,9 @@ node Navigation {
 
 /*
  * WebElement literally represents an html element.
- * It's intended to define only the most used web 
- * element (h1, h2, div, p, textarea) or custom elements
- * like <dime id="..."  >
  */
 @icon("icons/16/object_16.png")
 @palette("Web Elements")
-@postAttributeChange("info.scce.cinco.product.userdocumentation.hooks.HighlightOnAttributeChanged")
 node WebElement {
 	style object("WebElement: ${selector}:${value}")
 	attr EString as selector := "id"
