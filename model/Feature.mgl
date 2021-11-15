@@ -4,7 +4,7 @@ stylePath "model/Feature.style"
 
 @primeviewer
 @mcam("check")
-@mcam_checkmodule("info.scce.cinco.product.userdocumentation.checks.CheckFeatureGraphCycles")
+@mcam_checkmodule("info.scce.cinco.product.userdocumentation.checks.CheckFeatureGraphLoops")
 @mcam_checkmodule("info.scce.cinco.product.userdocumentation.checks.CheckInterruptedFeatureGraphSequence")
 @mcam_checkmodule("info.scce.cinco.product.userdocumentation.checks.CheckUniqueFeatureName")
 @generatable("info.scce.cinco.product.userdocumentation.codegen.Generate", "/src-gen/")

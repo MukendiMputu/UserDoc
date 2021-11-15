@@ -2,7 +2,7 @@ id info.scce.cinco.product.usersequence.main
 stylePath "model/Doc.style"
 
 @mcam("check")
-@mcam_checkmodule("info.scce.cinco.product.userdocumentation.checks.CheckDocGraphCycles")
+@mcam_checkmodule("info.scce.cinco.product.userdocumentation.checks.CheckDocGraphLoops")
 @mcam_checkmodule("info.scce.cinco.product.userdocumentation.checks.CheckInterruptedDocGraphSequence")
 @mcam_checkmodule("info.scce.cinco.product.userdocumentation.checks.CheckUniquePictureName")
 graphModel DocGraphModel {

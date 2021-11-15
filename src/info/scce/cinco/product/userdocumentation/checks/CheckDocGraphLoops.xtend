@@ -12,7 +12,7 @@ import java.util.HashMap
 /**
  * Based on info.scce.cinco.product.minidime.process.checks.LoopCheck
  */
-class CheckDocGraphCycles extends UserDocCheck<DocGraphModelId, DocGraphModelAdapter> {
+class CheckDocGraphLoops extends UserDocCheck<DocGraphModelId, DocGraphModelAdapter> {
 
 	var DocGraphModelAdapter adapter
 	var ArrayList<Node> visitedNodes = new ArrayList

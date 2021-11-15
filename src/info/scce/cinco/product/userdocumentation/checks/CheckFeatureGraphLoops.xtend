@@ -7,7 +7,7 @@ import info.scce.cinco.product.features.main.mcam.adapter.FeatureGraphModelAdapt
 /**
  * Based on info.scce.cinco.product.minidime.process.checks.LoopCheck
  */
-class CheckFeatureGraphCycles extends UserDocCheck<FeatureGraphModelId, FeatureGraphModelAdapter>  {
+class CheckFeatureGraphLoops extends UserDocCheck<FeatureGraphModelId, FeatureGraphModelAdapter>  {
 	
 	override doExecute(FeatureGraphModelAdapter adapter) {
 
