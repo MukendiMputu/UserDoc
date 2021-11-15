@@ -70,8 +70,11 @@ Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,org.eclipse.e
  n.generator.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc
  .cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.generato
  r.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.met
- a.plugin.generator.runtime,de.jabc.cinco.meta.plugin.mcam.runtime,de.ja
- bc.cinco.meta.plugin.generator.runtime
+ a.plugin.generator.runtime,de.jabc.cinco.meta.plugin.generator.runtime,
+ de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.g
+ enerator.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.ci
+ nco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.mcam.runtim
+ e
 Bundle-ActivationPolicy: lazy
 Export-Package: info.scce.cinco.product.userdocumentation.action,info.sc
  ce.cinco.product.userdocumentation.appearance,info.scce.cinco.product.u
@@ -92,9 +95,9 @@ Export-Package: info.scce.cinco.product.userdocumentation.action,info.sc
  product.usersequence.main.doc.util,info.scce.cinco.product.usersequence
  .main.doc.views,info.scce.cinco.product.usersequence.main.doc.views.imp
  l,info.scce.cinco.product.usersequence.main.doc.views.util,info.scce.ci
- nco.product.userdocumentation.perspective,info.scce.cinco.product.users
- equence.main.mcam.adapter,info.scce.cinco.product.usersequence.main.mca
- m.cli,info.scce.cinco.product.features.main.mcam.adapter,info.scce.cinc
- o.product.features.main.mcam.cli
+ nco.product.userdocumentation.perspective,info.scce.cinco.product.featu
+ res.main.mcam.adapter,info.scce.cinco.product.features.main.mcam.cli,in
+ fo.scce.cinco.product.usersequence.main.mcam.adapter,info.scce.cinco.pr
+ oduct.usersequence.main.mcam.cli
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 

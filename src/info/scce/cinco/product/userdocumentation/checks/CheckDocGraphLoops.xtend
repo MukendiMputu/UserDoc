@@ -16,7 +16,7 @@ class CheckDocGraphLoops extends UserDocCheck<DocGraphModelId, DocGraphModelAdap
 
 	var DocGraphModelAdapter adapter
 	var ArrayList<Node> visitedNodes = new ArrayList
-	var HashMap<Node, Integer> cycleDepth = new HashMap
+	var HashMap<Node, Integer> nodeDepths = new HashMap
 
 	override doExecute(DocGraphModelAdapter adapter) {
 		this.adapter = adapter
@@ -24,49 +24,37 @@ class CheckDocGraphLoops extends UserDocCheck<DocGraphModelId, DocGraphModelAdap
 			val obj = id.element
 			if (obj instanceof DocGraphModel) {
 				obj.traverseDocGraphSequence
-				obj.analyzeCycleDepth
 			}
 		}
 	}
 
-	def private void analyzeCycleDepth(DocGraphModel model) {
-		for (node : cycleDepth.keySet) {
-			val preNode = node.predecessors.head
-			if (cycleDepth.get(node) !== null
-					&& cycleDepth.get(preNode) !== null
-					&& cycleDepth.get(node) < cycleDepth.get(preNode)) {
-				addError(adapter.getIdByString(model.id), 'Cycle detected in graph model')
-			}
-		}
-	}
 
 	def private void traverseDocGraphSequence(DocGraphModel model) {
 		for (startNd : model.startNodes) {
-			cycleDepth.put(startNd, 0)
+			nodeDepths.put(startNd, 0)
 			var succ = startNd.successors.head
 			while (!(succ instanceof EndNode)) {
-				succ.hasAlreadyBeenVisited(cycleDepth.get(startNd))
+				if(visitedNodes.contains(succ)){
+					println("++++ Yes, "+succ.eClass.name+" (id: "+succ.id+") has already been visited. +++++") 
+					addError(adapter.getIdByString(model.id), 'Cycle detected in graph model.')
+					return
+				}
+				
+				visitedNodes.add(succ)
+				nodeDepths.put(succ, 0)
+				
+				if (succ instanceof SubDoc) {
+					nodeDepths.put(succ, nodeDepths.get(startNd)+1)
+					succ.subDoc.traverseDocGraphSequence
+				}
 				succ = succ.successors.head	
 			}
-		}
-	}
-		
-	
-	def private void hasAlreadyBeenVisited(Node node, Integer depth){
-		
-		if(visitedNodes.contains(node)){return}
-		visitedNodes.add(node)
-		cycleDepth.put(node, depth)
-		
-		if (node instanceof SubDoc) {
-			cycleDepth.put(node, depth + 1)
-			node.subDoc.traverseDocGraphSequence
 		}
 	}
 
 	override init() {
 		visitedNodes.clear
-		cycleDepth.clear
+		nodeDepths.clear
 	}
 
 }
