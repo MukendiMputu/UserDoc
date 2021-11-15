@@ -5,6 +5,9 @@ import info.scce.cinco.product.features.main.mcam.adapter.FeatureGraphModelAdapt
 import info.scce.cinco.product.features.main.mcam.adapter.FeatureGraphModelId
 import java.util.ArrayList
 
+/**
+ * Based on info.scce.cinco.product.minidime.process.checks.UniqueName
+ */
 class CheckUniqueFeatureName extends UserDocCheck<FeatureGraphModelId, FeatureGraphModelAdapter> {
 	
 	ArrayList<String> picFileNames = new ArrayList

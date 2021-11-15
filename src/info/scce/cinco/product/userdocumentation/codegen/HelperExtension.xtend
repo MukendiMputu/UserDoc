@@ -33,8 +33,9 @@ import java.util.LinkedList
 import java.util.List
 import info.scce.cinco.product.usersequence.main.doc.Timer
 
-//import java.util.ArrayList
-
+/**
+ * Most of the following method are copied from/based on the MINI-DIME example project
+ */
 class HelperExtension {
 	
 	// Fully Quallified Names (Fqn)
@@ -144,20 +145,20 @@ class HelperExtension {
 		          .replace("\"", "\\\"");
 	}
 	
-	/* Extracts in sequence order all Doc model container in a feature container */
+	/* Extracts a sequence order of all Doc model contained in a feature container */
 	static def extractSequence(FeatureContainer container) {
 		val List<DocNode> singleSequence = new LinkedList<DocNode>;
 		val firstDocNode = container.starts.head.docNodeSuccessors.head
 		singleSequence.add(firstDocNode)			// get first DocNode
 		var succ = firstDocNode.successors.head		// and its successor
-		while (!(succ instanceof Stop) && !(succ instanceof EndNode)) {		// if it's and end node
-			singleSequence.add(succ as DocNode)
-			succ = succ.successors.head				// or else get its successor
+		while (!(succ instanceof Stop) && !(succ instanceof EndNode)) {		// while it's neither an EndNode nor StopNode
+			singleSequence.add(succ as DocNode)		// add it and 
+			succ = succ.successors.head				// get its successor
 		}
 		return singleSequence						// return the sequence
 	}
 	
-	/* Retrieves the element method following the sequence or queue in the model*/
+	/* Retrieves the element's Selenium-action following the order of appearance*/
 	static def String getLinesOfCode(DocGraphModel model, String featureTitle, Boolean createsScreenshots){
 		var StringBuilder codeText = new StringBuilder
 		for(start : model.startNodes){
@@ -221,6 +222,7 @@ class HelperExtension {
 	'''
 
 	
+	/* Retrieves the element's Mardown documentation text following the order of appearance*/
 	static def String getDocumentationText(DocGraphModel model, Boolean createScreenshot){
 		var StringBuilder documentationText = new StringBuilder
 		for(start : model.startNodes){
@@ -233,12 +235,12 @@ class HelperExtension {
 		'''«documentationText.toString»''' 
 	}
 	
-	
+	/* overloading method */
 	static def String getDocumentationLine(Node node){
 		node.getDocumentationLine(false)
 	}
 	
-	
+	/* Retrieves the the documentation text from the model depending on the node type. */
 	static def String getDocumentationLine(Node node, Boolean createScreenshot)'''
 		«switch (node.eClass.name) {
 				case "Navigation": 		'''«(node as Navigation).documentation»'''

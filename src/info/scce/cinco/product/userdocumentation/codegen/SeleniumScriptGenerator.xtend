@@ -13,6 +13,13 @@ import java.util.HashMap
 import java.util.Map
 import static extension info.scce.cinco.product.userdocumentation.codegen.HelperExtension.*
 
+
+/**
+ * This class extracts most of the model graph information to construct a Selenium-Java script.
+ * It is based on the pattern from the MINI-DIME project.
+ * 
+ * @author Mukendi Mputu
+ */
 class SeleniumScriptGenerator extends UserDocFileTemplate {
 	
 	val FeatureGraphModel featureModel

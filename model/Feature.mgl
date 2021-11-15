@@ -65,6 +65,7 @@ node DocNode{
 //                                                                  #
 //###################################################################
 
+/* for gathering important properties like username and password */
 @icon("icons/16/container_16.png")
 @palette("Selenium Properties")
 container PropertyContainer {
@@ -124,6 +125,7 @@ node Email{
 	attr EString as value := "j.doe@example.com"
 }
 
+/* list of Selenium-supported  Web browsers*/
 enum Browsers {
 	CHROME	
 	EDGE	

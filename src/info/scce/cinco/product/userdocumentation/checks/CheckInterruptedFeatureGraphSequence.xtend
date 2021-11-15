@@ -4,7 +4,7 @@ import info.scce.cinco.product.features.main.mcam.adapter.FeatureGraphModelAdapt
 import info.scce.cinco.product.features.main.mcam.adapter.FeatureGraphModelId
 
 /**
- * Based on info.scce.cinco.product.minidime.process.checks.
+ * Based on info.scce.cinco.product.minidime.process.checks.LoopCheck
  */
 class CheckInterruptedFeatureGraphSequence extends UserDocCheck<FeatureGraphModelId, FeatureGraphModelAdapter> {
 	

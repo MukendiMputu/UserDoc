@@ -4,6 +4,10 @@ import de.jabc.cinco.meta.core.ge.style.generator.runtime.appearance.StyleAppear
 import style.StyleFactory
 import info.scce.cinco.product.usersequence.main.doc.WebElement
 
+/**
+ * This class highlights a WebElementNode (and any Node inheriting from it) in the model graph
+ * as soon as the property isHighlighted is set true. Otherwise it unhighlights it.
+ */
 class HighlightInputNodeAppearance implements StyleAppearanceProvider<WebElement> {
 
 	extension StyleFactory = StyleFactory.eINSTANCE

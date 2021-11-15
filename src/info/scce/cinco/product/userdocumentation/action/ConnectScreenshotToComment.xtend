@@ -4,6 +4,11 @@ import de.jabc.cinco.meta.runtime.action.CincoCustomAction
 import info.scce.cinco.product.usersequence.main.doc.Screenshot
 import graphmodel.Node
 
+
+/**
+ * The intent is to automatically connect a ScreenshotNode
+ * to the CommentNode once it's been assigned in the property view.
+ */
 class ConnectScreenshotToComment extends CincoCustomAction<Node> {
 	override execute(Node it){
 		if (it instanceof Screenshot){

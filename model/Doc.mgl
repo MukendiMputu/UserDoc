@@ -24,6 +24,8 @@ graphModel DocGraphModel {
 	@multiLine
 	attr EString as documenation := "Lorem ipsum dolor et si met"
 }
+
+/*======================== STRUCTURAL ELEMENTS ======================== */
  
 @icon("icons/16/start_16.png")
 @palette("Basic Elements")
@@ -39,8 +41,6 @@ node EndNode {
 	incomingEdges (Transition[1,1])
 }
 
-/*======================== STRUCTURAL ELEMENTS ======================== */
-
 @icon("icons/16/action_16.png")
 @doubleClickAction("info.scce.cinco.product.userdocumentation.action.DocNodeOpenSubmodel")
 node SubDoc {
@@ -50,6 +50,8 @@ node SubDoc {
 	incomingEdges (Transition[1,1])
 	outgoingEdges (Transition[1,1])
 }
+
+/*======================== SELENIUM ELEMENTS ======================== */
 
 @icon("icons/16/highlighter_16.png")
 @palette("Selenium Actions")
@@ -91,7 +93,7 @@ node Timer {
 	attr EString as cssSelector := ""
 	attr Condition as condition
 }
-
+/* helpful conditions from the Selenium ExpectedCondition class */
 enum Condition {
 	presenceOfElementLocated
 	presenceOfAllElementsLocatedBy
@@ -307,7 +309,7 @@ node Comment {
 	outgoingEdges (Anchor[1,*])
 }
 
-/*======================== TRANSITION ELEMENTS ======================== */
+/*======================== EDGES ======================== */
 
 edge Transition {
 	style simpleArrow

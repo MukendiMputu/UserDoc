@@ -5,6 +5,9 @@ import info.scce.cinco.product.usersequence.main.mcam.adapter.DocGraphModelAdapt
 import info.scce.cinco.product.usersequence.main.mcam.adapter.DocGraphModelId
 import java.util.ArrayList
 
+/**
+ * Based on info.scce.cinco.product.minidime.process.checks.UniqueName
+ */
 class CheckUniquePictureName extends UserDocCheck<DocGraphModelId, DocGraphModelAdapter> {
 	
 	ArrayList<String> picFileNames = new ArrayList
