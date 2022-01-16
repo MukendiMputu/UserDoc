@@ -58,7 +58,7 @@ class SeleniumScriptGenerator extends UserDocFileTemplate {
 	}
 	
 	def className() {
-		'''GetSeleniumScreenshots'''
+		'''SeleniumScreenshotsGenerator'''
 	}
 	
 	override fileTemplate() {
@@ -156,6 +156,7 @@ class SeleniumScriptGenerator extends UserDocFileTemplate {
 			public void run() {
 				// For every feature container in the MGL generate a sequence of methods
 				this.openBrowser();
+				«««TODO: an execution order of features might be necessary»»
 				«FOR featureCont : featureModel.featureContainers»
 				{
 					// Start of sequence «featureCont.title»
