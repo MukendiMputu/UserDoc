@@ -110,7 +110,7 @@ class SeleniumScriptGenerator extends UserDocFileTemplate {
 		 */
 		
 		@SuppressWarnings("unused")
-		class «className» implements Runnable{
+		class «className» {
 			// User Credentials
 			private static String username;
 			private static String password;
@@ -146,34 +146,43 @@ class SeleniumScriptGenerator extends UserDocFileTemplate {
 				«ENDFOR»
 				element = null;
 			}
-		
-			public static void main(String[] args) {
-				«className» app = new «className»();
-				app.run();
-			}
-		
-			@Override
-			public void run() {
-				// For every feature container in the MGL generate a sequence of methods
-				this.openBrowser();
-				«««TODO: an execution order of features might be necessary»»
-				«FOR featureCont : featureModel.featureContainers»
-				{
-					// Start of sequence «featureCont.title»
+			
+			«FOR featureCont : featureModel.featureContainers»
+			// Start of «featureCont.title» feature
+			«FOR docNode : featureCont.extractSequence»
+			static class «docNode.mgl.modelName.cleanFileOrFolderName» {
+				
+				static void runSequence(«className» screenshooter, boolean capture) {
 					try {
-						«FOR docNode : featureCont.extractSequence»
-							// DocNode «docNode.mgl.modelName»
+						// DocNode «docNode.mgl.modelName»
+						if (capture) {
 							«docNode.mgl.getLinesOfCode(featureCont.title, docNode.createScreenshots)»
-						«ENDFOR»
+						} else {
+							«docNode.mgl.getLinesOfCode(featureCont.title, false)»
+						}
 					} catch (Exception e) {
 						e.printStackTrace();
 					} finally {
-					// Reset the application state
+						// Reset the application state
 					}
 				}
-				«ENDFOR»
-				this.closeBrowser();
 			}
+			
+			«ENDFOR»
+			«ENDFOR»
+		
+			public static void main(String[] args) {
+				«className» app = new «className»();
+				
+				app.openBrowser();
+				«FOR featureCont : featureModel.featureContainers»
+				«FOR docNode : featureCont.extractSequence SEPARATOR '\napp.restartBrowser();\n' AFTER '\napp.closeBrowser();\n'»
+					«docNode.mgl.modelName.cleanFileOrFolderName».runSequence(app, «IF docNode.createScreenshots»true«ELSE»false«ENDIF»);
+				«ENDFOR»
+				«ENDFOR»
+				
+			}
+		
 		
 			/*================== Selenium Methods ==================*/
 		
@@ -212,11 +221,11 @@ class SeleniumScriptGenerator extends UserDocFileTemplate {
 			public void undoHighlightElement(String selector)
 			{
 				JavascriptExecutor jsExec = (JavascriptExecutor)«className».«this.concreteDriver.get("driverName")»;
-				jsExec.executeScript("arguments[0].setAttribute('style','border: 4px solid red;');", findPageElement(selector));
+				jsExec.executeScript("arguments[0].removeAttribute('style','border: 4px solid red;');", findPageElement(selector));
 			}
 			public Boolean typeIn(String selector, String contentText)
 			{
-				findPageElement(selector);
+				findPageElement(selector).sendKeys(contentText);
 				return true;
 			}
 			public Boolean clickBtn(String selector)
@@ -234,6 +243,15 @@ class SeleniumScriptGenerator extends UserDocFileTemplate {
 			{
 				findPageElement("button[type='submit']").click();
 				return true;
+			}
+			public void restartBrowser() {
+			    «FOR driver : drivers.entrySet»
+			    «className».«this.concreteDriver.get("driverName")».manage().deleteAllCookies();         // Clear Cookies on the browser
+			    «className».«this.concreteDriver.get("driverName")».quit();
+			    «className».«this.concreteDriver.get("driverName")» = null;
+			    «className».«this.concreteDriver.get("driverName")» = new «driver.key.driverClass»();
+			    «ENDFOR»
+			
 			}
 			public void closeBrowser()
 			{

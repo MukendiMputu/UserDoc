@@ -176,39 +176,39 @@ class HelperExtension {
 	/* Depending on the node type a template method for the Selenium Script is chosen. */
 	static def String getNodeCode(Node node, String featureTitle, Boolean createsScreenshots)'''
 		«switch (node.eClass.name) {
-				case "Navigation": 		'''this.goToPage("«(node as Navigation).link.escape»");'''
-				case "Div": 			'''«IF createsScreenshots && (node as Div).highlighted»this.highlightElement("«(node as Div).selector.escape»"); «ENDIF»'''
-				case "H": 				'''«IF createsScreenshots && (node as H).highlighted»this.highlightElement("«(node as H).selector.escape»"); «ENDIF»'''
-				case "P": 				'''«IF createsScreenshots && (node as P).highlighted»this.highlightElement("«(node as P).selector.escape»"); «ENDIF»'''
-				case "Span": 			'''«IF createsScreenshots && (node as Span).highlighted»this.highlightElement("«(node as Span).selector.escape»"); «ENDIF»'''
-				case "Label": 			'''«IF createsScreenshots && (node as Label).highlighted»this.highlightElement("«(node as Label).selector.escape»"); «ENDIF»'''
-				case "Textarea": 		'''«IF createsScreenshots && (node as Textarea).highlighted»this.highlightElement("«(node as Textarea).selector.escape»"); «ENDIF»'''
-				case "Table": 			'''«IF createsScreenshots && (node as Table).highlighted»this.highlightElement("«(node as Table).selector.escape»"); «ENDIF»'''
-				case "TableHead": 		'''«IF createsScreenshots && (node as TableHead).highlighted»this.highlightElement("«(node as TableHead).selector.escape»"); «ENDIF»'''
-				case "Th": 				'''«IF createsScreenshots && (node as Th).highlighted»this.highlightElement("«(node as Th).selector.escape»"); «ENDIF»'''
-				case "TableRow": 		'''«IF createsScreenshots && (node as TableRow).highlighted»this.highlightElement("«(node as TableRow).selector.escape»"); «ENDIF»'''
-				case "TableBody": 		'''«IF createsScreenshots && (node as TableBody).highlighted»this.highlightElement("«(node as TableBody).selector.escape»"); «ENDIF»'''
-				case "TableData": 		'''«IF createsScreenshots && (node as TableData).highlighted»this.highlightElement("«(node as TableData).selector.escape»"); «ENDIF»'''
+				case "Navigation": 		'''screenshooter.goToPage("«(node as Navigation).link.escape»");'''
+				case "Div": 			'''«IF createsScreenshots && (node as Div).highlighted»screenshooter.highlightElement("«(node as Div).selector.escape»"); «ENDIF»'''
+				case "H": 				'''«IF createsScreenshots && (node as H).highlighted»screenshooter.highlightElement("«(node as H).selector.escape»"); «ENDIF»'''
+				case "P": 				'''«IF createsScreenshots && (node as P).highlighted»screenshooter.highlightElement("«(node as P).selector.escape»"); «ENDIF»'''
+				case "Span": 			'''«IF createsScreenshots && (node as Span).highlighted»screenshooter.highlightElement("«(node as Span).selector.escape»"); «ENDIF»'''
+				case "Label": 			'''«IF createsScreenshots && (node as Label).highlighted»screenshooter.highlightElement("«(node as Label).selector.escape»"); «ENDIF»'''
+				case "Textarea": 		'''«IF createsScreenshots && (node as Textarea).highlighted»screenshooter.highlightElement("«(node as Textarea).selector.escape»"); «ENDIF»'''
+				case "Table": 			'''«IF createsScreenshots && (node as Table).highlighted»screenshooter.highlightElement("«(node as Table).selector.escape»"); «ENDIF»'''
+				case "TableHead": 		'''«IF createsScreenshots && (node as TableHead).highlighted»screenshooter.highlightElement("«(node as TableHead).selector.escape»"); «ENDIF»'''
+				case "Th": 				'''«IF createsScreenshots && (node as Th).highlighted»screenshooter.highlightElement("«(node as Th).selector.escape»"); «ENDIF»'''
+				case "TableRow": 		'''«IF createsScreenshots && (node as TableRow).highlighted»screenshooter.highlightElement("«(node as TableRow).selector.escape»"); «ENDIF»'''
+				case "TableBody": 		'''«IF createsScreenshots && (node as TableBody).highlighted»screenshooter.highlightElement("«(node as TableBody).selector.escape»"); «ENDIF»'''
+				case "TableData": 		'''«IF createsScreenshots && (node as TableData).highlighted»screenshooter.highlightElement("«(node as TableData).selector.escape»"); «ENDIF»'''
 				case "Timer": 			'''«IF createsScreenshots »wait.until(«(node as Timer).condition»(By.cssSelector("«(node as Timer).cssSelector.escape»")));«ENDIF»'''
 				
 				case "Input": 			'''
-										«IF createsScreenshots && (node as Input).highlighted»this.highlightElement("«(node as Input).selector.escape»"); «ENDIF»
-										this.typeIn("«(node as Input).selector.escape»", "«(node as Input).content.escape»");
+										«IF createsScreenshots && (node as Input).highlighted»screenshooter.highlightElement("«(node as Input).selector.escape»"); «ENDIF»
+										screenshooter.typeIn("«(node as Input).selector.escape»", "«(node as Input).content.escape»");
 										'''
-				case "Highlight":		'''«IF createsScreenshots »this.highlightElement("«(node as Highlight).target.selector.escape»");«ENDIF»'''
-				case "UnHighlight":		'''«IF createsScreenshots »this.undoHighlightElement("«(node as UnHighlight).target.selector.escape»");«ENDIF»'''
-				case "Screenshot": 		'''«IF createsScreenshots »this.takePageScreenshot("«featureTitle.escape.cleanFileOrFolderName»", "«(node as Screenshot).pictureName.cleanFileOrFolderName»");«ENDIF»'''
+				case "Highlight":		'''«IF createsScreenshots »screenshooter.highlightElement("«(node as Highlight).target.selector.escape»");«ENDIF»'''
+				case "UnHighlight":		'''«IF createsScreenshots »screenshooter.undoHighlightElement("«(node as UnHighlight).target.selector.escape»");«ENDIF»'''
+				case "Screenshot": 		'''«IF createsScreenshots »screenshooter.takePageScreenshot("«featureTitle.escape.cleanFileOrFolderName»", "«(node as Screenshot).pictureName.cleanFileOrFolderName»");«ENDIF»'''
 				case "Button": 			'''
-										«IF createsScreenshots && (node as Button).highlighted»this.highlightElement("«(node as Button).selector.escape»"); «ENDIF»
-										this.clickBtn("«(node as Button).selector.escape»");
+										«IF createsScreenshots && (node as Button).highlighted»screenshooter.highlightElement("«(node as Button).selector.escape»"); «ENDIF»
+										screenshooter.clickBtn("«(node as Button).selector.escape»");
 										'''
 				case "SelectBox": 		'''
-										«IF createsScreenshots && (node as SelectBox).highlighted»this.highlightElement("«(node as SelectBox).selector.escape»"); «ENDIF»
-										this.select("«(node as SelectBox).selector.escape»", "«(node as SelectBox).option.escape»");
+										«IF createsScreenshots && (node as SelectBox).highlighted»screenshooter.highlightElement("«(node as SelectBox).selector.escape»"); «ENDIF»
+										screenshooter.select("«(node as SelectBox).selector.escape»", "«(node as SelectBox).option.escape»");
 										'''
 				case "SectionNode": 	'''«(node as SectionNode).allNodes.forEach[getNodeCode(featureTitle, createsScreenshots)]»'''
 				case "Form": 			'''
-										«IF createsScreenshots && (node as Form).highlighted»this.highlightElement("«(node as Form).selector.escape»"); «ENDIF»
+										«IF createsScreenshots && (node as Form).highlighted»screenshooter.highlightElement("«(node as Form).selector.escape»"); «ENDIF»
 										«FOR input : (node as Form).inputs»
 										«input.getNodeCode(featureTitle, createsScreenshots)»
 										«ENDFOR»
@@ -216,7 +216,7 @@ class HelperExtension {
 										«button.getNodeCode(featureTitle, createsScreenshots)»
 										«ENDFOR»
 										 '''
-				case "SubDoc": 			'''«(node as SubDoc).subDoc.getLinesOfCode(featureTitle, (node as SubDoc).createScreenshots)»'''
+				case "SubDoc": 			'''«(node as SubDoc).subDoc.modelName».runSequence(screenshooter, «IF (node as SubDoc).createScreenshots »true«ELSE»false«ENDIF»);'''
 		}
 		»
 	'''
